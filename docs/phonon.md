@@ -50,6 +50,47 @@ Later we denote {math}`q = (\mathbf{q}, \nu)` and {math}`-q = (-\mathbf{q}, \nu)
       = \frac{1}{ \sqrt{ M_{\kappa} M_{\kappa'} } } \sum_{l'} \Phi_{ \mu \mu' }(0\kappa, l'\kappa') e^{i \mathbf{q} \cdot \mathbf{r}(l')}.
     ```
 
+## Normal coordinates
+
+```{math}
+  u_{\mu}(l\kappa)
+    &=: \frac{1}{\sqrt{ L^{3} M_{\kappa} }} \sum_{q} Q_{q} e_{\mu}(\kappa; q) e^{i \mathbf{q} \cdot \mathbf{r}(l\kappa)} \\
+  p_{\mu}(l\kappa)
+    &=: \sqrt{\frac{M_{\kappa}}{L^{3}}} \sum_{q} P_{q} e_{\mu}(\kappa; -q) e^{-i \mathbf{q} \cdot \mathbf{r}(l\kappa)} \\
+  Q_{q}
+    &= \sum_{ l\kappa\mu } \sqrt{ \frac{M_{\kappa}}{L^{3}} } u_{\mu}(l\kappa) e_{\mu}(\kappa; -q) e^{-i \mathbf{q} \cdot \mathbf{r}(l\kappa)} \\
+  P_{q}
+    &= \sum_{ l\kappa\mu } \frac{1}{\sqrt{ L^{3}M_{\kappa} }} p_{\mu}(l\kappa) e_{\mu}(\kappa; q) e^{i \mathbf{q} \cdot \mathbf{r}(l\kappa)} \\
+  Q_{-q} &= Q_{q}^{\ast} \\
+  P_{-q} &= P_{q}^{\ast} \\
+  H &= \frac{1}{2} \sum_{q} \left( P_{q} P_{-q} + \omega_{q}^{2} Q_{q} Q_{-q} \right) \\
+```
+
+Creation and annihilation operators
+```{math}
+  A_{q}
+    &:= \frac{1}{\sqrt{2\hbar\omega_{q}}} \left( \omega_{q} Q_{q} + i P_{-q} \right) \\
+  A_{q}^{\dagger}
+    &:= \frac{1}{\sqrt{2\hbar\omega_{q}}} \left( \omega_{q} Q_{-q} - i P_{q} \right) \\
+  Q_{q}
+    &= \sqrt{\frac{\hbar}{2\omega_{q}}} \left( A_{q} + A_{-q}^{\dagger} \right) \\
+  P_{q}
+    &= i \sqrt{\frac{\hbar\omega_{q}}{2}} \left( A_{-q}^{\dagger} - A_{q} \right) \\
+  \left[ A_{q}, A_{q'}^{\dagger} \right] &= \delta_{qq'} \\
+  \left[ A_{q}, A_{q'} \right] &= 0 \\
+  \left[ A_{q}^{\dagger}, A_{q'}^{\dagger} \right] &= 0 \\
+  H &= \frac{1}{2} \sum_{q} \hbar \omega_{q} \left( A_{q}^{\dagger}A_{q} + \frac{1}{2} \right)
+```
+
+In canonical ensemble:
+```{math}
+  \langle A_{q}^{\dagger}A_{q} \rangle_{\beta}
+    &= \frac{1}{ e^{\beta \hbar \omega_{q}} - 1 } \\
+  \langle |Q_{q}|^{2} \rangle_{\beta}
+    &= \frac{\hbar}{2\omega_{q}} \left( 2 \langle A_{q}^{\dagger}A_{q} \rangle_{\beta} + 1 \right)
+```
+
+
 ## Action on displacements
 
 We define left group action for positions {math}`\mathbf{r}(l\kappa) = \mathbf{r}(l) + \mathbf{r}(0\kappa)` by {math}`g = (\mathbf{R}_{g}, \mathbf{\tau}_{g}) \in \mathcal{G}` as
