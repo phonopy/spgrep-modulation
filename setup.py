@@ -23,6 +23,7 @@ REQUIRED = [
     "typing_extensions",
     "numpy>=1.20.1",
     "spglib>=1.16.5",
+    "phonopy>=2.15.1",
     "spgrep",  # https://github.com/spglib/spgrep
 ]
 
