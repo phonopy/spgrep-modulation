@@ -228,6 +228,31 @@ We obtain projective irreps
         \quad (h \in \mathcal{G}^{\mathbf{q}})
 ```
 
+## Modulation
+
+Modulation associated with qpoint {math}`\mathbf{q}` and frequency {math}`\mathbf{\omega}_{\mathbf{q}}`:
+
+{math}`\mathbf{q} \neq \mathbf{0}` case:
+```{math}
+  u^{( \mathbf{q} \omega_{\mathbf{q}} )}_{\alpha}(l\kappa)
+    &= \frac{1}{\sqrt{L^{3}}} \sum_{ \nu }
+      \left(
+        Q^{ (\mathbf{q} \omega_{\mathbf{q}}) }_{\nu} f_{\alpha}(\kappa; \mathbf{q} \omega_{\mathbf{q}}\nu ) e^{ i \mathbf{q} \cdot \mathbf{r}(l) }
+        + \mathrm{c.c.}
+      \right) \\
+  Q^{ (\mathbf{q} \omega_{\mathbf{q}}) }_{\nu} &\in \mathbb{C} \\
+```
+
+{math}`\mathbf{q} = \mathbf{0}` case:
+```{math}
+  u^{( \mathbf{0} \omega_{\mathbf{0}} )}_{\alpha}(l\kappa)
+    &= \frac{1}{\sqrt{L^{3}}} \sum_{ \nu }
+        Q^{ (\mathbf{0} \omega_{\mathbf{0}}) }_{\nu} f_{\alpha}(\kappa; \mathbf{0} \omega_{\mathbf{0}}\nu ) \\
+  Q^{ (\mathbf{0} \omega_{\mathbf{0}}) }_{\nu} &\in \mathbb{R} \\
+```
+
+chain-adapted mode {cite}`Aroyo:js0048`
+
 ## References
 
 ```{bibliography}
