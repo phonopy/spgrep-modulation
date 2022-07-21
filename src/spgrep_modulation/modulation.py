@@ -85,12 +85,12 @@ class Modulation:
     def frequencies(self) -> NDArrayFloat:
         return self._frequencies
 
-    def get_modulated_supercell(
+    def get_modulated_supercell_and_modulation(
         self,
         frequency_index: int,
         amplitudes: list[float],
         arguments: list[float],
-    ) -> PhonopyAtoms:
+    ) -> tuple[PhonopyAtoms, NDArrayComplex]:
         # Adapted from phonopy
         _, eigvecs = self._eigenspaces[frequency_index]
 
@@ -108,7 +108,7 @@ class Modulation:
         cell = self._supercell.copy()
         cell.scaled_positions = scaled_positions
 
-        return cell
+        return cell, modulation
 
     @classmethod
     def with_supercell_and_symmetry_search(

@@ -51,7 +51,7 @@ def test_regression(ph_bto: Phonopy):
         factor=ph_bto.unit_conversion_factor,
     )
     phmd.run()
-    modulated_cell_phonopy = phmd.get_modulated_supercells()[0]
+    modulation_phonopy = phmd._u[0]
 
     md = Modulation.with_supercell_and_symmetry_search(
         dynamical_matrix=ph_bto.dynamical_matrix,
@@ -59,10 +59,13 @@ def test_regression(ph_bto: Phonopy):
         qpoint=qpoint,
         factor=ph_bto.unit_conversion_factor,
     )
-    modulated_cell = md.get_modulated_supercell(
+    modulated_cell, modulation = md.get_modulated_supercell_and_modulation(
         frequency_index=band_index,
         amplitudes=[amplitude],
-        arguments=[argument + np.pi],  # shift phase to match with phonopy's modulation
+        arguments=[argument],
     )
 
-    compare_cells_with_order(modulated_cell, modulated_cell_phonopy)
+    # Check modulations up to U(1)
+    phase_diffs = (0.5 * modulation) / modulation_phonopy
+    assert np.allclose(phase_diffs, phase_diffs[0, 0])
+    assert np.isclose(np.abs(phase_diffs[0, 0]), 1.0)
