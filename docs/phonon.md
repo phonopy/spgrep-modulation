@@ -138,7 +138,13 @@ where
 ```{math}
 :label: dynamical_matrix_rep
   \Gamma_{\kappa'\mu'; \kappa\mu}^{\mathbf{q}}(g)
-    := \exp \left( -i \mathbf{R}_{g} \mathbf{q} \cdot \mathbf{h}_{g}(\kappa) \right) [\mathbf{R}_{g}]_{\mu'\mu} \delta_{ g\kappa, \kappa' }.
+    &:= \exp \left( -i \mathbf{R}_{g} \mathbf{q} \cdot \mathbf{h}_{g}(\kappa) \right) [\mathbf{R}_{g}]_{\mu'\mu} \delta_{ g\kappa, \kappa' } \\
+    &:= \exp \left( -2 \pi i \mathbf{R}_{g, f}^{\top} \mathbf{q}_{f} \cdot \mathbf{h}_{g, f}(\kappa) \right) [\mathbf{R}_{g}]_{\mu'\mu} \delta_{ g\kappa, \kappa' } \\
+    &\quad (
+      \mathbf{R}_{g, f} := \mathbf{A}^{-1} \mathbf{R}_{g} \mathbf{A},
+      \mathbf{k} =: 2\pi \mathbf{A}^{-\top} \mathbf{k}_{f},
+      \mathbf{v} =: \mathbf{A} \mathbf{v}_{f}
+    )
 ```
 Equation {eq}`dynamical_matrix_rep` is essentially the same with Eq. (2.37) of {cite}`RevModPhys.40.1`.
 
@@ -154,7 +160,9 @@ Then,
         \exp \left( -i \mathbf{R}_{g}\mathbf{R}_{g'}\mathbf{q} \cdot \mathbf{h}_{g}(g\kappa') \right) \\
     &= \left[ \mathbf{\Gamma}^{ \mathbf{R}_{g'} \mathbf{q}}(g) \mathbf{\Gamma}^{ \mathbf{q}}(g') \right]_{ \kappa'\mu', \kappa\mu } \\
   \mathbf{\Gamma}^{\mathbf{q}}(g)^{\dagger} \mathbf{\Gamma}^{ \mathbf{q}}(g)
-    &= \mathbf{1} \quad \mbox{(Unitary)}
+    &= \mathbf{1} \quad \mbox{(Unitary)} \\
+  \Gamma^{\mathbf{q}}((E, \mathbf{t}))_{ \kappa'\mu', \kappa\mu }
+    &= \exp \left( -i \mathbf{q} \cdot \mathbf{t} \right) \delta_{\mu'\mu} \delta_{ \kappa, \kappa' }.
 ```
 
 Fourier transformation of force constants

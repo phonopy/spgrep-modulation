@@ -7,7 +7,12 @@ import numpy as np
 from phonopy.harmonic.dynamical_matrix import DynamicalMatrix, DynamicalMatrixNAC
 from phonopy.phonon.degeneracy import degenerate_sets, get_eigenvectors
 from phonopy.structure.atoms import PhonopyAtoms
-from phonopy.structure.cells import Supercell, get_supercell, shape_supercell_matrix
+from phonopy.structure.cells import (
+    Primitive,
+    Supercell,
+    get_supercell,
+    shape_supercell_matrix,
+)
 from phonopy.structure.symmetry import Symmetry
 from phonopy.units import VaspToTHz
 from spgrep_modulation.utils import NDArrayComplex, NDArrayFloat, NDArrayInt
@@ -17,7 +22,7 @@ class Modulation:
     """
     Parameters
     ----------
-    symmetry:
+    primitive_symmetry:
     supercell:
     dynamical_matrix:
     qpoint: array, (3, )
@@ -29,7 +34,7 @@ class Modulation:
 
     def __init__(
         self,
-        symmetry: Symmetry,
+        primitive_symmetry: Symmetry,
         supercell: Supercell,
         dynamical_matrix: DynamicalMatrix | DynamicalMatrixNAC,
         qpoint: NDArrayFloat,
@@ -42,7 +47,7 @@ class Modulation:
             warn(f"Given qpoint={qpoint} is not commensurate with supercell.")
         self._qpoint = qpoint
 
-        self._symmetry = symmetry
+        self._primitive_symmetry = primitive_symmetry
         self._supercell = supercell
         self._dynamical_matrix = dynamical_matrix
         self._nac_q_direction = nac_q_direction
@@ -70,8 +75,12 @@ class Modulation:
         # TODO: Construct irreps with `qpoint` here
 
     @property
-    def symmetry(self) -> Symmetry:
-        return self._symmetry
+    def primitive_symmetry(self) -> Symmetry:
+        return self._primitive_symmetry
+
+    @property
+    def primitive(self) -> Primitive:
+        return self._dynamical_matrix.primitive
 
     @property
     def supercell(self) -> Supercell:
@@ -121,7 +130,7 @@ class Modulation:
         symprec: float = 1e-5,
     ) -> Modulation:
         primitive = dynamical_matrix.primitive
-        symmetry = Symmetry(cell=primitive, symprec=symprec)
+        primitive_symmetry = Symmetry(cell=primitive, symprec=symprec)
 
         supercell_matrix_3x3 = shape_supercell_matrix(supercell_matrix)
         supercell = get_supercell(
@@ -131,7 +140,7 @@ class Modulation:
         )
 
         return cls(
-            symmetry=symmetry,
+            primitive_symmetry=primitive_symmetry,
             supercell=supercell,
             dynamical_matrix=dynamical_matrix,
             qpoint=qpoint,
