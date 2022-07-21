@@ -41,6 +41,7 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.mathjax",
     "sphinxcontrib.bibtex",
+    "sphinx_proof",
     "myst_parser",
 ]
 
