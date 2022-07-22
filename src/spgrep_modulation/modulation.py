@@ -11,6 +11,7 @@ from phonopy.structure.cells import (
     Primitive,
     Supercell,
     get_supercell,
+    is_primitive_cell,
     shape_supercell_matrix,
 )
 from phonopy.structure.symmetry import Symmetry
@@ -28,7 +29,7 @@ class Modulation:
     qpoint: array, (3, )
     nac_q_direction:
     factor:
-    cutoff: float
+    degeneracy_tolerance: float
         Absolute tolerance to groupby phonon frequencies in ``factor`` unit
     """
 
@@ -40,7 +41,7 @@ class Modulation:
         qpoint: NDArrayFloat,
         nac_q_direction: NDArrayFloat | None = None,
         factor: float = VaspToTHz,
-        cutoff: float = 1e-4,
+        degeneracy_tolerance: float = 1e-5,
     ) -> None:
         # Check to be commensurate
         if not np.allclose(np.remainder(supercell.supercell_matrix.T @ qpoint, 1), 0):
@@ -48,6 +49,9 @@ class Modulation:
         self._qpoint = qpoint
 
         self._primitive_symmetry = primitive_symmetry
+        if not is_primitive_cell(primitive_symmetry.symmetry_operations["rotations"]):
+            raise RuntimeError("Set primitive cell.")
+
         self._supercell = supercell
         self._dynamical_matrix = dynamical_matrix
         self._nac_q_direction = nac_q_direction
@@ -68,7 +72,7 @@ class Modulation:
         # Group eigenvecs by frequencies
         self._eigenspaces = []
         self._frequencies = self._eigvals_to_frequencies(eigvals)
-        deg_sets = degenerate_sets(self._frequencies, cutoff=cutoff)
+        deg_sets = degenerate_sets(self._frequencies, cutoff=degeneracy_tolerance)
         for indices in deg_sets:
             self._eigenspaces.append((eigvals[indices[0]], [eigvecs[:, idx] for idx in indices]))
 

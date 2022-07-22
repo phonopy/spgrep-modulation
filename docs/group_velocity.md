@@ -42,7 +42,7 @@ The gradient operator {math}`\mathbf{\nabla}_{\mathbf{q}}` behaves as covariant 
 
 The left hand side of Eq. {eq}`indicator`:
 ```{math}
-    \sum_{g \in \mathcal{G}^{\mathbf{q}}}
+    \sum_{g \in \mathcal{G}^{\mathbf{q}} / \mathcal{T} }
         | \chi^{(\mathbf{q} \omega_{\mathbf{q}})}(g) |^{2} \chi^{(\mathbf{\nabla})}(\mathbf{R}_{g})
 ```
 
