@@ -53,7 +53,7 @@ def project_eigenmode_representation(
         atol=atol,
     )
 
-    basis = []
+    modified_basis = []
     irreps = []
     for irrep in little_cogroup_irreps:
         projected = project_to_irrep(
@@ -66,8 +66,21 @@ def project_eigenmode_representation(
         if len(projected) == 0:
             continue
 
-        basis.append([basis.reshape(-1, num_atoms, 3) for basis in projected])
+        modified_basis.append([basis.reshape(-1, num_atoms, 3) for basis in projected])
         irreps.append(irrep)
+
+    # Apply phase to be consistent with definition of phonopy's dynamical matrix
+    phase = np.exp(
+        -2j * np.pi * np.dot(primitive.scaled_positions, primitive_qpoint)
+    )  # (num_atoms, )
+    basis = []
+    for list_mb in modified_basis:
+        basis_for_same_irrep = []
+        for mb in list_mb:
+            eigenvecs = phase[None, :, None] * mb  # (dim_irrep, num_atoms, 3)
+            basis_for_same_irrep.append(eigenvecs)
+
+        basis.append(basis_for_same_irrep)
 
     return basis, irreps, mapping_little_group
 

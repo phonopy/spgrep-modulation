@@ -186,7 +186,7 @@ The condition that potential energy is invariant under symmetry operations is re
     &= \dots = \sum_{  } \left[ \mathbf{\Gamma}^{\mathbf{q}}(g) \mathbf{\Phi}(\mathbf{q}) \mathbf{\Gamma}^{\mathbf{q}}(g)^{\dagger} \right]_{\kappa\mu, \kappa'\mu'} u_{\mu}(\kappa; \mathbf{R}_{g}\mathbf{q}) u_{\mu'}(\kappa'; -\mathbf{R}_{g}\mathbf{q}).
     ```
 
-## Diagonalizing {math}`\mathbf{\Phi}(\mathbf{q})` with modified eigenvectors
+## Small representation of {math}`\mathcal{G}^{\mathbf{q}}`
 
 For {math}`h, h' \in \mathcal{G}^{\mathbf{q}}`,
 ```{math}
@@ -196,44 +196,42 @@ For {math}`h, h' \in \mathcal{G}^{\mathbf{q}}`,
     &= \mathbf{\Gamma}^{\mathbf{q}}(h) \mathbf{\Phi}(\mathbf{q}) \mathbf{\Gamma}^{\mathbf{q}}(h)^{\dagger}
     \quad (\forall h \in \mathcal{G}^{\mathbf{q}}).
 ```
-We can reuse eigenvectors of dynamical matrix for decomposing {math}`\mathbf{\Gamma}^{ \mathbf{q}}` into irreps,
+
+We can introduce projective representation {math}`\overline{\Gamma}^{ \mathbf{q}}`,
+```{math}
+  \mathbf{\Gamma}^{ \mathbf{q}}(h)
+    &=: e^{ -i \mathbf{q} \cdot \mathbf{v}_{h} } \overline{\mathbf{\Gamma}}^{ \mathbf{q}}(h) \\
+  \overline{\mathbf{\Gamma}}^{ \mathbf{q}}(h) \overline{\mathbf{\Gamma}}^{ \mathbf{q}}(h')
+    &= e^{ -i \mathbf{q} \cdot ( \mathbf{R}_{h} \mathbf{v}_{h'} - \mathbf{v}_{h'} ) } \overline{\mathbf{\Gamma}}^{ \mathbf{q}}(hh') \\
+  \overline{\mathbf{\Gamma}}^{ \mathbf{q}}((E, \mathbf{t}))
+    &= \mathbf{1}
+```
+Thus, we only need to consider projective representation {math}`\mathbf{\gamma}^{ \mathbf{q}}` for little co-group {math}`\overline{\mathcal{G}}^{\mathbf{q}} \simeq \mathcal{G}^{\mathbf{q}} / \mathcal{T}`.
+The decomposition of the projective representation
+```{math}
+  \overline{\Gamma}^{\mathbf{q}} &= \sum_{\omega} m_{\omega} \overline{\Gamma}^{\mathbf{q}\omega} \\
+```
+can be performed with [spgrep](https://github.com/spglib/spgrep).
+The corresponding small representation of {math}`\mathcal{G}^{\mathbf{q}}` is obtained by {math}`\mathbf{\Gamma}^{ \mathbf{q}\omega}(h) := e^{ -i \mathbf{q} \cdot \mathbf{v}_{h} } \overline{\mathbf{\Gamma}}^{ \mathbf{q}\omega }(h)`.
+We call orthonormal basis vectors {math}`f_{\mu}(\kappa; \mathbf{q}\omega\nu)` forming irrep {math}`\Gamma^{\mathbf{q}\omega}` as *modified eigenvectors*:
+```{math}
+  h f_{\mu}(\kappa; \mathbf{q}\omega\nu)
+    &= \sum_{\nu' \mu'\kappa'} f_{\mu'}(\kappa'; \mathbf{q}\omega\nu') \Gamma^{\mathbf{q}\omega}(h)_{\nu'\kappa'\mu', \nu\kappa\mu} \quad (h \in \mathcal{G}^{\mathbf{q}}) \\
+  \sum_{\nu} f_{\mu'}(\kappa'; \mathbf{q}\omega\nu)^{\ast} f_{\mu}(\kappa; \mathbf{q}\omega\nu)
+    &= \delta_{\mu'\mu} \delta_{\kappa'\kappa}
+    \quad (\mathrm{Orthonormal})
+```
+
+We can subdivide eigenvectors further by decomposing {math}`\Gamma^{\mathbf{q}}` into irreps,
 ```{math}
   D_{\mu\mu'}(\kappa\kappa'; \mathbf{q})
     &= \frac{1}{\sqrt{ M_{\kappa}M_{\kappa'} }} e^{ i \mathbf{q} \cdot \left( \mathbf{r}(0\kappa') - \mathbf{r}(0\kappa) \right) } \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) \\
-  f_{\mu}(\kappa; \mathbf{q}\nu)
-    &:= \frac{1}{\sqrt{M_{\kappa}}} e^{ i\mathbf{q} \cdot \mathbf{r}(0\kappa) } e_{\mu}(\kappa; \mathbf{q}\nu) \\
-  u_{\mu}(l\kappa)
-    &= \frac{1}{\sqrt{L^{3}}} \sum_{ q } Q_{q} f_{\mu}(\kappa; q) e^{ i \mathbf{q} \cdot \mathbf{r}(l) } \\
-  \sum_{ \kappa \mu }\sum_{ \kappa' \mu' } f_{\mu}(\kappa; \mathbf{q}\nu)^{\ast} \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) f_{\mu'}(\kappa'; \mathbf{q}\nu')
-    &= \omega_{\mathbf{q}\nu}^{2} \delta_{\nu\nu'}
-```
-
-*modified eigenvectors*, {math}`\mathbf{f}(\mathbf{q}\nu) = \{f_{\mu}(\kappa; \mathbf{q}\nu) \}_{\kappa\mu}`, with the same eigenvalues form irreps,
-```{math}
-    \mathbf{F}_{\mathbf{q} \omega}
-        &= \left( \mathbf{f}(\mathbf{q}\nu) \mid \omega_{\mathbf{q}\nu}^{2} = \omega^{2} \right) \\
-    \mathbf{\Gamma}^{\mathbf{q}}_{\omega}
-        &:= \mathbf{F}_{\mathbf{q} \omega}^{\dagger} \mathbf{\Gamma}^{\mathbf{q}} \mathbf{F}_{\mathbf{q} \omega}
-```
-
-## Small represenation of {math}`\mathcal{G}^{\mathbf{q}}`
-
-We can introduce projective representation {math}`\mathbf{\gamma}^{ \mathbf{q}}(h)`,
-```{math}
-  \mathbf{\Gamma}^{ \mathbf{q}}(h)
-    &=: e^{ -i \mathbf{q} \cdot \mathbf{v}_{h} } \mathbf{\gamma}^{ \mathbf{q}}(h) \\
-  \mathbf{\gamma}^{ \mathbf{q}}(h) \mathbf{\gamma}^{ \mathbf{q}}(h')
-    &= e^{ -i \mathbf{q} \cdot ( \mathbf{R}_{h} \mathbf{v}_{h'} - \mathbf{v}_{h'} ) } \mathbf{\gamma}^{ \mathbf{q}}(hh') \\
-  \mathbf{\gamma}^{ \mathbf{q}}((E, \mathbf{t}))
-    &= \mathbf{1}
-```
-
-Thus, we only need to consider projective representation {math}`\mathbf{\gamma}^{ \mathbf{q}}` for little co-group {math}`\overline{\mathcal{G}}^{\mathbf{q}} \simeq \mathcal{G}^{\mathbf{q}} / \mathcal{T}`.
-We obtain projective irreps
-```{math}
-    \mathbf{\gamma}^{\mathbf{q}\omega}(\mathbf{R}_{h})
-        := e^{ -i \mathbf{q} \cdot \mathbf{v}_{h} } \mathbf{F}_{\mathbf{q} \omega}^{\dagger} \mathbf{\gamma}^{\mathbf{q}}(\mathbf{R}_{h}) \mathbf{F}_{\mathbf{q} \omega}
-        \quad (h \in \mathcal{G}^{\mathbf{q}})
+  e_{\mu}(\kappa; \mathbf{q}\omega\nu)
+    &:= e^{ -i\mathbf{q} \cdot \mathbf{r}(0\kappa) } f_{\mu}(\kappa; \mathbf{q}\omega\nu) \\
+  \sum_{ \kappa'\mu' } D_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) e_{\mu'}(\kappa'; \mathbf{q}\omega\nu)
+    &= \omega^{2} e_{\mu}(\kappa; \mathbf{q}\omega\nu) \\
+  \sum_{\nu} e_{\mu}(\kappa; \mathbf{q}\omega\nu)^{\ast} e_{\mu'}(\kappa'; \mathbf{q}\omega\nu)
+    &= \delta_{\mu\mu'} \delta_{\kappa\kappa'} \\
 ```
 
 ## Modulation
@@ -242,21 +240,21 @@ Modulation associated with qpoint {math}`\mathbf{q}` and frequency {math}`\mathb
 
 {math}`\mathbf{q} \neq \mathbf{0}` case:
 ```{math}
-  u^{( \mathbf{q} \omega_{\mathbf{q}} )}_{\alpha}(l\kappa)
-    &= \frac{1}{\sqrt{L^{3}}} \sum_{ \nu }
+  u^{( \mathbf{q} \omega )}_{\alpha}(l\kappa)
+    &= \frac{1}{\sqrt{L^{3}M_{\kappa}}} \sum_{ \nu }
       \left(
-        Q^{ (\mathbf{q} \omega_{\mathbf{q}}) }_{\nu} f_{\alpha}(\kappa; \mathbf{q} \omega_{\mathbf{q}}\nu ) e^{ i \mathbf{q} \cdot \mathbf{r}(l) }
+        Q^{ (\mathbf{q} \omega) }_{\nu} e_{\alpha}(\kappa; \mathbf{q} \omega\nu ) e^{ i \mathbf{q} \cdot \mathbf{r}(l\kappa) }
         + \mathrm{c.c.}
       \right) \\
-  Q^{ (\mathbf{q} \omega_{\mathbf{q}}) }_{\nu} &\in \mathbb{C} \\
+  Q^{ (\mathbf{q} \omega) }_{\nu} &\in \mathbb{C} \\
 ```
 
 {math}`\mathbf{q} = \mathbf{0}` case:
 ```{math}
-  u^{( \mathbf{0} \omega_{\mathbf{0}} )}_{\alpha}(l\kappa)
-    &= \frac{1}{\sqrt{L^{3}}} \sum_{ \nu }
-        Q^{ (\mathbf{0} \omega_{\mathbf{0}}) }_{\nu} f_{\alpha}(\kappa; \mathbf{0} \omega_{\mathbf{0}}\nu ) \\
-  Q^{ (\mathbf{0} \omega_{\mathbf{0}}) }_{\nu} &\in \mathbb{R} \\
+  u^{( \mathbf{0} \omega )}_{\alpha}(l\kappa)
+    &= \frac{1}{\sqrt{L^{3}M_{\kappa}}} \sum_{ \nu }
+        Q^{ (\mathbf{0} \omega) }_{\nu} e_{\alpha}(\kappa; \mathbf{0} \omega\nu ) \\
+  Q^{ (\mathbf{0} \omega) }_{\nu} &\in \mathbb{R} \\
 ```
 
 chain-adapted mode {cite}`Aroyo:js0048`
