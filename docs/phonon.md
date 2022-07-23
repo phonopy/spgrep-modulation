@@ -27,14 +27,6 @@ Let normalized eigenvector of {math}`\mathbf{D}(\mathbf{q})` as {math}`[\mathbf{
   \mathbf{D}(\mathbf{q}) \mathbf{e}(\mathbf{q}\nu)
     &= \omega_{\mathbf{q}\nu}^{2} \mathbf{e}(\mathbf{q}\nu)
     \quad (\nu = 1, \dots, 3N) \\
-  \sum_{ \kappa\mu} \sum_{ \kappa'\mu' } e_{\mu}(\kappa; \mathbf{q}\nu)^{\ast} D_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) e_{\mu'}(\kappa'; \mathbf{q}\nu')
-    &= \omega_{\mathbf{q}\nu}^{2} \delta_{\nu \nu'} \\
-  \sum_{ \kappa\mu} e_{\mu}(\kappa; \mathbf{q}\nu)^{\ast} e_{\mu}(\kappa; \mathbf{q}\nu')
-    &= \delta_{\nu \nu'}
-    \quad \mbox{(Orthogonality)} \\
-  \sum_{ \nu } e_{\mu}(\kappa; \mathbf{q}\nu)^{\ast} e_{\mu'}(\kappa'; \mathbf{q}\nu)
-    &= \delta_{\kappa\kappa'} \delta_{\mu\mu'}
-    \quad \mbox{(Completeness)} \\
   \omega_{-\mathbf{q}\nu}^{2} &= \omega_{\mathbf{q}\nu}^{2}.
 ```
 We can choose as
@@ -46,7 +38,7 @@ Later we denote {math}`q = (\mathbf{q}, \nu)` and {math}`-q = (-\mathbf{q}, \nu)
 [^dynamical_matrix]: This is the same phase convention with [phonopy](https://phonopy.github.io/phonopy/formulation.html#dynamical-matrix).
     There is the other formulation for defining dynamical matrix as
     ```{math}
-    \tilde{D}_{\mu \mu'}(\kappa\kappa'; \mathbf{q})
+    \Psi_{\mu \mu'}(\kappa\kappa'; \mathbf{q})
       = \frac{1}{ \sqrt{ M_{\kappa} M_{\kappa'} } } \sum_{l'} \Phi_{ \mu \mu' }(0\kappa, l'\kappa') e^{i \mathbf{q} \cdot \mathbf{r}(l')}.
     ```
 
@@ -123,16 +115,17 @@ We define left group action for displacement at {math}`\mathbf{r}(l\kappa)` as [
 Consider Fourier transformation of {math}`\mathbf{u}(\mathbf{r}(l\kappa))`
 ```{math}
   \mathbf{u}(\kappa; \mathbf{q})
-    &:= \frac{1}{\sqrt{L^{3}}} \sum_{l} \mathbf{u}(\mathbf{r}(l\kappa)) e^{ i \mathbf{q} \cdot \mathbf{r}(l) } \\
+    &:= \sqrt{\frac{M_{\kappa}}{L^{3}}} \sum_{l} \mathbf{u}(\mathbf{r}(l\kappa)) e^{ i \mathbf{q} \cdot \mathbf{r}(l) } \\
   \mathbf{u}(\mathbf{r}(l\kappa))
-    &= \frac{1}{\sqrt{L^{3}}} \sum_{\mathbf{q}} \mathbf{u}(\kappa; \mathbf{q}) e^{ -i \mathbf{q} \cdot \mathbf{r}(l) } \\
+    &= \frac{1}{\sqrt{M_{\kappa}L^{3}}} \sum_{\mathbf{q}} \mathbf{u}(\kappa; \mathbf{q}) e^{ -i \mathbf{q} \cdot \mathbf{r}(l) } \\
   g u_{\mu}(\kappa; \mathbf{q})
-    &= \frac{1}{\sqrt{L^{3}}} \sum_{l} g u_{\mu}(\mathbf{r}(l\kappa)) e^{i \mathbf{q}\cdot \mathbf{r}(l)} \\
-    &= \frac{1}{\sqrt{L^{3}}} \sum_{l}\sum_{\nu} R_{g,\mu\nu} u_{\nu}\left( \mathbf{R}_{g}\mathbf{r}(l) + \mathbf{r}(0, g\kappa) + \mathbf{h}_{g}(\kappa) \right) e^{i \mathbf{q}\cdot \mathbf{r}(l)} \\
-    &= \frac{1}{\sqrt{L^{3}}} \sum_{l'}\sum_{\nu} R_{g,\mu\nu} u_{\nu}\left( \mathbf{r}(l', g\kappa) \right) e^{i \mathbf{q}\cdot \mathbf{R}_{g}^{-1}(\mathbf{r}(l') - \mathbf{h}_{\kappa} ) } \\
-    &= \frac{1}{\sqrt{L^{3}}} \sum_{l'}\sum_{\nu} R_{g,\mu\nu} u_{\nu}\left( \mathbf{r}(l', g\kappa) \right) e^{i \mathbf{R}_{g}\mathbf{q}\cdot (\mathbf{r}(l') - \mathbf{h}_{\kappa} ) }
+    &= \sqrt{\frac{M_{\kappa}}{L^{3}}} \sum_{l} g u_{\mu}(\mathbf{r}(l\kappa)) e^{i \mathbf{q}\cdot \mathbf{r}(l)} \\
+    &= \sqrt{\frac{M_{\kappa}}{L^{3}}} \sum_{l}\sum_{\nu} R_{g,\mu\nu} u_{\nu}\left( \mathbf{R}_{g}\mathbf{r}(l) + \mathbf{r}(0, g\kappa) + \mathbf{h}_{g}(\kappa) \right) e^{i \mathbf{q}\cdot \mathbf{r}(l)} \\
+    &= \sqrt{\frac{M_{\kappa}}{L^{3}}} \sum_{l'}\sum_{\nu} R_{g,\mu\nu} u_{\nu}\left( \mathbf{r}(l', g\kappa) \right) e^{i \mathbf{q}\cdot \mathbf{R}_{g}^{-1}(\mathbf{r}(l') - \mathbf{h}_{\kappa} ) } \\
+    &= \sqrt{\frac{M_{\kappa}}{L^{3}}} \sum_{l'}\sum_{\nu} R_{g,\mu\nu} u_{\nu}\left( \mathbf{r}(l', g\kappa) \right) e^{i \mathbf{R}_{g}\mathbf{q}\cdot (\mathbf{r}(l') - \mathbf{h}_{\kappa} ) }
         \quad (\because \mathbf{R}_{g} \in O(3)) \\
-    &= \sum_{\kappa'\mu'} u_{\mu'}(\kappa'; \mathbf{R}_{g} \mathbf{q} ) \Gamma_{\kappa'\mu'; \kappa\mu}^{\mathbf{q}}(g),
+    &= \sum_{\kappa'\mu'} u_{\mu'}(\kappa'; \mathbf{R}_{g} \mathbf{q} ) \Gamma_{\kappa'\mu'; \kappa\mu}^{\mathbf{q}}(g)
+      \quad (\because M_{g\kappa} = M_{\kappa}),
 ```
 where
 ```{math}
@@ -168,7 +161,7 @@ Then,
 Fourier transformation of force constants
 ```{math}
   \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q})
-    &:= \sum_{l'} \Phi_{\mu\mu'}(0\kappa; l'\kappa') e^{ i \mathbf{q} \cdot \mathbf{r}(l') } \\
+    &:= \frac{1}{\sqrt{M_{\kappa}M_{\kappa'}}} \sum_{l'} \Phi_{\mu\mu'}(0\kappa; l'\kappa') e^{ i \mathbf{q} \cdot \mathbf{r}(l') } \\
   \sum_{ l l' } \Phi_{ \mu \mu' }(l\kappa, l'\kappa') u_{\mu}(l\kappa) u_{\mu'}(l'\kappa')
     &= \sum_{\mathbf{q}} \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) u_{\mu}(\kappa; \mathbf{q}) u_{\mu'}(\kappa'; -\mathbf{q}) \\
 ```
@@ -217,21 +210,18 @@ We call orthonormal basis vectors {math}`f_{\mu}(\kappa; \mathbf{q}\omega\nu)` f
 ```{math}
   h f_{\mu}(\kappa; \mathbf{q}\omega\nu)
     &= \sum_{\nu' \mu'\kappa'} f_{\mu'}(\kappa'; \mathbf{q}\omega\nu') \Gamma^{\mathbf{q}\omega}(h)_{\nu'\kappa'\mu', \nu\kappa\mu} \quad (h \in \mathcal{G}^{\mathbf{q}}) \\
-  \sum_{\nu} f_{\mu'}(\kappa'; \mathbf{q}\omega\nu)^{\ast} f_{\mu}(\kappa; \mathbf{q}\omega\nu)
-    &= \delta_{\mu'\mu} \delta_{\kappa'\kappa}
-    \quad (\mathrm{Orthonormal})
+  \sum_{\kappa\mu} f_{\mu}(\kappa; \mathbf{q}\omega\nu)^{\ast} f_{\mu}(\kappa; \mathbf{q}\omega\nu')
+    &= \delta_{\nu\nu'}
 ```
 
 We can subdivide eigenvectors further by decomposing {math}`\Gamma^{\mathbf{q}}` into irreps,
 ```{math}
   D_{\mu\mu'}(\kappa\kappa'; \mathbf{q})
-    &= \frac{1}{\sqrt{ M_{\kappa}M_{\kappa'} }} e^{ i \mathbf{q} \cdot \left( \mathbf{r}(0\kappa') - \mathbf{r}(0\kappa) \right) } \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) \\
+    &= e^{ i \mathbf{q} \cdot \left( \mathbf{r}(0\kappa') - \mathbf{r}(0\kappa) \right) } \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) \\
   e_{\mu}(\kappa; \mathbf{q}\omega\nu)
     &:= e^{ -i\mathbf{q} \cdot \mathbf{r}(0\kappa) } f_{\mu}(\kappa; \mathbf{q}\omega\nu) \\
   \sum_{ \kappa'\mu' } D_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) e_{\mu'}(\kappa'; \mathbf{q}\omega\nu)
     &= \omega^{2} e_{\mu}(\kappa; \mathbf{q}\omega\nu) \\
-  \sum_{\nu} e_{\mu}(\kappa; \mathbf{q}\omega\nu)^{\ast} e_{\mu'}(\kappa'; \mathbf{q}\omega\nu)
-    &= \delta_{\mu\mu'} \delta_{\kappa\kappa'} \\
 ```
 
 ## Modulation
