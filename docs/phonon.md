@@ -202,19 +202,27 @@ We can introduce projective representation {math}`\overline{\Gamma}^{ \mathbf{q}
 Thus, we only need to consider projective representation {math}`\mathbf{\gamma}^{ \mathbf{q}}` for little co-group {math}`\overline{\mathcal{G}}^{\mathbf{q}} \simeq \mathcal{G}^{\mathbf{q}} / \mathcal{T}`.
 The decomposition of the projective representation
 ```{math}
-  \overline{\Gamma}^{\mathbf{q}} &= \sum_{\omega} m_{\omega} \overline{\Gamma}^{\mathbf{q}\omega} \\
+  \overline{\Gamma}^{\mathbf{q}} &= \sum_{\alpha} \sum_{\sigma} \overline{\Gamma}^{\mathbf{q}\alpha\sigma} \\
 ```
 can be performed with [spgrep](https://github.com/spglib/spgrep).
 The corresponding small representation of {math}`\mathcal{G}^{\mathbf{q}}` is obtained by {math}`\mathbf{\Gamma}^{ \mathbf{q}\omega}(h) := e^{ -i \mathbf{q} \cdot \mathbf{v}_{h} } \overline{\mathbf{\Gamma}}^{ \mathbf{q}\omega }(h)`.
-We call orthonormal basis vectors {math}`f_{\mu}(\kappa; \mathbf{q}\omega\nu)` forming irrep {math}`\Gamma^{\mathbf{q}\omega}` as *modified eigenvectors*:
+We call orthonormal basis vectors {math}`f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu)` forming irrep {math}`\Gamma^{\mathbf{q}\alpha}` as *modified eigenvectors*:
 ```{math}
-  h f_{\mu}(\kappa; \mathbf{q}\omega\nu)
-    &= \sum_{\nu' \mu'\kappa'} f_{\mu'}(\kappa'; \mathbf{q}\omega\nu') \Gamma^{\mathbf{q}\omega}(h)_{\nu'\kappa'\mu', \nu\kappa\mu} \quad (h \in \mathcal{G}^{\mathbf{q}}) \\
-  \sum_{\kappa\mu} f_{\mu}(\kappa; \mathbf{q}\omega\nu)^{\ast} f_{\mu}(\kappa; \mathbf{q}\omega\nu')
+  h f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu)
+    &= \sum_{\nu'} f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu') \Gamma^{\mathbf{q}\alpha}(h)_{\nu',\nu} \quad (h \in \mathcal{G}^{\mathbf{q}}) \\
+  \sum_{\kappa\mu} f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu)^{\ast} f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu')
     &= \delta_{\nu\nu'}
 ```
 
 We can subdivide eigenvectors further by decomposing {math}`\Gamma^{\mathbf{q}}` into irreps,
+```{math}
+  \left[ F^{\mathbf{q}\alpha\sigma} \right]_{\kappa\mu, \nu}
+    &:= f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu) \\
+  \mathbf{F}^{\mathbf{q}\alpha\sigma \dagger} \mathbf{\Gamma}^{\mathbf{q}}(h) \mathbf{F}^{\mathbf{q}\alpha\sigma}
+    &= \mathbf{\Gamma}^{\mathbf{q}\alpha}(h)
+    \quad (h \in \mathcal{G}^{\mathbf{q}}) \\
+```
+
 ```{math}
   D_{\mu\mu'}(\kappa\kappa'; \mathbf{q})
     &= e^{ i \mathbf{q} \cdot \left( \mathbf{r}(0\kappa') - \mathbf{r}(0\kappa) \right) } \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) \\
