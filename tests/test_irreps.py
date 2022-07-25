@@ -1,8 +1,14 @@
+from itertools import product
+
 import numpy as np
 import pytest
 from spgrep.group import get_little_group
 from spgrep.irreps import enumerate_small_representations
-from spgrep.representation import check_spacegroup_representation, is_unitary
+from spgrep.representation import (
+    check_spacegroup_representation,
+    get_character,
+    is_unitary,
+)
 
 from phonopy.structure.symmetry import Symmetry
 from spgrep_modulation.irreps import (
@@ -14,13 +20,13 @@ from spgrep_modulation.irreps import (
 @pytest.mark.parametrize(
     "ph_name,qpoint,num_irreps,num_basis",
     [
-        ("ph_si_diamond", [0, 0, 0], 2, [1, 1]),
+        # ("ph_si_diamond", [0, 0, 0], 2, [1, 1]),
         ("ph_si_diamond", [0.5, 0, 0.5], 3, [1, 1, 1]),  # X point in primitive
-        ("ph_si_diamond", [0.25, 0.25, 0.5], 4, [2, 1, 1, 2]),  # Sigma line in primitive
-        ("ph_mgo", [0, 0, 0], 1, [2]),
-        ("ph_mgo", [0.5, 0, 0.5], 2, [2, 2]),  # X point in primitive
-        ("ph_bto", [0.0, 0.0, 0.0], 2, [4, 1]),  # Gamma point
-        ("ph_bto", [0.0, 0.5, 0.5], 8, [1, 1, 1, 1, 3, 1, 2, 1]),  # TODO: M point
+        # ("ph_si_diamond", [0.25, 0.25, 0.5], 4, [2, 1, 1, 2]),  # Sigma line in primitive
+        # ("ph_mgo", [0, 0, 0], 1, [2]),
+        # ("ph_mgo", [0.5, 0, 0.5], 2, [2, 2]),  # X point in primitive
+        # ("ph_bto", [0.0, 0.0, 0.0], 2, [4, 1]),  # Gamma point
+        # ("ph_bto", [0.0, 0.5, 0.5], 8, [1, 1, 1, 1, 3, 1, 2, 1]),  # TODO: M point
     ],
 )
 def test_project_eigenmode_representation(request, ph_name, qpoint, num_irreps, num_basis):
@@ -36,6 +42,11 @@ def test_project_eigenmode_representation(request, ph_name, qpoint, num_irreps, 
     assert len(irreps) == num_irreps
     assert [len(b) for b in all_basis] == num_basis
     assert sum(sum(len(bb) for bb in b) for b in all_basis) == len(primitive) * 3
+
+    # Check irreps by characters
+    characters = [get_character(irrep) for irrep in irreps]
+    for (i, chi), (j, chj) in product(enumerate(characters), repeat=2):
+        assert (np.sum(np.conj(chi) * chj) == len(mapping)) == (i == j)
 
     # Check irreps
     num_atoms = len(primitive)

@@ -1,36 +1,46 @@
 import numpy as np
+import pytest
 
 from phonopy import Phonopy
 from phonopy.phonon.modulation import Modulation as PhonopyModulation
-from phonopy.structure.atoms import PhonopyAtoms
 from spgrep_modulation.modulation import Modulation
 
 
-def compare_cells_with_order(cell: PhonopyAtoms, cell_ref: PhonopyAtoms, symprec=1e-5):
-    """Compare two cells with the same orders of positions."""
-    np.testing.assert_allclose(cell.cell, cell_ref.cell, atol=symprec)
-    compare_positions_with_order(cell.scaled_positions, cell_ref.scaled_positions, cell.cell)
-    np.testing.assert_array_equal(cell.numbers, cell_ref.numbers)
-    np.testing.assert_allclose(cell.masses, cell_ref.masses, atol=symprec)
-    if cell.magnetic_moments is None:
-        assert cell_ref.magnetic_moments is None
-    else:
-        np.testing.assert_allclose(cell.magnetic_moments, cell_ref.magnetic_moments, atol=symprec)
+@pytest.mark.parametrize(
+    "ph_name,qpoint",
+    [
+        ("ph_bto", [0, 0, 0]),  # Gamma
+        ("ph_bto", [0, 0, 0.5]),  # X point
+        ("ph_bto", [0, 0.5, 0.5]),  # M point
+        ("ph_mgo", [0, 0, 0]),  # Gamma
+        ("ph_mgo", [0.5, 0, 0.5]),  # X point in primitive
+        ("ph_si_diamond", [0, 0, 0]),  # Gamma
+        ("ph_si_diamond", [0.5, 0, 0.5]),  # X point in primitive
+    ],
+)
+def test_symmetry_adapted_eigenmodes(request, ph_name, qpoint):
+    ph = request.getfixturevalue(ph_name)
 
+    md = Modulation.with_supercell_and_symmetry_search(
+        dynamical_matrix=ph.dynamical_matrix,
+        supercell_matrix=[2, 2, 2],
+        qpoint=qpoint,
+        factor=ph.unit_conversion_factor,
+    )
 
-def compare_positions_with_order(pos, pos_ref, lattice, symprec=1e-5):
-    """Compare two lists of positions and orders."""
-    diff = pos - pos_ref
-    diff -= np.rint(diff)
-    dist = (np.dot(diff, lattice) ** 2).sum(axis=1)
-    assert (dist < symprec).all()
+    # Check if each mode is truly eigenvector of dynamical matrix
+    dm = md.dynamical_matrix.dynamical_matrix
+    num_atoms = len(md.primitive)
+    for eigval, modes in md.eigenspaces:
+        actual = np.einsum("ij,kj->ki", dm, modes.reshape(-1, num_atoms * 3), optimize="greedy")
+        expect = eigval * modes.reshape(-1, num_atoms * 3)
+        assert np.allclose(actual, expect, atol=1e-6)
 
 
 def test_regression(ph_bto: Phonopy):
     # Supercell dimension with respect to the primitive cell, dtype='intc', shape=(3, ), (3, 3), (9, )
     dimension = [2, 2, 2]
 
-    # qpoint = [0., 0., 0.5]  # X point, degenerated as dim=2
     qpoint = [0.0, 0.5, 0.5]  # M point, non-degenerated
     band_index = 0
     amplitude = 2.0
@@ -66,6 +76,9 @@ def test_regression(ph_bto: Phonopy):
     )
 
     # Check modulations up to U(1)
-    phase_diffs = (0.5 * modulation) / modulation_phonopy
-    assert np.allclose(phase_diffs, phase_diffs[0, 0])
-    assert np.isclose(np.abs(phase_diffs[0, 0]), 1.0)
+    indices = np.nonzero(modulation_phonopy)
+    phase_diff = (0.5 * modulation[indices[0][0], indices[1][0]]) / modulation_phonopy[
+        indices[0][0], indices[1][0]
+    ]
+    assert np.allclose(0.5 * modulation, modulation_phonopy * phase_diff)
+    assert np.isclose(np.abs(phase_diff), 1.0)

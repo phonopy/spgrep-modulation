@@ -204,7 +204,7 @@ The decomposition of the projective representation
 ```{math}
   \overline{\Gamma}^{\mathbf{q}} &= \sum_{\alpha} \sum_{\sigma} \overline{\Gamma}^{\mathbf{q}\alpha\sigma} \\
 ```
-can be performed with [spgrep](https://github.com/spglib/spgrep).
+can be performed with [spgrep](https://github.com/spglib/spgrep), where {math}`\alpha` represent irrep and {math}`\sigma = 1,\dots, m_{\alpha}` distinguish equivalent irreps to {math}`\alpha`.
 The corresponding small representation of {math}`\mathcal{G}^{\mathbf{q}}` is obtained by {math}`\mathbf{\Gamma}^{ \mathbf{q}\omega}(h) := e^{ -i \mathbf{q} \cdot \mathbf{v}_{h} } \overline{\mathbf{\Gamma}}^{ \mathbf{q}\omega }(h)`.
 We call orthonormal basis vectors {math}`f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu)` forming irrep {math}`\Gamma^{\mathbf{q}\alpha}` as *modified eigenvectors*:
 ```{math}
@@ -223,14 +223,39 @@ We can subdivide eigenvectors further by decomposing {math}`\Gamma^{\mathbf{q}}`
     \quad (h \in \mathcal{G}^{\mathbf{q}}) \\
 ```
 
+## Solve dynamical matrix w.r.t. modified eigenvectors
+
+Block-diagonalize fourier transformed force constants:
 ```{math}
+  \mathbf{F}^{\mathbf{q}\alpha}
+    &:= \left( \mathbf{F}^{\mathbf{q}\alpha 1} \dots \mathbf{F}^{\mathbf{q}\alpha m_{\alpha}} \right)
+    \quad \in \mathbb{C}^{3N \times m_{\alpha}d_{\alpha}} \\
+  \mathbf{\Phi}(\mathbf{q}\alpha)
+    &:= \mathbf{F}^{\mathbf{q}\alpha \dagger} \mathbf{\Phi}(\mathbf{q}) \mathbf{F}^{\mathbf{q}\alpha}
+    \quad \in \mathbb{C}^{ m_{\alpha}d_{\alpha} \times m_{\alpha}d_{\alpha} },
+```
+where {math}`\mathbf{\Phi}(\mathbf{q}\alpha)` is hermitian.
+
+Diagonalize {math}`\mathbf{\Phi}(\mathbf{q}\alpha)`
+```{math}
+  \mathbf{\Phi}(\mathbf{q}\alpha) \mathbf{c}(\mathbf{q} \alpha s\lambda)
+    &= \omega_{s}^{2} \mathbf{c}(\mathbf{q} \alpha s\lambda) \\
+  \mathbf{c}(\mathbf{q} \alpha s\lambda)^{\dagger} \mathbf{c}(\mathbf{q} \alpha s'\lambda') = \delta_{s s'} \delta_{\lambda \lambda'}
+```
+where {math}`s` labels real eigenvalues {math}`\omega_{s}^{2}`.
+When accidental degeneracy happens, {math}`\lambda` labels each of them.
+We choice eigenvectors {math}`\mathbf{c}(\mathbf{q} \alpha s\lambda)` are mutually orthogonal even within degenerated eigenvalues.
+
+Now go back the other convention of dynamical matrix:
+```{math}
+  e_{\mu}(\kappa; \mathbf{q}\alpha s \lambda)
+    &:= e^{ -i\mathbf{q} \cdot \mathbf{r}(0\kappa) } \sum_{\sigma\nu} f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu) c(\sigma\nu; \mathbf{q}\alpha s \lambda) \\
   D_{\mu\mu'}(\kappa\kappa'; \mathbf{q})
     &= e^{ i \mathbf{q} \cdot \left( \mathbf{r}(0\kappa') - \mathbf{r}(0\kappa) \right) } \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) \\
-  e_{\mu}(\kappa; \mathbf{q}\omega\nu)
-    &:= e^{ -i\mathbf{q} \cdot \mathbf{r}(0\kappa) } f_{\mu}(\kappa; \mathbf{q}\omega\nu) \\
-  \sum_{ \kappa'\mu' } D_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) e_{\mu'}(\kappa'; \mathbf{q}\omega\nu)
-    &= \omega^{2} e_{\mu}(\kappa; \mathbf{q}\omega\nu) \\
+  \sum_{ \kappa'\mu' } D_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) e_{\mu'}(\kappa'; \mathbf{q}\alpha s\lambda)
+    &= \omega_{s}^{2} e_{\mu}(\kappa; \mathbf{q}\alpha s \lambda),
 ```
+where {math}`\left[ c(\sigma\nu; \mathbf{q}\alpha s \lambda) \right]_{\sigma\nu} = \mathbf{c}(\mathbf{q}\alpha s \lambda)`.
 
 ## Modulation
 

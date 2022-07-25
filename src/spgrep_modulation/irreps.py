@@ -32,6 +32,7 @@ def project_eigenmode_representation(
     -------
     basis: list
         basis[i] is list of independent basis vectors with (dim, num_atoms, 3) forming irreps[i].
+        Note: phase chosen to be consistent with definition of phonopy's dynamical matrix
     irreps: list of irrep (little_order, dim, dim)
     mapping_little_group:
     """
