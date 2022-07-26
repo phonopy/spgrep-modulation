@@ -15,31 +15,27 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # setuptools-scm
 
     - uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-
-    # https://github.com/actions/cache/blob/main/examples.md#python---pip
-    - uses: actions/cache@v3
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-${{ matrix.python-version }}-pip-${{ hashFiles('**/setup.py') }}
-        restore-keys: |
-          ${{ runner.os }}-${{ matrix.python-version }}-pip-
 
     - name: Checkout spgrep
       uses: actions/checkout@v3
       with:
         repository: spglib/spgrep
         token: ${{ secrets.GH_PAT }}
-        path: spgrep
+        path: "spgrep"
+        fetch-depth: 0  # setuptools-scm
+        persist-credentials: false
 
     - name: Install spgrep
-      working-directory: spgrep
+      working-directory: "spgrep"
       run: |
         python -m pip install --upgrade pip
-        python -m pip install .
+        python -m pip install -e .
 
     - name: Install
       run: |
@@ -47,4 +43,4 @@ jobs:
 
     - name: Test with pytest
       run: |
-        python -m pytest -v tests/
+        pytest -v
