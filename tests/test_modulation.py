@@ -16,6 +16,10 @@ from spgrep_modulation.modulation import Modulation
         ("ph_mgo", [0.5, 0, 0.5]),  # X point in primitive
         ("ph_si_diamond", [0, 0, 0]),  # Gamma
         ("ph_si_diamond", [0.5, 0, 0.5]),  # X point in primitive
+        ("ph_aln", [0.0, 0.0, 0.0]),
+        ("ph_aln", [0.0, 0.0, 0.5]),  # A point
+        ("ph_aln", [1 / 2, 0.0, 0.0]),  # M point
+        ("ph_aln", [1 / 3, 1 / 3, 0.0]),  # K point
     ],
 )
 def test_symmetry_adapted_eigenmodes(request, ph_name, qpoint):
@@ -34,7 +38,7 @@ def test_symmetry_adapted_eigenmodes(request, ph_name, qpoint):
     for eigval, modes in md.eigenspaces:
         actual = np.einsum("ij,kj->ki", dm, modes.reshape(-1, num_atoms * 3), optimize="greedy")
         expect = eigval * modes.reshape(-1, num_atoms * 3)
-        assert np.allclose(actual, expect, atol=1e-6)
+        assert np.allclose(actual, expect, atol=1e-5)
 
 
 def test_regression(ph_bto: Phonopy):

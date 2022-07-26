@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+from typing import Literal
+
 import numpy as np
 from spgrep.group import get_little_group
 from spgrep.irreps import enumerate_small_representations
 from spgrep.representation import project_to_irrep
 
-from phonopy.harmonic.force_constants import similarity_transformation
 from phonopy.structure.cells import Primitive
 from phonopy.structure.symmetry import Symmetry
 from spgrep_modulation.utils import NDArrayComplex, NDArrayFloat, NDArrayInt
@@ -16,8 +17,9 @@ def project_eigenmode_representation(
     primitive: Primitive,
     primitive_symmetry: Symmetry,
     primitive_qpoint: NDArrayFloat,
+    method: Literal["Neto", "random"] = "Neto",
     rtol: float = 1e-5,
-    atol: float = 1e-8,
+    atol: float = 1e-6,  # Too tight tolerance gives wrong basis vectors...
 ) -> tuple[list[NDArrayComplex], list[NDArrayComplex], NDArrayInt]:
     """
     Parameters
@@ -30,8 +32,8 @@ def project_eigenmode_representation(
 
     Returns
     -------
-    basis: list
-        basis[i] is list of independent basis vectors with (dim, num_atoms, 3) forming irreps[i].
+    all_basis: list
+        all_basis[i] is list of independent basis vectors with (dim, num_atoms, 3) forming irreps[i].
         Note: phase chosen to be consistent with definition of phonopy's dynamical matrix
     irreps: list of irrep (little_order, dim, dim)
     mapping_little_group:
@@ -49,7 +51,7 @@ def project_eigenmode_representation(
         little_rotations,
         little_translations,
         primitive_qpoint,
-        method="Neto",
+        method=method,
         rtol=rtol,
         atol=atol,
     )
@@ -74,16 +76,16 @@ def project_eigenmode_representation(
     phase = np.exp(
         -2j * np.pi * np.dot(primitive.scaled_positions, primitive_qpoint)
     )  # (num_atoms, )
-    basis = []
+    all_basis = []
     for list_mb in modified_basis:
         basis_for_same_irrep = []
         for mb in list_mb:
             eigenvecs = phase[None, :, None] * mb  # (dim_irrep, num_atoms, 3)
             basis_for_same_irrep.append(eigenvecs)
 
-        basis.append(basis_for_same_irrep)
+        all_basis.append(basis_for_same_irrep)
 
-    return basis, irreps, mapping_little_group
+    return all_basis, irreps, mapping_little_group
 
 
 def get_eigenmode_representation(
@@ -128,7 +130,9 @@ def get_eigenmode_representation(
             )
 
     # Rotation matrix in cartesian (order, 3, 3)
-    rotation_rep = np.array([similarity_transformation(primitive.cell.T, r) for r in rotations])
+    A = primitive.cell.T  # column-wise lattice vectors
+    Ainv = np.linalg.inv(A)
+    rotation_rep = np.array([A @ r @ Ainv for r in rotations], dtype=np.complex_)
 
     rep = np.einsum("ipq,iab->ipaqb", perm_rep, rotation_rep, optimize="greedy")
     return rep
