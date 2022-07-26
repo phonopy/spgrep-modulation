@@ -239,11 +239,10 @@ where {math}`\mathbf{\Phi}(\mathbf{q}\alpha)` is hermitian.
 Diagonalize {math}`\mathbf{\Phi}(\mathbf{q}\alpha)`
 ```{math}
   \mathbf{\Phi}(\mathbf{q}\alpha) \mathbf{c}(\mathbf{q} \alpha s\lambda)
-    &= \omega_{s}^{2} \mathbf{c}(\mathbf{q} \alpha s\lambda) \\
+    &= \omega_{\alpha s}^{2} \mathbf{c}(\mathbf{q} \alpha s\lambda) \\
   \mathbf{c}(\mathbf{q} \alpha s\lambda)^{\dagger} \mathbf{c}(\mathbf{q} \alpha s'\lambda') = \delta_{s s'} \delta_{\lambda \lambda'}
 ```
-where {math}`s` labels real eigenvalues {math}`\omega_{s}^{2}`.
-When accidental degeneracy happens, {math}`\lambda` labels each of them.
+where {math}`s` labels real eigenvalues {math}`\omega_{\alpha s}^{2}`, and {math}`\lambda` labels each of them further.
 We choice eigenvectors {math}`\mathbf{c}(\mathbf{q} \alpha s\lambda)` are mutually orthogonal even within degenerated eigenvalues.
 
 Now go back the other convention of dynamical matrix:

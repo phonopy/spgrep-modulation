@@ -51,7 +51,7 @@ class Modulation:
         qpoint: NDArrayFloat,
         nac_q_direction: NDArrayFloat | None = None,
         factor: float = VaspToTHz,
-        degeneracy_tolerance: float = 1e-5,
+        degeneracy_tolerance: float = 1e-4,
     ) -> None:
         # Check to be commensurate
         if not np.allclose(np.remainder(supercell.supercell_matrix.T @ qpoint, 1), 0):
@@ -140,6 +140,11 @@ class Modulation:
                     optimize="greedy",
                 )
                 eigenspaces.append((eigvals_irrep[indices[0]], space_phonopy))
+
+            if len(deg_sets_irrep) != len(list_basis):
+                warn(
+                    f"If no accidental degeneracy happens, number of unique eigenvalues corresponding to an irrep ({len(list_basis)}) should be equal to degeneracy of the irrep ({len(deg_sets_irrep)})."
+                )
 
         # Sort by eigenvalue for regression test
         argsort = np.argsort([eigval for eigval, _ in eigenspaces], kind="stable")
