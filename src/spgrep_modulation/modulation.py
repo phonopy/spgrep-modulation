@@ -20,7 +20,13 @@ from spgrep_modulation.irreps import (
     get_eigenmode_representation,
     project_eigenmode_representation,
 )
-from spgrep_modulation.utils import NDArrayComplex, NDArrayFloat, NDArrayInt, qr_unique
+from spgrep_modulation.utils import (
+    NDArrayComplex,
+    NDArrayFloat,
+    NDArrayInt,
+    get_modified_dynamical_matrix,
+    qr_unique,
+)
 
 
 class Modulation:
@@ -90,18 +96,15 @@ class Modulation:
         )
 
         # Modified dynamical matrix
+        mdm = get_modified_dynamical_matrix(
+            self.dynamical_matrix.dynamical_matrix, self.primitive.scaled_positions, self.qpoint
+        )
+
+        eigenspaces = []
         num_atoms = len(self.primitive)
-        dm = self.dynamical_matrix.dynamical_matrix
         phase = np.exp(
             2j * np.pi * np.dot(self.primitive.scaled_positions, self.qpoint)
         )  # (num_atoms, )
-        mdm = (
-            dm.reshape(num_atoms, 3, num_atoms, 3)
-            * phase[:, None, None, None]
-            * np.conj(phase)[None, None, :, None]
-        ).reshape(num_atoms * 3, num_atoms * 3)
-
-        eigenspaces = []
         for list_basis in all_basis:
             # Block-diagonalize modified dynamical matrix
             list_modified_basis = [basis * phase[None, :, None] for basis in list_basis]

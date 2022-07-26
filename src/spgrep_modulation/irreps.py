@@ -3,8 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 import numpy as np
-from spgrep.group import get_little_group
-from spgrep.irreps import enumerate_small_representations
+from spgrep.core import get_spacegroup_irreps_from_primitive_symmetry
 from spgrep.representation import project_to_irrep
 
 from phonopy.structure.cells import Primitive
@@ -42,14 +41,9 @@ def project_eigenmode_representation(
     translations = primitive_symmetry.symmetry_operations["translations"]
     num_atoms = len(primitive)
 
-    little_rotations, little_translations, mapping_little_group = get_little_group(
-        rotations, translations, primitive_qpoint, atol=atol
-    )
-
-    # Compute irreps of little co-group
-    little_cogroup_irreps = enumerate_small_representations(
-        little_rotations,
-        little_translations,
+    small_reps, mapping_little_group = get_spacegroup_irreps_from_primitive_symmetry(
+        rotations,
+        translations,
         primitive_qpoint,
         method=method,
         rtol=rtol,
@@ -58,7 +52,7 @@ def project_eigenmode_representation(
 
     modified_basis = []
     irreps = []
-    for irrep in little_cogroup_irreps:
+    for irrep in small_reps:
         projected = project_to_irrep(
             representation=eigenmode_representation[mapping_little_group].reshape(
                 -1, num_atoms * 3, num_atoms * 3

@@ -15,6 +15,7 @@ from spgrep_modulation.irreps import (
     get_eigenmode_representation,
     project_eigenmode_representation,
 )
+from spgrep_modulation.utils import get_modified_dynamical_matrix
 
 
 @pytest.mark.parametrize(
@@ -81,12 +82,8 @@ def test_project_eigenmode_representation(request, ph_name, qpoint, num_irreps, 
     # Check if modified dynamical matrix is invariant under eigenmode representation
     dm = ph.dynamical_matrix
     dm.run(qpoint)
-    mdm = (
-        dm.dynamical_matrix.reshape(num_atoms, 3, num_atoms, 3)
-        * phase[:, None, None, None]
-        * np.conj(phase)[None, None, :, None]
-    )
-    mdm = mdm.reshape(num_atoms * 3, num_atoms * 3)
+    mdm = get_modified_dynamical_matrix(dm.dynamical_matrix, primitive.scaled_positions, qpoint)
+
     for idx in mapping:
         rep_idx = rep[idx].reshape(num_atoms * 3, num_atoms * 3)
         actual = rep_idx @ mdm @ np.conj(rep_idx.T)

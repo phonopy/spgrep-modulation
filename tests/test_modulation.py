@@ -7,27 +7,27 @@ from spgrep_modulation.modulation import Modulation
 
 
 @pytest.mark.parametrize(
-    "ph_name,qpoint",
+    "ph_name,qpoint,dimension",
     [
-        ("ph_bto", [0, 0, 0]),  # Gamma
-        ("ph_bto", [0, 0, 0.5]),  # X point
-        ("ph_bto", [0, 0.5, 0.5]),  # M point
-        ("ph_mgo", [0, 0, 0]),  # Gamma
-        ("ph_mgo", [0.5, 0, 0.5]),  # X point in primitive
-        ("ph_si_diamond", [0, 0, 0]),  # Gamma
-        ("ph_si_diamond", [0.5, 0, 0.5]),  # X point in primitive
-        ("ph_aln", [0.0, 0.0, 0.0]),
-        ("ph_aln", [0.0, 0.0, 0.5]),  # A point
-        ("ph_aln", [1 / 2, 0.0, 0.0]),  # M point
-        ("ph_aln", [1 / 3, 1 / 3, 0.0]),  # K point
+        ("ph_bto", [0, 0, 0], [1, 1, 1]),  # Gamma
+        ("ph_bto", [0, 0, 0.5], [2, 2, 2]),  # X point
+        ("ph_bto", [0, 0.5, 0.5], [2, 2, 2]),  # M point
+        ("ph_mgo", [0, 0, 0], [1, 1, 1]),  # Gamma
+        ("ph_mgo", [0.5, 0, 0.5], [2, 2, 2]),  # X point in primitive
+        ("ph_si_diamond", [0, 0, 0], [1, 1, 1]),  # Gamma
+        ("ph_si_diamond", [0.5, 0, 0.5], [2, 2, 2]),  # X point in primitive
+        ("ph_aln", [0.0, 0.0, 0.0], [1, 1, 1]),
+        ("ph_aln", [0.0, 0.0, 0.5], [2, 2, 2]),  # A point
+        ("ph_aln", [1 / 2, 0.0, 0.0], [2, 2, 2]),  # M point
+        ("ph_aln", [1 / 3, 1 / 3, 0.0], [3, 3, 2]),  # K point
     ],
 )
-def test_symmetry_adapted_eigenmodes(request, ph_name, qpoint):
+def test_symmetry_adapted_eigenmodes(request, ph_name, qpoint, dimension):
     ph = request.getfixturevalue(ph_name)
 
     md = Modulation.with_supercell_and_symmetry_search(
         dynamical_matrix=ph.dynamical_matrix,
-        supercell_matrix=[2, 2, 2],
+        supercell_matrix=dimension,
         qpoint=qpoint,
         factor=ph.unit_conversion_factor,
     )
