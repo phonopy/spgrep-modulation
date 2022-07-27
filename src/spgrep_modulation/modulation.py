@@ -59,7 +59,9 @@ class Modulation:
         self._qpoint = qpoint
 
         self._primitive_symmetry = primitive_symmetry
-        if not is_primitive_cell(primitive_symmetry.symmetry_operations["rotations"]):
+        rotations = primitive_symmetry.symmetry_operations["rotations"]
+        translations = primitive_symmetry.symmetry_operations["translations"]
+        if not is_primitive_cell(rotations):
             raise RuntimeError("Set primitive cell.")
 
         self._supercell = supercell
@@ -71,7 +73,7 @@ class Modulation:
         self._supercell_size = np.abs(np.around(np.linalg.det(self._supercell.supercell_matrix)))
 
         # Diagonalize dynamical matrix if not performed yet
-        eigvals, eigvecs = get_eigenvectors(
+        eigvals, _ = get_eigenvectors(
             qpoint,
             self._dynamical_matrix,
             ddm=None,  # Not used
@@ -82,9 +84,13 @@ class Modulation:
 
         # Group eigenvecs by frequencies
         self._frequencies = self._eigvals_to_frequencies(eigvals)
-        self._eigenspaces = self._group_eigenvecs(eigvals, eigvecs)
+        self._eigenspaces, mapping_little_group = self._group_eigenspaces(eigvals)
 
-    def _group_eigenvecs(self, eigvals, eigvecs):
+        # Little group
+        self._little_rotations = rotations[mapping_little_group]
+        self._little_translations = translations[mapping_little_group]
+
+    def _group_eigenspaces(self, eigvals):
         # Construct irreps with `qpoint`
         rep = get_eigenmode_representation(self.primitive, self.primitive_symmetry, self.qpoint)
         all_basis, irreps, mapping_little_group = project_eigenmode_representation(
@@ -105,15 +111,15 @@ class Modulation:
         phase = np.exp(
             2j * np.pi * np.dot(self.primitive.scaled_positions, self.qpoint)
         )  # (num_atoms, )
-        for list_basis in all_basis:
+        for list_basis, irrep in zip(all_basis, irreps):
             # Block-diagonalize modified dynamical matrix
             list_modified_basis = [basis * phase[None, :, None] for basis in list_basis]
             F_irrep = np.concatenate(
                 [mb.reshape(-1, num_atoms * 3) for mb in list_modified_basis]
-            ).T  # (num_atoms * 3, degeneracy * dim_irrep)
+            ).T  # (num_atoms * 3, len(list_basis) * dim_irrep)
             mdm_irrep = (
                 np.conj(F_irrep.T) @ mdm @ F_irrep
-            )  # (degeneracy * dim_irrep, degeneracy * dim_irrep)
+            )  # (len(list_basis) * dim_irrep, len(list_basis) * dim_irrep)
             if not np.allclose(mdm_irrep, np.conj(mdm_irrep).T):
                 warn("Block-diagonalized modified dynamical matrix is not Hermitian.")
 
@@ -122,35 +128,49 @@ class Modulation:
             # Group by eigenvalues
             frequencies_irrep = self._eigvals_to_frequencies(eigvals_irrep)
             deg_sets_irrep = degenerate_sets(frequencies_irrep, cutoff=self.degeneracy_tolerance)
+            if len(deg_sets_irrep) != len(list_basis):
+                warn(
+                    f"If no accidental degeneracy happens, number of unique eigenvalues corresponding to an irrep ({len(list_basis)}) should be equal to degeneracy of the irrep ({len(deg_sets_irrep)})."
+                )
+
+            dim_irrep = irrep.shape[1]
             for indices in deg_sets_irrep:
-                if not np.any(np.isclose(eigvals, eigvals_irrep[indices[0]])):
+                # If no accidental degeneracy happens, deg_eigval == dim_irrep, len(deg_sets_irrep) == len(list_basis)
+                deg_eigval = len(indices)
+                if (not np.any(np.isclose(eigvals, eigvals_irrep[indices[0]]))) or (
+                    deg_eigval != dim_irrep
+                ):
                     warn(f"Inconsistent eigenvalue: {eigvals_irrep[indices[0]]}, {eigvals}")
 
                 space = np.array(
                     [eigvecs_irrep[:, idx] for idx in indices]
-                )  # (deg_eigval, degeneracy * dim_irrep)
+                )  # (deg_eigval=dim_irrep, len(list_basis) * dim_irrep)
                 # QR decomposition of column-wise vectors gives Gram-Schmidt orthonormalized vectors in column wise.
                 space = qr_unique(space.T)[0].T
                 # Go back eigenvectors with phonopy's convention
                 space_phonopy = np.einsum(
                     "k,kmp,ip->ikm",
                     np.conj(phase),
-                    F_irrep.reshape(num_atoms, 3, -1),
+                    F_irrep.reshape(num_atoms, 3, len(list_basis) * dim_irrep),
                     space,
                     optimize="greedy",
-                )
-                eigenspaces.append((eigvals_irrep[indices[0]], space_phonopy))
+                )  # (deg_eigval=dim_irrep, num_atoms, 3)
 
-            if len(deg_sets_irrep) != len(list_basis):
-                warn(
-                    f"If no accidental degeneracy happens, number of unique eigenvalues corresponding to an irrep ({len(list_basis)}) should be equal to degeneracy of the irrep ({len(deg_sets_irrep)})."
-                )
+                # Representation matrix
+                irrep_eigmodes = np.einsum(
+                    "nsq,kqp,msp->knm",
+                    np.conj(space).reshape(deg_eigval, len(list_basis), dim_irrep),
+                    irrep,  # (little_order, dim_irrep, dim_irrep)
+                    space.reshape(deg_eigval, len(list_basis), dim_irrep),
+                    optimize="greedy",
+                )  # (little_order, dim_irrep, dim_irrep)
+
+                eigenspaces.append((eigvals_irrep[indices[0]], space_phonopy, irrep_eigmodes))
 
         # Sort by eigenvalue for regression test
-        argsort = np.argsort([eigval for eigval, _ in eigenspaces], kind="stable")
-        sorted_eigenspaces = [eigenspaces[idx] for idx in argsort]
+        sorted_eigenspaces = sorted(eigenspaces, key=lambda e: e[0])
 
-        return sorted_eigenspaces
+        return sorted_eigenspaces, mapping_little_group
 
     @property
     def dynamical_matrix(self) -> DynamicalMatrix | DynamicalMatrixNAC:
@@ -159,6 +179,14 @@ class Modulation:
     @property
     def primitive_symmetry(self) -> Symmetry:
         return self._primitive_symmetry
+
+    @property
+    def little_rotations(self) -> NDArrayInt:
+        return self._little_rotations
+
+    @property
+    def little_translations(self) -> NDArrayFloat:
+        return self._little_translations
 
     @property
     def primitive(self) -> Primitive:
@@ -185,8 +213,13 @@ class Modulation:
         return self._frequencies
 
     @property
-    def eigenspaces(self) -> list[tuple[float, NDArrayComplex]]:
-        """Return list of (eigenvalue, eigenvectors with (degeneracy, num_atoms, 3)) of dynamical matrix"""
+    def eigenspaces(self) -> list[tuple[float, NDArrayComplex, NDArrayComplex]]:
+        """Return list of (eigenvalue, degenerated eigenvectors, irrep formed by the eigenvectors) of dynamical matrix.
+
+        eigenvalue: float
+        eigenvectors: array, (dim, num_atoms, 3)
+        irrep: array, (little_order, dim, dim)
+        """
         return self._eigenspaces
 
     def get_modulated_supercell_and_modulation(
@@ -196,20 +229,20 @@ class Modulation:
         arguments: list[float],
     ) -> tuple[PhonopyAtoms, NDArrayComplex]:
         # Adapted from phonopy
-        _, eigvecs = self._eigenspaces[frequency_index]
+        _, eigvecs, _ = self.eigenspaces[frequency_index]
 
         # Generate modulation
-        modulation = np.zeros((len(self._supercell), 3), dtype=np.complex_)
+        modulation = np.zeros((len(self.supercell), 3), dtype=np.complex_)
         for eigvec, amplitude, argument in zip(eigvecs, amplitudes, arguments):
             modulation += self._get_displacements(eigvec.reshape(-1, 3), amplitude, argument)
 
         # Apply modulation to supercell
-        lattice = self._supercell.cell
-        positions = self._supercell.positions
+        lattice = self.supercell.cell
+        positions = self.supercell.positions
         positions += np.real(modulation) / 2
         scaled_positions = np.dot(positions, np.linalg.inv(lattice))
         scaled_positions = np.remainder(scaled_positions, 1)
-        cell = self._supercell.copy()
+        cell = self.supercell.copy()
         cell.scaled_positions = scaled_positions
 
         return cell, modulation

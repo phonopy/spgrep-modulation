@@ -1,5 +1,6 @@
 import numpy as np
 import pytest
+from spgrep.representation import check_spacegroup_representation, is_unitary
 
 from phonopy import Phonopy
 from phonopy.phonon.modulation import Modulation as PhonopyModulation
@@ -35,10 +36,22 @@ def test_symmetry_adapted_eigenmodes(request, ph_name, qpoint, dimension):
     # Check if each mode is truly eigenvector of dynamical matrix
     dm = md.dynamical_matrix.dynamical_matrix
     num_atoms = len(md.primitive)
-    for eigval, modes in md.eigenspaces:
+    for eigval, modes, _ in md.eigenspaces:
         actual = np.einsum("ij,kj->ki", dm, modes.reshape(-1, num_atoms * 3), optimize="greedy")
         expect = eigval * modes.reshape(-1, num_atoms * 3)
         assert np.allclose(actual, expect, atol=1e-5)
+
+    # Check irreps formed by symmetry-adapted eigenvectors
+    for _, _, irrep in md.eigenspaces:
+        # Check if `irrep` is unitary representation
+        assert is_unitary(irrep)
+        # Check if `rep` preserves multiplication for little group
+        assert check_spacegroup_representation(
+            md.little_rotations,
+            md.little_translations,
+            qpoint,
+            irrep,
+        )
 
 
 def test_regression(ph_bto: Phonopy):
