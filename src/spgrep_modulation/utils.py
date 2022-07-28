@@ -63,3 +63,36 @@ def qr_unique(a: NDArrayComplex) -> tuple[NDArrayComplex, NDArrayComplex]:
             r[i, :] *= -1
 
     return q, r
+
+
+def get_commensurate_diagonal_supercell(qpoint: NDArrayFloat, atol: float = 1e-8) -> NDArrayInt:
+    assert len(qpoint) == 3
+    diag = [0 for _ in range(3)]
+    for i, qi in enumerate(qpoint):
+        for n in [1, 2, 3]:
+            if np.isclose(np.remainder(n * qi, 1), 0, atol=atol):
+                diag[i] = n
+                break
+    return np.diag(diag)
+
+
+def sample_on_unit_sphere(rng: np.random.Generator, n: int, size: int = 1) -> NDArrayFloat:
+    """Return random points from a surface of n-dimensional unit sphere.
+
+    Ref: M. E. Muller, Communications of the ACM 2.4, 19-20 (1959).
+
+    Parameters
+    ----------
+    rng: numpy's random generator
+    n: int
+        Number of variables
+    size: int, default=1
+        Number of points to be sampled
+
+    Returns
+    -------
+    points: array, (size, n)
+    """
+    points = rng.standard_normal((size, n))
+    points /= np.linalg.norm(points, axis=1, keepdims=True)
+    return points

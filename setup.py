@@ -40,6 +40,9 @@ EXTRAS = {
         "ipython",
         "ipykernel",
         "notebook",
+        "ase==3.22.1",
+        "pymatgen==2022.7.25",
+        "click",
     ],
     "docs": [
         "sphinx",

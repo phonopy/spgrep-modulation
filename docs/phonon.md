@@ -308,24 +308,33 @@ Modulation associated with qpoint {math}`\mathbf{q}` and frequency {math}`\mathb
 
 {math}`\mathbf{q} \neq \mathbf{0}` case:
 ```{math}
-  u^{( \mathbf{q} \omega )}_{\alpha}(l\kappa)
-    &= \frac{1}{\sqrt{L^{3}M_{\kappa}}} \sum_{ \nu }
+  u^{( \mathbf{q} \alpha s)}_{\mu}(l\kappa)
+    &= \frac{1}{\sqrt{L^{3}M_{\kappa}}} \sum_{ \lambda }
       \left(
-        Q^{ (\mathbf{q} \omega) }_{\nu} e_{\alpha}(\kappa; \mathbf{q} \omega\nu ) e^{ i \mathbf{q} \cdot \mathbf{r}(l\kappa) }
+        Q^{ (\mathbf{q} \alpha s) }_{\lambda} e_{\mu}(\kappa; \mathbf{q} \alpha s \lambda) e^{ i \mathbf{q} \cdot \mathbf{r}(l\kappa) }
         + \mathrm{c.c.}
       \right) \\
-  Q^{ (\mathbf{q} \omega) }_{\nu} &\in \mathbb{C} \\
+  Q^{ (\mathbf{q} \alpha s) }_{\lambda} &\in \mathbb{C} \\
 ```
 
 {math}`\mathbf{q} = \mathbf{0}` case:
 ```{math}
-  u^{( \mathbf{0} \omega )}_{\alpha}(l\kappa)
-    &= \frac{1}{\sqrt{L^{3}M_{\kappa}}} \sum_{ \nu }
-        Q^{ (\mathbf{0} \omega) }_{\nu} e_{\alpha}(\kappa; \mathbf{0} \omega\nu ) \\
-  Q^{ (\mathbf{0} \omega) }_{\nu} &\in \mathbb{R} \\
+  u^{( \mathbf{0} \alpha s)}_{\mu}(l\kappa)
+    &= \frac{1}{\sqrt{L^{3}M_{\kappa}}} \sum_{ \lambda }
+        Q^{ (\mathbf{0} \alpha s) }_{\lambda} e_{\mu}(\kappa; \mathbf{0} \alpha s \lambda ) \\
+  Q^{ (\mathbf{0} \alpha s) }_{\lambda} &\in \mathbb{R} \\
 ```
 
-chain-adapted mode {cite}`Aroyo:js0048`
+% When we sample modulations in grid, we fix the norm of {math}`\mathbf{Q}^{ (\mathbf{q} \alpha s) }`, which is equivalent to fix the norm of the following mass-weighted displacements,
+% ```{math}
+%   \sum_{l \kappa \mu} M_{\kappa} \left| u^{( \mathbf{q} \alpha s)}_{\mu}(l\kappa) \right|^{2}
+%     \propto \sum_{\lambda} \left| Q^{ (\mathbf{q} \alpha s) }_{\lambda} \right|^{2}.
+% ```
+
+From unitary arbitrariness of {math}`\tilde{\Gamma}^{\mathbf{q}\alpha s}`, we can choose as {math}`\mathrm{Im}\, Q^{ (\mathbf{q} \alpha s) }_{\lambda=1} = 0`.
+Thus, sampling of {math}`\mathbf{Q}^{ (\mathbf{q} \alpha s) }` is attributed to sampling points from unit sphere {math}`S^{2 d_{\alpha} - 2}`.
+
+% chain-adapted mode {cite}`Aroyo:js0048`
 
 ## References
 

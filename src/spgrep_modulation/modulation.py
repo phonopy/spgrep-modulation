@@ -26,6 +26,7 @@ from spgrep_modulation.utils import (
     NDArrayInt,
     get_modified_dynamical_matrix,
     qr_unique,
+    sample_on_unit_sphere,
 )
 
 
@@ -41,6 +42,8 @@ class Modulation:
     factor:
     degeneracy_tolerance: float
         Absolute tolerance to groupby phonon frequencies in ``factor`` unit
+    seed: int
+        Seed value for sampling modulation from degenerated modes
     """
 
     def __init__(
@@ -52,6 +55,7 @@ class Modulation:
         nac_q_direction: NDArrayFloat | None = None,
         factor: float = VaspToTHz,
         degeneracy_tolerance: float = 1e-4,
+        seed: int = 0,
     ) -> None:
         # Check to be commensurate
         if not np.allclose(np.remainder(supercell.supercell_matrix.T @ qpoint, 1), 0):
@@ -69,6 +73,7 @@ class Modulation:
         self._nac_q_direction = nac_q_direction
         self._factor = factor
         self._degeneracy_tolerance = degeneracy_tolerance
+        self._rng = np.random.default_rng(seed=seed)
 
         self._supercell_size = np.abs(np.around(np.linalg.det(self._supercell.supercell_matrix)))
 
@@ -83,7 +88,6 @@ class Modulation:
         )
 
         # Group eigenvecs by frequencies
-        self._frequencies = self._eigvals_to_frequencies(eigvals)
         self._eigenspaces, mapping_little_group = self._group_eigenspaces(eigvals)
 
         # Little group
@@ -126,7 +130,7 @@ class Modulation:
             eigvals_irrep, eigvecs_irrep = np.linalg.eigh(mdm_irrep)
 
             # Group by eigenvalues
-            frequencies_irrep = self._eigvals_to_frequencies(eigvals_irrep)
+            frequencies_irrep = self.eigvals_to_frequencies(eigvals_irrep)
             deg_sets_irrep = degenerate_sets(frequencies_irrep, cutoff=self.degeneracy_tolerance)
             if len(deg_sets_irrep) != len(list_basis):
                 warn(
@@ -209,10 +213,6 @@ class Modulation:
         return self._degeneracy_tolerance
 
     @property
-    def frequencies(self) -> NDArrayFloat:
-        return self._frequencies
-
-    @property
     def eigenspaces(self) -> list[tuple[float, NDArrayComplex, NDArrayComplex]]:
         """Return list of (eigenvalue, degenerated eigenvectors, irrep formed by the eigenvectors) of dynamical matrix.
 
@@ -227,7 +227,8 @@ class Modulation:
         frequency_index: int,
         amplitudes: list[float],
         arguments: list[float],
-    ) -> tuple[PhonopyAtoms, NDArrayComplex]:
+        return_cell: bool = True,
+    ) -> tuple[PhonopyAtoms, NDArrayComplex] | NDArrayComplex:
         # Adapted from phonopy
         _, eigvecs, _ = self.eigenspaces[frequency_index]
 
@@ -236,16 +237,65 @@ class Modulation:
         for eigvec, amplitude, argument in zip(eigvecs, amplitudes, arguments):
             modulation += self._get_displacements(eigvec.reshape(-1, 3), amplitude, argument)
 
-        # Apply modulation to supercell
-        lattice = self.supercell.cell
-        positions = self.supercell.positions
-        positions += np.real(modulation) / 2
-        scaled_positions = np.dot(positions, np.linalg.inv(lattice))
-        scaled_positions = np.remainder(scaled_positions, 1)
-        cell = self.supercell.copy()
-        cell.scaled_positions = scaled_positions
+        if return_cell:
+            cell = self._apply_modulation_to_supercell(modulation)
+            return cell, modulation
+        else:
+            return modulation
 
-        return cell, modulation
+    def get_modulated_supercells(
+        self,
+        frequency_index: int,
+        maximal_displacement: float = 0.11,
+        max_size: int = 1,
+    ) -> list[PhonopyAtoms]:
+        """
+        Parameters
+        ----------
+        frequency_index: int
+            Index of considered eigenmodes in ``Modulation.eigenspaces``
+        maximal_displacement: int
+            Amplitude of modulation is chosen so that the maximal displacement in returned modulation is equal to ``maximal_displacement``.
+            Same unit as ``Modulation.primitive.cell``.
+        max_size: int
+            Number of returned modulated structures when degenerated eigenmodes are specified.
+
+        Returns
+        -------
+        cells: list of PhonopyAtoms
+        """
+        _, eigvecs, _ = self.eigenspaces[frequency_index]
+        degeneracy = len(eigvecs)
+
+        modulations = []
+        if degeneracy == 1:
+            modulation = self.get_modulated_supercell_and_modulation(
+                frequency_index, amplitudes=[1.0], arguments=[0.0], return_cell=False
+            )
+            modulations.append(modulation)
+        elif degeneracy > 1:
+            points = np.zeros((max_size, 2 * degeneracy))
+            # One of order parameters can be chosen as pure real because of unitary arbitrariness of eigenvectors
+            points[:, :-1] = sample_on_unit_sphere(self._rng, 2 * degeneracy - 1, size=max_size)
+            order_params = points.reshape(max_size, degeneracy, 2)
+            order_params = order_params[:, :, 0] + order_params[:, :, 1] * 1.0j
+
+            amplitudes = np.abs(order_params)
+            arguments = np.angle(order_params)
+            for amp, arg in zip(amplitudes, arguments):
+                modulation = self.get_modulated_supercell_and_modulation(
+                    frequency_index, amp, arg, return_cell=False
+                )
+                modulations.append(modulation)
+
+        cells = []
+        for modulation in modulations:
+            # Scale modulation to so that its maximal displacement is equal to ``maximal_displacement``
+            scaled_modulation = maximal_displacement / np.max(np.abs(modulation)) * modulation
+            cell = self._apply_modulation_to_supercell(scaled_modulation)
+            cells.append(cell)
+
+        return cells
 
     @classmethod
     def with_supercell_and_symmetry_search(
@@ -276,7 +326,7 @@ class Modulation:
             factor=factor,
         )
 
-    def _eigvals_to_frequencies(self, eigvals: NDArrayComplex) -> NDArrayFloat:
+    def eigvals_to_frequencies(self, eigvals: NDArrayComplex) -> NDArrayFloat:
         # Adapted from phonopy
         e = np.array(eigvals).real
         return np.sqrt(np.abs(e)) * np.sign(e) * self._factor
@@ -301,3 +351,13 @@ class Modulation:
         u *= amplitude * np.exp(1j * argument)
 
         return u
+
+    def _apply_modulation_to_supercell(self, modulation: NDArrayComplex) -> PhonopyAtoms:
+        lattice = self.supercell.cell
+        positions = self.supercell.positions
+        positions += np.real(modulation) / 2
+        scaled_positions = np.dot(positions, np.linalg.inv(lattice))
+        scaled_positions = np.remainder(scaled_positions, 1)
+        cell = self.supercell.copy()
+        cell.scaled_positions = scaled_positions
+        return cell
