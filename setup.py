@@ -24,6 +24,7 @@ REQUIRED = [
     "numpy>=1.20.1",
     "spglib>=1.16.5",
     "phonopy>=2.15.1",
+    "seekpath",
     "spgrep",  # https://github.com/spglib/spgrep
 ]
 
@@ -36,6 +37,12 @@ EXTRAS = {
         "mypy",
         "flake8",
         "pyupgrade",
+        "ipython",
+        "ipykernel",
+        "notebook",
+        "ase==3.22.1",
+        "pymatgen==2022.7.25",
+        "click",
     ],
     "docs": [
         "sphinx",

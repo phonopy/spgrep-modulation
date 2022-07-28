@@ -209,9 +209,11 @@ The corresponding small representation of {math}`\mathcal{G}^{\mathbf{q}}` is ob
 We call orthonormal basis vectors {math}`f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu)` forming irrep {math}`\Gamma^{\mathbf{q}\alpha}` as *modified eigenvectors*:
 ```{math}
   h f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu)
-    &= \sum_{\nu'} f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu') \Gamma^{\mathbf{q}\alpha}(h)_{\nu',\nu} \quad (h \in \mathcal{G}^{\mathbf{q}}) \\
+    &= \sum_{\nu'} f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu') \Gamma^{\mathbf{q}\alpha}(h)_{\nu',\nu}
+    \quad (h \in \mathcal{G}^{\mathbf{q}}, \nu = 1, \dots, d_{\alpha}) \\
   \sum_{\kappa\mu} f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu)^{\ast} f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu')
     &= \delta_{\nu\nu'}
+    \quad (\nu, \nu' = 1, \dots, d_{\alpha})
 ```
 
 We can subdivide eigenvectors further by decomposing {math}`\Gamma^{\mathbf{q}}` into irreps,
@@ -232,30 +234,73 @@ Block-diagonalize fourier transformed force constants:
     \quad \in \mathbb{C}^{3N \times m_{\alpha}d_{\alpha}} \\
   \mathbf{\Phi}(\mathbf{q}\alpha)
     &:= \mathbf{F}^{\mathbf{q}\alpha \dagger} \mathbf{\Phi}(\mathbf{q}) \mathbf{F}^{\mathbf{q}\alpha}
-    \quad \in \mathbb{C}^{ m_{\alpha}d_{\alpha} \times m_{\alpha}d_{\alpha} },
+    \quad \in \mathbb{C}^{ m_{\alpha}d_{\alpha} \times m_{\alpha}d_{\alpha} }, \\
 ```
 where {math}`\mathbf{\Phi}(\mathbf{q}\alpha)` is hermitian.
 
 Diagonalize {math}`\mathbf{\Phi}(\mathbf{q}\alpha)`
 ```{math}
-  \mathbf{\Phi}(\mathbf{q}\alpha) \mathbf{c}(\mathbf{q} \alpha s\lambda)
-    &= \omega_{s}^{2} \mathbf{c}(\mathbf{q} \alpha s\lambda) \\
-  \mathbf{c}(\mathbf{q} \alpha s\lambda)^{\dagger} \mathbf{c}(\mathbf{q} \alpha s'\lambda') = \delta_{s s'} \delta_{\lambda \lambda'}
+  \sum_{\sigma' \nu'} \Phi(\mathbf{q}\alpha)_{\sigma\nu, \sigma'\nu'} c(\mathbf{q} \alpha s\lambda)_{\sigma' \nu'}
+    &= \omega_{\alpha s}^{2} c(\mathbf{q} \alpha s\lambda)_{\sigma \nu}
+    \quad (s = 1, \dots, m_{\alpha}, \lambda = 1, \dots, d_{\alpha}) \\
+  \sum_{\sigma\nu} c(\mathbf{q}\alpha s\lambda)_{\sigma\nu}^{\ast} c(\mathbf{q}\alpha s'\lambda')_{\sigma\nu}
+    &= \delta_{s s'} \delta_{\lambda \lambda'} \\
+  \sum_{s\lambda} c(\mathbf{q}\alpha s\lambda)_{\sigma\nu}^{\ast} c(\mathbf{q}\alpha s\lambda)_{\sigma'\nu'}
+    &= \delta_{\sigma \sigma'} \delta_{\nu \nu'}
+    \quad (\sigma = 1, \dots, m_{\alpha}, \nu = 1, \dots, d_{\alpha}) \\
 ```
-where {math}`s` labels real eigenvalues {math}`\omega_{s}^{2}`.
-When accidental degeneracy happens, {math}`\lambda` labels each of them.
-We choice eigenvectors {math}`\mathbf{c}(\mathbf{q} \alpha s\lambda)` are mutually orthogonal even within degenerated eigenvalues.
+where {math}`s` labels real eigenvalues {math}`\omega_{\alpha s}^{2}` and {math}`\lambda` labels degenerated eigenvectors.
+Here, **we assume each equivalent irrep {math}`\Gamma^{\mathbf{q}\alpha \sigma}` gives a different eigenvalue**.
+Also, we choice eigenvectors {math}`\mathbf{c}(\mathbf{q} \alpha s\lambda) := \{ c(\mathbf{q}\alpha s\lambda)_{\sigma\nu} \}_{\sigma\nu}` are mutually orthogonal even within degenerated eigenvalues.
 
-Now go back the other convention of dynamical matrix:
+When irrep {math}`\alpha` appears more than once ({math}`m_{\alpha} > 1`), irrep formed by eigenvectors is no longer same as {math}`\Gamma^{\mathbf{q}\alpha}` {cite}`RevModPhys.40.1`:
+```{math}
+  \tilde{\mathbf{f}}(\mathbf{q}\alpha s \lambda)
+    &:= \sum_{\sigma\nu} \mathbf{f}(\mathbf{q}\alpha \sigma \nu) c(\mathbf{q}\alpha s\lambda)_{\sigma \nu} \\
+  h \tilde{\mathbf{f}}(\mathbf{q}\alpha s \lambda)
+    &= \sum_{\lambda'} \tilde{\mathbf{f}}(\mathbf{q}\alpha s\lambda') \tilde{\Gamma}^{\mathbf{q}\alpha s}(h)_{\lambda'\lambda},
+```
+where [^eigmode_rep]
+```{math}
+  \tilde{\Gamma}^{\mathbf{q}\alpha s}(h)_{\lambda'\lambda}
+    := \sum_{\sigma\nu\nu'} c(\mathbf{q}\alpha s\lambda')_{\sigma\nu'}^{\ast} \Gamma^{\mathbf{q}\alpha}(h)_{\nu'\nu} c(\mathbf{q}\alpha s\lambda)_{\sigma\nu}
+    \quad (h \in \mathcal{G}^{\mathbf{q}}).
+```
+
+[^eigmode_rep]: The derivation is cumbersome (to me).
+    Let {math}`\mathbf{C}^{\mathbf{q}\alpha s} = ( \mathbf{c}(\mathbf{q}\alpha s 1), \dots, \mathbf{c}(\mathbf{q}\alpha s d_{\alpha}) )`.
+    ```{math}
+    \tilde{\mathbf{\Gamma}}^{\alpha s}(h)
+      &:= \mathbf{C}^{\mathbf{q}\alpha s}
+         \begin{pmatrix}
+          \mathbf{\Gamma}^{\mathbf{q}\alpha}(h) & & \\
+          & \ddots & \\
+          & & \mathbf{\Gamma}^{\mathbf{q}\alpha}(h) \\
+         \end{pmatrix}
+         \mathbf{C}^{\mathbf{q}\alpha s \dagger} \\
+    \tilde{\Gamma}^{\alpha s}(h)_{\lambda' \lambda}
+      &= \sum_{\sigma' \nu' \sigma \nu}
+            c(\mathbf{q}\alpha s \lambda')_{\sigma'\nu'}^{\ast} \delta_{\sigma \sigma'}
+            \Gamma^{\mathbf{q}\alpha}(h)_{\nu'\nu}
+            c(\mathbf{q}\alpha s \lambda)_{\sigma\nu} \\
+      &= \sum_{\sigma \nu' \nu}
+            c(\mathbf{q}\alpha s \lambda')_{\sigma\nu'}^{\ast}
+            \Gamma^{\mathbf{q}\alpha}(h)_{\nu'\nu}
+            c(\mathbf{q}\alpha s \lambda)_{\sigma\nu} \\
+    ```
+
+Now go back to the other convention of dynamical matrix:
 ```{math}
   e_{\mu}(\kappa; \mathbf{q}\alpha s \lambda)
-    &:= e^{ -i\mathbf{q} \cdot \mathbf{r}(0\kappa) } \sum_{\sigma\nu} f_{\mu}(\kappa; \mathbf{q}\alpha\sigma\nu) c(\sigma\nu; \mathbf{q}\alpha s \lambda) \\
+    &:= e^{ -i\mathbf{q} \cdot \mathbf{r}(0\kappa) } \tilde{f}_{\mu}(\kappa; \mathbf{q}\alpha s \lambda) \\
   D_{\mu\mu'}(\kappa\kappa'; \mathbf{q})
     &= e^{ i \mathbf{q} \cdot \left( \mathbf{r}(0\kappa') - \mathbf{r}(0\kappa) \right) } \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) \\
   \sum_{ \kappa'\mu' } D_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) e_{\mu'}(\kappa'; \mathbf{q}\alpha s\lambda)
-    &= \omega_{s}^{2} e_{\mu}(\kappa; \mathbf{q}\alpha s \lambda),
+    &= \omega_{\alpha s}^{2} e_{\mu}(\kappa; \mathbf{q}\alpha s \lambda) \\
+  h \mathbf{e}(\mathbf{q}\alpha s \lambda)
+    &= \sum_{\lambda'} \mathbf{e}(\mathbf{q}\alpha s'\lambda') \tilde{\Gamma}^{\mathbf{q}\alpha s}(h)_{\lambda'\lambda}
+    \quad (h \in \mathcal{G}^{\mathbf{q}}).
 ```
-where {math}`\left[ c(\sigma\nu; \mathbf{q}\alpha s \lambda) \right]_{\sigma\nu} = \mathbf{c}(\mathbf{q}\alpha s \lambda)`.
 
 ## Modulation
 
@@ -263,24 +308,33 @@ Modulation associated with qpoint {math}`\mathbf{q}` and frequency {math}`\mathb
 
 {math}`\mathbf{q} \neq \mathbf{0}` case:
 ```{math}
-  u^{( \mathbf{q} \omega )}_{\alpha}(l\kappa)
-    &= \frac{1}{\sqrt{L^{3}M_{\kappa}}} \sum_{ \nu }
+  u^{( \mathbf{q} \alpha s)}_{\mu}(l\kappa)
+    &= \frac{1}{\sqrt{L^{3}M_{\kappa}}} \sum_{ \lambda }
       \left(
-        Q^{ (\mathbf{q} \omega) }_{\nu} e_{\alpha}(\kappa; \mathbf{q} \omega\nu ) e^{ i \mathbf{q} \cdot \mathbf{r}(l\kappa) }
+        Q^{ (\mathbf{q} \alpha s) }_{\lambda} e_{\mu}(\kappa; \mathbf{q} \alpha s \lambda) e^{ i \mathbf{q} \cdot \mathbf{r}(l\kappa) }
         + \mathrm{c.c.}
       \right) \\
-  Q^{ (\mathbf{q} \omega) }_{\nu} &\in \mathbb{C} \\
+  Q^{ (\mathbf{q} \alpha s) }_{\lambda} &\in \mathbb{C} \\
 ```
 
 {math}`\mathbf{q} = \mathbf{0}` case:
 ```{math}
-  u^{( \mathbf{0} \omega )}_{\alpha}(l\kappa)
-    &= \frac{1}{\sqrt{L^{3}M_{\kappa}}} \sum_{ \nu }
-        Q^{ (\mathbf{0} \omega) }_{\nu} e_{\alpha}(\kappa; \mathbf{0} \omega\nu ) \\
-  Q^{ (\mathbf{0} \omega) }_{\nu} &\in \mathbb{R} \\
+  u^{( \mathbf{0} \alpha s)}_{\mu}(l\kappa)
+    &= \frac{1}{\sqrt{L^{3}M_{\kappa}}} \sum_{ \lambda }
+        Q^{ (\mathbf{0} \alpha s) }_{\lambda} e_{\mu}(\kappa; \mathbf{0} \alpha s \lambda ) \\
+  Q^{ (\mathbf{0} \alpha s) }_{\lambda} &\in \mathbb{R} \\
 ```
 
-chain-adapted mode {cite}`Aroyo:js0048`
+% When we sample modulations in grid, we fix the norm of {math}`\mathbf{Q}^{ (\mathbf{q} \alpha s) }`, which is equivalent to fix the norm of the following mass-weighted displacements,
+% ```{math}
+%   \sum_{l \kappa \mu} M_{\kappa} \left| u^{( \mathbf{q} \alpha s)}_{\mu}(l\kappa) \right|^{2}
+%     \propto \sum_{\lambda} \left| Q^{ (\mathbf{q} \alpha s) }_{\lambda} \right|^{2}.
+% ```
+
+From unitary arbitrariness of {math}`\tilde{\Gamma}^{\mathbf{q}\alpha s}`, we can choose as {math}`\mathrm{Im}\, Q^{ (\mathbf{q} \alpha s) }_{\lambda=1} = 0`.
+Thus, sampling of {math}`\mathbf{Q}^{ (\mathbf{q} \alpha s) }` is attributed to sampling points from unit sphere {math}`S^{2 d_{\alpha} - 2}`.
+
+% chain-adapted mode {cite}`Aroyo:js0048`
 
 ## References
 
