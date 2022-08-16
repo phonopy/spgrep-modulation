@@ -25,7 +25,7 @@ REQUIRED = [
     "spglib>=1.16.5",
     "phonopy>=2.15.1",
     "seekpath",
-    "spgrep",  # https://github.com/spglib/spgrep
+    "spgrep>=0.2.11",  # https://github.com/spglib/spgrep
 ]
 
 # What packages are optional?

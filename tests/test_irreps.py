@@ -2,6 +2,7 @@ from itertools import product
 
 import numpy as np
 import pytest
+from phonopy.structure.symmetry import Symmetry
 from spgrep.group import get_little_group
 from spgrep.irreps import enumerate_small_representations
 from spgrep.representation import (
@@ -10,7 +11,6 @@ from spgrep.representation import (
     is_unitary,
 )
 
-from phonopy.structure.symmetry import Symmetry
 from spgrep_modulation.irreps import (
     get_eigenmode_representation,
     project_eigenmode_representation,
@@ -182,7 +182,7 @@ def test_eigenmode_representation(request, ph_name, qpoint):
         rep[mapping].reshape(-1, num_atoms * 3, num_atoms * 3),
     )
 
-    irreps = enumerate_small_representations(little_rotations, little_translations, qpoint)
+    irreps, _ = enumerate_small_representations(little_rotations, little_translations, qpoint)
     for irrep in irreps:
         assert check_spacegroup_representation(
             little_rotations,
