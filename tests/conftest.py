@@ -1,8 +1,7 @@
 from pathlib import Path
 
-import pytest
-
 import phonopy
+import pytest
 from phonopy import Phonopy
 
 

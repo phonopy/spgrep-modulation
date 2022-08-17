@@ -26,6 +26,7 @@ REQUIRED = [
     "phonopy>=2.15.1",
     "seekpath",
     "spgrep>=0.2.11",  # https://github.com/spglib/spgrep
+    "hsnf>=0.3.14",  # https://github.com/lan496/hsnf
 ]
 
 # What packages are optional?
