@@ -3,6 +3,7 @@ from __future__ import annotations
 from warnings import warn
 
 import numpy as np
+
 from phonopy.harmonic.dynamical_matrix import DynamicalMatrix, DynamicalMatrixNAC
 from phonopy.phonon.degeneracy import degenerate_sets, get_eigenvectors
 from phonopy.structure.atoms import PhonopyAtoms
@@ -15,7 +16,6 @@ from phonopy.structure.cells import (
 )
 from phonopy.structure.symmetry import Symmetry
 from phonopy.units import VaspToTHz
-
 from spgrep_modulation.irreps import (
     get_eigenmode_representation,
     project_eigenmode_representation,
@@ -229,6 +229,17 @@ class Modulation:
         arguments: list[float],
         return_cell: bool = True,
     ) -> tuple[PhonopyAtoms, NDArrayComplex] | NDArrayComplex:
+        """Return modulated cell and modulation.
+
+        Parameters
+        ----------
+        frequency_index: int
+            Index of frequency with `dim` eivenvectors
+        amplitudes: list[float], (dim, )
+        arguments: list[float], (dim, )
+            in radian
+        return_cell: bool = True
+        """
         # Adapted from phonopy
         _, eigvecs, _ = self.eigenspaces[frequency_index]
 
@@ -238,7 +249,7 @@ class Modulation:
             modulation += self._get_displacements(eigvec.reshape(-1, 3), amplitude, argument)
 
         if return_cell:
-            cell = self._apply_modulation_to_supercell(modulation)
+            cell = self.apply_modulation_to_supercell(modulation)
             return cell, modulation
         else:
             return modulation
@@ -292,7 +303,7 @@ class Modulation:
         for modulation in modulations:
             # Scale modulation to so that its maximal displacement is equal to ``maximal_displacement``
             scaled_modulation = maximal_displacement / np.max(np.abs(modulation)) * modulation
-            cell = self._apply_modulation_to_supercell(scaled_modulation)
+            cell = self.apply_modulation_to_supercell(scaled_modulation)
             cells.append(cell)
 
         return cells
@@ -352,7 +363,7 @@ class Modulation:
 
         return u
 
-    def _apply_modulation_to_supercell(self, modulation: NDArrayComplex) -> PhonopyAtoms:
+    def apply_modulation_to_supercell(self, modulation: NDArrayComplex) -> PhonopyAtoms:
         lattice = self.supercell.cell
         positions = self.supercell.positions
         positions += np.real(modulation) / 2

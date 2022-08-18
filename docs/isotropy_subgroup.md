@@ -68,8 +68,9 @@ Point group of isotropy subgroup {math}`\mathcal{S}` should be a subgroup of {ma
 For given point group {math}`\mathcal{P}(\mathcal{S})` and translational subgroup {math}`\mathcal{T}(\mathcal{S})`, consider the following set
 ```{math}
     \mathcal{S}
-        := \{ ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{l} ) \mid \mathbf{R}_{i} \in \mathcal{P}(\mathcal{S}), \mathbf{l} \in \mathcal{T}(\mathcal{S}) \}.
+        := \{ ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{c}_{i} + \mathbf{l} ) \mid \mathbf{R}_{i} \in \mathcal{P}(\mathcal{S}), \mathbf{l} \in \mathcal{T}(\mathcal{S}) \}.
 ```
+Here {math}`\mathbf{c}_{i} \in \mathcal{T}(\mathcal{G})` can be freely chosen.
 
 The condition that {math}`\mathcal{S}` is a subgroup of {math}`\mathcal{G}` is as follows:
 ```{math}

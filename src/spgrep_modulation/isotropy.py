@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from fractions import Fraction
 from queue import Queue
 
@@ -176,6 +178,8 @@ class IsotropyEnumerator:
             elements = self._decode_bits(bits, order)
             ret.append(elements)
             for i in range(order):
+                if not preserve_sublattice[i]:
+                    continue
                 inv = get_inverse_index(table, i)
                 conj = [table[inv, table[idx, i]] for idx in elements]
                 found.add(sum(1 << idx for idx in set(conj)))
@@ -190,6 +194,7 @@ class IsotropyEnumerator:
         table: NDArrayInt,
     ) -> bool:
         """Check translational parts"""
+        # TODO: check additional translation for non-symmorphic space groups
         Minv = np.linalg.inv(transformation)
         for i in indices:
             Ri = self.little_rotations[i]

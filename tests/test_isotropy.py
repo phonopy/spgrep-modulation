@@ -1,17 +1,25 @@
+import numpy as np
 import pytest
 
+from phonopy.structure.symmetry import Symmetry
 from spgrep_modulation.isotropy import IsotropyEnumerator
 from spgrep_modulation.modulation import Modulation
 
 
+# Ref: Table 1 of "Isotropy Subgroups of the 230 Crystallographic Space Groups" (p.349)
 @pytest.mark.parametrize(
-    "ph_name,qpoint,dimension,freq_idx",
+    "ph_name,qpoint,dimension,freq_idx,numbers_expect",
     [
-        ("ph_bto", [0, 0, 0.5], [2, 2, 2], 0),  # X point
-        # ("ph_aln", [1 / 3, 1 / 3, 0.0], [3, 3, 2], 0),  # K point
+        # Two-dimensional irrep: X_5+
+        # Size=2 isotropy subgroups for X_5+
+        # One-dimensional OPD: No. 51, 63
+        # Two-dimensional OPD: No. 11
+        ("ph_bto", [0, 0.5, 0], [2, 2, 2], 0, [11, 51, 63]),
+        # K point
+        ("ph_aln", [1 / 3, 1 / 3, 0.0], [3, 3, 2], 0, None),
     ],
 )
-def test_isotropy_subgroup(request, ph_name, qpoint, dimension, freq_idx):
+def test_isotropy_subgroup(request, ph_name, qpoint, dimension, freq_idx, numbers_expect):
     ph = request.getfixturevalue(ph_name)
 
     md = Modulation.with_supercell_and_symmetry_search(
@@ -21,7 +29,6 @@ def test_isotropy_subgroup(request, ph_name, qpoint, dimension, freq_idx):
         factor=ph.unit_conversion_factor,
     )
 
-    # Two-dimensional irrep
     _, _, irrep = md.eigenspaces[freq_idx]
     assert irrep.shape[1] == 2
 
@@ -31,4 +38,21 @@ def test_isotropy_subgroup(request, ph_name, qpoint, dimension, freq_idx):
         qpoint,
         irrep,
     )
-    print(ie.order_parameter_directions)
+
+    numbers_actual = []
+    maximal_displacement = 0.11
+    for opd in ie.order_parameter_directions:
+        # For more than two-dimensional OPD, choose the first vector
+        amplitudes = np.abs(opd)[0]
+        arguments = np.angle(opd)[0]
+        modulation = md.get_modulated_supercell_and_modulation(
+            freq_idx, amplitudes, arguments, return_cell=False
+        )
+        scaled_modulation = maximal_displacement / np.max(np.abs(modulation)) * modulation
+        cell = md.apply_modulation_to_supercell(scaled_modulation)
+        symmetry = Symmetry(cell)
+
+        numbers_actual.append(symmetry.dataset["number"])
+
+    if numbers_expect:
+        assert set(numbers_actual) == set(numbers_expect)

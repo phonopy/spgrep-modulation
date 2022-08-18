@@ -14,14 +14,14 @@ from ase.calculators.calculator import Calculator
 from ase.calculators.emt import EMT
 from ase.constraints import UnitCellFilter
 from ase.optimize import BFGS
-from phonopy import Phonopy
-from phonopy.structure.atoms import PhonopyAtoms
-from phonopy.structure.symmetry import Symmetry
-from phonopy.units import VaspToTHz
 from pymatgen.analysis.prototypes import AflowPrototypeMatcher
 from pymatgen.analysis.structure_matcher import StructureMatcher
 from pymatgen.io.phonopy import get_pmg_structure
 
+from phonopy import Phonopy
+from phonopy.structure.atoms import PhonopyAtoms
+from phonopy.structure.symmetry import Symmetry
+from phonopy.units import VaspToTHz
 from spgrep_modulation.modulation import Modulation
 from spgrep_modulation.utils import NDArrayFloat, get_commensurate_diagonal_supercell
 
