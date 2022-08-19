@@ -1,9 +1,16 @@
 import numpy as np
 import pytest
+from spgrep.group import get_cayley_table
+from spgrep.pointgroup import pg_dataset
 from spgrep.utils import is_integer_array
 
 from phonopy.structure.symmetry import Symmetry
-from spgrep_modulation.isotropy import IsotropyEnumerator, get_translational_subgroup
+from spgrep_modulation.isotropy import (
+    IsotropyEnumerator,
+    enumerate_point_subgroup,
+    enumerate_point_subgroup_naive,
+    get_translational_subgroup,
+)
 from spgrep_modulation.modulation import Modulation
 
 
@@ -29,6 +36,15 @@ def test_get_translational_subgroup(qpoint):
     transformation = get_translational_subgroup(qpoint)
     assert np.linalg.det(transformation) > 0
     assert is_integer_array(transformation @ qpoint)
+
+
+def test_enumerate_point_subgroup():
+    pointgroup = pg_dataset["4/mmm"][0]
+    table = get_cayley_table(np.array(pointgroup))
+    flags = [True for _ in range(len(pointgroup))]
+    subgroups_actual = enumerate_point_subgroup(table, flags, return_conjugacy_class=False)
+    subgroups_expect = enumerate_point_subgroup_naive(table, flags)
+    assert len(subgroups_actual) == len(subgroups_expect)
 
 
 # Ref: Table 1 of "Isotropy Subgroups of the 230 Crystallographic Space Groups" (p.349)

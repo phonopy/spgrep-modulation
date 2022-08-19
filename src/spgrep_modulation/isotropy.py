@@ -77,7 +77,7 @@ class IsotropyEnumerator:
                 preserve_sublattice[i] = True
 
         table = get_cayley_table(self.little_rotations)
-        point_subgroup_indices = self._enumerate_point_subgroup(preserve_sublattice, table)
+        point_subgroup_indices = enumerate_point_subgroup(table, preserve_sublattice)
         isotropy_subgroups = []
         order_parameter_directions = []
         for indices in point_subgroup_indices:
@@ -108,64 +108,6 @@ class IsotropyEnumerator:
             maximal_isotropy_subgroups.append(subgroups[idx])
 
         return maximal_isotropy_subgroups, order_parameter_directions
-
-    def _enumerate_point_subgroup_naive(self, preserve_sublattice: list[bool]):
-        """Not used, but for checking number with the bit-DP version."""
-        table = get_cayley_table(self.little_rotations)
-        order = len(table)
-        ret = []
-        for bits in range(1, 1 << order):
-            elements = self._decode_bits(bits, order)
-            if not all([preserve_sublattice[idx] for idx in elements]):
-                continue
-
-            if self._is_subgroup(elements, table):
-                ret.append(bits)
-
-        return ret
-
-    def _enumerate_point_subgroup(
-        self,
-        preserve_sublattice: list[bool],
-        table: NDArrayInt,
-    ) -> list[list[int]]:
-        order = len(table)
-        identity = get_identity_index(table)
-        # Represent choice of elements by bit array
-        st = {1 << identity}
-        for i in range(order):
-            if (not preserve_sublattice[i]) or (i == identity):
-                continue
-            if (1 << i) in st:
-                # Already visited
-                continue
-
-            next_st = set()
-            for bits in st:
-                elements = self._decode_bits(bits, order)
-                assert self._is_subgroup(elements, table)
-                generated = self._traverse(elements + [i], identity, table)
-                next_st.add(sum(1 << idx for idx in set(generated)))
-
-            st = st.union(next_st)
-
-        # Group by conjugacy classes
-        found = set()
-        ret = []
-        for bits in sorted(st):
-            if bits in found:
-                continue
-            elements = self._decode_bits(bits, order)
-            ret.append(elements)
-            for i in range(order):
-                if not preserve_sublattice[i]:
-                    continue
-                inv = get_inverse_index(table, i)
-                conj = [table[inv, table[idx, i]] for idx in elements]
-                found.add(sum(1 << idx for idx in set(conj)))
-
-        assert len(found) == len(st)
-        return ret
 
     def _is_space_subgroup(
         self,
@@ -204,40 +146,6 @@ class IsotropyEnumerator:
         directions = project_to_irrep(subduced_rep, id_rep, atol=self._atol)
         return np.array(directions).reshape(-1, self.small_rep.shape[1])
 
-    @staticmethod
-    def _decode_bits(bits: int, order: int) -> list[int]:
-        elements = [idx for idx in range(order) if (bits >> idx) & 1 == 1]
-        return elements
-
-    @staticmethod
-    def _is_subgroup(elements: list[int], table: NDArrayInt) -> bool:
-        subtable = table[elements][:, elements]
-        for i in range(len(subtable)):
-            if (set(subtable[i]) != set(elements)) or (set(subtable[:, i]) != set(elements)):
-                return False
-        return True
-
-    @staticmethod
-    def _traverse(
-        generators: list[int],
-        identity: int,
-        table: NDArrayInt,
-    ) -> list[int]:
-        subgroup = set()
-        que = Queue()  # type: ignore
-        que.put(identity)
-
-        while not que.empty():
-            g = que.get()
-            if g in subgroup:
-                continue
-            subgroup.add(g)
-
-            for h in generators:
-                que.put(table[g, h])
-
-        return sorted(list(subgroup))
-
 
 def get_translational_subgroup(qpoint: NDArrayFloat, max_denominator: int = 100):
     """Return transformation matrix of the following sublattice:
@@ -271,3 +179,99 @@ def get_translational_subgroup(qpoint: NDArrayFloat, max_denominator: int = 100)
         transformation[0, :] *= -1
 
     return transformation
+
+
+def enumerate_point_subgroup(
+    table: NDArrayInt, preserve_sublattice: list[bool], return_conjugacy_class: bool = True
+) -> list[list[int]]:
+    order = len(table)
+    identity = get_identity_index(table)
+    # Represent choice of elements by bit array
+    st = {1 << identity}
+    for i in range(order):
+        if (not preserve_sublattice[i]) or (i == identity):
+            continue
+        if (1 << i) in st:
+            # Already visited
+            continue
+
+        next_st = set()
+        for bits in st:
+            elements = _decode_bits(bits, order)
+            assert _is_subgroup(elements, table)
+            generated = _traverse(elements + [i], identity, table)
+            next_st.add(sum(1 << idx for idx in set(generated)))
+
+        st = st.union(next_st)
+
+    if not return_conjugacy_class:
+        subgroups = []
+        for bits in sorted(st):
+            subgroups.append(_decode_bits(bits, order))
+        return subgroups
+
+    # Group by conjugacy classes
+    found = set()
+    ret = []
+    for bits in sorted(st):
+        if bits in found:
+            continue
+        elements = _decode_bits(bits, order)
+        ret.append(elements)
+        for i in range(order):
+            if not preserve_sublattice[i]:
+                continue
+            inv = get_inverse_index(table, i)
+            conj = [table[inv, table[idx, i]] for idx in elements]
+            found.add(sum(1 << idx for idx in set(conj)))
+
+    assert len(found) == len(st)
+    return ret
+
+
+def enumerate_point_subgroup_naive(table, preserve_sublattice: list[bool]):
+    order = len(table)
+    ret = []
+    for bits in range(1, 1 << order):
+        elements = _decode_bits(bits, order)
+        if not all([preserve_sublattice[idx] for idx in elements]):
+            continue
+
+        if _is_subgroup(elements, table):
+            ret.append(bits)
+
+    return ret
+
+
+def _decode_bits(bits: int, order: int) -> list[int]:
+    elements = [idx for idx in range(order) if (bits >> idx) & 1 == 1]
+    return elements
+
+
+def _is_subgroup(elements: list[int], table: NDArrayInt) -> bool:
+    subtable = table[elements][:, elements]
+    for i in range(len(subtable)):
+        if (set(subtable[i]) != set(elements)) or (set(subtable[:, i]) != set(elements)):
+            return False
+    return True
+
+
+def _traverse(
+    generators: list[int],
+    identity: int,
+    table: NDArrayInt,
+) -> list[int]:
+    subgroup = set()
+    que = Queue()  # type: ignore
+    que.put(identity)
+
+    while not que.empty():
+        g = que.get()
+        if g in subgroup:
+            continue
+        subgroup.add(g)
+
+        for h in generators:
+            que.put(table[g, h])
+
+    return sorted(list(subgroup))
