@@ -39,13 +39,17 @@ For later use, let {math}`\mathcal{L}_{\mathcal{S}}` be a sublattice {math}`\mat
 Note that, although subgroups of {math}`\mathcal{T}(\mathcal{S})` also satisfy the requirements, there is no need to consider such subgroups because these subgroups show at lower-symmetry {math}`\mathbf{k}` vector.
 
 There are two basis vectors for {math}`\mathcal{T}(\mathcal{S})` that are orthogonal to {math}`\mathbf{k}`.
-Let {math}`l` be LCM of denominators of {math}`\mathbf{k}`.
-The two basis vectors are obtained by solving the following modular linear system:
+Let {math}`l` be LCM of denominators of {math}`\frac{1}{2\pi}\mathbf{k}`.
+Then, we write the elements of {math}`\mathbf{k}` as
 ```{math}
-    (l \mathbf{k})^{\top} \mathbf{x} \equiv \mathbf{0} \quad (\mathrm{mod}\, l)
+    \mathbf{k} = 2\pi \left( \frac{a_{1}}{l} \frac{a_{2}}{l} \frac{a_{3}}{l} \right)^{\top},
 ```
+where {math}`\mathrm{GCD}(a_{1}, a_{2}, a_{3}) = 1`.
 
-There remains one basis vector, {math}`l^{2}\mathbf{k}`, for {math}`\mathcal{T}(\mathcal{S})` that are parallel to {math}`\mathbf{k}`.
+```{math}
+    &\mathbf{k} \cdot \mathbf{t} \in 2\pi \mathbb{Z} \\
+    &\Leftrightarrow a_{1} t_{1} + a_{2} t_{2} + a_{3} t_{3} \in l\mathbb{Z}
+```
 
 By stacking these basis vectors, we can find a transformation matrix {math}`\mathbf{M}`,
 ```{math}

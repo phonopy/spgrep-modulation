@@ -5,7 +5,7 @@ from queue import Queue
 
 import numpy as np
 from hsnf import row_style_hermite_normal_form
-from hsnf.integer_system import solve_modular_integer_linear_system
+from hsnf.integer_system import solve_integer_linear_system
 from spgrep.group import get_cayley_table, get_identity_index, get_inverse_index
 from spgrep.representation import project_to_irrep
 from spgrep.utils import contain_space, is_integer_array
@@ -67,7 +67,7 @@ class IsotropyEnumerator:
         return self._order_parameter_directions
 
     def _initialize(self):
-        transformation = self._get_translational_subgroup()
+        transformation = get_translational_subgroup(self.qpoint, self._max_denominator)
 
         # Point group operations that preserve translational subgroup of isotropy subgroup
         preserve_sublattice = [False for _ in range(len(self.little_rotations))]
@@ -108,26 +108,6 @@ class IsotropyEnumerator:
             maximal_isotropy_subgroups.append(subgroups[idx])
 
         return maximal_isotropy_subgroups, order_parameter_directions
-
-    def _get_translational_subgroup(self):
-        # Basis vectors of a sublattice formed by translation that preserve order parameter
-        elements = [
-            Fraction(qi).limit_denominator(self._max_denominator).denominator for qi in self.qpoint
-        ]
-        lcm = lcm_on_list(elements)
-        A = np.around(self.qpoint * lcm).astype(int)[None, :]
-        # basis vectors for k.t = 0
-        basis_orth, _ = solve_modular_integer_linear_system(A, np.zeros(1), lcm)
-        # basis vector parallel to k
-        basis_para = np.around(self.qpoint * lcm).astype(int) * lcm
-
-        # transformation @ mathbb{Z}^{3} forms sublattice
-        transformation = np.vstack([basis_orth, basis_para])
-        if np.linalg.det(transformation) < 0:
-            transformation[0, :] *= -1
-        transformation, _ = row_style_hermite_normal_form(transformation)
-
-        return transformation
 
     def _enumerate_point_subgroup_naive(self, preserve_sublattice: list[bool]):
         """Not used, but for checking number with the bit-DP version."""
@@ -257,3 +237,37 @@ class IsotropyEnumerator:
                 que.put(table[g, h])
 
         return sorted(list(subgroup))
+
+
+def get_translational_subgroup(qpoint: NDArrayFloat, max_denominator: int = 100):
+    """Return transformation matrix of the following sublattice:
+    Let `t` be a lattice point of the sublattice. Then, np.dot(t, qpoint) is integer.
+    """
+    if isinstance(qpoint, list):
+        qpoint = np.array(qpoint)
+
+    # Basis vectors of a sublattice formed by translation that preserve order parameter
+    elements = [Fraction(qi).limit_denominator(max_denominator).denominator for qi in qpoint]
+    lcm = lcm_on_list(elements)
+    A = np.around(qpoint * lcm).astype(int)[None, :]
+
+    all_basis = []
+    # Three vectors [lcm, 0, 0], [0, lcm, 0], [0, 0, lcm] are trivially general solutions.
+    all_basis.append(lcm * np.eye(3, dtype=int))
+
+    # Solve `A @ t = lcm`
+    # Since GCD of A is 1, this integer linear system always has a special solution.
+    special_and_basis = solve_integer_linear_system(A, np.array([lcm]))
+    if special_and_basis:
+        all_basis.append(special_and_basis[0])
+        all_basis.append(special_and_basis[1])
+
+    # transformation @ mathbb{Z}^{3} forms sublattice
+    transformation, _ = row_style_hermite_normal_form(np.vstack(all_basis))
+    # Take only three basis vectors
+    transformation = transformation[:3]
+
+    if np.linalg.det(transformation) < 0:
+        transformation[0, :] *= -1
+
+    return transformation

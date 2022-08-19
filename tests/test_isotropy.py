@@ -1,9 +1,34 @@
 import numpy as np
 import pytest
+from spgrep.utils import is_integer_array
 
 from phonopy.structure.symmetry import Symmetry
-from spgrep_modulation.isotropy import IsotropyEnumerator
+from spgrep_modulation.isotropy import IsotropyEnumerator, get_translational_subgroup
 from spgrep_modulation.modulation import Modulation
+
+
+@pytest.mark.parametrize(
+    "qpoint",
+    [
+        ([0.5, 0, 0]),
+        ([0.5, 0.5, 0]),
+        ([0.5, 0.5, 0.5]),
+        ([1 / 3, 0, 0]),
+        ([2 / 3, 0, 0]),
+        ([1 / 3, 1 / 3, 0]),
+        ([2 / 3, 2 / 3, 0]),
+        ([1 / 3, 2 / 3, 0]),
+        ([1 / 3, 1 / 3, 1 / 3]),
+        ([1 / 3, 1 / 3, 2 / 3]),
+        ([1 / 3, 2 / 3, 2 / 3]),
+        ([2 / 3, 2 / 3, 2 / 3]),
+        ([0.5, 1 / 3, 2 / 3]),
+    ],
+)
+def test_get_translational_subgroup(qpoint):
+    transformation = get_translational_subgroup(qpoint)
+    assert np.linalg.det(transformation) > 0
+    assert is_integer_array(transformation @ qpoint)
 
 
 # Ref: Table 1 of "Isotropy Subgroups of the 230 Crystallographic Space Groups" (p.349)
