@@ -20,6 +20,7 @@ from spgrep_modulation.irreps import (
     get_eigenmode_representation,
     project_eigenmode_representation,
 )
+from spgrep_modulation.isotropy import IsotropyEnumerator
 from spgrep_modulation.utils import (
     NDArrayComplex,
     NDArrayFloat,
@@ -302,6 +303,36 @@ class Modulation:
         cells = []
         for modulation in modulations:
             # Scale modulation to so that its maximal displacement is equal to ``maximal_displacement``
+            scaled_modulation = maximal_displacement / np.max(np.abs(modulation)) * modulation
+            cell = self.apply_modulation_to_supercell(scaled_modulation)
+            cells.append(cell)
+
+        return cells
+
+    def get_high_symmetry_modulated_supercells(
+        self,
+        frequency_index: int,
+        maximal_displacement: float = 0.11,
+    ) -> list[PhonopyAtoms]:
+        _, _, irrep = self.eigenspaces[frequency_index]
+        ie = IsotropyEnumerator(
+            self.little_rotations,
+            self.little_translations,
+            self.qpoint,
+            irrep,
+        )
+
+        cells = []
+
+        # Choose isotropy subgroups with one-dimensional order-parameter directions
+        for opd in ie.order_parameter_directions:
+            if len(opd) > 1:
+                continue
+            amplitudes = np.abs(opd)[0]
+            arguments = np.angle(opd)[0]
+            modulation = self.get_modulated_supercell_and_modulation(
+                frequency_index, amplitudes, arguments, return_cell=False
+            )
             scaled_modulation = maximal_displacement / np.max(np.abs(modulation)) * modulation
             cell = self.apply_modulation_to_supercell(scaled_modulation)
             cells.append(cell)

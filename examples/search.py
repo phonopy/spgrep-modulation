@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from abc import ABC, abstractmethod
 from collections import deque
 from dataclasses import dataclass
 from logging import INFO, Formatter, StreamHandler, basicConfig, getLogger
@@ -36,7 +37,7 @@ class TrialCell:
     frequency_index: int | None = None
 
 
-class ModulationSearch:
+class AbstractModulationSearch(ABC):
     def __init__(
         self,
         calc: Calculator,
@@ -119,41 +120,9 @@ class ModulationSearch:
 
         return found, parents
 
+    @abstractmethod
     def run(self, initial: TrialCell) -> list[TrialCell]:
-        # Relax cell
-        relaxed_cell, energy = self._get_relaxed_cell_and_energy(
-            initial.cell,
-            mask=[True, True, True, True, True, True],
-        )
-        initial.relaxed = relaxed_cell
-        initial.relaxed_energy_per_atom = energy / len(relaxed_cell)
-
-        # Calculate harmonic force constants
-        ph = self._get_phonon(relaxed_cell, self.supercell_matrix)
-        # Create modulation generators and search instable modes
-        modulators_imag_freqs = self._search_instable_modes(relaxed_cell, ph)
-
-        next_trialcells = []
-        for md, imag_freqs in modulators_imag_freqs:
-            for idx in imag_freqs:
-                next_cells_idx = md.get_modulated_supercells(
-                    idx, self.maximal_displacement, self.max_size
-                )
-                selected = self._pick_and_refine_high_symmetry_cells(next_cells_idx)
-
-                for cell in selected:
-                    next_trial = TrialCell(
-                        cell=cell,
-                        parent=relaxed_cell,
-                        qpoint=md.qpoint,
-                        frequency_index=idx,
-                    )
-                    next_trialcells.append(next_trial)
-
-        if len(next_trialcells) == 0:
-            self._logger.info("End this branch.")
-
-        return next_trialcells
+        pass
 
     def _get_energy_and_forces(self, cell: PhonopyAtoms) -> tuple[float, NDArrayFloat]:
         atoms = Atoms(
@@ -243,6 +212,44 @@ class ModulationSearch:
 
         return modulators_imag_freqs
 
+
+class BaseModulationSearch(AbstractModulationSearch):
+    def run(self, initial: TrialCell) -> list[TrialCell]:
+        # Relax cell
+        relaxed_cell, energy = self._get_relaxed_cell_and_energy(
+            initial.cell,
+            mask=[True, True, True, True, True, True],
+        )
+        initial.relaxed = relaxed_cell
+        initial.relaxed_energy_per_atom = energy / len(relaxed_cell)
+
+        # Calculate harmonic force constants
+        ph = self._get_phonon(relaxed_cell, self.supercell_matrix)
+        # Create modulation generators and search instable modes
+        modulators_imag_freqs = self._search_instable_modes(relaxed_cell, ph)
+
+        next_trialcells = []
+        for md, imag_freqs in modulators_imag_freqs:
+            for idx in imag_freqs:
+                next_cells_idx = md.get_modulated_supercells(
+                    idx, self.maximal_displacement, self.max_size
+                )
+                selected = self._pick_and_refine_high_symmetry_cells(next_cells_idx)
+
+                for cell in selected:
+                    next_trial = TrialCell(
+                        cell=cell,
+                        parent=relaxed_cell,
+                        qpoint=md.qpoint,
+                        frequency_index=idx,
+                    )
+                    next_trialcells.append(next_trial)
+
+        if len(next_trialcells) == 0:
+            self._logger.info("End this branch.")
+
+        return next_trialcells
+
     def _pick_and_refine_high_symmetry_cells(
         self, cells: list[PhonopyAtoms]
     ) -> list[PhonopyAtoms]:
@@ -288,6 +295,42 @@ class ModulationSearch:
         return selected
 
 
+class IsotropyModulationSearch(AbstractModulationSearch):
+    def run(self, initial: TrialCell) -> list[TrialCell]:
+        # Relax cell
+        relaxed_cell, energy = self._get_relaxed_cell_and_energy(
+            initial.cell,
+            mask=[True, True, True, True, True, True],
+        )
+        initial.relaxed = relaxed_cell
+        initial.relaxed_energy_per_atom = energy / len(relaxed_cell)
+
+        # Calculate harmonic force constants
+        ph = self._get_phonon(relaxed_cell, self.supercell_matrix)
+        # Create modulation generators and search instable modes
+        modulators_imag_freqs = self._search_instable_modes(relaxed_cell, ph)
+
+        next_trialcells = []
+        for md, imag_freqs in modulators_imag_freqs:
+            for idx in imag_freqs:
+                next_cells_idx = md.get_high_symmetry_modulated_supercells(
+                    idx, self.maximal_displacement
+                )
+                for cell in next_cells_idx:
+                    next_trial = TrialCell(
+                        cell=cell,
+                        parent=relaxed_cell,
+                        qpoint=md.qpoint,
+                        frequency_index=idx,
+                    )
+                    next_trialcells.append(next_trial)
+
+        if len(next_trialcells) == 0:
+            self._logger.info("End this branch.")
+
+        return next_trialcells
+
+
 @click.command()
 @click.option(
     "--output", required=False, default="debug", type=str, help="Root directory for saved files"
@@ -296,12 +339,10 @@ def main(output):
     calc = EMT()  # Effective medium potential for Al, Ni, Cu, Pd, Ag, Pt and Au
     supercell_matrix = [[2, 0, 0], [0, 2, 0], [0, 0, 2]]
 
-    ms = ModulationSearch(
+    ms = IsotropyModulationSearch(
         calc,
         supercell_matrix,
-        max_size=256,
         maximal_displacement=0.15,
-        symmetry_tolerance=1e-3,
     )
 
     # Simple cubic structure
