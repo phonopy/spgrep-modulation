@@ -10,6 +10,7 @@ from spgrep_modulation.isotropy import (
     enumerate_point_subgroup,
     enumerate_point_subgroup_naive,
     get_translational_subgroup,
+    search_compliment,
 )
 from spgrep_modulation.modulation import Modulation
 
@@ -30,6 +31,7 @@ from spgrep_modulation.modulation import Modulation
         ([1 / 3, 2 / 3, 2 / 3]),
         ([2 / 3, 2 / 3, 2 / 3]),
         ([0.5, 1 / 3, 2 / 3]),
+        ([0, 0, 0.5]),
     ],
 )
 def test_get_translational_subgroup(qpoint):
@@ -45,6 +47,42 @@ def test_enumerate_point_subgroup():
     subgroups_actual = enumerate_point_subgroup(table, flags, return_conjugacy_class=False)
     subgroups_expect = enumerate_point_subgroup_naive(table, flags)
     assert len(subgroups_actual) == len(subgroups_expect)
+
+
+def test_compliments():
+    rotations = np.array(
+        [
+            [[1, 0, 0], [0, 1, 0], [0, 0, 1]],
+            [[-1, 0, 0], [0, -1, 0], [0, 0, -1]],
+            [[-1, 0, 0], [0, -1, 0], [0, 0, 1]],
+            [[1, 0, 0], [0, 1, 0], [0, 0, -1]],
+            [[0, 1, 0], [1, 0, 0], [0, 0, -1]],
+            [[0, -1, 0], [-1, 0, 0], [0, 0, 1]],
+            [[0, -1, 0], [-1, 0, 0], [0, 0, -1]],
+            [[0, 1, 0], [1, 0, 0], [0, 0, 1]],
+        ]
+    )
+    translations = np.array(
+        [
+            [0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.5],
+            [0.0, 0.0, 0.5],
+            [0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.5],
+            [0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.5],
+        ]
+    )
+
+    transformation = np.diag([1, 1, 2])
+    table = get_cayley_table(rotations)
+    point_subgroup_indices = enumerate_point_subgroup(table, [True for _ in rotations])
+    search_compliment(rotations, translations, point_subgroup_indices[-1], transformation, table)
+    for indices in point_subgroup_indices:
+        result = search_compliment(rotations, translations, indices, transformation, table)
+        if indices == [0, 7]:
+            assert not result
 
 
 # Ref: Table 1 of "Isotropy Subgroups of the 230 Crystallographic Space Groups" (p.349)

@@ -45,6 +45,9 @@ class AbstractModulationSearch(ABC):
         maximal_displacement: float = 0.11,
         max_size: int = 512,
         symmetry_tolerance: float = 1e-2,  # Rough symprec to idealize modulated cells
+        ltol: float = 1e-8,
+        stol: float = 1e-8,
+        angle_tol: float = -1,
     ) -> None:
         self._calc = calc
         self._supercell_matrix = supercell_matrix
@@ -52,7 +55,10 @@ class AbstractModulationSearch(ABC):
         self._max_size = max_size
         self._symmetry_tolerance = symmetry_tolerance
         self._structure_matcher = StructureMatcher(
-            ltol=1e-7, stol=1e-7, scale=False
+            ltol=ltol,
+            stol=stol,
+            angle_tol=angle_tol,
+            scale=False,
         )  # Tighter tolerance than default
 
         # Logger
@@ -98,19 +104,22 @@ class AbstractModulationSearch(ABC):
             -1,
         ]
 
-        que = deque()  # type: ignore
+        que: deque[tuple[TrialCell, int, int]] = deque()
         que.append((initial, 0, 0))
         while len(que) > 0:
             parent, idx, depth = que.pop()
             if depth > max_depth:
+                self._logger.info(f"Stop child of parent={idx} due to max depth limit")
                 continue
 
-            self._logger.info(f"parent_id={idx}, depth={depth + 1}")
+            self._logger.info(f"parent={idx}, depth={depth}")
+
             children = self.run(parent)
 
             for child in children:
                 child_pmg = get_pmg_structure(child.cell)
                 if any([self._structure_matcher.fit(child_pmg, other) for other in found_pmg]):
+                    self._logger.info("Detect duplicates")
                     continue
 
                 found.append(child)
@@ -297,6 +306,9 @@ class BaseModulationSearch(AbstractModulationSearch):
 
 class IsotropyModulationSearch(AbstractModulationSearch):
     def run(self, initial: TrialCell) -> list[TrialCell]:
+        symmetry = Symmetry(initial.cell, symprec=1e-5)
+        self._logger.info(f"{symmetry.dataset['international']} ({symmetry.dataset['number']})")
+
         # Relax cell
         relaxed_cell, energy = self._get_relaxed_cell_and_energy(
             initial.cell,
@@ -316,6 +328,7 @@ class IsotropyModulationSearch(AbstractModulationSearch):
                 next_cells_idx = md.get_high_symmetry_modulated_supercells(
                     idx, self.maximal_displacement
                 )
+                self._logger.info(f"{len(next_cells_idx)} high-symmetry modulations are detected.")
                 for cell in next_cells_idx:
                     next_trial = TrialCell(
                         cell=cell,
@@ -342,7 +355,7 @@ def main(output):
     ms = IsotropyModulationSearch(
         calc,
         supercell_matrix,
-        maximal_displacement=0.15,
+        angle_tol=2.0,
     )
 
     # Simple cubic structure
@@ -353,7 +366,7 @@ def main(output):
         cell=[[a, 0, 0], [0, a, 0], [0, 0, a]],
     )
 
-    found, parents = ms.run_recursive(TrialCell(cell=initial_cell))
+    found, parents = ms.run_recursive(TrialCell(cell=initial_cell), max_depth=3)
 
     root = Path(output)
     root.mkdir(exist_ok=True)

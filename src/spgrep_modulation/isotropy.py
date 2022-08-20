@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from fractions import Fraction
+from itertools import product
 from queue import Queue
 
 import numpy as np
-from hsnf import row_style_hermite_normal_form
+from hsnf import row_style_hermite_normal_form, smith_normal_form
 from hsnf.integer_system import solve_integer_linear_system
 from spgrep.group import get_cayley_table, get_identity_index, get_inverse_index
 from spgrep.representation import project_to_irrep
@@ -68,6 +69,7 @@ class IsotropyEnumerator:
 
     def _initialize(self):
         transformation = get_translational_subgroup(self.qpoint, self._max_denominator)
+        assert is_integer_array(transformation @ self.qpoint, atol=self._atol)
 
         # Point group operations that preserve translational subgroup of isotropy subgroup
         preserve_sublattice = [False for _ in range(len(self.little_rotations))]
@@ -81,7 +83,9 @@ class IsotropyEnumerator:
         isotropy_subgroups = []
         order_parameter_directions = []
         for indices in point_subgroup_indices:
-            if not self._is_space_subgroup(indices, transformation, table):
+            if not search_compliment(
+                self.little_rotations, self.little_translations, indices, transformation, table
+            ):
                 continue
 
             directions = self._determine_order_parameter_directions(indices)
@@ -108,29 +112,6 @@ class IsotropyEnumerator:
             maximal_isotropy_subgroups.append(subgroups[idx])
 
         return maximal_isotropy_subgroups, order_parameter_directions
-
-    def _is_space_subgroup(
-        self,
-        indices: list[int],
-        transformation: NDArrayInt,
-        table: NDArrayInt,
-    ) -> bool:
-        """Check translational parts"""
-        # TODO: check additional translation for non-symmorphic space groups
-        Minv = np.linalg.inv(transformation)
-        for i in indices:
-            Ri = self.little_rotations[i]
-            vi = self.little_translations[i]
-            inv_i = get_inverse_index(table, i)
-            inv_Ri = np.linalg.inv(Ri)
-            for j in indices:
-                vj = self._little_translations[j]
-                k = table[inv_i, j]
-                disp = vj - inv_Ri @ vi - self.little_translations[k]
-                if not is_integer_array(Minv @ disp, atol=self._atol):
-                    return False
-
-        return True
 
     def _determine_order_parameter_directions(
         self, isotropy_subgroup: list[int]
@@ -165,10 +146,10 @@ def get_translational_subgroup(qpoint: NDArrayFloat, max_denominator: int = 100)
 
     # Solve `A @ t = lcm`
     # Since GCD of A is 1, this integer linear system always has a special solution.
-    special_and_basis = solve_integer_linear_system(A, np.array([lcm]))
-    if special_and_basis:
-        all_basis.append(special_and_basis[0])
-        all_basis.append(special_and_basis[1])
+    basis_and_special = solve_integer_linear_system(A, np.array([lcm]))
+    if basis_and_special:
+        all_basis.append(basis_and_special[0])
+        all_basis.append(basis_and_special[1])
 
     # transformation @ mathbb{Z}^{3} forms sublattice
     transformation, _ = row_style_hermite_normal_form(np.vstack(all_basis))
@@ -199,7 +180,7 @@ def enumerate_point_subgroup(
         for bits in st:
             elements = _decode_bits(bits, order)
             assert _is_subgroup(elements, table)
-            generated = _traverse(elements + [i], identity, table)
+            generated = traverse(elements + [i], identity, table)
             next_st.add(sum(1 << idx for idx in set(generated)))
 
         st = st.union(next_st)
@@ -256,7 +237,7 @@ def _is_subgroup(elements: list[int], table: NDArrayInt) -> bool:
     return True
 
 
-def _traverse(
+def traverse(
     generators: list[int],
     identity: int,
     table: NDArrayInt,
@@ -275,3 +256,85 @@ def _traverse(
             que.put(table[g, h])
 
     return sorted(list(subgroup))
+
+
+def search_compliment(
+    rotations,
+    translations,
+    indices: list[int],
+    transformation: NDArrayInt,
+    table: NDArrayInt,
+    atol: float = 1e-6,
+) -> bool:
+    """Return true if some adjusted translations enable given point group and translational subgroup correspond to a space group."""
+    # Search generators
+    identity = get_identity_index(table)
+    generators = _search_generators(indices, identity, table)
+
+    # Lattice points in sublattice formed by `transformation`
+    # See https://lan496.github.io/dsenum/supercell.html
+    snf, L, R = smith_normal_form(transformation)  # snf = L @ transformation @ R
+    invariant_factors = tuple(snf.diagonal())
+    points = []
+    for factor in product(*[range(f) for f in invariant_factors]):
+        point = np.linalg.inv(L) @ np.array(factor)
+        points.append(np.around(point).astype(int))
+
+    Minv = np.linalg.inv(transformation)
+    for trials in product(points, repeat=len(generators)):
+        adjusted_translations = [None for _ in translations]
+        adjusted_translations[identity] = np.array([0, 0, 0])
+        for g, trial in zip(generators, trials):
+            adjusted_translations[g] = translations[g] + trial
+
+        # Determine adjusted translations during traversal
+        subgroup: set = set()  # type: ignore
+        que = Queue()  # type: ignore
+        que.put((identity, adjusted_translations[identity]))
+        while not que.empty():
+            g, trns = que.get()
+            if g in subgroup:
+                continue
+            subgroup.add(g)
+            if adjusted_translations[g] is None:
+                adjusted_translations[g] = trns
+
+            for h in generators:
+                trns_gh = rotations[g] @ adjusted_translations[h] + adjusted_translations[g]
+                que.put((table[g, h], trns_gh))
+
+        # Check consistency
+        ok = True
+        for g in indices:
+            if not is_integer_array(adjusted_translations[g] - translations[g]):
+                ok = False
+                break
+        if not ok:
+            continue
+
+        for g, h in product(indices, repeat=2):
+            gh = table[g, h]
+            additional = (
+                rotations[g] @ adjusted_translations[h]
+                + adjusted_translations[g]
+                - adjusted_translations[gh]
+            )
+            if not is_integer_array(Minv @ additional, atol=atol):
+                ok = False
+                break
+        if ok:
+            return True
+
+    return False
+
+
+def _search_generators(indices: list[int], identity: int, table: NDArrayInt) -> list[int]:
+    generators = []
+    for i in indices:
+        if i == identity:
+            continue
+        generators.append(i)
+        subgroup = traverse(generators, identity, table)
+        if len(subgroup) == len(indices):
+            break
+    return generators

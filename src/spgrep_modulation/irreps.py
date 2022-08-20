@@ -60,6 +60,7 @@ def project_eigenmode_representation(
             irrep=irrep,
             atol=atol,
         )
+
         if len(projected) == 0:
             continue
 
