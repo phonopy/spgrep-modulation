@@ -89,12 +89,12 @@ def test_compliments():
 @pytest.mark.parametrize(
     "ph_name,qpoint,dimension,freq_idx,numbers_expect",
     [
-        # Two-dimensional irrep: X_5+
+        # Pm-3m (No. 221), two-dimensional irrep: X_5+
         # Size=2 isotropy subgroups for X_5+
-        # One-dimensional OPD: No. 51, 63
-        # Two-dimensional OPD: No. 11
+        #   One-dimensional OPD: No. 51, 63
+        #   Two-dimensional OPD: No. 11
         ("ph_bto", [0, 0.5, 0], [2, 2, 2], 0, [11, 51, 63]),
-        # K point
+        # P6_3mc (186), two-dimensional irrep: K_3
         ("ph_aln", [1 / 3, 1 / 3, 0.0], [3, 3, 2], 0, None),
     ],
 )

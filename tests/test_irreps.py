@@ -3,7 +3,6 @@ from itertools import product
 import numpy as np
 import pytest
 from spgrep.group import get_little_group
-from spgrep.irreps import enumerate_small_representations
 from spgrep.representation import (
     check_spacegroup_representation,
     get_character,
@@ -181,12 +180,3 @@ def test_eigenmode_representation(request, ph_name, qpoint):
         qpoint,
         rep[mapping].reshape(-1, num_atoms * 3, num_atoms * 3),
     )
-
-    irreps, _ = enumerate_small_representations(little_rotations, little_translations, qpoint)
-    for irrep in irreps:
-        assert check_spacegroup_representation(
-            little_rotations,
-            little_translations,
-            qpoint,
-            irrep,
-        )

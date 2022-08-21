@@ -8,7 +8,6 @@ import numpy as np
 from hsnf import row_style_hermite_normal_form, smith_normal_form
 from hsnf.integer_system import solve_integer_linear_system
 from spgrep.group import get_cayley_table, get_identity_index, get_inverse_index
-from spgrep.representation import project_to_irrep
 from spgrep.utils import contain_space, is_integer_array
 
 from spgrep_modulation.utils import (
@@ -35,7 +34,7 @@ class IsotropyEnumerator:
         atol: float = 1e-6,
     ) -> None:
         self._little_rotations = np.array(little_rotations)
-        self._little_translations = np.array(little_translations)
+        self._little_translations = np.array(little_translations) - np.rint(little_translations)
         self._qpoint = np.array(qpoint)
         self._small_rep = small_rep
         self._max_denominator = max_denominator
@@ -122,9 +121,24 @@ class IsotropyEnumerator:
         -------
         directions: (num_directions, small_rep_dim)
         """
+        # Projection to identity representation will also work, but the problem
+        # is that identity representation of small representations is not obvious...
         subduced_rep = self.small_rep[isotropy_subgroup]
-        id_rep = np.ones((len(isotropy_subgroup), 1, 1))
-        directions = project_to_irrep(subduced_rep, id_rep, atol=self._atol)
+        reynolds = np.sum(subduced_rep, axis=0) / len(isotropy_subgroup)
+        eigvals, eigvecs = np.linalg.eig(reynolds)
+        # Symmetry-adapted basises correspond to eigenvectors with eigenvalue=1
+        basis = [
+            eigvec
+            for eigval, eigvec in zip(eigvals, eigvecs.T)
+            if np.isclose(eigval, 1, atol=self._atol)
+        ]
+        if len(basis) == 0:
+            return []
+
+        # QR decomposition of column-wise vectors gives Gram-Schmidt orthonormalized vectors in column wise.
+        # (num_directions, len(isotropy_subgroup))
+        directions = np.linalg.qr(np.transpose(basis))[0].T
+
         return np.array(directions).reshape(-1, self.small_rep.shape[1])
 
 
