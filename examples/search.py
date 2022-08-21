@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from abc import ABC, abstractmethod
 from collections import deque
 from dataclasses import dataclass
 from logging import INFO, Formatter, StreamHandler, basicConfig, getLogger
@@ -28,15 +29,16 @@ from spgrep_modulation.utils import NDArrayFloat, get_commensurate_diagonal_supe
 
 @dataclass
 class TrialCell:
+    idx: int
+    parent_idx: int
     cell: PhonopyAtoms
     relaxed: PhonopyAtoms | None = None
     relaxed_energy_per_atom: float | None = None
-    parent: PhonopyAtoms | None = None
     qpoint: NDArrayFloat | None = None
     frequency_index: int | None = None
 
 
-class ModulationSearch:
+class AbstractModulationSearch(ABC):
     def __init__(
         self,
         calc: Calculator,
@@ -44,6 +46,9 @@ class ModulationSearch:
         maximal_displacement: float = 0.11,
         max_size: int = 512,
         symmetry_tolerance: float = 1e-2,  # Rough symprec to idealize modulated cells
+        ltol: float = 1e-8,
+        stol: float = 1e-8,
+        angle_tol: float = -1,
     ) -> None:
         self._calc = calc
         self._supercell_matrix = supercell_matrix
@@ -51,8 +56,14 @@ class ModulationSearch:
         self._max_size = max_size
         self._symmetry_tolerance = symmetry_tolerance
         self._structure_matcher = StructureMatcher(
-            ltol=1e-7, stol=1e-7, scale=False
+            ltol=ltol,
+            stol=stol,
+            angle_tol=angle_tol,
+            scale=False,
         )  # Tighter tolerance than default
+
+        # Global variable to track index of cells
+        self._max_idx = 1
 
         # Logger
         self._logger = getLogger(__name__)
@@ -84,76 +95,61 @@ class ModulationSearch:
     def symmetry_tolerance(self) -> float:
         return self._symmetry_tolerance
 
-    def run_recursive(
-        self, initial: TrialCell, max_depth: int = 4
-    ) -> tuple[list[TrialCell], list[int]]:
-        found = [
-            initial,
-        ]
-        found_pmg = [
-            get_pmg_structure(initial.cell),
-        ]
-        parents = [
-            -1,
-        ]
+    def run_recursive(self, initial_cell: PhonopyAtoms, max_depth: int = 4) -> list[TrialCell]:
+        initial = TrialCell(
+            idx=0,
+            cell=initial_cell,
+            parent_idx=-1,
+        )
+        self._max_idx = 1
 
-        que = deque()  # type: ignore
-        que.append((initial, 0, 0))
+        found = []
+        found_pmg = []
+
+        que: deque[tuple[TrialCell, int]] = deque()
+        que.append((initial, 0))
         while len(que) > 0:
-            parent, idx, depth = que.pop()
+            parent, depth = que.pop()
             if depth > max_depth:
+                self._logger.info(f"Stop child of parent={parent.idx} due to max depth limit")
                 continue
 
-            self._logger.info(f"parent_id={idx}, depth={depth + 1}")
+            self._logger.info(f"parent={parent.idx}, depth={depth}")
+
+            # Show symmetry
+            symmetry = Symmetry(parent.cell, symprec=1e-5)
+            self._logger.info(
+                f"{symmetry.dataset['international']} ({symmetry.dataset['number']})"
+            )
+
+            # Relax cell
+            relaxed_cell, energy = self._get_relaxed_cell_and_energy(
+                parent.cell,
+                mask=[True, True, True, True, True, True],
+            )
+            parent.relaxed = relaxed_cell
+            parent.relaxed_energy_per_atom = energy / len(relaxed_cell)
+
+            # Now, entries of `parent` are filled
+            found.append(parent)
+            parent_pmg = get_pmg_structure(parent.cell)
+            found_pmg.append(parent_pmg)
+
             children = self.run(parent)
 
             for child in children:
                 child_pmg = get_pmg_structure(child.cell)
                 if any([self._structure_matcher.fit(child_pmg, other) for other in found_pmg]):
+                    self._logger.info("Detect duplicates")
                     continue
 
-                found.append(child)
-                found_pmg.append(child_pmg)
-                parents.append(idx)
-                que.append((child, len(found), depth + 1))
+                que.appendleft((child, depth + 1))
 
-        return found, parents
+        return found
 
+    @abstractmethod
     def run(self, initial: TrialCell) -> list[TrialCell]:
-        # Relax cell
-        relaxed_cell, energy = self._get_relaxed_cell_and_energy(
-            initial.cell,
-            mask=[True, True, True, True, True, True],
-        )
-        initial.relaxed = relaxed_cell
-        initial.relaxed_energy_per_atom = energy / len(relaxed_cell)
-
-        # Calculate harmonic force constants
-        ph = self._get_phonon(relaxed_cell, self.supercell_matrix)
-        # Create modulation generators and search instable modes
-        modulators_imag_freqs = self._search_instable_modes(relaxed_cell, ph)
-
-        next_trialcells = []
-        for md, imag_freqs in modulators_imag_freqs:
-            for idx in imag_freqs:
-                next_cells_idx = md.get_modulated_supercells(
-                    idx, self.maximal_displacement, self.max_size
-                )
-                selected = self._pick_and_refine_high_symmetry_cells(next_cells_idx)
-
-                for cell in selected:
-                    next_trial = TrialCell(
-                        cell=cell,
-                        parent=relaxed_cell,
-                        qpoint=md.qpoint,
-                        frequency_index=idx,
-                    )
-                    next_trialcells.append(next_trial)
-
-        if len(next_trialcells) == 0:
-            self._logger.info("End this branch.")
-
-        return next_trialcells
+        pass
 
     def _get_energy_and_forces(self, cell: PhonopyAtoms) -> tuple[float, NDArrayFloat]:
         atoms = Atoms(
@@ -243,6 +239,38 @@ class ModulationSearch:
 
         return modulators_imag_freqs
 
+
+class BaseModulationSearch(AbstractModulationSearch):
+    def run(self, initial: TrialCell) -> list[TrialCell]:
+        # Calculate harmonic force constants
+        ph = self._get_phonon(initial.relaxed, self.supercell_matrix)
+        # Create modulation generators and search instable modes
+        modulators_imag_freqs = self._search_instable_modes(initial.relaxed, ph)
+
+        next_trialcells = []
+        for md, imag_freqs in modulators_imag_freqs:
+            for idx in imag_freqs:
+                next_cells_idx = md.get_modulated_supercells(
+                    idx, self.maximal_displacement, self.max_size
+                )
+                selected = self._pick_and_refine_high_symmetry_cells(next_cells_idx)
+
+                for cell in selected:
+                    next_trial = TrialCell(
+                        idx=self._max_idx,
+                        parent_idx=initial.idx,
+                        cell=cell,
+                        qpoint=md.qpoint,
+                        frequency_index=idx,
+                    )
+                    next_trialcells.append(next_trial)
+                    self._max_idx += 1
+
+        if len(next_trialcells) == 0:
+            self._logger.info("End this branch.")
+
+        return next_trialcells
+
     def _pick_and_refine_high_symmetry_cells(
         self, cells: list[PhonopyAtoms]
     ) -> list[PhonopyAtoms]:
@@ -288,20 +316,54 @@ class ModulationSearch:
         return selected
 
 
+class IsotropyModulationSearch(AbstractModulationSearch):
+    def run(self, initial: TrialCell) -> list[TrialCell]:
+        # Calculate harmonic force constants
+        ph = self._get_phonon(initial.relaxed, self.supercell_matrix)
+        # Create modulation generators and search instable modes
+        modulators_imag_freqs = self._search_instable_modes(initial.relaxed, ph)
+
+        next_trialcells = []
+        for md, imag_freqs in modulators_imag_freqs:
+            for idx in imag_freqs:
+                next_cells_idx = md.get_high_symmetry_modulated_supercells(
+                    idx, self.maximal_displacement
+                )
+                self._logger.info(f"{len(next_cells_idx)} high-symmetry modulations are detected.")
+                for cell in next_cells_idx:
+                    next_trial = TrialCell(
+                        idx=self._max_idx,
+                        parent_idx=initial.idx,
+                        cell=cell,
+                        qpoint=md.qpoint,
+                        frequency_index=idx,
+                    )
+                    next_trialcells.append(next_trial)
+                    self._max_idx += 1
+
+        if len(next_trialcells) == 0:
+            self._logger.info("End this branch.")
+
+        return next_trialcells
+
+
 @click.command()
 @click.option(
     "--output", required=False, default="debug", type=str, help="Root directory for saved files"
 )
-def main(output):
+@click.option(
+    "--show_prototype", required=False, default=False, help="Attach prototype information if true"
+)
+def main(output, show_prototype):
     calc = EMT()  # Effective medium potential for Al, Ni, Cu, Pd, Ag, Pt and Au
     supercell_matrix = [[2, 0, 0], [0, 2, 0], [0, 0, 2]]
 
-    ms = ModulationSearch(
+    ms = IsotropyModulationSearch(
         calc,
         supercell_matrix,
-        max_size=256,
-        maximal_displacement=0.15,
-        symmetry_tolerance=1e-3,
+        ltol=1e-6,
+        stol=1e-6,
+        angle_tol=2.0,
     )
 
     # Simple cubic structure
@@ -312,7 +374,7 @@ def main(output):
         cell=[[a, 0, 0], [0, a, 0], [0, 0, a]],
     )
 
-    found, parents = ms.run_recursive(TrialCell(cell=initial_cell))
+    found = ms.run_recursive(initial_cell, max_depth=2)
 
     root = Path(output)
     root.mkdir(exist_ok=True)
@@ -323,21 +385,28 @@ def main(output):
     for i, tcell in enumerate(found):
         structure = get_pmg_structure(tcell.cell)
 
-        prototype = apm.get_prototypes(structure)
-        prototype_tag = ""
-        if prototype:
-            prototype_tag = prototype[0]["tags"]["aflow"]
-        prototypes.append(prototype_tag)
-        print(f"Energy: {tcell.relaxed_energy_per_atom:.4f} eV/atom, Prototype: {prototype_tag}")
+        if show_prototype:
+            prototype = apm.get_prototypes(structure)
+            prototype_tag = ""
+            if prototype:
+                prototype_tag = prototype[0]["tags"]["aflow"]
+            prototypes.append(prototype_tag)
+            print(
+                f"Energy: {tcell.relaxed_energy_per_atom:.4f} eV/atom, Prototype: {prototype_tag}"
+            )
+        else:
+            print(f"Energy: {tcell.relaxed_energy_per_atom:.4f} eV/atom")
 
         path = root / f"structure_{i}.cif"
         structure.to(fmt="cif", filename=path, symprec=1e-5)
 
     result = {
         "energies": [tcell.relaxed_energy_per_atom for tcell in found],
-        "paths": [(src, dst) for dst, src in enumerate(parents)],
-        "prototypes": prototypes,
+        "paths": [(tcell.parent_idx, tcell.idx) for tcell in found],
     }
+    if show_prototype:
+        result["prototypes"] = prototypes
+
     with open(root / "result.json", "w") as f:
         json.dump(result, f, indent=2)
 

@@ -25,7 +25,8 @@ REQUIRED = [
     "spglib>=1.16.5",
     "phonopy>=2.15.1",
     "seekpath",
-    "spgrep",  # https://github.com/spglib/spgrep
+    "spgrep>=0.2.11",  # https://github.com/spglib/spgrep
+    "hsnf>=0.3.15",  # https://github.com/lan496/hsnf
 ]
 
 # What packages are optional?
@@ -81,7 +82,7 @@ setup(
     python_requires=REQUIRES_PYTHON,
     url=URL,
     package_dir={"": "src"},
-    packages=find_packages(exclude=("tests",)),
+    packages=find_packages(where="src", include=["spgrep_modulation"]),
     package_data={},
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],
@@ -95,6 +96,8 @@ setup(
     include_package_data=True,
     license="BSD",
     test_suite="tests",
+    zip_safe=False,
+    use_scm_version=True,
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers

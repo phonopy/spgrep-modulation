@@ -7,6 +7,7 @@ hidden:
    Lattice vibration <phonon>
    Symmetry condition for group velocity <group_velocity>
    Supercell construction <supercell>
+   Isotropy subgroup <isotropy_subgroup>
    API reference <api>
 ```
 

@@ -20,6 +20,7 @@ from spgrep_modulation.irreps import (
     get_eigenmode_representation,
     project_eigenmode_representation,
 )
+from spgrep_modulation.isotropy import IsotropyEnumerator
 from spgrep_modulation.utils import (
     NDArrayComplex,
     NDArrayFloat,
@@ -131,7 +132,16 @@ class Modulation:
 
             # Group by eigenvalues
             frequencies_irrep = self.eigvals_to_frequencies(eigvals_irrep)
-            deg_sets_irrep = degenerate_sets(frequencies_irrep, cutoff=self.degeneracy_tolerance)
+            cutoff = self.degeneracy_tolerance
+            max_groupby_degeneracy_trials = 8
+            for _ in range(max_groupby_degeneracy_trials):
+                # TODO: binary search for choosing cutoff value
+                deg_sets_irrep = degenerate_sets(frequencies_irrep, cutoff=cutoff)
+                if len(deg_sets_irrep) < len(list_basis):
+                    cutoff /= 10  # Tighten tolerance
+                elif len(deg_sets_irrep) == len(list_basis):
+                    break
+
             if len(deg_sets_irrep) != len(list_basis):
                 warn(
                     f"If no accidental degeneracy happens, number of unique eigenvalues corresponding to an irrep ({len(list_basis)}) should be equal to degeneracy of the irrep ({len(deg_sets_irrep)})."
@@ -229,6 +239,17 @@ class Modulation:
         arguments: list[float],
         return_cell: bool = True,
     ) -> tuple[PhonopyAtoms, NDArrayComplex] | NDArrayComplex:
+        """Return modulated cell and modulation.
+
+        Parameters
+        ----------
+        frequency_index: int
+            Index of frequency with `dim` eivenvectors
+        amplitudes: list[float], (dim, )
+        arguments: list[float], (dim, )
+            in radian
+        return_cell: bool = True
+        """
         # Adapted from phonopy
         _, eigvecs, _ = self.eigenspaces[frequency_index]
 
@@ -238,7 +259,7 @@ class Modulation:
             modulation += self._get_displacements(eigvec.reshape(-1, 3), amplitude, argument)
 
         if return_cell:
-            cell = self._apply_modulation_to_supercell(modulation)
+            cell = self.apply_modulation_to_supercell(modulation)
             return cell, modulation
         else:
             return modulation
@@ -292,7 +313,37 @@ class Modulation:
         for modulation in modulations:
             # Scale modulation to so that its maximal displacement is equal to ``maximal_displacement``
             scaled_modulation = maximal_displacement / np.max(np.abs(modulation)) * modulation
-            cell = self._apply_modulation_to_supercell(scaled_modulation)
+            cell = self.apply_modulation_to_supercell(scaled_modulation)
+            cells.append(cell)
+
+        return cells
+
+    def get_high_symmetry_modulated_supercells(
+        self,
+        frequency_index: int,
+        maximal_displacement: float = 0.11,
+    ) -> list[PhonopyAtoms]:
+        _, _, irrep = self.eigenspaces[frequency_index]
+        ie = IsotropyEnumerator(
+            self.little_rotations,
+            self.little_translations,
+            self.qpoint,
+            irrep,
+        )
+
+        cells = []
+
+        # Choose isotropy subgroups with one-dimensional order-parameter directions
+        for opd in ie.order_parameter_directions:
+            if len(opd) > 1:
+                continue
+            amplitudes = np.abs(opd)[0]
+            arguments = np.angle(opd)[0]
+            modulation = self.get_modulated_supercell_and_modulation(
+                frequency_index, amplitudes, arguments, return_cell=False
+            )
+            scaled_modulation = maximal_displacement / np.max(np.abs(modulation)) * modulation
+            cell = self.apply_modulation_to_supercell(scaled_modulation)
             cells.append(cell)
 
         return cells
@@ -352,7 +403,7 @@ class Modulation:
 
         return u
 
-    def _apply_modulation_to_supercell(self, modulation: NDArrayComplex) -> PhonopyAtoms:
+    def apply_modulation_to_supercell(self, modulation: NDArrayComplex) -> PhonopyAtoms:
         lattice = self.supercell.cell
         positions = self.supercell.positions
         positions += np.real(modulation) / 2

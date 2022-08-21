@@ -120,7 +120,10 @@ Consider Fourier transformation of {math}`\mathbf{u}(\mathbf{r}(l\kappa))`
     &= \frac{1}{\sqrt{M_{\kappa}L^{3}}} \sum_{\mathbf{q}} \mathbf{u}(\kappa; \mathbf{q}) e^{ -i \mathbf{q} \cdot \mathbf{r}(l) } \\
   g u_{\mu}(\kappa; \mathbf{q})
     &= \sqrt{\frac{M_{\kappa}}{L^{3}}} \sum_{l} g u_{\mu}(\mathbf{r}(l\kappa)) e^{i \mathbf{q}\cdot \mathbf{r}(l)} \\
-    &= \sqrt{\frac{M_{\kappa}}{L^{3}}} \sum_{l}\sum_{\nu} R_{g,\mu\nu} u_{\nu}\left( \mathbf{R}_{g}\mathbf{r}(l) + \mathbf{r}(0, g\kappa) + \mathbf{h}_{g}(\kappa) \right) e^{i \mathbf{q}\cdot \mathbf{r}(l)} \\
+    &= \sqrt{\frac{M_{\kappa}}{L^{3}}} \sum_{l}\sum_{\nu}
+      R_{g,\mu\nu} u_{\nu}\left( \mathbf{R}_{g}\mathbf{r}(l) + \mathbf{r}(0, g\kappa) + \mathbf{h}_{g}(\kappa) \right)
+      e^{i \mathbf{q}\cdot \mathbf{r}(l)} \\
+      &\quad (\mathbf{r}(l') := \mathbf{R}_{g}\mathbf{r}(l) + \mathbf{h}_{g}(\kappa) ) \\
     &= \sqrt{\frac{M_{\kappa}}{L^{3}}} \sum_{l'}\sum_{\nu} R_{g,\mu\nu} u_{\nu}\left( \mathbf{r}(l', g\kappa) \right) e^{i \mathbf{q}\cdot \mathbf{R}_{g}^{-1}(\mathbf{r}(l') - \mathbf{h}_{\kappa} ) } \\
     &= \sqrt{\frac{M_{\kappa}}{L^{3}}} \sum_{l'}\sum_{\nu} R_{g,\mu\nu} u_{\nu}\left( \mathbf{r}(l', g\kappa) \right) e^{i \mathbf{R}_{g}\mathbf{q}\cdot (\mathbf{r}(l') - \mathbf{h}_{\kappa} ) }
         \quad (\because \mathbf{R}_{g} \in O(3)) \\
@@ -135,7 +138,7 @@ where
     &:= \exp \left( -2 \pi i \mathbf{R}_{g, f}^{\top} \mathbf{q}_{f} \cdot \mathbf{h}_{g, f}(\kappa) \right) [\mathbf{R}_{g}]_{\mu'\mu} \delta_{ g\kappa, \kappa' } \\
     &\quad (
       \mathbf{R}_{g, f} := \mathbf{A}^{-1} \mathbf{R}_{g} \mathbf{A},
-      \mathbf{k} =: 2\pi \mathbf{A}^{-\top} \mathbf{k}_{f},
+      \mathbf{q} =: 2\pi \mathbf{A}^{-\top} \mathbf{q}_{f},
       \mathbf{v} =: \mathbf{A} \mathbf{v}_{f}
     )
 ```
@@ -199,7 +202,7 @@ We can introduce projective representation {math}`\overline{\Gamma}^{ \mathbf{q}
   \overline{\mathbf{\Gamma}}^{ \mathbf{q}}((E, \mathbf{t}))
     &= \mathbf{1}
 ```
-Thus, we only need to consider projective representation {math}`\mathbf{\gamma}^{ \mathbf{q}}` for little co-group {math}`\overline{\mathcal{G}}^{\mathbf{q}} \simeq \mathcal{G}^{\mathbf{q}} / \mathcal{T}`.
+Thus, we only need to consider projective representation {math}`\overline{\mathbf{\Gamma}}^{ \mathbf{q}}` for little co-group {math}`\overline{\mathcal{G}}^{\mathbf{q}} \simeq \mathcal{G}^{\mathbf{q}} / \mathcal{T}`.
 The decomposition of the projective representation
 ```{math}
   \overline{\Gamma}^{\mathbf{q}} &= \sum_{\alpha} \sum_{\sigma} \overline{\Gamma}^{\mathbf{q}\alpha\sigma} \\

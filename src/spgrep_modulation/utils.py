@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from math import gcd
+
 import numpy as np
 from numpy.typing import NDArray
 from typing_extensions import TypeAlias  # for Python<3.10
@@ -96,3 +98,11 @@ def sample_on_unit_sphere(rng: np.random.Generator, n: int, size: int = 1) -> ND
     points = rng.standard_normal((size, n))
     points /= np.linalg.norm(points, axis=1, keepdims=True)
     return points
+
+
+def lcm_on_list(elements: list[int]) -> int:
+    """Return least common square for list of integers."""
+    lcm = elements[0]
+    for e in elements[1:]:
+        lcm = lcm * e // gcd(lcm, e)
+    return lcm
