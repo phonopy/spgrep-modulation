@@ -132,7 +132,16 @@ class Modulation:
 
             # Group by eigenvalues
             frequencies_irrep = self.eigvals_to_frequencies(eigvals_irrep)
-            deg_sets_irrep = degenerate_sets(frequencies_irrep, cutoff=self.degeneracy_tolerance)
+            cutoff = self.degeneracy_tolerance
+            max_groupby_degeneracy_trials = 8
+            for _ in range(max_groupby_degeneracy_trials):
+                # TODO: binary search for choosing cutoff value
+                deg_sets_irrep = degenerate_sets(frequencies_irrep, cutoff=cutoff)
+                if len(deg_sets_irrep) < len(list_basis):
+                    cutoff /= 10  # Tighten tolerance
+                elif len(deg_sets_irrep) == len(list_basis):
+                    break
+
             if len(deg_sets_irrep) != len(list_basis):
                 warn(
                     f"If no accidental degeneracy happens, number of unique eigenvalues corresponding to an irrep ({len(list_basis)}) should be equal to degeneracy of the irrep ({len(deg_sets_irrep)})."
