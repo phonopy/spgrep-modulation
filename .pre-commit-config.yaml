@@ -45,3 +45,8 @@ repos:
     rev: v2.34.0
     hooks:
       - id: pyupgrade
+  # Notebook
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.4.0
+    hooks:
+      - id: nbqa-black
