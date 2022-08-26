@@ -44,6 +44,7 @@ EXTRAS = {
         "ase==3.22.1",
         "pymatgen==2022.7.25",
         "click",
+        "networkx",
     ],
     "docs": [
         "sphinx",
