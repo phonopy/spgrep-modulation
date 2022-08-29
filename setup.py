@@ -42,7 +42,7 @@ EXTRAS = {
         "ipykernel",
         "notebook",
         "ase==3.22.1",
-        "pymatgen==2022.7.25",
+        "pymatgen==2022.8.23",
         "click",
         "networkx",
     ],
