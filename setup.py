@@ -29,8 +29,19 @@ REQUIRED = [
     "hsnf>=0.3.15",  # https://github.com/lan496/hsnf
 ]
 
+VIS_REQUIRED = [
+    "ipykernel",
+    "notebook>=4.2",
+    # nglview does not work with ipywidgets>=8, https://github.com/nglviewer/nglview/issues/1032
+    "ipywidgets>=7.0, <8",
+    "nglview>=3.0.3",
+    "ase>=3.22.1",
+    "pymatgen>=2022.8.23",
+]
+
 # What packages are optional?
 EXTRAS = {
+    "vis": VIS_REQUIRED,
     "dev": [
         "pytest",
         "pre-commit",
@@ -39,12 +50,9 @@ EXTRAS = {
         "flake8",
         "pyupgrade",
         "ipython",
-        "ipykernel",
-        "notebook",
-        "ase==3.22.1",
-        "pymatgen==2022.8.23",
         "click",
         "networkx",
+        *VIS_REQUIRED,
     ],
     "docs": [
         "sphinx",
