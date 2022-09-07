@@ -133,6 +133,8 @@ docs_build
 
 phonopy/
 .vscode/
-.DS_Store
+*.DS_Store
 *.yaml
 debug/
+
+*POSCAR*

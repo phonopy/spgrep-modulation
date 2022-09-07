@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass
 from itertools import product
 
 import numpy as np
@@ -128,13 +127,6 @@ COLOR_SCHEMES = {
 }
 
 
-@dataclass
-class PeriodicSiteImage:
-    site: PeriodicSite
-    site_index: int
-    jimage: tuple[int, ...]
-
-
 class ColorScheme:
     def __init__(self, scheme="jmol") -> None:
         # TODO: Add more color_scheme
@@ -180,25 +172,10 @@ def viewer(
     -------
     view: NGLWidget
     """
-    structure: Structure = get_pmg_structure(cell)
-
-    # Wrap frac_coords in [0, 1)
-    wrapped_sites = []
-    for site in structure:
-        frac_coords = np.remainder(site.frac_coords, 1)
-        wrapped_sites.append(
-            PeriodicSite(
-                species=site.species,
-                coords=frac_coords,
-                lattice=structure.lattice,
-                properties=site.properties,
-            )
-        )
-    wrapped_structure = Structure.from_sites(wrapped_sites)
-
     # Show image atoms near unit cell
-    displayed = _get_displayed(wrapped_structure)
-    structure_display = Structure.from_sites([si.site for si in displayed])
+    structure = get_pmg_structure(cell)
+    locals_and_ghosts = get_local_and_ghost_sites(structure)
+    structure_display = Structure.from_sites(locals_and_ghosts)
 
     view = show_pymatgen(structure_display)
     view.clear()
@@ -206,7 +183,7 @@ def viewer(
 
     cc = ColorScheme(scheme="jmol")
 
-    view = _add_sites(view, cc, displayed)
+    view = _add_sites(view, cc, [site for site in structure_display])
 
     if show_unitcell:
         view.add_unitcell()
@@ -226,9 +203,22 @@ def viewer(
     return view
 
 
-def _get_displayed(structure: Structure, eps: float = 1e-8) -> list[PeriodicSiteImage]:
-    ghosts = []
-    for site_index, site in enumerate(structure):
+def get_local_and_ghost_sites(structure: Structure, eps: float = 1e-8) -> list[PeriodicSite]:
+    # Wrap frac_coords in [0, 1)
+    wrapped_sites = []
+    for site in structure:
+        frac_coords = np.remainder(site.frac_coords, 1)
+        wrapped_sites.append(
+            PeriodicSite(
+                species=site.species,
+                coords=frac_coords,
+                lattice=structure.lattice,
+                properties=site.properties,
+            )
+        )
+
+    locals_and_ghosts = []
+    for site in wrapped_sites:
         for jimage in product([0, 1 - eps], repeat=3):
             # Skip original site
             if np.allclose(jimage, 0):
@@ -242,28 +232,20 @@ def _get_displayed(structure: Structure, eps: float = 1e-8) -> list[PeriodicSite
                     lattice=structure.lattice,
                     properties=site.properties,
                 )
-                ghosts.append(
-                    PeriodicSiteImage(
-                        site=new_site,
-                        site_index=site_index,
-                        jimage=tuple(map(int, np.around(jimage).tolist())),
-                    )
-                )
+                locals_and_ghosts.append(new_site)
 
-    displayed = []
-    for site_index, site in enumerate(structure):
-        displayed.append(PeriodicSiteImage(site=site, site_index=site_index, jimage=(0, 0, 0)))
-    displayed.extend(ghosts)
+    for site in wrapped_sites:
+        locals_and_ghosts.append(site)
 
-    return displayed
+    return locals_and_ghosts
 
 
 def _add_sites(
     view: NGLWidget,
     cc: ColorScheme,
-    displayed: list[PeriodicSiteImage],
+    sites: list[PeriodicSite],
 ) -> NGLWidget:
-    for i, si in enumerate(displayed):
+    for i, si in enumerate(sites):
         # ref: https://github.com/nglviewer/nglview/issues/913
         # selection=[i] is equivalent to f"@{i}" in "selection language".
         # See https://nglviewer.org/ngl/api/manual/usage/selection-language.html
