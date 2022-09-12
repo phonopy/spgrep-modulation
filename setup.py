@@ -33,7 +33,7 @@ VIS_REQUIRED = [
     "ipykernel",
     "notebook>=4.2",
     # nglview does not work with ipywidgets>=8, https://github.com/nglviewer/nglview/issues/1032
-    "ipywidgets>=7.0, <8",
+    "ipywidgets>=7.0, <9",
     "nglview>=3.0.3",
     "ase>=3.22.1",
     "pymatgen>=2022.8.23",
