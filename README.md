@@ -1,6 +1,8 @@
 # spgrep-modulation
 Collective atomic modulation analysis with irreducible space-group representation
 
+- Document (develop): <https://phonopy.github.io/spgrep-modulation/develop/>
+
 ## Installation
 
 ```shell
