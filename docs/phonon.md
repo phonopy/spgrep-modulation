@@ -1,7 +1,5 @@
 # Lattice vibration
 
-Refs. {cite}`birman1974quick,RevModPhys.40.1`
-
 ## Harmonic phonon
 
 Hamiltonian and commutation relations:

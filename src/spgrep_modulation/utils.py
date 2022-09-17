@@ -1,3 +1,4 @@
+"""Utility functions."""
 from __future__ import annotations
 
 from math import gcd
@@ -14,7 +15,7 @@ NDArrayComplex: TypeAlias = NDArray[np.complex_]
 def get_modified_dynamical_matrix(
     dynamical_matrix: NDArrayComplex, scaled_positions: NDArrayFloat, qpoint: NDArrayFloat
 ):
-    """Get dynamical matrix phased by only lattice points
+    r"""Get dynamical matrix phased by only lattice points.
 
     .. math::
        \\Phi_{\\mu\\mu'}(\\kappa\\kappa'; \\mathbf{q})
@@ -30,6 +31,7 @@ def get_modified_dynamical_matrix(
     Returns
     -------
     mdm: array, (num_atoms * 3, num_atoms * 3)
+        Dynamical matrix in Maradudin's convention
     """
     num_atoms = len(scaled_positions)
     phase = np.exp(2j * np.pi * np.dot(scaled_positions, qpoint))  # (num_atoms, )
@@ -42,10 +44,13 @@ def get_modified_dynamical_matrix(
 
 
 def qr_unique(a: NDArrayComplex) -> tuple[NDArrayComplex, NDArrayComplex]:
-    """Computer QR decomposition
-        A = QR,
-    where Q is unitary and R is upper triangular and diagonal part of R are chosen to be positive.
-    This decomposition is unique if A is full rank.
+    r"""Compute QR decomposition.
+
+    .. math::
+       A = QR,
+
+    where ``Q`` is unitary and ``R`` is upper triangular and diagonal part of ``R`` are chosen to be positive.
+    This decomposition is unique if ``A`` is full rank.
 
     Parameters
     ----------
@@ -68,6 +73,7 @@ def qr_unique(a: NDArrayComplex) -> tuple[NDArrayComplex, NDArrayComplex]:
 
 
 def get_commensurate_diagonal_supercell(qpoint: NDArrayFloat, atol: float = 1e-8) -> NDArrayInt:
+    """Return minimum diagonal supercell in which ``qpoint`` is commensurate."""
     assert len(qpoint) == 3
     diag = [0 for _ in range(3)]
     for i, qi in enumerate(qpoint):

@@ -1,3 +1,4 @@
+"""Modulation class."""
 from __future__ import annotations
 
 from warnings import warn
@@ -32,20 +33,7 @@ from spgrep_modulation.utils import (
 
 
 class Modulation:
-    """
-    Parameters
-    ----------
-    primitive_symmetry:
-    supercell:
-    dynamical_matrix:
-    qpoint: array, (3, )
-    nac_q_direction:
-    factor:
-    degeneracy_tolerance: float
-        Absolute tolerance to groupby phonon frequencies in ``factor`` unit
-    seed: int
-        Seed value for sampling modulation from degenerated modes
-    """
+    """Generate modulated cells based on dynamical matrix of phonon."""
 
     def __init__(
         self,
@@ -58,6 +46,26 @@ class Modulation:
         degeneracy_tolerance: float = 1e-4,
         seed: int = 0,
     ) -> None:
+        """Generate modulated cells based on dynamical matrix of phonon.
+
+        Parameters
+        ----------
+        primitive_symmetry: phonopy.structure.symmetry.Symmetry
+            phonopy's Symmetry object for primitive cell
+        supercell: phonopy.structure.cells.Supercell
+            phonopy's supercell object to apply modulation
+        dynamical_matrix: phonopy.harmonic.dynamical_matrix.DynamicalMatrix
+            phonopy's dynamical matrix object
+        qpoint: array, (3, )
+        nac_q_direction:
+            Used to calculate dynamical matrix around Gamma point if specified
+        factor: float
+            Unit conversion
+        degeneracy_tolerance: float
+            Absolute tolerance to groupby phonon frequencies in ``factor`` unit
+        seed: int
+            Seed value for sampling modulation from degenerated modes
+        """
         # Check to be commensurate
         if not np.allclose(np.remainder(supercell.supercell_matrix.T @ qpoint, 1), 0):
             warn(f"Given qpoint={qpoint} is not commensurate with supercell.")
@@ -188,47 +196,56 @@ class Modulation:
 
     @property
     def dynamical_matrix(self) -> DynamicalMatrix | DynamicalMatrixNAC:
+        """Return Phonopy's dynamical matrix."""
         return self._dynamical_matrix
 
     @property
     def primitive_symmetry(self) -> Symmetry:
+        """Return Phonopy's symmetry for primitive cell."""
         return self._primitive_symmetry
 
     @property
     def little_rotations(self) -> NDArrayInt:
+        """Return rotations of little group at ``qpoint``."""
         return self._little_rotations
 
     @property
     def little_translations(self) -> NDArrayFloat:
+        """Return translations of little group at ``qpoint``."""
         return self._little_translations
 
     @property
     def primitive(self) -> Primitive:
+        """Return Phonopy's primitive cell."""
         return self._dynamical_matrix.primitive
 
     @property
     def supercell(self) -> Supercell:
+        """Return Phonopy's supercell without modulations."""
         return self._supercell
 
     @property
     def qpoint(self) -> NDArrayFloat:
+        """Return qpoint."""
         return self._qpoint
 
     @property
     def unit_conversion_factor(self) -> float:
+        """Return unit conversion for frequencies."""
         return self._factor
 
     @property
     def degeneracy_tolerance(self) -> float:
+        """Return absolute tolerance to detect degenerated bands."""
         return self._degeneracy_tolerance
 
     @property
     def eigenspaces(self) -> list[tuple[float, NDArrayComplex, NDArrayComplex]]:
-        """Return list of (eigenvalue, degenerated eigenvectors, irrep formed by the eigenvectors) of dynamical matrix.
+        """Return list of ``(eigenvalue, degenerated eigenvectors, irrep formed by the eigenvectors)`` of dynamical matrix.
 
-        eigenvalue: float
-        eigenvectors: array, (dim, num_atoms, 3)
-        irrep: array, (little_order, dim, dim)
+        * ``eigenvalue``: float
+        * ``eigenvectors``: array, (dim, num_atoms, 3)
+        * ``irrep``: array, (little_order, dim, dim)
         """
         return self._eigenspaces
 
@@ -239,7 +256,7 @@ class Modulation:
         arguments: list[float],
         return_cell: bool = True,
     ) -> tuple[PhonopyAtoms, NDArrayComplex] | NDArrayComplex:
-        """Return modulated cell and modulation.
+        """Return modulated cell and modulation with given amplitudes and arguments.
 
         Parameters
         ----------
@@ -270,7 +287,8 @@ class Modulation:
         maximal_displacement: float = 0.11,
         max_size: int = 1,
     ) -> list[PhonopyAtoms]:
-        """
+        """Return modulated cells with randomly sampled arguments.
+
         Parameters
         ----------
         frequency_index: int
@@ -323,6 +341,20 @@ class Modulation:
         frequency_index: int,
         maximal_displacement: float = 0.11,
     ) -> list[PhonopyAtoms]:
+        """Return modulated cells corresponding to one-dimensional order-parameter directions of an isotropy subgroup.
+
+        Parameters
+        ----------
+        frequency_index: int
+            Index of considered eigenmodes in ``Modulation.eigenspaces``
+        maximal_displacement: int
+            Amplitude of modulation is chosen so that the maximal displacement in returned modulation is equal to ``maximal_displacement``.
+            Same unit as ``Modulation.primitive.cell``.
+
+        Returns
+        -------
+        cells: list of PhonopyAtoms
+        """
         _, _, irrep = self.eigenspaces[frequency_index]
         ie = IsotropyEnumerator(
             self.little_rotations,
@@ -358,6 +390,7 @@ class Modulation:
         factor: float = VaspToTHz,
         symprec: float = 1e-5,
     ) -> Modulation:
+        """Return Modulation class with supercell matrix."""
         primitive = dynamical_matrix.primitive
         primitive_symmetry = Symmetry(cell=primitive, symprec=symprec)
 
@@ -378,6 +411,7 @@ class Modulation:
         )
 
     def eigvals_to_frequencies(self, eigvals: NDArrayComplex) -> NDArrayFloat:
+        """Convert eigenvalue to frequency."""
         # Adapted from phonopy
         e = np.array(eigvals).real
         return np.sqrt(np.abs(e)) * np.sign(e) * self._factor
@@ -404,6 +438,7 @@ class Modulation:
         return u
 
     def apply_modulation_to_supercell(self, modulation: NDArrayComplex) -> PhonopyAtoms:
+        """Apply modulation to supercell."""
         lattice = self.supercell.cell
         positions = self.supercell.positions
         positions += np.real(modulation) / 2

@@ -138,5 +138,6 @@ phonopy/
 debug/
 
 *POSCAR*
+disp-*
 
 gh-pages*

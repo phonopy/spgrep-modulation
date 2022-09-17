@@ -1,3 +1,4 @@
+"""Modulation analysis with irreps and isotropy subgroups."""
 from importlib.metadata import PackageNotFoundError, version
 
 # https://github.com/pypa/setuptools_scm/#retrieving-package-version-at-runtime
