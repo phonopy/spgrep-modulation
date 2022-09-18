@@ -1,3 +1,4 @@
+"""Utilities for visualization in notebook."""
 from __future__ import annotations
 
 import math
@@ -128,16 +129,21 @@ COLOR_SCHEMES = {
 
 
 class ColorScheme:
+    """Color scheme for atoms."""
+
     def __init__(self, scheme="jmol") -> None:
+        """Initialize color scheme."""
         # TODO: Add more color_scheme
         self._color_scheme = COLOR_SCHEMES[scheme]
 
     def get_color(self, site: PeriodicSite) -> list[float]:
+        """Return color based on species."""
         key = self._get_key(site.specie)
         color = [c / 256 for c in self._color_scheme[key]]
         return color
 
     def get_hex_color(self, site: PeriodicSite) -> str:
+        """Return color hex based on species."""
         key = self._get_key(site.specie)
         color = self._color_scheme[key]
         hex = f"#{color[0]:02x}{color[1]:02x}{color[2]:02x}"
@@ -204,6 +210,7 @@ def viewer(
 
 
 def get_local_and_ghost_sites(structure: Structure, eps: float = 1e-8) -> list[PeriodicSite]:
+    """Return structure with ghost atoms near unit cell."""
     # Wrap frac_coords in [0, 1)
     wrapped_sites = []
     for site in structure:

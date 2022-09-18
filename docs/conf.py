@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = "spgrep-modulation"
-copyright = "2022, Kohei Shinohara, Atsushi Togo"
-author = "Kohei Shinohara, Atsushi Togo"
+copyright = "2022, Kohei Shinohara"
+author = "Kohei Shinohara"
 
 # https://github.com/pypa/setuptools_scm/
 from importlib.metadata import version
@@ -41,7 +41,8 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.mathjax",
     "sphinxcontrib.bibtex",
-    "sphinx_proof",
+    "nbsphinx",
+    # "sphinx_proof",  # Seems to be incompatible with nbsphinx
     "myst_parser",
 ]
 

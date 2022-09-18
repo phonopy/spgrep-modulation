@@ -42,15 +42,24 @@ There are two basis vectors for {math}`\mathcal{T}(\mathcal{S})` that are orthog
 Let {math}`l` be LCM of denominators of {math}`\frac{1}{2\pi}\mathbf{k}`.
 Then, we write the elements of {math}`\mathbf{k}` as
 ```{math}
-    \mathbf{k} = 2\pi \left( \frac{a_{1}}{l} \frac{a_{2}}{l} \frac{a_{3}}{l} \right)^{\top},
+    \mathbf{k} = 2\pi \left( \frac{g a_{1}}{l} \frac{g a_{2}}{l} \frac{g a_{3}}{l} \right)^{\top},
 ```
-where {math}`\mathrm{GCD}(a_{1}, a_{2}, a_{3}) = 1`.
+where {math}`\mathrm{GCD}(a_{1}, a_{2}, a_{3}) = 1`, {math}`\mathrm{GCD}(g, l) = 1` and {math}`1 \leq g < l`.
 
 ```{math}
     &\mathbf{k} \cdot \mathbf{t} \in 2\pi \mathbb{Z} \\
-    &\Leftrightarrow a_{1} t_{1} + a_{2} t_{2} + a_{3} t_{3} \in l\mathbb{Z}
+    &\Leftrightarrow g (a_{1} \,a_{2} \,a_{3}) \mathbf{t} \equiv 0 \quad (\mathrm{mod}\, l) \\
+    &\Leftrightarrow (a_{1} \,a_{2} \,a_{3}) \mathbf{t} \equiv 0 \quad (\mathrm{mod}\, l)
+        \quad (\because \mathrm{GCD}(g, l) = 1) \\
 ```
 
+By solving {math}`(a_{1} \,a_{2} \,a_{3}) \mathbf{t} = l`, we obtain one special solution {math}`(a_{1} \,a_{2} \,a_{3}) \mathbf{t}_{0} = l` and two general solutions {math}`(a_{1} \,a_{2} \,a_{3}) \mathbf{t}_{i} = 0 \, (i=1,2)`.
+Then, {math}`\{ n\mathbf{t}_{0}, \mathbf{t}_{1}, \mathbf{t}_{2} \}` spans a lattice
+```{math}
+    \{ \mathbf{t} \in \mathbb{Z}^{3} \mid (a_{1} \,a_{2} \,a_{3}) \mathbf{t} = nl \}
+```
+for {math}`n \in \mathbb{Z}`.
+Thus, {math}`\{ \mathbf{t}_{0}, \mathbf{t}_{1}, \mathbf{t}_{2} \}` is basis of {math}`\mathcal{L}_{S}`.
 By stacking these basis vectors, we can find a transformation matrix {math}`\mathbf{M}`,
 ```{math}
     \mathcal{T}(\mathcal{S}) = \{ \mathbf{Mt} \mid (\mathbf{E}, \mathbf{t}) \in \mathcal{G} \}.

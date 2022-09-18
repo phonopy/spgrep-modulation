@@ -11,7 +11,7 @@ from setuptools import find_packages, setup
 NAME = "spgrep_modulation"
 DESCRIPTION = "Collective atomic modulation analysis with irreducible space-group representation"
 URL = "https://github.com/lan496/spgrep-modulation"
-AUTHOR = "Kohei Shinohara, Atsushi Togo"
+AUTHOR = "Kohei Shinohara"
 EMAIL = "kshinohara0508@gmail.com"
 REQUIRES_PYTHON = ">=3.8.0"
 
@@ -57,8 +57,9 @@ EXTRAS = {
     "docs": [
         "sphinx",
         "sphinx-autobuild",
+        "nbsphinx",
         "sphinxcontrib-bibtex",
-        "sphinx-proof",
+        # "sphinx-proof",  # Seems to be incompatible with nbsphinx
         "myst-parser",
         "sphinx-book-theme",
     ],

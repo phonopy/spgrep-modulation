@@ -1,3 +1,4 @@
+"""Isotropy subgroup of space group."""
 from __future__ import annotations
 
 from fractions import Fraction
@@ -14,15 +15,13 @@ from spgrep_modulation.utils import (
     NDArrayComplex,
     NDArrayFloat,
     NDArrayInt,
+    gcd_on_list,
     lcm_on_list,
 )
 
 
 class IsotropyEnumerator:
-    """
-    maximal_isotropy_subgroups: list of indices
-    order_parameter_directions:
-    """
+    """Enumerate isotropy subgroups of given little group and small representation."""
 
     def __init__(
         self,
@@ -33,6 +32,18 @@ class IsotropyEnumerator:
         max_denominator: int = 100,
         atol: float = 1e-6,
     ) -> None:
+        """Initialize class.
+
+        Parameters
+        ----------
+        little_rotations: array, (order, 3, 3)
+        little_translations: array, (order, 3)
+        qpoint: array, (3, )
+        small_rep: (order, dim, dim)
+            Small representation of space group at ``qpoint``
+        max_denominator: int
+        atol: float
+        """
         self._little_rotations = np.array(little_rotations)
         self._little_translations = np.array(little_translations) - np.rint(little_translations)
         self._qpoint = np.array(qpoint)
@@ -44,26 +55,40 @@ class IsotropyEnumerator:
 
     @property
     def little_rotations(self) -> NDArrayInt:
+        """Return rotations of little group at ``qpoint``."""
         return self._little_rotations
 
     @property
     def little_translations(self) -> NDArrayFloat:
+        """Return translations of little group at ``qpoint``."""
         return self._little_translations
 
     @property
     def qpoint(self) -> NDArrayFloat:
+        """Return qpoint."""
         return self._qpoint
 
     @property
     def small_rep(self) -> NDArrayComplex:
+        """Return small representation of space group."""
         return self._small_rep
 
     @property
     def maximal_isotropy_subgroups(self) -> list[list[int]]:
+        """Return list of indices for isotropy subgroups.
+
+        Let ``subgroup = self.maximal_isotropy_subgroups[i]``. ``(self.little_rotations[subgroup], self.little_translations[subgroup])`` gives a coset of the i-th isotropy subgroup.
+        """
         return self._maximal_isotropy_subgroups
 
     @property
     def order_parameter_directions(self) -> list[NDArrayComplex]:
+        """Return order-parameter directions of isotropy subgroups.
+
+        Let ``opd = self.order_parameter_directions[i]``, which is an array with ``(num_direction, dim)``.
+        ``num_direction`` is the number of free parameters for the ``i``-th isotropy subgroup.
+        ``dim`` is dimension of the given small representation.
+        """
         return self._order_parameter_directions
 
     def _initialize(self):
@@ -143,8 +168,9 @@ class IsotropyEnumerator:
 
 
 def get_translational_subgroup(qpoint: NDArrayFloat, max_denominator: int = 100):
-    """Return transformation matrix of the following sublattice:
-    Let `t` be a lattice point of the sublattice. Then, np.dot(t, qpoint) is integer.
+    """Return transformation matrix of the following sublattice.
+
+    Let ``t`` be a lattice point of the returned sublattice. Then, ``np.dot(t, qpoint)`` is integer.
     """
     if isinstance(qpoint, list):
         qpoint = np.array(qpoint)
@@ -152,23 +178,15 @@ def get_translational_subgroup(qpoint: NDArrayFloat, max_denominator: int = 100)
     # Basis vectors of a sublattice formed by translation that preserve order parameter
     elements = [Fraction(qi).limit_denominator(max_denominator).denominator for qi in qpoint]
     lcm = lcm_on_list(elements)
-    A = np.around(qpoint * lcm).astype(int)[None, :]
-
-    all_basis = []
-    # Three vectors [lcm, 0, 0], [0, lcm, 0], [0, 0, lcm] are trivially general solutions.
-    all_basis.append(lcm * np.eye(3, dtype=int))
+    numerators = np.around(qpoint * lcm).astype(int)
+    g = gcd_on_list(numerators)
+    A = np.array([num // g for num in numerators])[None, :]  # Now, GCD(A) = 1
 
     # Solve `A @ t = lcm`
     # Since GCD of A is 1, this integer linear system always has a special solution.
     basis_and_special = solve_integer_linear_system(A, np.array([lcm]))
-    if basis_and_special:
-        all_basis.append(basis_and_special[0])
-        all_basis.append(basis_and_special[1])
-
     # transformation @ mathbb{Z}^{3} forms sublattice
-    transformation, _ = row_style_hermite_normal_form(np.vstack(all_basis))
-    # Take only three basis vectors
-    transformation = transformation[:3]
+    transformation, _ = row_style_hermite_normal_form(np.vstack(basis_and_special))
 
     if np.linalg.det(transformation) < 0:
         transformation[0, :] *= -1
@@ -179,6 +197,7 @@ def get_translational_subgroup(qpoint: NDArrayFloat, max_denominator: int = 100)
 def enumerate_point_subgroup(
     table: NDArrayInt, preserve_sublattice: list[bool], return_conjugacy_class: bool = True
 ) -> list[list[int]]:
+    """Enumerate conjugacy subgroups of point group."""
     order = len(table)
     identity = get_identity_index(table)
     # Represent choice of elements by bit array
@@ -225,6 +244,7 @@ def enumerate_point_subgroup(
 
 
 def enumerate_point_subgroup_naive(table, preserve_sublattice: list[bool]):
+    """Enumerate conjugacy subgroups of point group in brute force."""
     order = len(table)
     ret = []
     for bits in range(1, 1 << order):
@@ -256,6 +276,7 @@ def traverse(
     identity: int,
     table: NDArrayInt,
 ) -> list[int]:
+    """Traverse group elements from generators."""
     subgroup = set()
     que = Queue()  # type: ignore
     que.put(identity)

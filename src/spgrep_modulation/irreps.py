@@ -1,3 +1,4 @@
+"""Irreps for phonon."""
 from __future__ import annotations
 
 from typing import Literal
@@ -20,12 +21,16 @@ def project_eigenmode_representation(
     rtol: float = 1e-5,
     atol: float = 1e-6,  # Too tight tolerance gives wrong basis vectors...
 ) -> tuple[list[NDArrayComplex], list[NDArrayComplex], NDArrayInt]:
-    """
+    """Decompose representation matrices by eigenmodes into irreps.
+
     Parameters
     ----------
     eigenmode_representation: array, (order, num_atoms, 3, num_atoms, 3)
-    primitive: Primitive
-    primitive_symmetry: Symmetry
+        Representation matrices formed by phonon eigenmodes
+    primitive: phonopy.structure.cells.Primitive
+        phonopy's primitive object
+    primitive_symmetry: phonopy.structure.symmetry.Symmetry
+        phonopy's Symmetry object for primitive cell
     primitive_qpoint: array, (3, )
         q vector in ``primitive``'s dual basis vectors
 
@@ -36,6 +41,7 @@ def project_eigenmode_representation(
         Note: phase chosen to be consistent with definition of phonopy's dynamical matrix
     irreps: list of irrep (little_order, dim, dim)
     mapping_little_group:
+        list of indices for little group.
     """
     rotations = primitive_symmetry.symmetry_operations["rotations"]
     translations = primitive_symmetry.symmetry_operations["translations"]
@@ -88,21 +94,24 @@ def get_eigenmode_representation(
     primitive_symmetry: Symmetry,
     primitive_qpoint: NDArrayFloat,
 ) -> NDArrayComplex:
-    """Compute representation matrix for eigenmodes.
+    r"""Compute representation matrix for eigenmodes.
 
     .. math::
-       \\Gamma_{\\kappa'\\mu'; \\kappa\\mu}^{\\mathbf{q}}(g) := \\exp \\left( -i \\mathbf{R}_{g} \\mathbf{q} \\cdot \\mathbf{h}_{g}(\\kappa) \\right) [\\mathbf{R}_{g}]_{\\mu'\\mu} \\delta_{ g\\kappa, \\kappa' }
+       \Gamma_{\kappa'\mu'; \kappa\mu}^{\mathbf{q}}(g) := \exp \left( -i \mathbf{R}_{g} \mathbf{q} \cdot \mathbf{h}_{g}(\kappa) \right) [\mathbf{R}_{g}]_{\mu'\mu} \delta_{ g\kappa, \kappa' }
 
     Parameters
     ----------
-    primitive: Primitive
-    primitive_symmetry: Symmetry
+    primitive: phonopy.structure.cells.Primitive
+        phonopy's primitive object
+    primitive_symmetry: phonopy.structure.symmetry.Symmetry
+        phonopy's Symmetry object for primitive cell
     primitive_qpoint: array, (3, )
         q vector in ``primitive``'s dual basis vectors
 
     Returns
     -------
     rep: array, (order, num_atoms, 3, num_atoms, 3)
+        Representation matrices
     """
     rotations = primitive_symmetry.symmetry_operations["rotations"]
     translations = primitive_symmetry.symmetry_operations["translations"]
