@@ -41,7 +41,8 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.mathjax",
     "sphinxcontrib.bibtex",
-    "sphinx_proof",
+    "nbsphinx",
+    # "sphinx_proof",  # Seems to be incompatible with nbsphinx
     "myst_parser",
 ]
 

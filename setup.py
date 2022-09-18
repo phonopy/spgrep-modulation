@@ -57,8 +57,9 @@ EXTRAS = {
     "docs": [
         "sphinx",
         "sphinx-autobuild",
+        "nbsphinx",
         "sphinxcontrib-bibtex",
-        "sphinx-proof",
+        # "sphinx-proof",  # Seems to be incompatible with nbsphinx
         "myst-parser",
         "sphinx-book-theme",
     ],
