@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>spgrep-modulation &#8212; spgrep-modulation 0.1.dev1+ga71aeee</title>
+    <title>spgrep-modulation &#8212; spgrep-modulation 0.1.dev1+ga687d1f</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -22,7 +22,6 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -32,9 +31,10 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Lattice vibration" href="phonon.html" />
+    <link rel="next" title="Examples" href="examples.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -73,7 +73,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga71aeee</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga687d1f</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -92,37 +92,56 @@
    Introduction
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="phonon.html">
-   Lattice vibration
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="examples.html">
+   Examples
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/band_connectivity.html">
+     Sewing band structure by subduced representation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/visualize.html">
+     Visualize modulated structures with nglview
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="group_velocity.html">
-   Symmetry condition for group velocity
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="formulation.html">
+   Formulation
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="supercell.html">
-   Supercell construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="isotropy_subgroup.html">
-   Isotropy subgroup
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="band_connectivity.html">
-   Band connectivity
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="phonon.html">
+     Lattice vibration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="isotropy_subgroup.html">
+     Isotropy subgroup
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="api.html">
    API reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -140,6 +159,33 @@
    <li class="toctree-l2">
     <a class="reference internal" href="api_isotropy.html">
      Isotropy subgroup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="notes.html">
+   Implementation notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="group_velocity.html">
+     Symmetry condition for group velocity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="supercell.html">
+     Supercell construction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="band_connectivity.html">
+     Band connectivity
     </a>
    </li>
   </ul>
@@ -277,13 +323,33 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#features">
+   Features
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#usage">
+   Usage
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#installation">
    Installation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#license">
+   License
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#development">
    Development
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#acknowledgements">
+   Acknowledgements
   </a>
  </li>
 </ul>
@@ -306,13 +372,33 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#features">
+   Features
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#usage">
+   Usage
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#installation">
    Installation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#license">
+   License
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#development">
    Development
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#acknowledgements">
+   Acknowledgements
   </a>
  </li>
 </ul>
@@ -329,28 +415,73 @@ title="Print to PDF"
 </div>
 <section id="spgrep-modulation">
 <h1>spgrep-modulation<a class="headerlink" href="#spgrep-modulation" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://github.com/phonopy/spgrep-modulation/actions/workflows/testing.yml"><img alt="testing" src="https://github.com/phonopy/spgrep-modulation/actions/workflows/testing.yml/badge.svg" /></a>
+<a class="reference external" href="https://opensource.org/licenses/BSD-3-Clause"><img alt="License" src="https://img.shields.io/badge/License-BSD_3--Clause-blue.svg" /></a></p>
 <p>Collective atomic modulation analysis with irreducible space-group representation</p>
 <ul class="simple">
+<li><p>Github: <a class="reference external" href="https://github.com/phonopy/spgrep-modulation">https://github.com/phonopy/spgrep-modulation</a></p></li>
+<li><p>Document: <a class="reference external" href="https://phonopy.github.io/spgrep-modulation">https://phonopy.github.io/spgrep-modulation</a></p></li>
 <li><p>Document (develop): <a class="reference external" href="https://phonopy.github.io/spgrep-modulation/develop/">https://phonopy.github.io/spgrep-modulation/develop/</a></p></li>
 </ul>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Calculate representation matrices and irreps formed by phonon eigenmodes</p></li>
+<li><p>Calculate isotropy subgroups of irreps of space groups on the fly</p></li>
+<li><p>Generate modulated structures in selected order-parameter directions of isotropy subgroups</p></li>
+</ul>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">phonopy</span>
+<span class="kn">from</span> <span class="nn">phonopy.structure.symmetry</span> <span class="kn">import</span> <span class="n">Symmetry</span>
+<span class="kn">from</span> <span class="nn">spgrep_modulation.modulation</span> <span class="kn">import</span> <span class="n">Modulation</span>
+
+<span class="c1"># Load Phonopy object</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;tests&quot;</span> <span class="o">/</span> <span class="s2">&quot;phonopy_mp-2998.yaml.xz&quot;</span>
+<span class="n">ph</span> <span class="o">=</span> <span class="n">phonopy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="c1"># Prepare Modulation class</span>
+<span class="n">qpoint</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># X point</span>
+<span class="n">md</span> <span class="o">=</span> <span class="n">Modulation</span><span class="o">.</span><span class="n">with_supercell_and_symmetry_search</span><span class="p">(</span>
+    <span class="n">dynamical_matrix</span><span class="o">=</span><span class="n">ph</span><span class="o">.</span><span class="n">dynamical_matrix</span><span class="p">,</span>
+    <span class="n">supercell_matrix</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">qpoint</span><span class="o">=</span><span class="n">qpoint</span><span class="p">,</span>
+    <span class="n">factor</span><span class="o">=</span><span class="n">ph</span><span class="o">.</span><span class="n">unit_conversion_factor</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Degenerated imaginary mode</span>
+<span class="n">frequency_index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Frequency (THz): </span><span class="si">{</span><span class="n">md</span><span class="o">.</span><span class="n">eigvals_to_frequencies</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">eigenspaces</span><span class="p">[</span><span class="n">frequency_index</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># -&gt; Frequency (THz): -4.88</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Irrep shape: </span><span class="si">{</span><span class="n">md</span><span class="o">.</span><span class="n">eigenspaces</span><span class="p">[</span><span class="n">frequency_index</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># -&gt; Irrep shape: (16, 2, 2)</span>
+
+<span class="c1"># Modulated cells corresponding to one-dimensional order-parameter directions of isotropy subgroup</span>
+<span class="n">cells</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">get_high_symmetry_modulated_supercells</span><span class="p">(</span><span class="n">frequency_index</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cells</span><span class="p">:</span>
+    <span class="n">symmetry</span> <span class="o">=</span> <span class="n">Symmetry</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">symmetry</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;international&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (No. </span><span class="si">{</span><span class="n">symmetry</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="c1"># -&gt; Pmma (No. 51) and Cmcm (No. 63)</span>
+</pre></div>
+</div>
+</section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">#</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda create -n spgrep <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10 pip
 conda activate spgrep
-<span class="c1"># Install spgrep</span>
-git clone git@github.com:spglib/spgrep.git
-<span class="nb">pushd</span> spgrep
-pip install -e .
-<span class="nb">popd</span>
-<span class="c1"># Install this package</span>
 git clone git@github.com:lan496/spgrep-modulation.git
-<span class="nb">pushd</span> spgrep-modulation
+<span class="nb">cd</span> spgrep-modulation
 pip install -e .
 <span class="c1"># pip install -e &quot;.[dev,docs]&quot;</span>
-<span class="nb">popd</span>
 <span class="c1"># pre-commit install</span>
 </pre></div>
 </div>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">#</a></h2>
+<p>spgrep-modulation is released under a BSD 3-clause license.</p>
 </section>
 <section id="development">
 <h2>Development<a class="headerlink" href="#development" title="Permalink to this headline">#</a></h2>
@@ -359,6 +490,10 @@ pip install -e .
 <span class="c1"># open localhost:8000 in your browser</span>
 </pre></div>
 </div>
+</section>
+<section id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">#</a></h2>
+<p>Some test files <code class="docutils literal notranslate"><span class="pre">tests/phonopy_mp-*.yaml.xz</span></code> are adapted from <a class="reference external" href="http://phonondb.mtl.kyoto-u.ac.jp/index.html">phonondb</a> under CC BY 4.0.</p>
 </section>
 </section>
 
@@ -370,10 +505,10 @@ pip install -e .
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="phonon.html" title="next page">
+    <a class='right-next' id="next-link" href="examples.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lattice vibration</p>
+        <p class="prev-next-title">Examples</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -384,9 +519,9 @@ pip install -e .
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Kohei Shinohara, Atsushi Togo<br/>
+    By Kohei Shinohara<br/>
   
-      &copy; Copyright 2022, Kohei Shinohara, Atsushi Togo.<br/>
+      &copy; Copyright 2022, Kohei Shinohara.<br/>
 </p>
         </footer>
     </div>

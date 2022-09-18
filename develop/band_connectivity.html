@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Band connectivity &#8212; spgrep-modulation 0.1.dev1+ga71aeee</title>
+    <title>Band connectivity &#8212; spgrep-modulation 0.1.dev1+ga687d1f</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -22,7 +22,6 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -32,11 +31,12 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API Reference" href="api.html" />
-    <link rel="prev" title="Isotropy subgroup" href="isotropy_subgroup.html" />
+    <link rel="prev" title="Supercell construction" href="supercell.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -75,7 +75,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga71aeee</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga687d1f</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -94,37 +94,56 @@
    Introduction
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="phonon.html">
-   Lattice vibration
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="examples.html">
+   Examples
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/band_connectivity.html">
+     Sewing band structure by subduced representation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/visualize.html">
+     Visualize modulated structures with nglview
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="group_velocity.html">
-   Symmetry condition for group velocity
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="formulation.html">
+   Formulation
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="supercell.html">
-   Supercell construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="isotropy_subgroup.html">
-   Isotropy subgroup
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Band connectivity
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="phonon.html">
+     Lattice vibration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="isotropy_subgroup.html">
+     Isotropy subgroup
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="api.html">
    API reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -142,6 +161,33 @@
    <li class="toctree-l2">
     <a class="reference internal" href="api_isotropy.html">
      Isotropy subgroup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="notes.html">
+   Implementation notes
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="group_velocity.html">
+     Symmetry condition for group velocity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="supercell.html">
+     Supercell construction
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Band connectivity
     </a>
    </li>
   </ul>
@@ -377,19 +423,12 @@ We refer to a <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-v
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="isotropy_subgroup.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="supercell.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Isotropy subgroup</p>
+            <p class="prev-next-title">Supercell construction</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="api.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">API Reference</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
@@ -398,9 +437,9 @@ We refer to a <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-v
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Kohei Shinohara, Atsushi Togo<br/>
+    By Kohei Shinohara<br/>
   
-      &copy; Copyright 2022, Kohei Shinohara, Atsushi Togo.<br/>
+      &copy; Copyright 2022, Kohei Shinohara.<br/>
 </p>
         </footer>
     </div>

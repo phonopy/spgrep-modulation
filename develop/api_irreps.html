@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Irreps &#8212; spgrep-modulation 0.1.dev1+ga71aeee</title>
+    <title>Irreps &#8212; spgrep-modulation 0.1.dev1+ga687d1f</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -22,7 +22,6 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -32,7 +31,9 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Isotropy subgroup" href="api_isotropy.html" />
@@ -75,7 +76,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga71aeee</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga687d1f</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -94,37 +95,56 @@
    Introduction
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="phonon.html">
-   Lattice vibration
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="examples.html">
+   Examples
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/band_connectivity.html">
+     Sewing band structure by subduced representation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/visualize.html">
+     Visualize modulated structures with nglview
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="group_velocity.html">
-   Symmetry condition for group velocity
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="formulation.html">
+   Formulation
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="supercell.html">
-   Supercell construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="isotropy_subgroup.html">
-   Isotropy subgroup
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="band_connectivity.html">
-   Band connectivity
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="phonon.html">
+     Lattice vibration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="isotropy_subgroup.html">
+     Isotropy subgroup
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="api.html">
    API reference
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -142,6 +162,33 @@
    <li class="toctree-l2">
     <a class="reference internal" href="api_isotropy.html">
      Isotropy subgroup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="notes.html">
+   Implementation notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="group_velocity.html">
+     Symmetry condition for group velocity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="supercell.html">
+     Supercell construction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="band_connectivity.html">
+     Band connectivity
     </a>
    </li>
   </ul>
@@ -286,12 +333,13 @@ title="Print to PDF"
 <div><dl class="py function">
 <dt class="sig sig-object py" id="spgrep_modulation.irreps.project_eigenmode_representation">
 <span class="sig-prename descclassname"><span class="pre">spgrep_modulation.irreps.</span></span><span class="sig-name descname"><span class="pre">project_eigenmode_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eigenmode_representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.complex128</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">phonopy.structure.cells.Primitive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primitive_symmetry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">phonopy.structure.symmetry.Symmetry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primitive_qpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Neto'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'random'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Neto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.complex128</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.complex128</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.int32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/spgrep_modulation/irreps.html#project_eigenmode_representation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.irreps.project_eigenmode_representation" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Decompose representation matrices by eigenmodes into irreps.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>eigenmode_representation</strong> (<em>array</em><em>, </em><em>(</em><em>order</em><em>, </em><em>num_atoms</em><em>, </em><em>3</em><em>, </em><em>num_atoms</em><em>, </em><em>3</em><em>)</em>) – </p></li>
-<li><p><strong>primitive</strong> (<em>Primitive</em>) – </p></li>
-<li><p><strong>primitive_symmetry</strong> (<em>Symmetry</em>) – </p></li>
+<li><p><strong>eigenmode_representation</strong> (<em>array</em><em>, </em><em>(</em><em>order</em><em>, </em><em>num_atoms</em><em>, </em><em>3</em><em>, </em><em>num_atoms</em><em>, </em><em>3</em><em>)</em>) – Representation matrices formed by phonon eigenmodes</p></li>
+<li><p><strong>primitive</strong> (<em>phonopy.structure.cells.Primitive</em>) – phonopy’s primitive object</p></li>
+<li><p><strong>primitive_symmetry</strong> (<em>phonopy.structure.symmetry.Symmetry</em>) – phonopy’s Symmetry object for primitive cell</p></li>
 <li><p><strong>primitive_qpoint</strong> (<em>array</em><em>, </em><em>(</em><em>3</em><em>, </em><em>)</em>) – q vector in <code class="docutils literal notranslate"><span class="pre">primitive</span></code>’s dual basis vectors</p></li>
 </ul>
 </dd>
@@ -300,7 +348,7 @@ title="Print to PDF"
 <li><p><strong>all_basis</strong> (<em>list</em>) – all_basis[i] is list of independent basis vectors with (dim, num_atoms, 3) forming irreps[i].
 Note: phase chosen to be consistent with definition of phonopy’s dynamical matrix</p></li>
 <li><p><strong>irreps</strong> (<em>list of irrep (little_order, dim, dim)</em>)</p></li>
-<li><p><em>mapping_little_group</em></p></li>
+<li><p><em>mapping_little_group</em> – list of indices for little group.</p></li>
 </ul>
 </p>
 </dd>
@@ -318,13 +366,13 @@ Note: phase chosen to be consistent with definition of phonopy’s dynamical mat
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>primitive</strong> (<em>Primitive</em>) – </p></li>
-<li><p><strong>primitive_symmetry</strong> (<em>Symmetry</em>) – </p></li>
+<li><p><strong>primitive</strong> (<em>phonopy.structure.cells.Primitive</em>) – phonopy’s primitive object</p></li>
+<li><p><strong>primitive_symmetry</strong> (<em>phonopy.structure.symmetry.Symmetry</em>) – phonopy’s Symmetry object for primitive cell</p></li>
 <li><p><strong>primitive_qpoint</strong> (<em>array</em><em>, </em><em>(</em><em>3</em><em>, </em><em>)</em>) – q vector in <code class="docutils literal notranslate"><span class="pre">primitive</span></code>’s dual basis vectors</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>rep</strong></p>
+<dd class="field-even"><p><strong>rep</strong> – Representation matrices</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>array, (order, num_atoms, 3, num_atoms, 3)</p>
@@ -364,9 +412,9 @@ Note: phase chosen to be consistent with definition of phonopy’s dynamical mat
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Kohei Shinohara, Atsushi Togo<br/>
+    By Kohei Shinohara<br/>
   
-      &copy; Copyright 2022, Kohei Shinohara, Atsushi Togo.<br/>
+      &copy; Copyright 2022, Kohei Shinohara.<br/>
 </p>
         </footer>
     </div>

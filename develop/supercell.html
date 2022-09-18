@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Supercell construction &#8212; spgrep-modulation 0.1.dev1+ga71aeee</title>
+    <title>Supercell construction &#8212; spgrep-modulation 0.1.dev1+ga687d1f</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -22,7 +22,6 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -32,10 +31,12 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Isotropy subgroup" href="isotropy_subgroup.html" />
+    <link rel="next" title="Band connectivity" href="band_connectivity.html" />
     <link rel="prev" title="Symmetry condition for group velocity" href="group_velocity.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -75,7 +76,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga71aeee</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga687d1f</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -94,37 +95,56 @@
    Introduction
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="phonon.html">
-   Lattice vibration
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="examples.html">
+   Examples
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/band_connectivity.html">
+     Sewing band structure by subduced representation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/visualize.html">
+     Visualize modulated structures with nglview
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="group_velocity.html">
-   Symmetry condition for group velocity
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="formulation.html">
+   Formulation
   </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Supercell construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="isotropy_subgroup.html">
-   Isotropy subgroup
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="band_connectivity.html">
-   Band connectivity
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="phonon.html">
+     Lattice vibration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="isotropy_subgroup.html">
+     Isotropy subgroup
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="api.html">
    API reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -142,6 +162,33 @@
    <li class="toctree-l2">
     <a class="reference internal" href="api_isotropy.html">
      Isotropy subgroup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="notes.html">
+   Implementation notes
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="group_velocity.html">
+     Symmetry condition for group velocity
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Supercell construction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="band_connectivity.html">
+     Band connectivity
     </a>
    </li>
   </ul>
@@ -344,23 +391,15 @@ title="Print to PDF"
 <p>Let <span class="math notranslate nohighlight">\(L(\mathcal{G})\)</span> be a lattice of space group <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[    L(\mathcal{G}) = \left\{ \mathbf{t} \mid (\mathbf{I}, \mathbf{t}) \in \mathcal{T}(\mathcal{G}) \right\}.\]</div>
-<div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 1 </span></p>
-<section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\mathcal{P} := \mathcal{P}(\mathcal{G})\)</span> be a point group of space group <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>.
 Lattice <span class="math notranslate nohighlight">\(L (\subset L(\mathcal{G}))\)</span> is called <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>-invariant if <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> acts faithfully on <span class="math notranslate nohighlight">\(L\)</span> with the following action, <span class="math notranslate nohighlight">\(\mathcal{P} \times L \ni (\mathbf{R}, \mathbf{t}) \mapsto \mathbf{Rt} \in L\)</span>.</p>
-</section>
-</div><div class="proof theorem admonition" id="theorem-1">
-<p class="admonition-title"><span class="caption-number">Theorem 1 </span></p>
-<section class="theorem-content" id="proof-content">
 <p>Theorem 5.2 in Ref. <span id="id1">[<a class="reference internal" href="#id11" title="B. Eick, F. Gähler, and W. Nickel. Computing Maximal Subgroups and Wyckoff Positions of Space Groups. Acta Crystallographica Section A, 53(4):467–474, Jul 1997. URL: https://doi.org/10.1107/S0108767397003462, doi:10.1107/S0108767397003462.">EGahlerN97</a>]</span></p>
 <p>Let <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> be a maximal k-subgroup of space group <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>:</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{M})\)</span> is a maximal <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>-invariant subgroup of <span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{G})\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{G}) / \mathcal{T}(\mathcal{M})\)</span> is an elementary abelian <span class="math notranslate nohighlight">\(p\)</span>-group for a prime <span class="math notranslate nohighlight">\(p\)</span>. That is, <span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{G}) / \mathcal{T}(\mathcal{M}) \simeq (\mathbb{Z} / p \mathbb{Z})^{r}\)</span> for a non-negative integer <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
 </ol>
-</section>
-</div><p>The above theorem can be proved as follows.
+<p>The above theorem can be proved as follows.
 When <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> is a maximal k-subgroup, <span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{G}) / \mathcal{T}(\mathcal{M})\)</span> has no proper subgroup that is invariant under conjugate action of <span class="math notranslate nohighlight">\(\mathcal{G}/\mathcal{T}(\mathcal{M})\)</span>.
 Thus, <span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{G}) / \mathcal{T}(\mathcal{M})\)</span> has no charactristic subgroup <a class="footnote-reference brackets" href="#charactristic" id="id2">1</a>.
 In general, finitely generated abelian group without charastristic subgroups is an elementary abelian <span class="math notranslate nohighlight">\(p\)</span>-group for a prime <span class="math notranslate nohighlight">\(p\)</span> <a class="footnote-reference brackets" href="#aut" id="id3">2</a>.</p>
@@ -423,10 +462,10 @@ The condition that <span class="math notranslate nohighlight">\(\mathcal{T}(\mat
             <p class="prev-next-title">Symmetry condition for group velocity</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="isotropy_subgroup.html" title="next page">
+    <a class='right-next' id="next-link" href="band_connectivity.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Isotropy subgroup</p>
+        <p class="prev-next-title">Band connectivity</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -437,9 +476,9 @@ The condition that <span class="math notranslate nohighlight">\(\mathcal{T}(\mat
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Kohei Shinohara, Atsushi Togo<br/>
+    By Kohei Shinohara<br/>
   
-      &copy; Copyright 2022, Kohei Shinohara, Atsushi Togo.<br/>
+      &copy; Copyright 2022, Kohei Shinohara.<br/>
 </p>
         </footer>
     </div>

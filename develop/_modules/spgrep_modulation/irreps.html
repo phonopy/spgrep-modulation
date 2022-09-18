@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>spgrep_modulation.irreps &#8212; spgrep-modulation 0.1.dev1+ga71aeee</title>
+    <title>spgrep_modulation.irreps &#8212; spgrep-modulation 0.1.dev1+ga687d1f</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -21,7 +21,6 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -31,6 +30,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -71,7 +71,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga71aeee</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga687d1f</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
@@ -90,37 +90,56 @@
    Introduction
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../phonon.html">
-   Lattice vibration
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../examples.html">
+   Examples
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../examples/band_connectivity.html">
+     Sewing band structure by subduced representation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../examples/visualize.html">
+     Visualize modulated structures with nglview
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../group_velocity.html">
-   Symmetry condition for group velocity
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../formulation.html">
+   Formulation
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../supercell.html">
-   Supercell construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../isotropy_subgroup.html">
-   Isotropy subgroup
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../band_connectivity.html">
-   Band connectivity
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../phonon.html">
+     Lattice vibration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../isotropy_subgroup.html">
+     Isotropy subgroup
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../api.html">
    API reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -138,6 +157,33 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../../api_isotropy.html">
      Isotropy subgroup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../notes.html">
+   Implementation notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../group_velocity.html">
+     Symmetry condition for group velocity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../supercell.html">
+     Supercell construction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../band_connectivity.html">
+     Band connectivity
     </a>
    </li>
   </ul>
@@ -231,7 +277,8 @@ title="Fullscreen mode"
               <div>
                 
   <h1>Source code for spgrep_modulation.irreps</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span class="sd">&quot;&quot;&quot;Irreps for phonon.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
 
@@ -253,12 +300,16 @@ title="Fullscreen mode"
     <span class="n">rtol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">,</span>
     <span class="n">atol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span>  <span class="c1"># Too tight tolerance gives wrong basis vectors...</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">NDArrayComplex</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArrayComplex</span><span class="p">],</span> <span class="n">NDArrayInt</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Decompose representation matrices by eigenmodes into irreps.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    eigenmode_representation: array, (order, num_atoms, 3, num_atoms, 3)</span>
-<span class="sd">    primitive: Primitive</span>
-<span class="sd">    primitive_symmetry: Symmetry</span>
+<span class="sd">        Representation matrices formed by phonon eigenmodes</span>
+<span class="sd">    primitive: phonopy.structure.cells.Primitive</span>
+<span class="sd">        phonopy&#39;s primitive object</span>
+<span class="sd">    primitive_symmetry: phonopy.structure.symmetry.Symmetry</span>
+<span class="sd">        phonopy&#39;s Symmetry object for primitive cell</span>
 <span class="sd">    primitive_qpoint: array, (3, )</span>
 <span class="sd">        q vector in ``primitive``&#39;s dual basis vectors</span>
 
@@ -269,6 +320,7 @@ title="Fullscreen mode"
 <span class="sd">        Note: phase chosen to be consistent with definition of phonopy&#39;s dynamical matrix</span>
 <span class="sd">    irreps: list of irrep (little_order, dim, dim)</span>
 <span class="sd">    mapping_little_group:</span>
+<span class="sd">        list of indices for little group.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rotations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">&quot;rotations&quot;</span><span class="p">]</span>
     <span class="n">translations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">&quot;translations&quot;</span><span class="p">]</span>
@@ -321,21 +373,24 @@ title="Fullscreen mode"
     <span class="n">primitive_symmetry</span><span class="p">:</span> <span class="n">Symmetry</span><span class="p">,</span>
     <span class="n">primitive_qpoint</span><span class="p">:</span> <span class="n">NDArrayFloat</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayComplex</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Compute representation matrix for eigenmodes.</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute representation matrix for eigenmodes.</span>
 
 <span class="sd">    .. math::</span>
-<span class="sd">       \\Gamma_{\\kappa&#39;\\mu&#39;; \\kappa\\mu}^{\\mathbf{q}}(g) := \\exp \\left( -i \\mathbf{R}_{g} \\mathbf{q} \\cdot \\mathbf{h}_{g}(\\kappa) \\right) [\\mathbf{R}_{g}]_{\\mu&#39;\\mu} \\delta_{ g\\kappa, \\kappa&#39; }</span>
+<span class="sd">       \Gamma_{\kappa&#39;\mu&#39;; \kappa\mu}^{\mathbf{q}}(g) := \exp \left( -i \mathbf{R}_{g} \mathbf{q} \cdot \mathbf{h}_{g}(\kappa) \right) [\mathbf{R}_{g}]_{\mu&#39;\mu} \delta_{ g\kappa, \kappa&#39; }</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    primitive: Primitive</span>
-<span class="sd">    primitive_symmetry: Symmetry</span>
+<span class="sd">    primitive: phonopy.structure.cells.Primitive</span>
+<span class="sd">        phonopy&#39;s primitive object</span>
+<span class="sd">    primitive_symmetry: phonopy.structure.symmetry.Symmetry</span>
+<span class="sd">        phonopy&#39;s Symmetry object for primitive cell</span>
 <span class="sd">    primitive_qpoint: array, (3, )</span>
 <span class="sd">        q vector in ``primitive``&#39;s dual basis vectors</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    rep: array, (order, num_atoms, 3, num_atoms, 3)</span>
+<span class="sd">        Representation matrices</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rotations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">&quot;rotations&quot;</span><span class="p">]</span>
     <span class="n">translations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">&quot;translations&quot;</span><span class="p">]</span>
@@ -380,9 +435,9 @@ title="Fullscreen mode"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Kohei Shinohara, Atsushi Togo<br/>
+    By Kohei Shinohara<br/>
   
-      &copy; Copyright 2022, Kohei Shinohara, Atsushi Togo.<br/>
+      &copy; Copyright 2022, Kohei Shinohara.<br/>
 </p>
         </footer>
     </div>

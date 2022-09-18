@@ -7,18 +7,14 @@ Let {math}`L(\mathcal{G})` be a lattice of space group {math}`\mathcal{G}`,
     L(\mathcal{G}) = \left\{ \mathbf{t} \mid (\mathbf{I}, \mathbf{t}) \in \mathcal{T}(\mathcal{G}) \right\}.
 ```
 
-```{prf:definition}
 Let {math}`\mathcal{P} := \mathcal{P}(\mathcal{G})` be a point group of space group {math}`\mathcal{G}`.
 Lattice {math}`L (\subset L(\mathcal{G}))` is called {math}`\mathcal{P}`-invariant if {math}`\mathcal{P}` acts faithfully on {math}`L` with the following action, {math}`\mathcal{P} \times L \ni (\mathbf{R}, \mathbf{t}) \mapsto \mathbf{Rt} \in L`.
-```
 
-```{prf:theorem}
 Theorem 5.2 in Ref. {cite}`Eick:js0047`
 
 Let {math}`\mathcal{M}` be a maximal k-subgroup of space group {math}`\mathcal{G}`:
 1. {math}`\mathcal{T}(\mathcal{M})` is a maximal {math}`\mathcal{G}`-invariant subgroup of {math}`\mathcal{T}(\mathcal{G})`.
 2. {math}`\mathcal{T}(\mathcal{G}) / \mathcal{T}(\mathcal{M})` is an elementary abelian {math}`p`-group for a prime {math}`p`. That is, {math}`\mathcal{T}(\mathcal{G}) / \mathcal{T}(\mathcal{M}) \simeq (\mathbb{Z} / p \mathbb{Z})^{r}` for a non-negative integer {math}`r`.
-```
 
 The above theorem can be proved as follows.
 When {math}`\mathcal{M}` is a maximal k-subgroup, {math}`\mathcal{T}(\mathcal{G}) / \mathcal{T}(\mathcal{M})` has no proper subgroup that is invariant under conjugate action of {math}`\mathcal{G}/\mathcal{T}(\mathcal{M})`.

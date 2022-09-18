@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Lattice vibration &#8212; spgrep-modulation 0.1.dev1+ga71aeee</title>
+    <title>Lattice vibration &#8212; spgrep-modulation 0.1.dev1+ga687d1f</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -22,7 +22,6 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -32,11 +31,13 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Symmetry condition for group velocity" href="group_velocity.html" />
-    <link rel="prev" title="spgrep-modulation" href="index.html" />
+    <link rel="next" title="Isotropy subgroup" href="isotropy_subgroup.html" />
+    <link rel="prev" title="Formulation" href="formulation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -75,7 +76,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga71aeee</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga687d1f</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -94,37 +95,56 @@
    Introduction
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Lattice vibration
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="examples.html">
+   Examples
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/band_connectivity.html">
+     Sewing band structure by subduced representation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/visualize.html">
+     Visualize modulated structures with nglview
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="group_velocity.html">
-   Symmetry condition for group velocity
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="formulation.html">
+   Formulation
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="supercell.html">
-   Supercell construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="isotropy_subgroup.html">
-   Isotropy subgroup
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="band_connectivity.html">
-   Band connectivity
-  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Lattice vibration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="isotropy_subgroup.html">
+     Isotropy subgroup
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="api.html">
    API reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -142,6 +162,33 @@
    <li class="toctree-l2">
     <a class="reference internal" href="api_isotropy.html">
      Isotropy subgroup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="notes.html">
+   Implementation notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="group_velocity.html">
+     Symmetry condition for group velocity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="supercell.html">
+     Supercell construction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="band_connectivity.html">
+     Band connectivity
     </a>
    </li>
   </ul>
@@ -385,14 +432,13 @@ title="Print to PDF"
                 
   <section id="lattice-vibration">
 <h1>Lattice vibration<a class="headerlink" href="#lattice-vibration" title="Permalink to this headline">#</a></h1>
-<p>Refs. <span id="id1">[<a class="reference internal" href="#id10" title="Joseph L BIRMAN. A quick trip through group theory and lattice dynamics. Dynamical Properties of Solids: Crystalline solids, fundamentals, 1:83, 1974.">BIR74</a>, <a class="reference internal" href="#id9" title="A. A. MARADUDIN and S. H. VOSKO. Symmetry properties of the normal vibrations of a crystal. Rev. Mod. Phys., 40:1–37, Jan 1968. URL: https://link.aps.org/doi/10.1103/RevModPhys.40.1, doi:10.1103/RevModPhys.40.1.">MV68</a>]</span></p>
 <section id="harmonic-phonon">
 <h2>Harmonic phonon<a class="headerlink" href="#harmonic-phonon" title="Permalink to this headline">#</a></h2>
 <p>Hamiltonian and commutation relations:</p>
 <div class="math notranslate nohighlight">
 \[  H = \sum_{ l \kappa \mu } \frac{ p_{\mu}(l\kappa)^{2} }{ 2 M_{\kappa} }
     + \frac{1}{2} \sum_{ l \kappa \mu } \sum_{ l' \kappa' \mu' } \Phi_{ \mu \mu' }(l\kappa, l'\kappa') u_{\mu}(l\kappa) u_{\mu'}(l'\kappa')\]</div>
-<p>Dynamical matrix <a class="footnote-reference brackets" href="#dynamical-matrix" id="id2">1</a></p>
+<p>Dynamical matrix <a class="footnote-reference brackets" href="#dynamical-matrix" id="id1">1</a></p>
 <div class="math notranslate nohighlight">
 \[  D_{\mu \mu'}(\kappa\kappa'; \mathbf{q})
     = \frac{1}{ \sqrt{ M_{\kappa} M_{\kappa'} } } \sum_{l'} \Phi_{ \mu \mu' }(0\kappa, l'\kappa') e^{i \mathbf{q} \cdot ( \mathbf{r}(l'\kappa') - \mathbf{r}(0\kappa) )}\]</div>
@@ -457,7 +503,7 @@ title="Print to PDF"
 Then,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}    g \mathbf{r}(\mathbf{l}, \kappa) &amp;= \mathbf{R}_{g} \mathbf{r}(l) + \mathbf{r}(0, g\kappa) + \mathbf{h}_{g}(\kappa) \\\end{split}\]</div>
-<p>We define left group action for displacement at <span class="math notranslate nohighlight">\(\mathbf{r}(l\kappa)\)</span> as <a class="footnote-reference brackets" href="#displacement-action" id="id3">2</a></p>
+<p>We define left group action for displacement at <span class="math notranslate nohighlight">\(\mathbf{r}(l\kappa)\)</span> as <a class="footnote-reference brackets" href="#displacement-action" id="id2">2</a></p>
 <div class="math notranslate nohighlight">
 \[  g u_{\mu}(\mathbf{r}(l\kappa))
     := \sum_{\nu} [\mathbf{R}_{g}]_{\mu\nu} u_{\nu}(g \mathbf{r}(l\kappa)).\]</div>
@@ -488,7 +534,7 @@ Then,</p>
       \mathbf{q} =: 2\pi \mathbf{A}^{-\top} \mathbf{q}_{f},
       \mathbf{v} =: \mathbf{A} \mathbf{v}_{f}
     )\end{split}\]</div>
-<p>Equation <a class="reference internal" href="#equation-dynamical-matrix-rep">(1)</a> is essentially the same with Eq. (2.37) of <span id="id4">[<a class="reference internal" href="#id9" title="A. A. MARADUDIN and S. H. VOSKO. Symmetry properties of the normal vibrations of a crystal. Rev. Mod. Phys., 40:1–37, Jan 1968. URL: https://link.aps.org/doi/10.1103/RevModPhys.40.1, doi:10.1103/RevModPhys.40.1.">MV68</a>]</span>.</p>
+<p>Equation <a class="reference internal" href="#equation-dynamical-matrix-rep">(1)</a> is essentially the same with Eq. (2.37) of <span id="id3">[<a class="reference internal" href="#id8" title="A. A. MARADUDIN and S. H. VOSKO. Symmetry properties of the normal vibrations of a crystal. Rev. Mod. Phys., 40:1–37, Jan 1968. URL: https://link.aps.org/doi/10.1103/RevModPhys.40.1, doi:10.1103/RevModPhys.40.1.">MV68</a>]</span>.</p>
 <p>We write matrix representation <span class="math notranslate nohighlight">\([\mathbf{\Gamma}^{\mathbf{q}}(g)]_{ \kappa'\mu'; \kappa\mu } := \Gamma_{\kappa'\mu'; \kappa\mu}^{\mathbf{q}}(g)\)</span>.
 Then,</p>
 <div class="math notranslate nohighlight">
@@ -510,7 +556,7 @@ Then,</p>
     &amp;:= \frac{1}{\sqrt{M_{\kappa}M_{\kappa'}}} \sum_{l'} \Phi_{\mu\mu'}(0\kappa; l'\kappa') e^{ i \mathbf{q} \cdot \mathbf{r}(l') } \\
   \sum_{ l l' } \Phi_{ \mu \mu' }(l\kappa, l'\kappa') u_{\mu}(l\kappa) u_{\mu'}(l'\kappa')
     &amp;= \sum_{\mathbf{q}} \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) u_{\mu}(\kappa; \mathbf{q}) u_{\mu'}(\kappa'; -\mathbf{q}) \\\end{split}\]</div>
-<p>The condition that potential energy is invariant under symmetry operations is rewritten as <a class="footnote-reference brackets" href="#fourier-force-constant" id="id5">3</a></p>
+<p>The condition that potential energy is invariant under symmetry operations is rewritten as <a class="footnote-reference brackets" href="#fourier-force-constant" id="id4">3</a></p>
 <div class="math notranslate nohighlight">
 \[  \mathbf{\Phi}(\mathbf{R}_{g} \mathbf{q})
     = \mathbf{\Gamma}^{\mathbf{q}}(g) \mathbf{\Phi}(\mathbf{q}) \mathbf{\Gamma}^{\mathbf{q}}(g)^{\dagger}.\]</div>
@@ -578,13 +624,13 @@ We call orthonormal basis vectors <span class="math notranslate nohighlight">\(f
 <p>where <span class="math notranslate nohighlight">\(s\)</span> labels real eigenvalues <span class="math notranslate nohighlight">\(\omega_{\alpha s}^{2}\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span> labels degenerated eigenvectors.
 Here, <strong>we assume each equivalent irrep <span class="math notranslate nohighlight">\(\Gamma^{\mathbf{q}\alpha \sigma}\)</span> gives a different eigenvalue</strong>.
 Also, we choice eigenvectors <span class="math notranslate nohighlight">\(\mathbf{c}(\mathbf{q} \alpha s\lambda) := \{ c(\mathbf{q}\alpha s\lambda)_{\sigma\nu} \}_{\sigma\nu}\)</span> are mutually orthogonal even within degenerated eigenvalues.</p>
-<p>When irrep <span class="math notranslate nohighlight">\(\alpha\)</span> appears more than once (<span class="math notranslate nohighlight">\(m_{\alpha} &gt; 1\)</span>), irrep formed by eigenvectors is no longer same as <span class="math notranslate nohighlight">\(\Gamma^{\mathbf{q}\alpha}\)</span> <span id="id6">[<a class="reference internal" href="#id9" title="A. A. MARADUDIN and S. H. VOSKO. Symmetry properties of the normal vibrations of a crystal. Rev. Mod. Phys., 40:1–37, Jan 1968. URL: https://link.aps.org/doi/10.1103/RevModPhys.40.1, doi:10.1103/RevModPhys.40.1.">MV68</a>]</span>:</p>
+<p>When irrep <span class="math notranslate nohighlight">\(\alpha\)</span> appears more than once (<span class="math notranslate nohighlight">\(m_{\alpha} &gt; 1\)</span>), irrep formed by eigenvectors is no longer same as <span class="math notranslate nohighlight">\(\Gamma^{\mathbf{q}\alpha}\)</span> <span id="id5">[<a class="reference internal" href="#id8" title="A. A. MARADUDIN and S. H. VOSKO. Symmetry properties of the normal vibrations of a crystal. Rev. Mod. Phys., 40:1–37, Jan 1968. URL: https://link.aps.org/doi/10.1103/RevModPhys.40.1, doi:10.1103/RevModPhys.40.1.">MV68</a>]</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}  \tilde{\mathbf{f}}(\mathbf{q}\alpha s \lambda)
     &amp;:= \sum_{\sigma\nu} \mathbf{f}(\mathbf{q}\alpha \sigma \nu) c(\mathbf{q}\alpha s\lambda)_{\sigma \nu} \\
   h \tilde{\mathbf{f}}(\mathbf{q}\alpha s \lambda)
     &amp;= \sum_{\lambda'} \tilde{\mathbf{f}}(\mathbf{q}\alpha s\lambda') \tilde{\Gamma}^{\mathbf{q}\alpha s}(h)_{\lambda'\lambda},\end{split}\]</div>
-<p>where <a class="footnote-reference brackets" href="#eigmode-rep" id="id7">4</a></p>
+<p>where <a class="footnote-reference brackets" href="#eigmode-rep" id="id6">4</a></p>
 <div class="math notranslate nohighlight">
 \[  \tilde{\Gamma}^{\mathbf{q}\alpha s}(h)_{\lambda'\lambda}
     := \sum_{\sigma\nu\nu'} c(\mathbf{q}\alpha s\lambda')_{\sigma\nu'}^{\ast} \Gamma^{\mathbf{q}\alpha}(h)_{\nu'\nu} c(\mathbf{q}\alpha s\lambda)_{\sigma\nu}
@@ -624,26 +670,23 @@ Thus, sampling of <span class="math notranslate nohighlight">\(\mathbf{Q}^{ (\ma
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
-<div class="docutils container" id="id8">
+<div class="docutils container" id="id7">
 <dl class="citation">
-<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id1">BIR74</a></span></dt>
-<dd><p>Joseph L BIRMAN. A quick trip through group theory and lattice dynamics. <em>Dynamical Properties of Solids: Crystalline solids, fundamentals</em>, 1:83, 1974.</p>
-</dd>
-<dt class="label" id="id9"><span class="brackets">MV68</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id4">2</a>,<a href="#id6">3</a>)</span></dt>
+<dt class="label" id="id8"><span class="brackets">MV68</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id5">2</a>)</span></dt>
 <dd><p>A. A. MARADUDIN and S. H. VOSKO. Symmetry properties of the normal vibrations of a crystal. <em>Rev. Mod. Phys.</em>, 40:1–37, Jan 1968. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/RevModPhys.40.1">https://link.aps.org/doi/10.1103/RevModPhys.40.1</a>, <a class="reference external" href="https://doi.org/10.1103/RevModPhys.40.1">doi:10.1103/RevModPhys.40.1</a>.</p>
 </dd>
 </dl>
 </div>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
-<dt class="label" id="dynamical-matrix"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dt class="label" id="dynamical-matrix"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>This is the same phase convention with <a class="reference external" href="https://phonopy.github.io/phonopy/formulation.html#dynamical-matrix">phonopy</a>.
 There is the other formulation for defining dynamical matrix as</p>
 <div class="math notranslate nohighlight">
 \[\Psi_{\mu \mu'}(\kappa\kappa'; \mathbf{q})
   = \frac{1}{ \sqrt{ M_{\kappa} M_{\kappa'} } } \sum_{l'} \Phi_{ \mu \mu' }(0\kappa, l'\kappa') e^{i \mathbf{q} \cdot \mathbf{r}(l')}.\]</div>
 </dd>
-<dt class="label" id="displacement-action"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dt class="label" id="displacement-action"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
 <dd><p>This definition actually satisfies the condition of left group action</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}    \left[ g \left( g' \mathbf{u}(\mathbf{r}(l\kappa)) \right) \right]_{\mu}
@@ -652,14 +695,14 @@ There is the other formulation for defining dynamical matrix as</p>
     &amp;= \sum_{ \nu } R_{gg', \mu\nu} u_{\nu}( gg'\mathbf{r}(l\kappa) ) \\
     &amp;= \left[ (gg') \mathbf{u}(\mathbf{r}(l\kappa)) \right]_{\mu}.\end{split}\]</div>
 </dd>
-<dt class="label" id="fourier-force-constant"><span class="brackets"><a class="fn-backref" href="#id5">3</a></span></dt>
+<dt class="label" id="fourier-force-constant"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
 <dd><p>The derivation is as follows:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\sum_{ l\kappa\mu l'\kappa'\mu' } \Phi_{ \mu \mu' }(l\kappa, l'\kappa') u_{\mu}(l\kappa) u_{\mu'}(l'\kappa')
 &amp;= \sum_{ l\kappa\mu l'\kappa'\mu' } \Phi_{ \mu \mu' }(l\kappa, l'\kappa') gu_{\mu}(l\kappa) gu_{\mu'}(l'\kappa') \\
 &amp;= \dots = \sum_{  } \left[ \mathbf{\Gamma}^{\mathbf{q}}(g) \mathbf{\Phi}(\mathbf{q}) \mathbf{\Gamma}^{\mathbf{q}}(g)^{\dagger} \right]_{\kappa\mu, \kappa'\mu'} u_{\mu}(\kappa; \mathbf{R}_{g}\mathbf{q}) u_{\mu'}(\kappa'; -\mathbf{R}_{g}\mathbf{q}).\end{split}\]</div>
 </dd>
-<dt class="label" id="eigmode-rep"><span class="brackets"><a class="fn-backref" href="#id7">4</a></span></dt>
+<dt class="label" id="eigmode-rep"><span class="brackets"><a class="fn-backref" href="#id6">4</a></span></dt>
 <dd><p>The derivation is cumbersome (to me).
 Let <span class="math notranslate nohighlight">\(\mathbf{C}^{\mathbf{q}\alpha s} = ( \mathbf{c}(\mathbf{q}\alpha s 1), \dots, \mathbf{c}(\mathbf{q}\alpha s d_{\alpha}) )\)</span>.</p>
 <div class="math notranslate nohighlight">
@@ -693,17 +736,17 @@ Let <span class="math notranslate nohighlight">\(\mathbf{C}^{\mathbf{q}\alpha s}
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="formulation.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">spgrep-modulation</p>
+            <p class="prev-next-title">Formulation</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="group_velocity.html" title="next page">
+    <a class='right-next' id="next-link" href="isotropy_subgroup.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Symmetry condition for group velocity</p>
+        <p class="prev-next-title">Isotropy subgroup</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -714,9 +757,9 @@ Let <span class="math notranslate nohighlight">\(\mathbf{C}^{\mathbf{q}\alpha s}
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Kohei Shinohara, Atsushi Togo<br/>
+    By Kohei Shinohara<br/>
   
-      &copy; Copyright 2022, Kohei Shinohara, Atsushi Togo.<br/>
+      &copy; Copyright 2022, Kohei Shinohara.<br/>
 </p>
         </footer>
     </div>

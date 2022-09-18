@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; spgrep-modulation 0.1.dev1+ga71aeee</title>
+    <title>Index &#8212; spgrep-modulation 0.1.dev1+ga687d1f</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -21,7 +21,6 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -31,6 +30,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -71,7 +71,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga71aeee</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga687d1f</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -90,37 +90,56 @@
    Introduction
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="phonon.html">
-   Lattice vibration
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="examples.html">
+   Examples
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/band_connectivity.html">
+     Sewing band structure by subduced representation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="examples/visualize.html">
+     Visualize modulated structures with nglview
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="group_velocity.html">
-   Symmetry condition for group velocity
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="formulation.html">
+   Formulation
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="supercell.html">
-   Supercell construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="isotropy_subgroup.html">
-   Isotropy subgroup
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="band_connectivity.html">
-   Band connectivity
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="phonon.html">
+     Lattice vibration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="isotropy_subgroup.html">
+     Isotropy subgroup
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="api.html">
    API reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -138,6 +157,33 @@
    <li class="toctree-l2">
     <a class="reference internal" href="api_isotropy.html">
      Isotropy subgroup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="notes.html">
+   Implementation notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="group_velocity.html">
+     Symmetry condition for group velocity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="supercell.html">
+     Supercell construction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="band_connectivity.html">
+     Band connectivity
     </a>
    </li>
   </ul>
@@ -234,16 +280,69 @@ title="Fullscreen mode"
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
- <a href="#G"><strong>G</strong></a>
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#G"><strong>G</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
+ | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#W"><strong>W</strong></a>
  
 </div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.apply_modulation_to_supercell">apply_modulation_to_supercell() (spgrep_modulation.modulation.Modulation method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.degeneracy_tolerance">degeneracy_tolerance (spgrep_modulation.modulation.Modulation property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.dynamical_matrix">dynamical_matrix (spgrep_modulation.modulation.Modulation property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.eigenspaces">eigenspaces (spgrep_modulation.modulation.Modulation property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.eigvals_to_frequencies">eigvals_to_frequencies() (spgrep_modulation.modulation.Modulation method)</a>
+</li>
+      <li><a href="api_isotropy.html#spgrep_modulation.isotropy.enumerate_point_subgroup">enumerate_point_subgroup() (in module spgrep_modulation.isotropy)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_irreps.html#spgrep_modulation.irreps.get_eigenmode_representation">get_eigenmode_representation() (in module spgrep_modulation.irreps)</a>
+</li>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.get_high_symmetry_modulated_supercells">get_high_symmetry_modulated_supercells() (spgrep_modulation.modulation.Modulation method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.get_modulated_supercell_and_modulation">get_modulated_supercell_and_modulation() (spgrep_modulation.modulation.Modulation method)</a>
+</li>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.get_modulated_supercells">get_modulated_supercells() (spgrep_modulation.modulation.Modulation method)</a>
+</li>
+      <li><a href="api_isotropy.html#spgrep_modulation.isotropy.get_translational_subgroup">get_translational_subgroup() (in module spgrep_modulation.isotropy)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -256,10 +355,42 @@ title="Fullscreen mode"
   </ul></td>
 </tr></table>
 
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_isotropy.html#spgrep_modulation.isotropy.IsotropyEnumerator.little_rotations">little_rotations (spgrep_modulation.isotropy.IsotropyEnumerator property)</a>
+
+      <ul>
+        <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.little_rotations">(spgrep_modulation.modulation.Modulation property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_isotropy.html#spgrep_modulation.isotropy.IsotropyEnumerator.little_translations">little_translations (spgrep_modulation.isotropy.IsotropyEnumerator property)</a>
+
+      <ul>
+        <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.little_translations">(spgrep_modulation.modulation.Modulation property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_isotropy.html#spgrep_modulation.isotropy.IsotropyEnumerator.maximal_isotropy_subgroups">maximal_isotropy_subgroups (spgrep_modulation.isotropy.IsotropyEnumerator property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation">Modulation (class in spgrep_modulation.modulation)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_isotropy.html#spgrep_modulation.isotropy.IsotropyEnumerator.order_parameter_directions">order_parameter_directions (spgrep_modulation.isotropy.IsotropyEnumerator property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -267,7 +398,55 @@ title="Fullscreen mode"
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.primitive">primitive (spgrep_modulation.modulation.Modulation property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.primitive_symmetry">primitive_symmetry (spgrep_modulation.modulation.Modulation property)</a>
+</li>
       <li><a href="api_irreps.html#spgrep_modulation.irreps.project_eigenmode_representation">project_eigenmode_representation() (in module spgrep_modulation.irreps)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_isotropy.html#spgrep_modulation.isotropy.IsotropyEnumerator.qpoint">qpoint (spgrep_modulation.isotropy.IsotropyEnumerator property)</a>
+
+      <ul>
+        <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.qpoint">(spgrep_modulation.modulation.Modulation property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_isotropy.html#spgrep_modulation.isotropy.search_compliment">search_compliment() (in module spgrep_modulation.isotropy)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_isotropy.html#spgrep_modulation.isotropy.IsotropyEnumerator.small_rep">small_rep (spgrep_modulation.isotropy.IsotropyEnumerator property)</a>
+</li>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.supercell">supercell (spgrep_modulation.modulation.Modulation property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.unit_conversion_factor">unit_conversion_factor (spgrep_modulation.modulation.Modulation property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_modulation.html#spgrep_modulation.modulation.Modulation.with_supercell_and_symmetry_search">with_supercell_and_symmetry_search() (spgrep_modulation.modulation.Modulation class method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -288,9 +467,9 @@ title="Fullscreen mode"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Kohei Shinohara, Atsushi Togo<br/>
+    By Kohei Shinohara<br/>
   
-      &copy; Copyright 2022, Kohei Shinohara, Atsushi Togo.<br/>
+      &copy; Copyright 2022, Kohei Shinohara.<br/>
 </p>
         </footer>
     </div>
