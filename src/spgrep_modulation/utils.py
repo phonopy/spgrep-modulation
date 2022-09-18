@@ -106,6 +106,14 @@ def sample_on_unit_sphere(rng: np.random.Generator, n: int, size: int = 1) -> ND
     return points
 
 
+def gcd_on_list(elements: list[int]) -> int:
+    """Return greatest common devisor for list of integers."""
+    g = elements[0]
+    for e in elements[1:]:
+        g = gcd(g, e)
+    return g
+
+
 def lcm_on_list(elements: list[int]) -> int:
     """Return least common square for list of integers."""
     lcm = elements[0]

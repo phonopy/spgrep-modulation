@@ -15,6 +15,7 @@ from spgrep_modulation.utils import (
     NDArrayComplex,
     NDArrayFloat,
     NDArrayInt,
+    gcd_on_list,
     lcm_on_list,
 )
 
@@ -177,23 +178,15 @@ def get_translational_subgroup(qpoint: NDArrayFloat, max_denominator: int = 100)
     # Basis vectors of a sublattice formed by translation that preserve order parameter
     elements = [Fraction(qi).limit_denominator(max_denominator).denominator for qi in qpoint]
     lcm = lcm_on_list(elements)
-    A = np.around(qpoint * lcm).astype(int)[None, :]
-
-    all_basis = []
-    # Three vectors [lcm, 0, 0], [0, lcm, 0], [0, 0, lcm] are trivially general solutions.
-    all_basis.append(lcm * np.eye(3, dtype=int))
+    numerators = np.around(qpoint * lcm).astype(int)
+    g = gcd_on_list(numerators)
+    A = np.array([num // g for num in numerators])[None, :]  # Now, GCD(A) = 1
 
     # Solve `A @ t = lcm`
     # Since GCD of A is 1, this integer linear system always has a special solution.
     basis_and_special = solve_integer_linear_system(A, np.array([lcm]))
-    if basis_and_special:
-        all_basis.append(basis_and_special[0])
-        all_basis.append(basis_and_special[1])
-
     # transformation @ mathbb{Z}^{3} forms sublattice
-    transformation, _ = row_style_hermite_normal_form(np.vstack(all_basis))
-    # Take only three basis vectors
-    transformation = transformation[:3]
+    transformation, _ = row_style_hermite_normal_form(np.vstack(basis_and_special))
 
     if np.linalg.det(transformation) < 0:
         transformation[0, :] *= -1
