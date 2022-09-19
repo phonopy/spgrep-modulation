@@ -3,12 +3,16 @@
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/phonopy/spgrep-modulation/main.svg)](https://results.pre-commit.ci/latest/github/phonopy/spgrep-modulation/main)
 [![codecov](https://codecov.io/gh/lan496/spgrep-modulation/branch/main/graph/badge.svg?token=K80FQQJ383)](https://codecov.io/gh/lan496/spgrep-modulation)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/spgrep-modulation)](https://img.shields.io/pypi/pyversions/spgrep-modulation)
+[![PyPI version](https://badge.fury.io/py/spgrep-modulation.svg)](https://badge.fury.io/py/spgrep-modulation)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/spgrep-modulation)](https://img.shields.io/pypi/dm/spgrep-modulation)
 
 Collective atomic modulation analysis with irreducible space-group representation
 
 - Github: <https://github.com/phonopy/spgrep-modulation>
 - Document: <https://phonopy.github.io/spgrep-modulation>
 - Document (develop): <https://phonopy.github.io/spgrep-modulation/develop/>
+- PyPI: <https://pypi.org/project/spgrep-modulation>
 
 ## Features
 
