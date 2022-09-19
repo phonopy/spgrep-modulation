@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Symmetry condition for group velocity &#8212; spgrep-modulation 0.1.dev1+ga687d1f</title>
+    <title>Examples &#8212; spgrep-modulation 0.2.2</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -32,12 +32,10 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Supercell construction" href="supercell.html" />
-    <link rel="prev" title="Implementation notes" href="notes.html" />
+    <link rel="next" title="Sewing band structure by subduced representation" href="examples/band_connectivity.html" />
+    <link rel="prev" title="spgrep-modulation" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -76,7 +74,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga687d1f</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.2</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -95,11 +93,11 @@
    Introduction
   </a>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="examples.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
    Examples
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
@@ -166,18 +164,18 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="notes.html">
    Implementation notes
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="group_velocity.html">
      Symmetry condition for group velocity
     </a>
    </li>
@@ -266,7 +264,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/group_velocity.md.txt"
+        <a href="_sources/examples.md.txt"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -303,60 +301,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Symmetry condition for group velocity</h1>
+                <h1>Examples</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -364,52 +325,14 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="symmetry-condition-for-group-velocity">
-<h1>Symmetry condition for group velocity<a class="headerlink" href="#symmetry-condition-for-group-velocity" title="Permalink to this headline">#</a></h1>
-<p>Ref. <span id="id1">[<a class="reference internal" href="#id4" title="Joseph L BIRMAN. A quick trip through group theory and lattice dynamics. Dynamical Properties of Solids: Crystalline solids, fundamentals, 1:83, 1974.">BIR74</a>]</span></p>
-<p>Group action on modified eigenvectors</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}    g f_{\mu}(\kappa; \mathbf{q}\omega_{\mathbf{q}}\nu)
-        &amp;= \sum_{\mu'\nu'} f_{\mu'}(\kappa'; \mathbf{q}\omega_{\mathbf{q}}\nu') \Gamma^{ (\mathbf{q} \omega_{\mathbf{q}}) }(g)_{\kappa'\mu'\nu', \kappa\mu\nu}
-        \quad (g \in \mathcal{G}^{\mathbf{q}}) \\
-    \omega_{\mathbf{q}}^{2}
-        &amp;= \sum_{ \kappa \mu }\sum_{ \kappa' \mu' } f_{\mu}(\kappa; \mathbf{q}\omega_{\mathbf{q}}\nu)^{\ast} \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) f_{\mu'}(\kappa'; \mathbf{q}\omega_{\mathbf{q}}\nu)\end{split}\]</div>
-<p>Group velocity</p>
-<div class="math notranslate nohighlight">
-\[    \nabla_{q_{\alpha}} \omega_{\mathbf{q}}^{2}
-        = \sum_{ \kappa \mu }\sum_{ \kappa' \mu' }
-            f_{\mu}(\kappa; \mathbf{q}\omega_{\mathbf{q}}\nu)^{\ast}
-            \left( \nabla_{q_{\alpha}} \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) \right)
-            f_{\mu'}(\kappa'; \mathbf{q}\omega_{\mathbf{q}}\nu)\]</div>
-<p>If the group velocity has scalar component, that is</p>
-<div class="math notranslate nohighlight" id="equation-indicator">
-<span class="eqno">(1)<a class="headerlink" href="#equation-indicator" title="Permalink to this equation">#</a></span>\[\left\langle
-    \Gamma^{ (\mathbf{q} \omega_{\mathbf{q}}) \ast} \otimes \Gamma^{(\mathbf{\nabla})} \otimes \Gamma^{ (\mathbf{q} \omega_{\mathbf{q}}) }
-    \mid
-    \Gamma^{ (\mathrm{id}) }
-\right\rangle
-\geq 1,\]</div>
-<p>it should be zero at <span class="math notranslate nohighlight">\(\mathbf{q}\)</span>.</p>
-<p>The gradient operator <span class="math notranslate nohighlight">\(\mathbf{\nabla}_{\mathbf{q}}\)</span> behaves as covariant vector:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}    \mathbf{q}' &amp;= \mathbf{R}^{\top}\mathbf{q} \quad (\mathbf{R} \in O(3)) \\
-    \nabla_{q'_{\alpha}}
-        &amp;= \sum_{\beta} \frac{ \partial q_{\beta} }{ \partial q'_{\alpha} } \nabla_{q_{\beta}}
-        = \sum_{\beta} R_{\alpha\beta} \nabla_{q_{\beta}}\end{split}\]</div>
-<p>The left hand side of Eq. <a class="reference internal" href="#equation-indicator">(1)</a>:</p>
-<div class="math notranslate nohighlight">
-\[    \sum_{g \in \mathcal{G}^{\mathbf{q}} / \mathcal{T} }
-        | \chi^{(\mathbf{q} \omega_{\mathbf{q}})}(g) |^{2} \chi^{(\mathbf{\nabla})}(\mathbf{R}_{g})\]</div>
-<section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
-<div class="docutils container" id="id2">
-<dl class="citation">
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">BIR74</a></span></dt>
-<dd><p>Joseph L BIRMAN. A quick trip through group theory and lattice dynamics. <em>Dynamical Properties of Solids: Crystalline solids, fundamentals</em>, 1:83, 1974.</p>
-</dd>
-</dl>
+  <section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/band_connectivity.html">  Sewing band structure by subduced representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/visualize.html">  Visualize modulated structures with nglview</a></li>
+</ul>
 </div>
-</section>
 </section>
 
 
@@ -420,17 +343,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="notes.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Implementation notes</p>
+            <p class="prev-next-title">spgrep-modulation</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="supercell.html" title="next page">
+    <a class='right-next' id="next-link" href="examples/band_connectivity.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Supercell construction</p>
+        <p class="prev-next-title">Sewing band structure by subduced representation</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

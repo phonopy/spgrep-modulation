@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Supercell construction &#8212; spgrep-modulation 0.1.dev1+ga687d1f</title>
+    <title>Symmetry condition for group velocity &#8212; spgrep-modulation 0.2.2</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -36,8 +36,8 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Band connectivity" href="band_connectivity.html" />
-    <link rel="prev" title="Symmetry condition for group velocity" href="group_velocity.html" />
+    <link rel="next" title="Supercell construction" href="supercell.html" />
+    <link rel="prev" title="Implementation notes" href="notes.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -76,7 +76,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga687d1f</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.2</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -176,13 +176,13 @@
    </i>
   </label>
   <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="group_velocity.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Symmetry condition for group velocity
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="supercell.html">
      Supercell construction
     </a>
    </li>
@@ -266,7 +266,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/supercell.md.txt"
+        <a href="_sources/group_velocity.md.txt"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -326,16 +326,6 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#klassengleiche-subgroup">
-   Klassengleiche subgroup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#minimal-supercell-problem">
-   Minimal supercell problem
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
    References
   </a>
@@ -349,7 +339,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Supercell construction</h1>
+                <h1>Symmetry condition for group velocity</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -359,16 +349,6 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#klassengleiche-subgroup">
-   Klassengleiche subgroup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#minimal-supercell-problem">
-   Minimal supercell problem
-  </a>
- </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
    References
@@ -384,66 +364,51 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="supercell-construction">
-<h1>Supercell construction<a class="headerlink" href="#supercell-construction" title="Permalink to this headline">#</a></h1>
-<section id="klassengleiche-subgroup">
-<h2>Klassengleiche subgroup<a class="headerlink" href="#klassengleiche-subgroup" title="Permalink to this headline">#</a></h2>
-<p>Let <span class="math notranslate nohighlight">\(L(\mathcal{G})\)</span> be a lattice of space group <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>,</p>
+  <section id="symmetry-condition-for-group-velocity">
+<h1>Symmetry condition for group velocity<a class="headerlink" href="#symmetry-condition-for-group-velocity" title="Permalink to this headline">#</a></h1>
+<p>Ref. <span id="id1">[<a class="reference internal" href="#id4" title="Joseph L BIRMAN. A quick trip through group theory and lattice dynamics. Dynamical Properties of Solids: Crystalline solids, fundamentals, 1:83, 1974.">BIR74</a>]</span></p>
+<p>Group action on modified eigenvectors</p>
 <div class="math notranslate nohighlight">
-\[    L(\mathcal{G}) = \left\{ \mathbf{t} \mid (\mathbf{I}, \mathbf{t}) \in \mathcal{T}(\mathcal{G}) \right\}.\]</div>
-<p>Let <span class="math notranslate nohighlight">\(\mathcal{P} := \mathcal{P}(\mathcal{G})\)</span> be a point group of space group <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>.
-Lattice <span class="math notranslate nohighlight">\(L (\subset L(\mathcal{G}))\)</span> is called <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>-invariant if <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> acts faithfully on <span class="math notranslate nohighlight">\(L\)</span> with the following action, <span class="math notranslate nohighlight">\(\mathcal{P} \times L \ni (\mathbf{R}, \mathbf{t}) \mapsto \mathbf{Rt} \in L\)</span>.</p>
-<p>Theorem 5.2 in Ref. <span id="id1">[<a class="reference internal" href="#id11" title="B. Eick, F. Gähler, and W. Nickel. Computing Maximal Subgroups and Wyckoff Positions of Space Groups. Acta Crystallographica Section A, 53(4):467–474, Jul 1997. URL: https://doi.org/10.1107/S0108767397003462, doi:10.1107/S0108767397003462.">EGahlerN97</a>]</span></p>
-<p>Let <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> be a maximal k-subgroup of space group <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>:</p>
-<ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{M})\)</span> is a maximal <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>-invariant subgroup of <span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{G})\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{G}) / \mathcal{T}(\mathcal{M})\)</span> is an elementary abelian <span class="math notranslate nohighlight">\(p\)</span>-group for a prime <span class="math notranslate nohighlight">\(p\)</span>. That is, <span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{G}) / \mathcal{T}(\mathcal{M}) \simeq (\mathbb{Z} / p \mathbb{Z})^{r}\)</span> for a non-negative integer <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
-</ol>
-<p>The above theorem can be proved as follows.
-When <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> is a maximal k-subgroup, <span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{G}) / \mathcal{T}(\mathcal{M})\)</span> has no proper subgroup that is invariant under conjugate action of <span class="math notranslate nohighlight">\(\mathcal{G}/\mathcal{T}(\mathcal{M})\)</span>.
-Thus, <span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{G}) / \mathcal{T}(\mathcal{M})\)</span> has no charactristic subgroup <a class="footnote-reference brackets" href="#charactristic" id="id2">1</a>.
-In general, finitely generated abelian group without charastristic subgroups is an elementary abelian <span class="math notranslate nohighlight">\(p\)</span>-group for a prime <span class="math notranslate nohighlight">\(p\)</span> <a class="footnote-reference brackets" href="#aut" id="id3">2</a>.</p>
-<p>We need to find a translation subgroup <span class="math notranslate nohighlight">\(\mathcal{S} &lt; \mathcal{T}(\mathcal{G})\)</span> with</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{G}) / \mathcal{S} \simeq \mathbb{Z}_{p^{r}}\)</span> for some prime number <span class="math notranslate nohighlight">\(p\)</span> and integer <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(L(\mathcal{S}) = \mathbf{M}\mathbb{Z}^{n}\)</span>. For all <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathcal{P}(\mathcal{G})\)</span>, <span class="math notranslate nohighlight">\(\mathbf{RM}\mathbb{Z}^{n} = \mathbf{M}\mathbb{Z}^{n}\)</span>, that is, <span class="math notranslate nohighlight">\(\mathbf{M}^{-1}\mathbf{R}\mathbf{M}\)</span> is a unimodular matrix.</p></li>
-</ul>
-<p>Let the Smith normal form of <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> as <span class="math notranslate nohighlight">\(\mathbf{M} = \mathrm{diag}(n_{1}, n_{2}, n_{3})\)</span>.
-The condition that <span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{G}) / \mathcal{S}\)</span> has no proper subgroups requires <span class="math notranslate nohighlight">\(n_{1} = n_{2} = 1\)</span> and <span class="math notranslate nohighlight">\(n_{3}\)</span> is a power of a prime number, which follow from the Chinese remainder theorem.</p>
-</section>
-<section id="minimal-supercell-problem">
-<h2>Minimal supercell problem<a class="headerlink" href="#minimal-supercell-problem" title="Permalink to this headline">#</a></h2>
-<p>Reference <span id="id4">[<a class="reference internal" href="#id9" title="Lyuwen Fu, Mordechai Kornbluth, Zhengqian Cheng, and Chris A. Marianetti. Group theoretical approach to computing phonons and their interactions. Phys. Rev. B, 100:014303, Jul 2019. URL: https://link.aps.org/doi/10.1103/PhysRevB.100.014303, doi:10.1103/PhysRevB.100.014303.">FKCM19</a>]</span> proposed a method to find supercell matrix <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> that accommodates all given wave vectors <span class="math notranslate nohighlight">\(\mathbf{Q}\)</span>:</p>
+\[\begin{split}    g f_{\mu}(\kappa; \mathbf{q}\omega_{\mathbf{q}}\nu)
+        &amp;= \sum_{\mu'\nu'} f_{\mu'}(\kappa'; \mathbf{q}\omega_{\mathbf{q}}\nu') \Gamma^{ (\mathbf{q} \omega_{\mathbf{q}}) }(g)_{\kappa'\mu'\nu', \kappa\mu\nu}
+        \quad (g \in \mathcal{G}^{\mathbf{q}}) \\
+    \omega_{\mathbf{q}}^{2}
+        &amp;= \sum_{ \kappa \mu }\sum_{ \kappa' \mu' } f_{\mu}(\kappa; \mathbf{q}\omega_{\mathbf{q}}\nu)^{\ast} \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) f_{\mu'}(\kappa'; \mathbf{q}\omega_{\mathbf{q}}\nu)\end{split}\]</div>
+<p>Group velocity</p>
 <div class="math notranslate nohighlight">
-\[    \min_{ \mathbf{H} \in \mathbb{Z}^{d \times d} } \det \mathbf{H}
-    \quad \mathrm{s.t.} \quad
-    \mathbf{H}^{\top} \mathbf{q} \equiv \mathbf{0}_{d} \, (\mathrm{mod}\, \mathbb{Z}^{d}) \quad (\forall \mathbf{q} \in \mathbf{Q})\]</div>
-<p>Ref. <span id="id5">[<a class="reference internal" href="#id10" title="Jonathan H. Lloyd-Williams and Bartomeu Monserrat. Lattice dynamics and electron-phonon coupling calculations using nondiagonal supercells. Phys. Rev. B, 92:184301, Nov 2015. URL: https://link.aps.org/doi/10.1103/PhysRevB.92.184301, doi:10.1103/PhysRevB.92.184301.">LWM15</a>]</span> gave a specific formula for a commensurate supercell for given single wave vector.</p>
-</section>
+\[    \nabla_{q_{\alpha}} \omega_{\mathbf{q}}^{2}
+        = \sum_{ \kappa \mu }\sum_{ \kappa' \mu' }
+            f_{\mu}(\kappa; \mathbf{q}\omega_{\mathbf{q}}\nu)^{\ast}
+            \left( \nabla_{q_{\alpha}} \Phi_{\mu\mu'}(\kappa\kappa'; \mathbf{q}) \right)
+            f_{\mu'}(\kappa'; \mathbf{q}\omega_{\mathbf{q}}\nu)\]</div>
+<p>If the group velocity has scalar component, that is</p>
+<div class="math notranslate nohighlight" id="equation-indicator">
+<span class="eqno">(1)<a class="headerlink" href="#equation-indicator" title="Permalink to this equation">#</a></span>\[\left\langle
+    \Gamma^{ (\mathbf{q} \omega_{\mathbf{q}}) \ast} \otimes \Gamma^{(\mathbf{\nabla})} \otimes \Gamma^{ (\mathbf{q} \omega_{\mathbf{q}}) }
+    \mid
+    \Gamma^{ (\mathrm{id}) }
+\right\rangle
+\geq 1,\]</div>
+<p>it should be zero at <span class="math notranslate nohighlight">\(\mathbf{q}\)</span>.</p>
+<p>The gradient operator <span class="math notranslate nohighlight">\(\mathbf{\nabla}_{\mathbf{q}}\)</span> behaves as covariant vector:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}    \mathbf{q}' &amp;= \mathbf{R}^{\top}\mathbf{q} \quad (\mathbf{R} \in O(3)) \\
+    \nabla_{q'_{\alpha}}
+        &amp;= \sum_{\beta} \frac{ \partial q_{\beta} }{ \partial q'_{\alpha} } \nabla_{q_{\beta}}
+        = \sum_{\beta} R_{\alpha\beta} \nabla_{q_{\beta}}\end{split}\]</div>
+<p>The left hand side of Eq. <a class="reference internal" href="#equation-indicator">(1)</a>:</p>
+<div class="math notranslate nohighlight">
+\[    \sum_{g \in \mathcal{G}^{\mathbf{q}} / \mathcal{T} }
+        | \chi^{(\mathbf{q} \omega_{\mathbf{q}})}(g) |^{2} \chi^{(\mathbf{\nabla})}(\mathbf{R}_{g})\]</div>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
-<div class="docutils container" id="id6">
+<div class="docutils container" id="id2">
 <dl class="citation">
-<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id1">EGahlerN97</a></span></dt>
-<dd><p>B. Eick, F. Gähler, and W. Nickel. Computing Maximal Subgroups and Wyckoff Positions of Space Groups. <em>Acta Crystallographica Section A</em>, 53(4):467–474, Jul 1997. URL: <a class="reference external" href="https://doi.org/10.1107/S0108767397003462">https://doi.org/10.1107/S0108767397003462</a>, <a class="reference external" href="https://doi.org/10.1107/S0108767397003462">doi:10.1107/S0108767397003462</a>.</p>
-</dd>
-<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id4">FKCM19</a></span></dt>
-<dd><p>Lyuwen Fu, Mordechai Kornbluth, Zhengqian Cheng, and Chris A. Marianetti. Group theoretical approach to computing phonons and their interactions. <em>Phys. Rev. B</em>, 100:014303, Jul 2019. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.100.014303">https://link.aps.org/doi/10.1103/PhysRevB.100.014303</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.100.014303">doi:10.1103/PhysRevB.100.014303</a>.</p>
-</dd>
-<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id5">LWM15</a></span></dt>
-<dd><p>Jonathan H. Lloyd-Williams and Bartomeu Monserrat. Lattice dynamics and electron-phonon coupling calculations using nondiagonal supercells. <em>Phys. Rev. B</em>, 92:184301, Nov 2015. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.92.184301">https://link.aps.org/doi/10.1103/PhysRevB.92.184301</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.92.184301">doi:10.1103/PhysRevB.92.184301</a>.</p>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">BIR74</a></span></dt>
+<dd><p>Joseph L BIRMAN. A quick trip through group theory and lattice dynamics. <em>Dynamical Properties of Solids: Crystalline solids, fundamentals</em>, 1:83, 1974.</p>
 </dd>
 </dl>
 </div>
-<hr class="footnotes docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="charactristic"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
-<dd><p>A charastiristic subgroup of group <span class="math notranslate nohighlight">\(G\)</span> is a subgroup that is invariant under all authmorphism of <span class="math notranslate nohighlight">\(G\)</span>.</p>
-</dd>
-<dt class="label" id="aut"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
-<dd><p>If <span class="math notranslate nohighlight">\(\mathrm{Aut}(G)\)</span> acts on <span class="math notranslate nohighlight">\(G\)</span> transitively, all elements other than identity have the same prime order.</p>
-</dd>
-</dl>
 </section>
 </section>
 
@@ -455,17 +420,17 @@ The condition that <span class="math notranslate nohighlight">\(\mathcal{T}(\mat
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="group_velocity.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="notes.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Symmetry condition for group velocity</p>
+            <p class="prev-next-title">Implementation notes</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="band_connectivity.html" title="next page">
+    <a class='right-next' id="next-link" href="supercell.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Band connectivity</p>
+        <p class="prev-next-title">Supercell construction</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

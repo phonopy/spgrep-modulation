@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>API Reference &#8212; spgrep-modulation 0.1.dev1+ga687d1f</title>
+    <title>Band connectivity &#8212; spgrep-modulation 0.2.2</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -32,10 +32,11 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Modulation" href="api_modulation.html" />
-    <link rel="prev" title="Isotropy subgroup" href="isotropy_subgroup.html" />
+    <link rel="prev" title="Supercell construction" href="supercell.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -74,7 +75,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ga687d1f</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.2</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -137,11 +138,11 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="api.html">
    API reference
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
@@ -164,16 +165,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="notes.html">
    Implementation notes
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="group_velocity.html">
      Symmetry condition for group velocity
@@ -184,8 +185,8 @@
      Supercell construction
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="band_connectivity.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Band connectivity
     </a>
    </li>
@@ -264,7 +265,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/api.md.txt"
+        <a href="_sources/band_connectivity.md.txt"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -301,23 +302,70 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problem-statement">
+   Problem statement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>API Reference</h1>
+                <h1>Band connectivity</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problem-statement">
+   Problem statement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -325,15 +373,46 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="api_modulation.html">    Modulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_irreps.html">    Irreps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_isotropy.html">    Isotropy subgroup</a></li>
-</ul>
+  <section id="band-connectivity">
+<h1>Band connectivity<a class="headerlink" href="#band-connectivity" title="Permalink to this headline">#</a></h1>
+<p>Refs. <span id="id1">[<a class="reference internal" href="#id16" title="Barry Bradlyn, L. Elcoro, M. G. Vergniory, Jennifer Cano, Zhijun Wang, C. Felser, M. I. Aroyo, and B. Andrei Bernevig. Band connectivity for topological quantum chemistry: band structures as a graph theory problem. Phys. Rev. B, 97:035138, Jan 2018. URL: https://link.aps.org/doi/10.1103/PhysRevB.97.035138, doi:10.1103/PhysRevB.97.035138.">BEV+18</a>, <a class="reference internal" href="#id17" title="M. G. Vergniory, L. Elcoro, Zhijun Wang, Jennifer Cano, C. Felser, M. I. Aroyo, B. Andrei Bernevig, and Barry Bradlyn. Graph theory data for topological quantum chemistry. Phys. Rev. E, 96:023310, Aug 2017. URL: https://link.aps.org/doi/10.1103/PhysRevE.96.023310, doi:10.1103/PhysRevE.96.023310.">VEW+17</a>]</span></p>
+<p>We consider to “sew” a band structure between neighboring <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-vectors.</p>
+<section id="problem-statement">
+<h2>Problem statement<a class="headerlink" href="#problem-statement" title="Permalink to this headline">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{G}\)</span> be a space group.
+We call the largest continuous submanifold of reciprocal space that the little co-group of every point in the manifold is isomorphic to each other as <strong><span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-manifold</strong>.
+We say that two <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-manifolds are <strong>connected</strong> if the two <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-manifolds have a common <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-vector with some specific free parameters <a class="footnote-reference brackets" href="#diff" id="id2">1</a>.
+We call a manifold of <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-vector is of <strong>maximal symmetry</strong> if its little co-group is not a proper subgroup of <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-vectors in the connected manifolds.
+We refer to a <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-vector in <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-manifold of maximal symmetry as <strong>maximal <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-vector</strong>.</p>
+<p>For a <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-vector, we consider a pair of irrep formed by eigenvectors and corresponding eigenvalue as a node of a graph:</p>
+<div class="math notranslate nohighlight">
+\[    \mathcal{N}_{\mathbf{k}} = \{ (\Gamma^{\mathbf{k}\alpha}, \lambda) \mid \mbox{some eigenvectors with eigenvalue $\lambda$ form irrep $\Gamma^{\mathbf{k}\alpha}$} \}.\]</div>
+<p>Given two sets of nodes <span class="math notranslate nohighlight">\(\mathcal{N}_{\mathbf{k}_{1}}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{N}_{\mathbf{k}_{2}}\)</span> from two connected <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-manifolds, these nodes are linked via <span class="math notranslate nohighlight">\(\mathcal{N}_{\mathbf{k}_{p}}\)</span> where a <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-manifold containing <span class="math notranslate nohighlight">\(\mathbf{k}_{p}\)</span> is connected to both <span class="math notranslate nohighlight">\(\mathbf{k}_{1}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{k}_{2}\)</span>.</p>
+<p>Two nodes <span class="math notranslate nohighlight">\((\Gamma^{\mathbf{k}_{i}\alpha}, \lambda) \in \mathcal{N}_{\mathbf{k}_{i}}\)</span> and <span class="math notranslate nohighlight">\((\Gamma^{\mathbf{k}_{p}\beta}, \lambda') \in \mathcal{N}_{\mathbf{k}_{p}}\)</span> are connected if the subduced representation of <span class="math notranslate nohighlight">\(\Gamma^{\mathbf{k}_{i}\alpha}\)</span> contains <span class="math notranslate nohighlight">\(\Gamma^{\mathbf{k}_{p}\beta}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[    \Gamma^{\mathbf{k}_{i}\alpha} \downarrow \mathcal{G}^{\mathbf{k}_{p}}
+        \simeq \bigoplus_{\beta} m_{\beta} \Gamma^{\mathbf{k}_{\mathbf{p}}\beta}
+        \quad (i=1,2).\]</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<div class="docutils container" id="id3">
+<dl class="citation">
+<dt class="label" id="id16"><span class="brackets">BEV+18</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id18">2</a>)</span></dt>
+<dd><p>Barry Bradlyn, L. Elcoro, M. G. Vergniory, Jennifer Cano, Zhijun Wang, C. Felser, M. I. Aroyo, and B. Andrei Bernevig. Band connectivity for topological quantum chemistry: band structures as a graph theory problem. <em>Phys. Rev. B</em>, 97:035138, Jan 2018. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.97.035138">https://link.aps.org/doi/10.1103/PhysRevB.97.035138</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.97.035138">doi:10.1103/PhysRevB.97.035138</a>.</p>
+</dd>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id1">VEW+17</a></span></dt>
+<dd><p>M. G. Vergniory, L. Elcoro, Zhijun Wang, Jennifer Cano, C. Felser, M. I. Aroyo, B. Andrei Bernevig, and Barry Bradlyn. Graph theory data for topological quantum chemistry. <em>Phys. Rev. E</em>, 96:023310, Aug 2017. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevE.96.023310">https://link.aps.org/doi/10.1103/PhysRevE.96.023310</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevE.96.023310">doi:10.1103/PhysRevE.96.023310</a>.</p>
+</dd>
+</dl>
 </div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="diff"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>For our aim, this definition does not consider reciprocal lattice translations unlike Ref. <span id="id18">[<a class="reference internal" href="#id16" title="Barry Bradlyn, L. Elcoro, M. G. Vergniory, Jennifer Cano, Zhijun Wang, C. Felser, M. I. Aroyo, and B. Andrei Bernevig. Band connectivity for topological quantum chemistry: band structures as a graph theory problem. Phys. Rev. B, 97:035138, Jan 2018. URL: https://link.aps.org/doi/10.1103/PhysRevB.97.035138, doi:10.1103/PhysRevB.97.035138.">BEV+18</a>]</span>.</p>
+</dd>
+</dl>
+</section>
 </section>
 
 
@@ -344,19 +423,12 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="isotropy_subgroup.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="supercell.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Isotropy subgroup</p>
+            <p class="prev-next-title">Supercell construction</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="api_modulation.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Modulation</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
