@@ -1,5 +1,7 @@
 # spgrep-modulation
 [![testing](https://github.com/phonopy/spgrep-modulation/actions/workflows/testing.yml/badge.svg)](https://github.com/phonopy/spgrep-modulation/actions/workflows/testing.yml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/phonopy/spgrep-modulation/main.svg)](https://results.pre-commit.ci/latest/github/phonopy/spgrep-modulation/main)
+[![codecov](https://codecov.io/gh/lan496/spgrep-modulation/branch/main/graph/badge.svg?token=K80FQQJ383)](https://codecov.io/gh/lan496/spgrep-modulation)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 Collective atomic modulation analysis with irreducible space-group representation
