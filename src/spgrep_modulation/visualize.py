@@ -6,12 +6,11 @@ from itertools import product
 
 import numpy as np
 from nglview import NGLWidget, show_pymatgen
+from phonopy.structure.atoms import PhonopyAtoms
 from pymatgen.core import Structure
 from pymatgen.core.periodic_table import Element, Species
 from pymatgen.core.sites import PeriodicSite
 from pymatgen.io.phonopy import get_pmg_structure
-
-from phonopy.structure.atoms import PhonopyAtoms
 
 COLOR_SCHEMES = {
     "jmol": {
