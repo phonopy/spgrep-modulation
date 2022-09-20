@@ -2,6 +2,7 @@ from pathlib import Path
 
 import phonopy
 from phonopy.structure.symmetry import Symmetry
+
 from spgrep_modulation.modulation import Modulation
 
 # Load Phonopy object
