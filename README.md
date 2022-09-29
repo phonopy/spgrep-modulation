@@ -59,6 +59,10 @@ for cell in cells:
 ## Installation
 
 ```shell
+pip install spgrep-modulation
+```
+
+```shell
 conda create -n spgrep python=3.10 pip
 conda activate spgrep
 git clone git@github.com:lan496/spgrep-modulation.git

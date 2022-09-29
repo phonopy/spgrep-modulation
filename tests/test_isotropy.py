@@ -1,10 +1,10 @@
 import numpy as np
 import pytest
-from phonopy.structure.symmetry import Symmetry
 from spgrep.group import get_cayley_table
 from spgrep.pointgroup import pg_dataset
 from spgrep.utils import is_integer_array
 
+from phonopy.structure.symmetry import Symmetry
 from spgrep_modulation.isotropy import (
     IsotropyEnumerator,
     enumerate_point_subgroup,
@@ -18,6 +18,7 @@ from spgrep_modulation.modulation import Modulation
 @pytest.mark.parametrize(
     "qpoint",
     [
+        ([0, 0, 0]),
         ([0.5, 0, 0]),
         ([0.5, 0.5, 0]),
         ([0.5, 0.5, 0.5]),

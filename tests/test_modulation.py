@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
-from phonopy import Phonopy
-from phonopy.phonon.modulation import Modulation as PhonopyModulation
 from spgrep.representation import check_spacegroup_representation, is_unitary
 
+from phonopy import Phonopy
+from phonopy.phonon.modulation import Modulation as PhonopyModulation
 from spgrep_modulation.modulation import Modulation
 
 

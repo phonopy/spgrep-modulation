@@ -167,13 +167,17 @@ class IsotropyEnumerator:
         return np.array(directions).reshape(-1, self.small_rep.shape[1])
 
 
-def get_translational_subgroup(qpoint: NDArrayFloat, max_denominator: int = 100):
+def get_translational_subgroup(qpoint: list[float] | NDArrayFloat, max_denominator: int = 100):
     """Return transformation matrix of the following sublattice.
 
     Let ``t`` be a lattice point of the returned sublattice. Then, ``np.dot(t, qpoint)`` is integer.
     """
     if isinstance(qpoint, list):
         qpoint = np.array(qpoint)
+
+    if np.allclose(qpoint, 0):
+        # GAMMA point
+        return np.diag([1, 1, 1])
 
     # Basis vectors of a sublattice formed by translation that preserve order parameter
     elements = [Fraction(qi).limit_denominator(max_denominator).denominator for qi in qpoint]
