@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Implementation notes &#8212; spgrep-modulation 0.2.4</title>
+    <title>Change log &#8212; spgrep-modulation 0.2.4</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -34,8 +34,8 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Symmetry condition for group velocity" href="group_velocity.html" />
-    <link rel="prev" title="Change log" href="changelog.html" />
+    <link rel="next" title="Implementation notes" href="notes.html" />
+    <link rel="prev" title="Isotropy subgroup" href="api_isotropy.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -164,16 +164,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="changelog.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Change log
   </a>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="notes.html">
    Implementation notes
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
@@ -269,7 +269,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/notes.md.txt"
+        <a href="_sources/changelog.md.txt"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -306,23 +306,70 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-2-4">
+   v0.2.4
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-2-3">
+   v0.2.3
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Implementation notes</h1>
+                <h1>Change log</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-2-4">
+   v0.2.4
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-2-3">
+   v0.2.3
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -330,15 +377,23 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="implementation-notes">
-<h1>Implementation notes<a class="headerlink" href="#implementation-notes" title="Permalink to this headline">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="group_velocity.html">   Symmetry condition for group velocity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="supercell.html">   Supercell construction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="band_connectivity.html">   Band connectivity</a></li>
+  <section id="change-log">
+<h1>Change log<a class="headerlink" href="#change-log" title="Permalink to this headline">#</a></h1>
+<section id="v0-2-4">
+<h2>v0.2.4<a class="headerlink" href="#v0-2-4" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Fix <code class="xref py py-func docutils literal notranslate"><span class="pre">get_translational_subgroup()</span></code> for Gamma point</p></li>
 </ul>
-</div>
+</section>
+<section id="v0-2-3">
+<h2>v0.2.3<a class="headerlink" href="#v0-2-3" title="Permalink to this headline">#</a></h2>
+<p>Initial release to PyPI</p>
+<ul class="simple">
+<li><p>Calculate representation matrices and irreps formed by phonon eigenmodes</p></li>
+<li><p>Calculate isotropy subgroups of irreps of space groups on the fly</p></li>
+<li><p>Generate modulated structures in selected order-parameter directions of isotropy subgroups</p></li>
+</ul>
+</section>
 </section>
 
 
@@ -349,17 +404,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="changelog.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="api_isotropy.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Change log</p>
+            <p class="prev-next-title">Isotropy subgroup</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="group_velocity.html" title="next page">
+    <a class='right-next' id="next-link" href="notes.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Symmetry condition for group velocity</p>
+        <p class="prev-next-title">Implementation notes</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

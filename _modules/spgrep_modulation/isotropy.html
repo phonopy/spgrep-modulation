@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>spgrep_modulation.isotropy &#8212; spgrep-modulation 0.2.3</title>
+    <title>spgrep_modulation.isotropy &#8212; spgrep-modulation 0.2.4</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -71,7 +71,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.3</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.4</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
@@ -160,6 +160,11 @@
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../changelog.html">
+   Change log
+  </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../notes.html">
@@ -446,13 +451,17 @@ title="Fullscreen mode"
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">directions</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">small_rep</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
 
 
-<div class="viewcode-block" id="get_translational_subgroup"><a class="viewcode-back" href="../../api_isotropy.html#spgrep_modulation.isotropy.get_translational_subgroup">[docs]</a><span class="k">def</span> <span class="nf">get_translational_subgroup</span><span class="p">(</span><span class="n">qpoint</span><span class="p">:</span> <span class="n">NDArrayFloat</span><span class="p">,</span> <span class="n">max_denominator</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+<div class="viewcode-block" id="get_translational_subgroup"><a class="viewcode-back" href="../../api_isotropy.html#spgrep_modulation.isotropy.get_translational_subgroup">[docs]</a><span class="k">def</span> <span class="nf">get_translational_subgroup</span><span class="p">(</span><span class="n">qpoint</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="n">NDArrayFloat</span><span class="p">,</span> <span class="n">max_denominator</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return transformation matrix of the following sublattice.</span>
 
 <span class="sd">    Let ``t`` be a lattice point of the returned sublattice. Then, ``np.dot(t, qpoint)`` is integer.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qpoint</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="n">qpoint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">qpoint</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">qpoint</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="c1"># GAMMA point</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 
     <span class="c1"># Basis vectors of a sublattice formed by translation that preserve order parameter</span>
     <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">Fraction</span><span class="p">(</span><span class="n">qi</span><span class="p">)</span><span class="o">.</span><span class="n">limit_denominator</span><span class="p">(</span><span class="n">max_denominator</span><span class="p">)</span><span class="o">.</span><span class="n">denominator</span> <span class="k">for</span> <span class="n">qi</span> <span class="ow">in</span> <span class="n">qpoint</span><span class="p">]</span>

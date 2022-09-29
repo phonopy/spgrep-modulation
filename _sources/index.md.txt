@@ -7,6 +7,7 @@ hidden:
    Examples <examples>
    Formulation <formulation>
    API reference <api>
+   Change log <changelog>
    Implementation notes <notes>
 ```
 
