@@ -171,6 +171,11 @@ def get_translational_subgroup(qpoint: list[float] | NDArrayFloat, max_denominat
     """Return transformation matrix of the following sublattice.
 
     Let ``t`` be a lattice point of the returned sublattice. Then, ``np.dot(t, qpoint)`` is integer.
+
+    Returns
+    -------
+    transformation: array, (3, 3)
+        ``transformation @ qpoint`` is integer vector.
     """
     if isinstance(qpoint, list):
         qpoint = np.array(qpoint)
