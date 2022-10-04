@@ -2,6 +2,7 @@ from itertools import product
 
 import numpy as np
 import pytest
+from phonopy.structure.symmetry import Symmetry
 from spgrep.group import get_little_group
 from spgrep.representation import (
     check_spacegroup_representation,
@@ -9,7 +10,6 @@ from spgrep.representation import (
     is_unitary,
 )
 
-from phonopy.structure.symmetry import Symmetry
 from spgrep_modulation.irreps import (
     get_eigenmode_representation,
     project_eigenmode_representation,
