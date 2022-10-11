@@ -1,6 +1,7 @@
 """Utility functions."""
 from __future__ import annotations
 
+from fractions import Fraction
 from math import gcd
 
 import numpy as np
@@ -72,15 +73,19 @@ def qr_unique(a: NDArrayComplex) -> tuple[NDArrayComplex, NDArrayComplex]:
     return q, r
 
 
-def get_commensurate_diagonal_supercell(qpoint: NDArrayFloat, atol: float = 1e-8) -> NDArrayInt:
-    """Return minimum diagonal supercell in which ``qpoint`` is commensurate."""
+def get_commensurate_diagonal_supercell(qpoint: NDArrayFloat, max_size: int = 10) -> NDArrayInt:
+    """Return minimum diagonal supercell in which ``qpoint`` is commensurate.
+    
+    Parameters
+    ----------
+    qpoint: point in reciprocal space in reduced coordinates
+    max_size: largest number of cells in a given direction
+    """
     assert len(qpoint) == 3
     diag = [0 for _ in range(3)]
     for i, qi in enumerate(qpoint):
-        for n in [1, 2, 3]:
-            if np.isclose(np.remainder(n * qi, 1), 0, atol=atol):
-                diag[i] = n
-                break
+        n = Fraction(qi).limit_denominator(max_size).denominator
+        diag[i] = n
     return np.diag(diag)
 
 
