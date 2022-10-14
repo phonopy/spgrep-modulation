@@ -73,7 +73,9 @@ def qr_unique(a: NDArrayComplex) -> tuple[NDArrayComplex, NDArrayComplex]:
     return q, r
 
 
-def get_commensurate_diagonal_supercell(qpoint: NDArrayFloat, max_denominator: int = 10) -> NDArrayInt:
+def get_commensurate_diagonal_supercell(
+    qpoint: NDArrayFloat, max_denominator: int = 10
+) -> NDArrayInt:
     """Return minimum diagonal supercell in which ``qpoint`` is commensurate.
 
     Parameters
