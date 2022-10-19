@@ -73,7 +73,9 @@ def qr_unique(a: NDArrayComplex) -> tuple[NDArrayComplex, NDArrayComplex]:
     return q, r
 
 
-def get_commensurate_diagonal_supercell(qpoint: NDArrayFloat, max_denominator: int = 10, tol: float = 0.01) -> NDArrayInt:
+def get_commensurate_diagonal_supercell(
+    qpoint: NDArrayFloat, max_denominator: int = 10, tol: float = 0.01
+) -> NDArrayInt:
     """Return minimum diagonal supercell in which ``qpoint`` is commensurate.
 
     For best accuracy, pass qpoints as fractions, e.g. 1/3 instead of 0.333.
@@ -88,8 +90,11 @@ def get_commensurate_diagonal_supercell(qpoint: NDArrayFloat, max_denominator: i
     diag = [0 for _ in range(3)]
     for i, qi in enumerate(qpoint):
         n = Fraction(qi).limit_denominator(max_denominator)
-        if not np.isclose(np.abs(n.numerator/n.denominator), np.abs(qi), atol=tol):
-            print('Warning: qpoint %s with value %s does not fit with the provided tolerance' % (i, qi))
+        if not np.isclose(np.abs(n.numerator / n.denominator), np.abs(qi), atol=tol):
+            print(
+                "Warning: qpoint %s with value %s does not fit with the provided tolerance"
+                % (i, qi)
+            )
         diag[i] = n.denominator
     return np.diag(diag)
 
