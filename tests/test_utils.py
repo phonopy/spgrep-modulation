@@ -17,9 +17,7 @@ from spgrep_modulation.utils import (
     ],
 )
 def test_get_commensurate_diagonal_supercell(qpoint):
-    """
-    Test qpoints that should fit well into small supercells.
-    """
+    """Test qpoints that should fit well into small supercells."""
     supercell = get_commensurate_diagonal_supercell(qpoint)
     for i in supercell @ qpoint: # should be integers
         rounded = np.rint(i)
