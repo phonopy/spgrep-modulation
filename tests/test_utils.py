@@ -11,17 +11,19 @@ from spgrep_modulation.utils import (
     [
         [0, 0, 0],
         [1, 1, 1],
-        [0.33, 0.33, 0.33],
         [1/2, 1/2, 1/2],
         [-1, -1, -1],
         [0.25, 1/2, -0.25],
-        [0.59, 0.61, 0.63],
     ],
 )
 def test_get_commensurate_diagonal_supercell(qpoint):
+    """
+    Test qpoints that should fit well into small supercells.
+    """
     supercell = get_commensurate_diagonal_supercell(qpoint)
     for i in supercell @ qpoint: # should be integers
-        assert np.isclose(i % 1, 0) or np.isclose(i % 1, 1)    
+        rounded = np.rint(i)
+        assert np.isclose(rounded - i, 0)
 
 
 def test_qr_unique():
