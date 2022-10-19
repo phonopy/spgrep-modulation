@@ -1,10 +1,8 @@
 import numpy as np
 import pytest
 
-from spgrep_modulation.utils import (
-        get_commensurate_diagonal_supercell,
-        qr_unique,
-)
+from spgrep_modulation.utils import get_commensurate_diagonal_supercell, qr_unique
+
 
 @pytest.mark.parametrize(
     "qpoint",
