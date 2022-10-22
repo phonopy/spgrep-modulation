@@ -1,6 +1,7 @@
 """Utility functions."""
 from __future__ import annotations
 
+from fractions import Fraction
 from math import gcd
 
 import numpy as np
@@ -72,15 +73,29 @@ def qr_unique(a: NDArrayComplex) -> tuple[NDArrayComplex, NDArrayComplex]:
     return q, r
 
 
-def get_commensurate_diagonal_supercell(qpoint: NDArrayFloat, atol: float = 1e-8) -> NDArrayInt:
-    """Return minimum diagonal supercell in which ``qpoint`` is commensurate."""
+def get_commensurate_diagonal_supercell(
+    qpoint: NDArrayFloat, max_denominator: int = 10, tol: float = 0.01
+) -> NDArrayInt:
+    """Return minimum diagonal supercell in which ``qpoint`` is commensurate.
+
+    For best accuracy, pass qpoints as fractions, e.g. 1/3 instead of 0.333.
+
+    Parameters
+    ----------
+    qpoint: point in reciprocal space in reduced coordinates
+    max_denominator: largest number of cells in a given direction in real space
+    tol: maximum distance from provided qpoint to commensurate qpoint along each reciprocal lattice vector
+    """
     assert len(qpoint) == 3
     diag = [0 for _ in range(3)]
     for i, qi in enumerate(qpoint):
-        for n in [1, 2, 3]:
-            if np.isclose(np.remainder(n * qi, 1), 0, atol=atol):
-                diag[i] = n
-                break
+        n = Fraction(qi).limit_denominator(max_denominator)
+        if not np.isclose(np.abs(n.numerator / n.denominator), np.abs(qi), atol=tol):
+            print(
+                "Warning: qpoint %s with value %s does not fit with the provided tolerance"
+                % (i, qi)
+            )
+        diag[i] = n.denominator
     return np.diag(diag)
 
 
