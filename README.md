@@ -68,7 +68,7 @@ conda activate spgrep
 git clone git@github.com:lan496/spgrep-modulation.git
 cd spgrep-modulation
 pip install -e .
-# pip install -e ".[dev,docs]"
+# pip install -e ".[dev,docs,vis]"
 # pre-commit install
 ```
 

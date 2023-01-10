@@ -2,6 +2,91 @@
 requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2", "wheel"]
 build-backend = "setuptools.build_meta"
 
+###############################################################################
+# Project
+###############################################################################
+[project]
+name = "spgrep_modulation"
+dynamic = ["version", "readme"]
+description = "Collective atomic modulation analysis with irreducible space-group representation"
+authors = [
+    {name = "Kohei Shinohara", email = "kshinohara0508@gmail.com"},
+]
+requires-python = ">=3.8.0"
+license = {file = "LICENSE"}
+classifiers = [
+    # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+    "setuptools",
+    "setuptools_scm",
+    "wheel",
+    "typing_extensions",
+    "numpy>=1.20.1",
+    "spglib>=2.0.2",
+    "phonopy>=2.15.1",
+    "seekpath",
+    "spgrep>=0.3.2",  # https://github.com/spglib/spgrep
+    "hsnf>=0.3.15",  # https://github.com/lan496/hsnf
+]
+
+[project.urls]
+Sources = "https://github.com/lan496/spgrep-modulation"
+
+[project.optional-dependencies]
+vis = [
+    "ipykernel",
+    "notebook>=4.2",
+    # nglview does not work with ipywidgets>=8, https://github.com/nglviewer/nglview/issues/1032
+    "ipywidgets>=7.0, <8",
+    "nglview>=3.0.3",
+    "ase>=3.22.1",
+    "pymatgen>=2022.8.23",
+]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "pre-commit",
+    "black",
+    "mypy",
+    "flake8",
+    "pyupgrade",
+    "ipython",
+    "click",
+    "networkx",
+]
+docs = [
+    "sphinx",
+    "sphinx-autobuild",
+    "nbsphinx",
+    "sphinxcontrib-bibtex",
+    # "sphinx-proof",  # Seems to be incompatible with nbsphinx
+    "myst-parser",
+    "sphinx-book-theme",
+]
+
+###############################################################################
+# Setuptools
+###############################################################################
+[tool.setuptools.dynamic]
+readme = {file = "README.md"}
+
+[tool.setuptools]
+zip-safe = false
+
+###############################################################################
+# Other tools
+###############################################################################
+
 # Enable version inference
 [tool.setuptools_scm]
 
@@ -30,6 +115,6 @@ exclude = '''
 
 [tool.mypy]
 exclude = [
-  'docs',
+    'docs',
 ]
 warn_no_return = false
