@@ -7,8 +7,9 @@ build-backend = "setuptools.build_meta"
 ###############################################################################
 [project]
 name = "spgrep_modulation"
-dynamic = ["version", "readme"]
+dynamic = ["version"]
 description = "Collective atomic modulation analysis with irreducible space-group representation"
+readme = "README.md"
 authors = [
     {name = "Kohei Shinohara", email = "kshinohara0508@gmail.com"},
 ]
@@ -77,9 +78,6 @@ docs = [
 ###############################################################################
 # Setuptools
 ###############################################################################
-[tool.setuptools.dynamic]
-readme = {file = "README.md"}
-
 [tool.setuptools]
 zip-safe = false
 
