@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>spgrep-modulation &#8212; spgrep-modulation 0.1.dev1+ge1c0c8d</title>
+    <title>spgrep-modulation &#8212; spgrep-modulation 0.1.dev1+g7c4e6f2</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -73,7 +73,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ge1c0c8d</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+g7c4e6f2</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -480,15 +480,15 @@ title="Print to PDF"
 </section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">#</a></h2>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install spgrep-modulation
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>spgrep-modulation
 </pre></div>
 </div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda create -n spgrep <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10 pip
-conda activate spgrep
-git clone git@github.com:lan496/spgrep-modulation.git
-<span class="nb">cd</span> spgrep-modulation
-pip install -e .
-<span class="c1"># pip install -e &quot;.[dev,docs]&quot;</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>spgrep<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10<span class="w"> </span>pip
+conda<span class="w"> </span>activate<span class="w"> </span>spgrep
+git<span class="w"> </span>clone<span class="w"> </span>git@github.com:lan496/spgrep-modulation.git
+<span class="nb">cd</span><span class="w"> </span>spgrep-modulation
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+<span class="c1"># pip install -e &quot;.[dev,docs,vis]&quot;</span>
 <span class="c1"># pre-commit install</span>
 </pre></div>
 </div>
@@ -500,7 +500,7 @@ pip install -e .
 <section id="development">
 <h2>Development<a class="headerlink" href="#development" title="Permalink to this headline">#</a></h2>
 <p>Document</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sphinx-autobuild docs docs_build
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sphinx-autobuild<span class="w"> </span>docs<span class="w"> </span>docs_build
 <span class="c1"># open localhost:8000 in your browser</span>
 </pre></div>
 </div>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Sewing band structure by subduced representation &#8212; spgrep-modulation 0.1.dev1+ge1c0c8d</title>
+    <title>Sewing band structure by subduced representation &#8212; spgrep-modulation 0.1.dev1+g7c4e6f2</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -76,7 +76,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+ge1c0c8d</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.1.dev1+g7c4e6f2</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -521,10 +521,11 @@ div.nboutput.container div.prompt > div {
     }
 }
 
-/* disable scrollbars on prompts */
+/* disable scrollbars and line breaks on prompts */
 div.nbinput.container div.prompt pre,
 div.nboutput.container div.prompt pre {
     overflow: hidden;
+    white-space: pre;
 }
 
 /* input/output area */
@@ -726,7 +727,7 @@ phonopy==2.16.3
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">BandNode</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Each point in band structure, characterized by eigenvalue and character of irrep.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Each point in band structure, characterized by eigenvalue and character of irrep.&quot;&quot;&quot;</span>
 
     <span class="n">qpoint</span><span class="p">:</span> <span class="n">NDArrayFloat</span>
     <span class="n">character</span><span class="p">:</span> <span class="n">NDArrayComplex</span>
@@ -737,7 +738,7 @@ phonopy==2.16.3
 
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">QpointInfo</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Container for little co-group at qpoint.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for little co-group at qpoint.&quot;&quot;&quot;</span>
 
     <span class="n">qpoint</span><span class="p">:</span> <span class="n">NDArrayFloat</span>
     <span class="n">little_rotations</span><span class="p">:</span> <span class="n">NDArrayInt</span>
@@ -790,7 +791,7 @@ phonopy==2.16.3
     <span class="n">num_atoms</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Connect nodes in consecutive qpoints.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Connect nodes in consecutive qpoints.</span>
 
 <span class="sd">    Assume little group of `qpoint_info1` includes little group of `qpoint_info2`.</span>
 
@@ -868,7 +869,7 @@ phonopy==2.16.3
     <span class="n">stop</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
     <span class="n">num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Connect bands between qpoints `start` and `stop`.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Connect bands between qpoints `start` and `stop`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
