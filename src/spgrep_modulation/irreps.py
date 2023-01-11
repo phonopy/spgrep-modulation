@@ -33,6 +33,13 @@ def project_eigenmode_representation(
         phonopy's Symmetry object for primitive cell
     primitive_qpoint: array, (3, )
         q vector in ``primitive``'s dual basis vectors
+    method: str, 'Neto' or 'random'
+        'Neto': construct irreps from a fixed chain of subgroups of little co-group
+        'random': construct irreps by numerically diagonalizing a random matrix commute with regular representation
+    rtol: float
+        Relative tolerance for comparing float values
+    atol: float
+        Absolute tolerance to distinguish difference eigenvalues
 
     Returns
     -------

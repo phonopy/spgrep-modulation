@@ -1,7 +1,13 @@
+from __future__ import annotations
+
+from pathlib import Path
+
 import numpy as np
+import phonopy
 import pytest
 from phonopy import Phonopy
 from phonopy.phonon.modulation import Modulation as PhonopyModulation
+from phonopy.structure.symmetry import Symmetry
 from spgrep.representation import check_spacegroup_representation, is_unitary
 
 from spgrep_modulation.modulation import Modulation
@@ -52,6 +58,27 @@ def test_symmetry_adapted_eigenmodes(request, ph_name, qpoint, dimension):
             qpoint,
             irrep,
         )
+
+
+def test_with_lower_symmetry():
+    path = Path(__file__).resolve().parent / "phonopy_64_R_to_12.yaml"
+    ph = phonopy.load(path)
+
+    parent_symmetry = Symmetry(ph.unitcell)
+    assert parent_symmetry.dataset["number"] == 64  # Cmce
+
+    qpoint = [0.5, 0.5, 0.5]  # R
+    md = Modulation.with_supercell_and_symmetry_search(
+        dynamical_matrix=ph.dynamical_matrix,
+        supercell_matrix=[2, 2, 2],
+        qpoint=qpoint,
+        factor=ph.unit_conversion_factor,
+    )
+    modulated = md.get_high_symmetry_modulated_supercells(frequency_index=0)
+    assert len(modulated) == 1
+
+    symmetry = Symmetry(modulated[0])
+    assert symmetry.dataset["number"] == 12  # C2/m
 
 
 def test_regression(ph_bto: Phonopy):

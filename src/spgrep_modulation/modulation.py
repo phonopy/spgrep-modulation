@@ -111,7 +111,7 @@ class Modulation:
             self.primitive,
             self.primitive_symmetry,
             self.qpoint,
-            rtol=self.degeneracy_tolerance,
+            atol=self.degeneracy_tolerance,
         )
 
         # Modified dynamical matrix
@@ -388,7 +388,9 @@ class Modulation:
         qpoint: NDArrayFloat,
         nac_q_direction: NDArrayFloat | None = None,
         factor: float = VaspToTHz,
+        degeneracy_tolerance: float = 1e-4,
         symprec: float = 1e-5,
+        seed: int = 0,
     ) -> Modulation:
         """Return Modulation class with supercell matrix."""
         primitive = dynamical_matrix.primitive
@@ -407,7 +409,9 @@ class Modulation:
             dynamical_matrix=dynamical_matrix,
             qpoint=qpoint,
             nac_q_direction=nac_q_direction,
+            degeneracy_tolerance=degeneracy_tolerance,
             factor=factor,
+            seed=seed,
         )
 
     def eigvals_to_frequencies(self, eigvals: NDArrayComplex) -> NDArrayFloat:
