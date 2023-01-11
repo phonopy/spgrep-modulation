@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>spgrep_modulation.modulation &#8212; spgrep-modulation 0.2.4</title>
+    <title>spgrep_modulation.modulation &#8212; spgrep-modulation 0.2.5</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -71,7 +71,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.4</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.5</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
@@ -288,7 +288,6 @@ title="Fullscreen mode"
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
 <span class="kn">from</span> <span class="nn">phonopy.harmonic.dynamical_matrix</span> <span class="kn">import</span> <span class="n">DynamicalMatrix</span><span class="p">,</span> <span class="n">DynamicalMatrixNAC</span>
 <span class="kn">from</span> <span class="nn">phonopy.phonon.degeneracy</span> <span class="kn">import</span> <span class="n">degenerate_sets</span><span class="p">,</span> <span class="n">get_eigenvectors</span>
 <span class="kn">from</span> <span class="nn">phonopy.structure.atoms</span> <span class="kn">import</span> <span class="n">PhonopyAtoms</span>
@@ -301,6 +300,7 @@ title="Fullscreen mode"
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">phonopy.structure.symmetry</span> <span class="kn">import</span> <span class="n">Symmetry</span>
 <span class="kn">from</span> <span class="nn">phonopy.units</span> <span class="kn">import</span> <span class="n">VaspToTHz</span>
+
 <span class="kn">from</span> <span class="nn">spgrep_modulation.irreps</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">get_eigenmode_representation</span><span class="p">,</span>
     <span class="n">project_eigenmode_representation</span><span class="p">,</span>
@@ -317,7 +317,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="Modulation"><a class="viewcode-back" href="../../api_modulation.html#spgrep_modulation.modulation.Modulation">[docs]</a><span class="k">class</span> <span class="nc">Modulation</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Generate modulated cells based on dynamical matrix of phonon.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate modulated cells based on dynamical matrix of phonon.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -330,7 +330,7 @@ title="Fullscreen mode"
         <span class="n">degeneracy_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span>
         <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Generate modulated cells based on dynamical matrix of phonon.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate modulated cells based on dynamical matrix of phonon.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -395,7 +395,7 @@ title="Fullscreen mode"
             <span class="bp">self</span><span class="o">.</span><span class="n">primitive</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">primitive_symmetry</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">qpoint</span><span class="p">,</span>
-            <span class="n">rtol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">degeneracy_tolerance</span><span class="p">,</span>
+            <span class="n">atol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">degeneracy_tolerance</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="c1"># Modified dynamical matrix</span>
@@ -480,52 +480,52 @@ title="Fullscreen mode"
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dynamical_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DynamicalMatrix</span> <span class="o">|</span> <span class="n">DynamicalMatrixNAC</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return Phonopy&#39;s dynamical matrix.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return Phonopy&#39;s dynamical matrix.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dynamical_matrix</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">primitive_symmetry</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Symmetry</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return Phonopy&#39;s symmetry for primitive cell.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return Phonopy&#39;s symmetry for primitive cell.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_primitive_symmetry</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">little_rotations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayInt</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return rotations of little group at ``qpoint``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return rotations of little group at ``qpoint``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_little_rotations</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">little_translations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayFloat</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return translations of little group at ``qpoint``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return translations of little group at ``qpoint``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_little_translations</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">primitive</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Primitive</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return Phonopy&#39;s primitive cell.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return Phonopy&#39;s primitive cell.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dynamical_matrix</span><span class="o">.</span><span class="n">primitive</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">supercell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Supercell</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return Phonopy&#39;s supercell without modulations.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return Phonopy&#39;s supercell without modulations.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_supercell</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">qpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayFloat</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return qpoint.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return qpoint.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qpoint</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">unit_conversion_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return unit conversion for frequencies.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return unit conversion for frequencies.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_factor</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">degeneracy_tolerance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return absolute tolerance to detect degenerated bands.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return absolute tolerance to detect degenerated bands.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_degeneracy_tolerance</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">eigenspaces</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">NDArrayComplex</span><span class="p">,</span> <span class="n">NDArrayComplex</span><span class="p">]]:</span>
-        <span class="sd">&quot;&quot;&quot;Return list of ``(eigenvalue, degenerated eigenvectors, irrep formed by the eigenvectors)`` of dynamical matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return list of ``(eigenvalue, degenerated eigenvectors, irrep formed by the eigenvectors)`` of dynamical matrix.</span>
 
 <span class="sd">        * ``eigenvalue``: float</span>
 <span class="sd">        * ``eigenvectors``: array, (dim, num_atoms, 3)</span>
@@ -540,7 +540,7 @@ title="Fullscreen mode"
         <span class="n">arguments</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
         <span class="n">return_cell</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">PhonopyAtoms</span><span class="p">,</span> <span class="n">NDArrayComplex</span><span class="p">]</span> <span class="o">|</span> <span class="n">NDArrayComplex</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return modulated cell and modulation with given amplitudes and arguments.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return modulated cell and modulation with given amplitudes and arguments.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -571,7 +571,7 @@ title="Fullscreen mode"
         <span class="n">maximal_displacement</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.11</span><span class="p">,</span>
         <span class="n">max_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">PhonopyAtoms</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Return modulated cells with randomly sampled arguments.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return modulated cells with randomly sampled arguments.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -625,7 +625,7 @@ title="Fullscreen mode"
         <span class="n">frequency_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">maximal_displacement</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.11</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">PhonopyAtoms</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Return modulated cells corresponding to one-dimensional order-parameter directions of an isotropy subgroup.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return modulated cells corresponding to one-dimensional order-parameter directions of an isotropy subgroup.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -672,9 +672,11 @@ title="Fullscreen mode"
         <span class="n">qpoint</span><span class="p">:</span> <span class="n">NDArrayFloat</span><span class="p">,</span>
         <span class="n">nac_q_direction</span><span class="p">:</span> <span class="n">NDArrayFloat</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">VaspToTHz</span><span class="p">,</span>
+        <span class="n">degeneracy_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span>
         <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Modulation</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return Modulation class with supercell matrix.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return Modulation class with supercell matrix.&quot;&quot;&quot;</span>
         <span class="n">primitive</span> <span class="o">=</span> <span class="n">dynamical_matrix</span><span class="o">.</span><span class="n">primitive</span>
         <span class="n">primitive_symmetry</span> <span class="o">=</span> <span class="n">Symmetry</span><span class="p">(</span><span class="n">cell</span><span class="o">=</span><span class="n">primitive</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="n">symprec</span><span class="p">)</span>
 
@@ -691,11 +693,13 @@ title="Fullscreen mode"
             <span class="n">dynamical_matrix</span><span class="o">=</span><span class="n">dynamical_matrix</span><span class="p">,</span>
             <span class="n">qpoint</span><span class="o">=</span><span class="n">qpoint</span><span class="p">,</span>
             <span class="n">nac_q_direction</span><span class="o">=</span><span class="n">nac_q_direction</span><span class="p">,</span>
+            <span class="n">degeneracy_tolerance</span><span class="o">=</span><span class="n">degeneracy_tolerance</span><span class="p">,</span>
             <span class="n">factor</span><span class="o">=</span><span class="n">factor</span><span class="p">,</span>
+            <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Modulation.eigvals_to_frequencies"><a class="viewcode-back" href="../../api_modulation.html#spgrep_modulation.modulation.Modulation.eigvals_to_frequencies">[docs]</a>    <span class="k">def</span> <span class="nf">eigvals_to_frequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eigvals</span><span class="p">:</span> <span class="n">NDArrayComplex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayFloat</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert eigenvalue to frequency.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert eigenvalue to frequency.&quot;&quot;&quot;</span>
         <span class="c1"># Adapted from phonopy</span>
         <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">eigvals</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">e</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_factor</span></div>
@@ -722,7 +726,7 @@ title="Fullscreen mode"
         <span class="k">return</span> <span class="n">u</span>
 
 <div class="viewcode-block" id="Modulation.apply_modulation_to_supercell"><a class="viewcode-back" href="../../api_modulation.html#spgrep_modulation.modulation.Modulation.apply_modulation_to_supercell">[docs]</a>    <span class="k">def</span> <span class="nf">apply_modulation_to_supercell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modulation</span><span class="p">:</span> <span class="n">NDArrayComplex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PhonopyAtoms</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Apply modulation to supercell.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply modulation to supercell.&quot;&quot;&quot;</span>
         <span class="n">lattice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">cell</span>
         <span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">supercell</span><span class="o">.</span><span class="n">positions</span>
         <span class="n">positions</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">modulation</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>

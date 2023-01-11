@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>spgrep_modulation.isotropy &#8212; spgrep-modulation 0.2.4</title>
+    <title>spgrep_modulation.isotropy &#8212; spgrep-modulation 0.2.5</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -71,7 +71,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.4</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.5</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
@@ -293,7 +293,7 @@ title="Fullscreen mode"
 <span class="kn">from</span> <span class="nn">hsnf</span> <span class="kn">import</span> <span class="n">row_style_hermite_normal_form</span><span class="p">,</span> <span class="n">smith_normal_form</span>
 <span class="kn">from</span> <span class="nn">hsnf.integer_system</span> <span class="kn">import</span> <span class="n">solve_integer_linear_system</span>
 <span class="kn">from</span> <span class="nn">spgrep.group</span> <span class="kn">import</span> <span class="n">get_cayley_table</span><span class="p">,</span> <span class="n">get_identity_index</span><span class="p">,</span> <span class="n">get_inverse_index</span>
-<span class="kn">from</span> <span class="nn">spgrep.utils</span> <span class="kn">import</span> <span class="n">contain_space</span><span class="p">,</span> <span class="n">is_integer_array</span>
+<span class="kn">from</span> <span class="nn">spgrep.utils</span> <span class="kn">import</span> <span class="n">grassmann_distance</span><span class="p">,</span> <span class="n">is_integer_array</span>
 
 <span class="kn">from</span> <span class="nn">spgrep_modulation.utils</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">NDArrayComplex</span><span class="p">,</span>
@@ -305,7 +305,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="IsotropyEnumerator"><a class="viewcode-back" href="../../api_isotropy.html#spgrep_modulation.isotropy.IsotropyEnumerator">[docs]</a><span class="k">class</span> <span class="nc">IsotropyEnumerator</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Enumerate isotropy subgroups of given little group and small representation.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate isotropy subgroups of given little group and small representation.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -316,7 +316,7 @@ title="Fullscreen mode"
         <span class="n">max_denominator</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
         <span class="n">atol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Initialize class.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize class.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -339,27 +339,27 @@ title="Fullscreen mode"
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">little_rotations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayInt</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return rotations of little group at ``qpoint``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return rotations of little group at ``qpoint``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_little_rotations</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">little_translations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayFloat</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return translations of little group at ``qpoint``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return translations of little group at ``qpoint``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_little_translations</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">qpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayFloat</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return qpoint.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return qpoint.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qpoint</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">small_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayComplex</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return small representation of space group.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return small representation of space group.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_small_rep</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">maximal_isotropy_subgroups</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
-        <span class="sd">&quot;&quot;&quot;Return list of indices for isotropy subgroups.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return list of indices for isotropy subgroups.</span>
 
 <span class="sd">        Let ``subgroup = self.maximal_isotropy_subgroups[i]``. ``(self.little_rotations[subgroup], self.little_translations[subgroup])`` gives a coset of the i-th isotropy subgroup.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -367,7 +367,7 @@ title="Fullscreen mode"
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">order_parameter_directions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArrayComplex</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Return order-parameter directions of isotropy subgroups.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return order-parameter directions of isotropy subgroups.</span>
 
 <span class="sd">        Let ``opd = self.order_parameter_directions[i]``, which is an array with ``(num_direction, dim)``.</span>
 <span class="sd">        ``num_direction`` is the number of free parameters for the ``i``-th isotropy subgroup.</span>
@@ -403,9 +403,7 @@ title="Fullscreen mode"
             <span class="c1"># Group by subspace spanned by order-parameter directions</span>
             <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">other</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">order_parameter_directions</span><span class="p">):</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">directions</span><span class="p">))</span> <span class="ow">and</span> <span class="n">contain_space</span><span class="p">(</span>
-                    <span class="n">other</span><span class="p">,</span> <span class="n">directions</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_atol</span>
-                <span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">directions</span><span class="p">))</span> <span class="ow">and</span> <span class="n">grassmann_distance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">directions</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
                     <span class="n">isotropy_subgroups</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
                     <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
                     <span class="k">break</span>
@@ -424,7 +422,7 @@ title="Fullscreen mode"
     <span class="k">def</span> <span class="nf">_determine_order_parameter_directions</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">isotropy_subgroup</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArrayComplex</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Determine order-parameter directions of given isotropy subgroup.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine order-parameter directions of given isotropy subgroup.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -452,9 +450,14 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="get_translational_subgroup"><a class="viewcode-back" href="../../api_isotropy.html#spgrep_modulation.isotropy.get_translational_subgroup">[docs]</a><span class="k">def</span> <span class="nf">get_translational_subgroup</span><span class="p">(</span><span class="n">qpoint</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="n">NDArrayFloat</span><span class="p">,</span> <span class="n">max_denominator</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return transformation matrix of the following sublattice.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return transformation matrix of the following sublattice.</span>
 
 <span class="sd">    Let ``t`` be a lattice point of the returned sublattice. Then, ``np.dot(t, qpoint)`` is integer.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    transformation: array, (3, 3)</span>
+<span class="sd">        ``transformation @ qpoint`` is integer vector.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qpoint</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="n">qpoint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">qpoint</span><span class="p">)</span>
@@ -485,7 +488,7 @@ title="Fullscreen mode"
 <div class="viewcode-block" id="enumerate_point_subgroup"><a class="viewcode-back" href="../../api_isotropy.html#spgrep_modulation.isotropy.enumerate_point_subgroup">[docs]</a><span class="k">def</span> <span class="nf">enumerate_point_subgroup</span><span class="p">(</span>
     <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">,</span> <span class="n">preserve_sublattice</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">return_conjugacy_class</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Enumerate conjugacy subgroups of point group.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate conjugacy subgroups of point group.&quot;&quot;&quot;</span>
     <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
     <span class="n">identity</span> <span class="o">=</span> <span class="n">get_identity_index</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
     <span class="c1"># Represent choice of elements by bit array</span>
@@ -532,7 +535,7 @@ title="Fullscreen mode"
 
 
 <span class="k">def</span> <span class="nf">enumerate_point_subgroup_naive</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">preserve_sublattice</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Enumerate conjugacy subgroups of point group in brute force.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate conjugacy subgroups of point group in brute force.&quot;&quot;&quot;</span>
     <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">order</span><span class="p">):</span>
@@ -564,7 +567,7 @@ title="Fullscreen mode"
     <span class="n">identity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Traverse group elements from generators.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Traverse group elements from generators.&quot;&quot;&quot;</span>
     <span class="n">subgroup</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">que</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
     <span class="n">que</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">identity</span><span class="p">)</span>
@@ -589,7 +592,7 @@ title="Fullscreen mode"
     <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">,</span>
     <span class="n">atol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return true if some adjusted translations enable given point group and translational subgroup correspond to a space group.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return true if some adjusted translations enable given point group and translational subgroup correspond to a space group.&quot;&quot;&quot;</span>
     <span class="c1"># Search generators</span>
     <span class="n">identity</span> <span class="o">=</span> <span class="n">get_identity_index</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
     <span class="n">generators</span> <span class="o">=</span> <span class="n">_search_generators</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>

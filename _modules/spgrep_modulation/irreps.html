@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>spgrep_modulation.irreps &#8212; spgrep-modulation 0.2.4</title>
+    <title>spgrep_modulation.irreps &#8212; spgrep-modulation 0.2.5</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -71,7 +71,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.4</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.5</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
@@ -288,11 +288,11 @@ title="Fullscreen mode"
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">phonopy.structure.cells</span> <span class="kn">import</span> <span class="n">Primitive</span>
+<span class="kn">from</span> <span class="nn">phonopy.structure.symmetry</span> <span class="kn">import</span> <span class="n">Symmetry</span>
 <span class="kn">from</span> <span class="nn">spgrep.core</span> <span class="kn">import</span> <span class="n">get_spacegroup_irreps_from_primitive_symmetry</span>
 <span class="kn">from</span> <span class="nn">spgrep.representation</span> <span class="kn">import</span> <span class="n">project_to_irrep</span>
 
-<span class="kn">from</span> <span class="nn">phonopy.structure.cells</span> <span class="kn">import</span> <span class="n">Primitive</span>
-<span class="kn">from</span> <span class="nn">phonopy.structure.symmetry</span> <span class="kn">import</span> <span class="n">Symmetry</span>
 <span class="kn">from</span> <span class="nn">spgrep_modulation.utils</span> <span class="kn">import</span> <span class="n">NDArrayComplex</span><span class="p">,</span> <span class="n">NDArrayFloat</span><span class="p">,</span> <span class="n">NDArrayInt</span>
 
 
@@ -305,7 +305,7 @@ title="Fullscreen mode"
     <span class="n">rtol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">,</span>
     <span class="n">atol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span>  <span class="c1"># Too tight tolerance gives wrong basis vectors...</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">NDArrayComplex</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArrayComplex</span><span class="p">],</span> <span class="n">NDArrayInt</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Decompose representation matrices by eigenmodes into irreps.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decompose representation matrices by eigenmodes into irreps.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -317,6 +317,13 @@ title="Fullscreen mode"
 <span class="sd">        phonopy&#39;s Symmetry object for primitive cell</span>
 <span class="sd">    primitive_qpoint: array, (3, )</span>
 <span class="sd">        q vector in ``primitive``&#39;s dual basis vectors</span>
+<span class="sd">    method: str, &#39;Neto&#39; or &#39;random&#39;</span>
+<span class="sd">        &#39;Neto&#39;: construct irreps from a fixed chain of subgroups of little co-group</span>
+<span class="sd">        &#39;random&#39;: construct irreps by numerically diagonalizing a random matrix commute with regular representation</span>
+<span class="sd">    rtol: float</span>
+<span class="sd">        Relative tolerance for comparing float values</span>
+<span class="sd">    atol: float</span>
+<span class="sd">        Absolute tolerance to distinguish difference eigenvalues</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -378,7 +385,7 @@ title="Fullscreen mode"
     <span class="n">primitive_symmetry</span><span class="p">:</span> <span class="n">Symmetry</span><span class="p">,</span>
     <span class="n">primitive_qpoint</span><span class="p">:</span> <span class="n">NDArrayFloat</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayComplex</span><span class="p">:</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute representation matrix for eigenmodes.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute representation matrix for eigenmodes.</span>
 
 <span class="sd">    .. math::</span>
 <span class="sd">       \Gamma_{\kappa&#39;\mu&#39;; \kappa\mu}^{\mathbf{q}}(g) := \exp \left( -i \mathbf{R}_{g} \mathbf{q} \cdot \mathbf{h}_{g}(\kappa) \right) [\mathbf{R}_{g}]_{\mu&#39;\mu} \delta_{ g\kappa, \kappa&#39; }</span>

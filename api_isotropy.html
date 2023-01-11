@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Isotropy subgroup &#8212; spgrep-modulation 0.2.4</title>
+    <title>Isotropy subgroup &#8212; spgrep-modulation 0.2.5</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -74,7 +74,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.4</h1>
+      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.5</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -399,6 +399,14 @@ title="Print to PDF"
 <span class="sig-prename descclassname"><span class="pre">spgrep_modulation.isotropy.</span></span><span class="sig-name descname"><span class="pre">get_translational_subgroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">NDArrayFloat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_denominator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/isotropy.html#get_translational_subgroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.isotropy.get_translational_subgroup" title="Permalink to this definition">#</a></dt>
 <dd><p>Return transformation matrix of the following sublattice.</p>
 <p>Let <code class="docutils literal notranslate"><span class="pre">t</span></code> be a lattice point of the returned sublattice. Then, <code class="docutils literal notranslate"><span class="pre">np.dot(t,</span> <span class="pre">qpoint)</span></code> is integer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>transformation</strong> – <code class="docutils literal notranslate"><span class="pre">transformation</span> <span class="pre">&#64;</span> <span class="pre">qpoint</span></code> is integer vector.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>array, (3, 3)</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div></blockquote>
