@@ -111,7 +111,7 @@ class Modulation:
             self.primitive,
             self.primitive_symmetry,
             self.qpoint,
-            rtol=self.degeneracy_tolerance,
+            atol=self.degeneracy_tolerance,
         )
 
         # Modified dynamical matrix

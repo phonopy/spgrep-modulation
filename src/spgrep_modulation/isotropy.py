@@ -9,7 +9,7 @@ import numpy as np
 from hsnf import row_style_hermite_normal_form, smith_normal_form
 from hsnf.integer_system import solve_integer_linear_system
 from spgrep.group import get_cayley_table, get_identity_index, get_inverse_index
-from spgrep.utils import contain_space, is_integer_array
+from spgrep.utils import grassmann_distance, is_integer_array
 
 from spgrep_modulation.utils import (
     NDArrayComplex,
@@ -119,9 +119,7 @@ class IsotropyEnumerator:
             # Group by subspace spanned by order-parameter directions
             found = False
             for i, other in enumerate(order_parameter_directions):
-                if (len(other) == len(directions)) and contain_space(
-                    other, directions, atol=self._atol
-                ):
+                if (len(other) == len(directions)) and grassmann_distance(other, directions) < 0.5:
                     isotropy_subgroups[i].append(indices)
                     found = True
                     break

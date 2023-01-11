@@ -35,7 +35,7 @@ dependencies = [
     "spglib>=2.0.2",
     "phonopy>=2.15.1",
     "seekpath",
-    "spgrep>=0.3.2",  # https://github.com/spglib/spgrep
+    "spgrep>=0.3.3",  # https://github.com/spglib/spgrep
     "hsnf>=0.3.15",  # https://github.com/lan496/hsnf
 ]
 
