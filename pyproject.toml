@@ -41,7 +41,10 @@ dependencies = [
 ]
 
 [project.urls]
-Sources = "https://github.com/lan496/spgrep-modulation"
+repository = "https://github.com/lan496/spgrep-modulation"
+homepage = "https://phonopy.github.io/spgrep-modulation"
+documentation = "https://phonopy.github.io/spgrep-modulation"
+changelog = "https://phonopy.github.io/spgrep-modulation/changelog.html"
 
 [project.optional-dependencies]
 vis = [
