@@ -320,13 +320,18 @@ title="Fullscreen mode"
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        little_rotations: array, (order, 3, 3)</span>
+<span class="sd">        little_rotations: array[int], (order, 3, 3)</span>
+<span class="sd">            Rotation parts of a little group</span>
 <span class="sd">        little_translations: array, (order, 3)</span>
+<span class="sd">            Translation parts of a little group</span>
 <span class="sd">        qpoint: array, (3, )</span>
-<span class="sd">        small_rep: (order, dim, dim)</span>
+<span class="sd">            Reciprocal point</span>
+<span class="sd">        small_rep: array, (order, dim, dim)</span>
 <span class="sd">            Small representation of space group at ``qpoint``</span>
-<span class="sd">        max_denominator: int</span>
-<span class="sd">        atol: float</span>
+<span class="sd">        max_denominator: int, default=100</span>
+<span class="sd">            Maximal value to infer denominators of ``qpoint``</span>
+<span class="sd">        atol: float, default=1e-6</span>
+<span class="sd">            Absolute tolerance to avoid numerical noise</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_little_rotations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">little_rotations</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_little_translations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">little_translations</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">rint</span><span class="p">(</span><span class="n">little_translations</span><span class="p">)</span>
@@ -361,7 +366,7 @@ title="Fullscreen mode"
     <span class="k">def</span> <span class="nf">maximal_isotropy_subgroups</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return list of indices for isotropy subgroups.</span>
 
-<span class="sd">        Let ``subgroup = self.maximal_isotropy_subgroups[i]``. ``(self.little_rotations[subgroup], self.little_translations[subgroup])`` gives a coset of the i-th isotropy subgroup.</span>
+<span class="sd">        Let ``subgroup = self.maximal_isotropy_subgroups[i]``. ``(self.little_rotations[subgroup], self.little_translations[subgroup])`` gives a coset of the ``i``-th isotropy subgroup.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maximal_isotropy_subgroups</span>
 
@@ -454,6 +459,13 @@ title="Fullscreen mode"
 
 <span class="sd">    Let ``t`` be a lattice point of the returned sublattice. Then, ``np.dot(t, qpoint)`` is integer.</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    qpoint: array, (3, )</span>
+<span class="sd">        Reciprocal point</span>
+<span class="sd">    max_denominator: int, default=100</span>
+<span class="sd">        Maximal value to infer denominators of ``qpoint``</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    transformation: array, (3, 3)</span>
@@ -488,7 +500,21 @@ title="Fullscreen mode"
 <div class="viewcode-block" id="enumerate_point_subgroup"><a class="viewcode-back" href="../../api_isotropy.html#spgrep_modulation.isotropy.enumerate_point_subgroup">[docs]</a><span class="k">def</span> <span class="nf">enumerate_point_subgroup</span><span class="p">(</span>
     <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">,</span> <span class="n">preserve_sublattice</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">return_conjugacy_class</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate conjugacy subgroups of point group.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate conjugacy subgroups of point group.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    table: array[int], (order, order)</span>
+<span class="sd">        Multiplication table of group</span>
+<span class="sd">    preserve_sublattice: list[bool]</span>
+<span class="sd">        Specify ``preserve_sublattice[i] = True`` if the ``i``-th operation preserves translational subgroup of isotropy subgroup</span>
+<span class="sd">    return_conjugacy_class: bool, default=True</span>
+<span class="sd">        If true, return representatives of conjugacy classes.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    subgroups: list[list[int]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
     <span class="n">identity</span> <span class="o">=</span> <span class="n">get_identity_index</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
     <span class="c1"># Represent choice of elements by bit array</span>

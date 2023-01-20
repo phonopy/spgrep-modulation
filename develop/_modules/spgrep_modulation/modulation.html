@@ -525,11 +525,17 @@ title="Fullscreen mode"
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">eigenspaces</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">NDArrayComplex</span><span class="p">,</span> <span class="n">NDArrayComplex</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return list of ``(eigenvalue, degenerated eigenvectors, irrep formed by the eigenvectors)`` of dynamical matrix.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return list of ``(eigenvalue, degenerated eigenvectors, irrep formed by the eigenvectors)`` of dynamical matrix.</span>
 
-<span class="sd">        * ``eigenvalue``: float</span>
-<span class="sd">        * ``eigenvectors``: array, (dim, num_atoms, 3)</span>
-<span class="sd">        * ``irrep``: array, (little_order, dim, dim)</span>
+<span class="sd">        ``frequency_index`` is the index of ``eigenspaces``.</span>
+<span class="sd">        Each ``frequency_index`` corresponds to a eigenvalue of the dynamical matrix, :math:`\omega_{\alpha s}^{2}`.</span>
+<span class="sd">        Here, :math:`\alpha` specifies irrep up to unitary equivalence and :math:`s` distinguishes the irrep among equivalent irreps.</span>
+<span class="sd">        ``eigenspaces[frequency_index]`` is a tuple with</span>
+
+<span class="sd">        * ``eigenvalue``: float, eigenvalue of the dynamical matrix :math:`\omega_{\alpha s}^{2}`</span>
+<span class="sd">        * ``eigenvectors``: array, (dim, num_atoms, 3), ``eigenvectors[lambda, kappa, :]`` is an eigenvector :math:`\mathbf{e}(\kappa; \mathbf{q}\alpha s \lambda)`.</span>
+<span class="sd">        * ``irrep``: array, (little_order, dim, dim), representation matrices of the irrep :math:`\tilde{\Gamma}^{\mathbf{q}\alpha s}`</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eigenspaces</span>
 
@@ -545,7 +551,8 @@ title="Fullscreen mode"
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        frequency_index: int</span>
-<span class="sd">            Index of frequency with `dim` eivenvectors</span>
+<span class="sd">            Index of considered eigenmodes in ``Modulation.eigenspaces``.</span>
+<span class="sd">            See :func:`Modulation.eigenspaces`.</span>
 <span class="sd">        amplitudes: list[float], (dim, )</span>
 <span class="sd">        arguments: list[float], (dim, )</span>
 <span class="sd">            in radian</span>
@@ -576,7 +583,8 @@ title="Fullscreen mode"
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        frequency_index: int</span>
-<span class="sd">            Index of considered eigenmodes in ``Modulation.eigenspaces``</span>
+<span class="sd">            Index of considered eigenmodes in ``Modulation.eigenspaces``.</span>
+<span class="sd">            See :func:`Modulation.eigenspaces`.</span>
 <span class="sd">        maximal_displacement: int</span>
 <span class="sd">            Amplitude of modulation is chosen so that the maximal displacement in returned modulation is equal to ``maximal_displacement``.</span>
 <span class="sd">            Same unit as ``Modulation.primitive.cell``.</span>
@@ -629,8 +637,8 @@ title="Fullscreen mode"
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        frequency_index: int</span>
-<span class="sd">            Index of considered eigenmodes in ``Modulation.eigenspaces``</span>
+<span class="sd">            Index of considered eigenmodes in ``Modulation.eigenspaces``.</span>
+<span class="sd">            See :func:`Modulation.eigenspaces`.</span>
 <span class="sd">        maximal_displacement: int</span>
 <span class="sd">            Amplitude of modulation is chosen so that the maximal displacement in returned modulation is equal to ``maximal_displacement``.</span>
 <span class="sd">            Same unit as ``Modulation.primitive.cell``.</span>

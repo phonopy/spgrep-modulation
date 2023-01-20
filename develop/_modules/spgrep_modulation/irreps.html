@@ -328,10 +328,10 @@ title="Fullscreen mode"
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    all_basis: list</span>
-<span class="sd">        all_basis[i] is list of independent basis vectors with (dim, num_atoms, 3) forming irreps[i].</span>
+<span class="sd">        ``all_basis[i]`` is list of independent basis vectors with (dim, num_atoms, 3) forming ``irreps[i]``.</span>
 <span class="sd">        Note: phase chosen to be consistent with definition of phonopy&#39;s dynamical matrix</span>
-<span class="sd">    irreps: list of irrep (little_order, dim, dim)</span>
-<span class="sd">    mapping_little_group:</span>
+<span class="sd">    irreps: list of irrep, (little_order, dim, dim)</span>
+<span class="sd">    mapping_little_group: array[int], (order, )</span>
 <span class="sd">        list of indices for little group.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rotations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">&quot;rotations&quot;</span><span class="p">]</span>
