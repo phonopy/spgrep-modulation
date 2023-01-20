@@ -241,11 +241,17 @@ class Modulation:
 
     @property
     def eigenspaces(self) -> list[tuple[float, NDArrayComplex, NDArrayComplex]]:
-        """Return list of ``(eigenvalue, degenerated eigenvectors, irrep formed by the eigenvectors)`` of dynamical matrix.
+        r"""Return list of ``(eigenvalue, degenerated eigenvectors, irrep formed by the eigenvectors)`` of dynamical matrix.
 
-        * ``eigenvalue``: float
-        * ``eigenvectors``: array, (dim, num_atoms, 3)
-        * ``irrep``: array, (little_order, dim, dim)
+        ``frequency_index`` is the index of ``eigenspaces``.
+        Each ``frequency_index`` corresponds to a eigenvalue of the dynamical matrix, :math:`\omega_{\alpha s}^{2}`.
+        Here, :math:`\alpha` specifies irrep up to unitary equivalence and :math:`s` distinguishes the irrep among equivalent irreps.
+        ``eigenspaces[frequency_index]`` is a tuple with
+
+        * ``eigenvalue``: float, eigenvalue of the dynamical matrix :math:`\omega_{\alpha s}^{2}`
+        * ``eigenvectors``: array, (dim, num_atoms, 3), ``eigenvectors[lambda, kappa, :]`` is an eigenvector :math:`\mathbf{e}(\kappa; \mathbf{q}\alpha s \lambda)`.
+        * ``irrep``: array, (little_order, dim, dim), representation matrices of the irrep :math:`\tilde{\Gamma}^{\mathbf{q}\alpha s}`
+
         """
         return self._eigenspaces
 
@@ -261,7 +267,8 @@ class Modulation:
         Parameters
         ----------
         frequency_index: int
-            Index of frequency with `dim` eivenvectors
+            Index of considered eigenmodes in ``Modulation.eigenspaces``.
+            See :func:`Modulation.eigenspaces`.
         amplitudes: list[float], (dim, )
         arguments: list[float], (dim, )
             in radian
@@ -292,7 +299,8 @@ class Modulation:
         Parameters
         ----------
         frequency_index: int
-            Index of considered eigenmodes in ``Modulation.eigenspaces``
+            Index of considered eigenmodes in ``Modulation.eigenspaces``.
+            See :func:`Modulation.eigenspaces`.
         maximal_displacement: int
             Amplitude of modulation is chosen so that the maximal displacement in returned modulation is equal to ``maximal_displacement``.
             Same unit as ``Modulation.primitive.cell``.
@@ -346,7 +354,8 @@ class Modulation:
         Parameters
         ----------
         frequency_index: int
-            Index of considered eigenmodes in ``Modulation.eigenspaces``
+            Index of considered eigenmodes in ``Modulation.eigenspaces``.
+            See :func:`Modulation.eigenspaces`.
         maximal_displacement: int
             Amplitude of modulation is chosen so that the maximal displacement in returned modulation is equal to ``maximal_displacement``.
             Same unit as ``Modulation.primitive.cell``.

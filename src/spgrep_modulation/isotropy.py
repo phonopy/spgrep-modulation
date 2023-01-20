@@ -36,13 +36,18 @@ class IsotropyEnumerator:
 
         Parameters
         ----------
-        little_rotations: array, (order, 3, 3)
+        little_rotations: array[int], (order, 3, 3)
+            Rotation parts of a little group
         little_translations: array, (order, 3)
+            Translation parts of a little group
         qpoint: array, (3, )
-        small_rep: (order, dim, dim)
+            Reciprocal point
+        small_rep: array, (order, dim, dim)
             Small representation of space group at ``qpoint``
-        max_denominator: int
-        atol: float
+        max_denominator: int, default=100
+            Maximal value to infer denominators of ``qpoint``
+        atol: float, default=1e-6
+            Absolute tolerance to avoid numerical noise
         """
         self._little_rotations = np.array(little_rotations)
         self._little_translations = np.array(little_translations) - np.rint(little_translations)
@@ -77,7 +82,7 @@ class IsotropyEnumerator:
     def maximal_isotropy_subgroups(self) -> list[list[int]]:
         """Return list of indices for isotropy subgroups.
 
-        Let ``subgroup = self.maximal_isotropy_subgroups[i]``. ``(self.little_rotations[subgroup], self.little_translations[subgroup])`` gives a coset of the i-th isotropy subgroup.
+        Let ``subgroup = self.maximal_isotropy_subgroups[i]``. ``(self.little_rotations[subgroup], self.little_translations[subgroup])`` gives a coset of the ``i``-th isotropy subgroup.
         """
         return self._maximal_isotropy_subgroups
 
@@ -170,6 +175,13 @@ def get_translational_subgroup(qpoint: list[float] | NDArrayFloat, max_denominat
 
     Let ``t`` be a lattice point of the returned sublattice. Then, ``np.dot(t, qpoint)`` is integer.
 
+    Parameters
+    ----------
+    qpoint: array, (3, )
+        Reciprocal point
+    max_denominator: int, default=100
+        Maximal value to infer denominators of ``qpoint``
+
     Returns
     -------
     transformation: array, (3, 3)
@@ -204,7 +216,21 @@ def get_translational_subgroup(qpoint: list[float] | NDArrayFloat, max_denominat
 def enumerate_point_subgroup(
     table: NDArrayInt, preserve_sublattice: list[bool], return_conjugacy_class: bool = True
 ) -> list[list[int]]:
-    """Enumerate conjugacy subgroups of point group."""
+    """Enumerate conjugacy subgroups of point group.
+
+    Parameters
+    ----------
+    table: array[int], (order, order)
+        Multiplication table of group
+    preserve_sublattice: list[bool]
+        Specify ``preserve_sublattice[i] = True`` if the ``i``-th operation preserves translational subgroup of isotropy subgroup
+    return_conjugacy_class: bool, default=True
+        If true, return representatives of conjugacy classes.
+
+    Returns
+    -------
+    subgroups: list[list[int]]
+    """
     order = len(table)
     identity = get_identity_index(table)
     # Represent choice of elements by bit array

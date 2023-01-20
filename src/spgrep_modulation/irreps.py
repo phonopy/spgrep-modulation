@@ -44,10 +44,10 @@ def project_eigenmode_representation(
     Returns
     -------
     all_basis: list
-        all_basis[i] is list of independent basis vectors with (dim, num_atoms, 3) forming irreps[i].
+        ``all_basis[i]`` is list of independent basis vectors with (dim, num_atoms, 3) forming ``irreps[i]``.
         Note: phase chosen to be consistent with definition of phonopy's dynamical matrix
-    irreps: list of irrep (little_order, dim, dim)
-    mapping_little_group:
+    irreps: list of irrep, (little_order, dim, dim)
+    mapping_little_group: array[int], (order, )
         list of indices for little group.
     """
     rotations = primitive_symmetry.symmetry_operations["rotations"]
