@@ -469,21 +469,18 @@ Same unit as <code class="docutils literal notranslate"><span class="pre">Modula
 <dd><p>Return modulated cells corresponding to one-dimensional order-parameter directions of an isotropy subgroup.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>Modulation.eigenspaces.</strong> (<em>Index of considered eigenmodes in</em>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frequency_index</strong> (<em>int</em>) – Index of considered eigenmodes in <code class="docutils literal notranslate"><span class="pre">Modulation.eigenspaces</span></code>.
+See <a class="reference internal" href="#spgrep_modulation.modulation.Modulation.eigenspaces" title="spgrep_modulation.modulation.Modulation.eigenspaces"><code class="xref py py-func docutils literal notranslate"><span class="pre">Modulation.eigenspaces()</span></code></a>.</p></li>
+<li><p><strong>maximal_displacement</strong> (<em>int</em>) – Amplitude of modulation is chosen so that the maximal displacement in returned modulation is equal to <code class="docutils literal notranslate"><span class="pre">maximal_displacement</span></code>.
+Same unit as <code class="docutils literal notranslate"><span class="pre">Modulation.primitive.cell</span></code>.</p></li>
+</ul>
 </dd>
-</dl>
-<p>:param See <a class="reference internal" href="#spgrep_modulation.modulation.Modulation.eigenspaces" title="spgrep_modulation.modulation.Modulation.eigenspaces"><code class="xref py py-func docutils literal notranslate"><span class="pre">Modulation.eigenspaces()</span></code></a>.:</p>
-<dl class="simple">
-<dt>maximal_displacement: int</dt><dd><p>Amplitude of modulation is chosen so that the maximal displacement in returned modulation is equal to <code class="docutils literal notranslate"><span class="pre">maximal_displacement</span></code>.
-Same unit as <code class="docutils literal notranslate"><span class="pre">Modulation.primitive.cell</span></code>.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cells</strong></p>
 </dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><strong>cells</strong></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>list of PhonopyAtoms</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of PhonopyAtoms</p>
 </dd>
 </dl>
 </dd></dl>
