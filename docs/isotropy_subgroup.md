@@ -62,7 +62,7 @@ for {math}`n \in \mathbb{Z}`.
 Thus, {math}`\{ \mathbf{t}_{0}, \mathbf{t}_{1}, \mathbf{t}_{2} \}` is basis of {math}`\mathcal{L}_{S}`.
 By stacking these basis vectors, we can find a transformation matrix {math}`\mathbf{M}`,
 ```{math}
-    \mathcal{T}(\mathcal{S}) = \{ \mathbf{Mt} \mid (\mathbf{E}, \mathbf{t}) \in \mathcal{G} \}.
+    \mathcal{L}_{\mathcal{S}} = \{ \mathbf{Mt} \mid (\mathbf{E}, \mathbf{t}) \in \mathcal{G} \}.
 ```
 
 ### Enumerate point group {math}`\mathcal{P}(\mathcal{S})`
@@ -81,7 +81,11 @@ Point group of isotropy subgroup {math}`\mathcal{S}` should be a subgroup of {ma
 For given point group {math}`\mathcal{P}(\mathcal{S})` and translational subgroup {math}`\mathcal{T}(\mathcal{S})`, consider the following set
 ```{math}
     \mathcal{S}
-        := \{ ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{c}_{i} + \mathbf{l} ) \mid \mathbf{R}_{i} \in \mathcal{P}(\mathcal{S}), \mathbf{l} \in \mathcal{T}(\mathcal{S}) \}.
+        := \{
+            ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{c}_{i} + \mathbf{l} )
+            \mid
+            \mathbf{R}_{i} \in \mathcal{P}(\mathcal{S}), \mathbf{l} \in \mathcal{L}_{\mathcal{S}}
+        \}.
 ```
 Here {math}`\mathbf{c}_{i} \in \mathcal{T}(\mathcal{G})` can be freely chosen.
 
@@ -91,18 +95,18 @@ The condition that {math}`\mathcal{S}` is a subgroup of {math}`\mathcal{G}` is a
         ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{Mt} )^{-1} ( \mathbf{R}_{j}, \mathbf{\tau}_{j} + \mathbf{Mt}' ) \in \mathcal{S} \\
     &\Leftrightarrow
         \forall ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{Mt} ), ( \mathbf{R}_{j}, \mathbf{\tau}_{j} + \mathbf{Mt}' ) \in \mathcal{S},
-        \mathbf{\tau}_{j} + \mathbf{Mt}' - \mathbf{R}_{i}^{-1}(\mathbf{\tau}_{i} + \mathbf{Mt}) \in \mathcal{T}(\mathcal{S}) \\
+        \mathbf{\tau}_{j} + \mathbf{Mt}' - \mathbf{R}_{i}^{-1}(\mathbf{\tau}_{i} + \mathbf{Mt}) \in \mathcal{L}_{\mathcal{S}} \\
     &\Leftrightarrow
         \forall \mathbf{R}_{i}, \mathbf{R}_{j} \in \mathcal{S},
         \exists k \,s.t.\, \mathbf{R}_{i}^{-1} \mathbf{R}_{j} = \mathbf{R}_{k},
-        \mathbf{\tau}_{j} - \mathbf{R}_{i}^{-1}\mathbf{\tau}_{i} - \mathbf{\tau}_{k} \in \mathcal{T}(\mathcal{S}) \\
+        \mathbf{\tau}_{j} - \mathbf{R}_{i}^{-1}\mathbf{\tau}_{i} - \mathbf{\tau}_{k} \in \mathcal{L}_{\mathcal{S}} \\
 ```
 
 ### Determine order-parameter direction
 
-Non-zero order-parameter directions correspond to eigenvectors whose eigenvalues are one of the Reynolds operator,
+Non-zero order-parameter directions correspond to eigenvectors with eigenvalue 1 of the projection operator,
 ```{math}
-    \frac{1}{|\mathcal{S}|} \sum_{ g \in \overline{\mathcal{G}} } \Gamma^{\mathbf{k}\alpha}(g).
+    \frac{1}{|\overline{\mathcal{S}}|} \sum_{ g \in \overline{\mathcal{S}} } \Gamma^{\mathbf{k}\alpha}(g).
 ```
 
 ## References

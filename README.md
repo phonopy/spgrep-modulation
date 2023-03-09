@@ -63,8 +63,8 @@ pip install spgrep-modulation
 ```
 
 ```shell
-conda create -n spgrep python=3.10 pip
-conda activate spgrep
+conda create -n modulation python=3.10 pip
+conda activate modulation
 git clone git@github.com:lan496/spgrep-modulation.git
 cd spgrep-modulation
 pip install -e .
