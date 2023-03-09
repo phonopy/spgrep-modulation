@@ -499,7 +499,7 @@ Then, <span class="math notranslate nohighlight">\(\{ n\mathbf{t}_{0}, \mathbf{t
 Thus, <span class="math notranslate nohighlight">\(\{ \mathbf{t}_{0}, \mathbf{t}_{1}, \mathbf{t}_{2} \}\)</span> is basis of <span class="math notranslate nohighlight">\(\mathcal{L}_{S}\)</span>.
 By stacking these basis vectors, we can find a transformation matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span>,</p>
 <div class="math notranslate nohighlight">
-\[    \mathcal{T}(\mathcal{S}) = \{ \mathbf{Mt} \mid (\mathbf{E}, \mathbf{t}) \in \mathcal{G} \}.\]</div>
+\[    \mathcal{L}_{\mathcal{S}} = \{ \mathbf{Mt} \mid (\mathbf{E}, \mathbf{t}) \in \mathcal{G} \}.\]</div>
 </section>
 <section id="enumerate-point-group-mathcal-p-mathcal-s">
 <h3>Enumerate point group <span class="math notranslate nohighlight">\(\mathcal{P}(\mathcal{S})\)</span><a class="headerlink" href="#enumerate-point-group-mathcal-p-mathcal-s" title="Permalink to this headline">#</a></h3>
@@ -515,7 +515,11 @@ By stacking these basis vectors, we can find a transformation matrix <span class
 <p>For given point group <span class="math notranslate nohighlight">\(\mathcal{P}(\mathcal{S})\)</span> and translational subgroup <span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{S})\)</span>, consider the following set</p>
 <div class="math notranslate nohighlight">
 \[    \mathcal{S}
-        := \{ ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{c}_{i} + \mathbf{l} ) \mid \mathbf{R}_{i} \in \mathcal{P}(\mathcal{S}), \mathbf{l} \in \mathcal{T}(\mathcal{S}) \}.\]</div>
+        := \{
+            ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{c}_{i} + \mathbf{l} )
+            \mid
+            \mathbf{R}_{i} \in \mathcal{P}(\mathcal{S}), \mathbf{l} \in \mathcal{L}_{\mathcal{S}}
+        \}.\]</div>
 <p>Here <span class="math notranslate nohighlight">\(\mathbf{c}_{i} \in \mathcal{T}(\mathcal{G})\)</span> can be freely chosen.</p>
 <p>The condition that <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is a subgroup of <span class="math notranslate nohighlight">\(\mathcal{G}\)</span> is as follows:</p>
 <div class="math notranslate nohighlight">
@@ -523,17 +527,17 @@ By stacking these basis vectors, we can find a transformation matrix <span class
         ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{Mt} )^{-1} ( \mathbf{R}_{j}, \mathbf{\tau}_{j} + \mathbf{Mt}' ) \in \mathcal{S} \\
     &amp;\Leftrightarrow
         \forall ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{Mt} ), ( \mathbf{R}_{j}, \mathbf{\tau}_{j} + \mathbf{Mt}' ) \in \mathcal{S},
-        \mathbf{\tau}_{j} + \mathbf{Mt}' - \mathbf{R}_{i}^{-1}(\mathbf{\tau}_{i} + \mathbf{Mt}) \in \mathcal{T}(\mathcal{S}) \\
+        \mathbf{\tau}_{j} + \mathbf{Mt}' - \mathbf{R}_{i}^{-1}(\mathbf{\tau}_{i} + \mathbf{Mt}) \in \mathcal{L}_{\mathcal{S}} \\
     &amp;\Leftrightarrow
         \forall \mathbf{R}_{i}, \mathbf{R}_{j} \in \mathcal{S},
         \exists k \,s.t.\, \mathbf{R}_{i}^{-1} \mathbf{R}_{j} = \mathbf{R}_{k},
-        \mathbf{\tau}_{j} - \mathbf{R}_{i}^{-1}\mathbf{\tau}_{i} - \mathbf{\tau}_{k} \in \mathcal{T}(\mathcal{S}) \\\end{split}\]</div>
+        \mathbf{\tau}_{j} - \mathbf{R}_{i}^{-1}\mathbf{\tau}_{i} - \mathbf{\tau}_{k} \in \mathcal{L}_{\mathcal{S}} \\\end{split}\]</div>
 </section>
 <section id="determine-order-parameter-direction">
 <h3>Determine order-parameter direction<a class="headerlink" href="#determine-order-parameter-direction" title="Permalink to this headline">#</a></h3>
-<p>Non-zero order-parameter directions correspond to eigenvectors whose eigenvalues are one of the Reynolds operator,</p>
+<p>Non-zero order-parameter directions correspond to eigenvectors with eigenvalue 1 of the projection operator,</p>
 <div class="math notranslate nohighlight">
-\[    \frac{1}{|\mathcal{S}|} \sum_{ g \in \overline{\mathcal{G}} } \Gamma^{\mathbf{k}\alpha}(g).\]</div>
+\[    \frac{1}{|\overline{\mathcal{S}}|} \sum_{ g \in \overline{\mathcal{S}} } \Gamma^{\mathbf{k}\alpha}(g).\]</div>
 </section>
 </section>
 <section id="references">
