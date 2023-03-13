@@ -75,7 +75,7 @@ docs = [
     "sphinxcontrib-bibtex",
     # "sphinx-proof",  # Seems to be incompatible with nbsphinx
     "myst-parser",
-    "sphinx-book-theme==0.3.3",
+    "sphinx-book-theme==1.0.0",
 ]
 
 ###############################################################################
