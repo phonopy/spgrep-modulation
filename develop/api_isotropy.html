@@ -1,16 +1,14 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
     <title>Isotropy subgroup &#8212; spgrep-modulation 0.2.6</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -20,89 +18,74 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Change log" href="changelog.html" />
     <link rel="prev" title="Irreps" href="api_irreps.html" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
+    <meta name="docsearch:language" content="en" />
 
-    <!-- Google Analytics -->
-    
+
+
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
-    
-    <div class="container-fluid" id="banner"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
 
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.6</h1>
-      
-    </a>
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">spgrep-modulation 0.2.6</h1>
+  
+</a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent" role="heading">
  <span class="caption-text">
   Contents
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="index.html">
    Introduction
   </a>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="examples.html">
    Examples
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
+  <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="examples/band_connectivity.html">
      Sewing band structure by subduced representation
@@ -114,17 +97,14 @@
     </a>
    </li>
   </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="formulation.html">
    Formulation
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
+  <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="phonon.html">
      Lattice vibration
@@ -136,17 +116,14 @@
     </a>
    </li>
   </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="api.html">
    API reference
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
+  <ul class="current collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="api_modulation.html">
      Modulation
@@ -163,22 +140,19 @@
     </a>
    </li>
   </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="changelog.html">
    Change log
   </a>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="notes.html">
    Implementation notes
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
+  <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="group_velocity.html">
      Symmetry condition for group velocity
@@ -195,21 +169,17 @@
     </a>
    </li>
   </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 
-    </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
 </div>
 
 
@@ -217,125 +187,170 @@
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
     </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/api_isotropy.md.txt"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
+    <div class="col pl-2 topbar-main">
         
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/api_isotropy.md.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Isotropy subgroup</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                    </div>
-                </div>
-            </div>
-            <main id="main-content" role="main">
-                
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spgrep_modulation.isotropy.IsotropyEnumerator">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     IsotropyEnumerator
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spgrep_modulation.isotropy.IsotropyEnumerator.little_rotations">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       IsotropyEnumerator.little_rotations
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spgrep_modulation.isotropy.IsotropyEnumerator.little_translations">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       IsotropyEnumerator.little_translations
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spgrep_modulation.isotropy.IsotropyEnumerator.qpoint">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       IsotropyEnumerator.qpoint
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spgrep_modulation.isotropy.IsotropyEnumerator.small_rep">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       IsotropyEnumerator.small_rep
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spgrep_modulation.isotropy.IsotropyEnumerator.maximal_isotropy_subgroups">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       IsotropyEnumerator.maximal_isotropy_subgroups
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spgrep_modulation.isotropy.IsotropyEnumerator.order_parameter_directions">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       IsotropyEnumerator.order_parameter_directions
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spgrep_modulation.isotropy.get_translational_subgroup">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     get_translational_subgroup()
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spgrep_modulation.isotropy.enumerate_point_subgroup">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     enumerate_point_subgroup()
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spgrep_modulation.isotropy.search_compliment">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     search_compliment()
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
               <div>
                 
   <section id="isotropy-subgroup">
-<h1>Isotropy subgroup<a class="headerlink" href="#isotropy-subgroup" title="Permalink to this headline">#</a></h1>
+<h1>Isotropy subgroup<a class="headerlink" href="#isotropy-subgroup" title="Permalink to this heading">¶</a></h1>
 <blockquote>
 <div><dl class="py class">
 <dt class="sig sig-object py" id="spgrep_modulation.isotropy.IsotropyEnumerator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spgrep_modulation.isotropy.</span></span><span class="sig-name descname"><span class="pre">IsotropyEnumerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">little_rotations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">little_translations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">small_rep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_denominator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/isotropy.html#IsotropyEnumerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spgrep_modulation.isotropy.</span></span><span class="sig-name descname"><span class="pre">IsotropyEnumerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">little_rotations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">little_translations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">small_rep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_denominator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/isotropy.html#IsotropyEnumerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enumerate isotropy subgroups of given little group and small representation.</p>
 <p>Initialize class.</p>
 <dl class="field-list simple">
@@ -352,38 +367,38 @@ title="Print to PDF"
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="spgrep_modulation.isotropy.IsotropyEnumerator.little_rotations">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">little_rotations</span></span><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator.little_rotations" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">little_rotations</span></span><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator.little_rotations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return rotations of little group at <code class="docutils literal notranslate"><span class="pre">qpoint</span></code>.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spgrep_modulation.isotropy.IsotropyEnumerator.little_translations">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">little_translations</span></span><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator.little_translations" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">little_translations</span></span><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator.little_translations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return translations of little group at <code class="docutils literal notranslate"><span class="pre">qpoint</span></code>.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spgrep_modulation.isotropy.IsotropyEnumerator.qpoint">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">qpoint</span></span><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator.qpoint" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">qpoint</span></span><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator.qpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return qpoint.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spgrep_modulation.isotropy.IsotropyEnumerator.small_rep">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">small_rep</span></span><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator.small_rep" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">small_rep</span></span><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator.small_rep" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return small representation of space group.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spgrep_modulation.isotropy.IsotropyEnumerator.maximal_isotropy_subgroups">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximal_isotropy_subgroups</span></span><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator.maximal_isotropy_subgroups" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximal_isotropy_subgroups</span></span><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator.maximal_isotropy_subgroups" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return list of indices for isotropy subgroups.</p>
 <p>Let <code class="docutils literal notranslate"><span class="pre">subgroup</span> <span class="pre">=</span> <span class="pre">self.maximal_isotropy_subgroups[i]</span></code>. <code class="docutils literal notranslate"><span class="pre">(self.little_rotations[subgroup],</span> <span class="pre">self.little_translations[subgroup])</span></code> gives a coset of the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th isotropy subgroup.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="spgrep_modulation.isotropy.IsotropyEnumerator.order_parameter_directions">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">order_parameter_directions</span></span><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator.order_parameter_directions" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">order_parameter_directions</span></span><a class="headerlink" href="#spgrep_modulation.isotropy.IsotropyEnumerator.order_parameter_directions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return order-parameter directions of isotropy subgroups.</p>
 <p>Let <code class="docutils literal notranslate"><span class="pre">opd</span> <span class="pre">=</span> <span class="pre">self.order_parameter_directions[i]</span></code>, which is an array with <code class="docutils literal notranslate"><span class="pre">(num_direction,</span> <span class="pre">dim)</span></code>.
 <code class="docutils literal notranslate"><span class="pre">num_direction</span></code> is the number of free parameters for the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th isotropy subgroup.
@@ -396,7 +411,7 @@ title="Print to PDF"
 <blockquote>
 <div><dl class="py function">
 <dt class="sig sig-object py" id="spgrep_modulation.isotropy.get_translational_subgroup">
-<span class="sig-prename descclassname"><span class="pre">spgrep_modulation.isotropy.</span></span><span class="sig-name descname"><span class="pre">get_translational_subgroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_denominator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/isotropy.html#get_translational_subgroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.isotropy.get_translational_subgroup" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spgrep_modulation.isotropy.</span></span><span class="sig-name descname"><span class="pre">get_translational_subgroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_denominator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/isotropy.html#get_translational_subgroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.isotropy.get_translational_subgroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return transformation matrix of the following sublattice.</p>
 <p>Let <code class="docutils literal notranslate"><span class="pre">t</span></code> be a lattice point of the returned sublattice. Then, <code class="docutils literal notranslate"><span class="pre">np.dot(t,</span> <span class="pre">qpoint)</span></code> is integer.</p>
 <dl class="field-list simple">
@@ -419,7 +434,7 @@ title="Print to PDF"
 <blockquote>
 <div><dl class="py function">
 <dt class="sig sig-object py" id="spgrep_modulation.isotropy.enumerate_point_subgroup">
-<span class="sig-prename descclassname"><span class="pre">spgrep_modulation.isotropy.</span></span><span class="sig-name descname"><span class="pre">enumerate_point_subgroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_sublattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_conjugacy_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/isotropy.html#enumerate_point_subgroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.isotropy.enumerate_point_subgroup" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spgrep_modulation.isotropy.</span></span><span class="sig-name descname"><span class="pre">enumerate_point_subgroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_sublattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_conjugacy_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/isotropy.html#enumerate_point_subgroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.isotropy.enumerate_point_subgroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enumerate conjugacy subgroups of point group.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -442,7 +457,7 @@ title="Print to PDF"
 <blockquote>
 <div><dl class="py function">
 <dt class="sig sig-object py" id="spgrep_modulation.isotropy.search_compliment">
-<span class="sig-prename descclassname"><span class="pre">spgrep_modulation.isotropy.</span></span><span class="sig-name descname"><span class="pre">search_compliment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/isotropy.html#search_compliment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.isotropy.search_compliment" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">spgrep_modulation.isotropy.</span></span><span class="sig-name descname"><span class="pre">search_compliment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/isotropy.html#search_compliment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.isotropy.search_compliment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return true if some adjusted translations enable given point group and translational subgroup correspond to a space group.</p>
 </dd></dl>
 
@@ -452,48 +467,36 @@ title="Print to PDF"
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="api_irreps.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Irreps</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="changelog.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Change log</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Kohei Shinohara<br/>
-  
-      &copy; Copyright 2022, Kohei Shinohara.<br/>
-</p>
-        </footer>
     </div>
     
-</div>
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="api_irreps.html" title="previous page">Irreps</a>
+    <a class='right-next' id="next-link" href="changelog.html" title="next page">Change log</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Kohei Shinohara<br/>
+        
+            &copy; Copyright 2022, Kohei Shinohara.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
 
 
       </div>
     </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
+    
   </body>
 </html>
