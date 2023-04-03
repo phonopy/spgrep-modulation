@@ -71,7 +71,7 @@ dev = [
 docs = [
     # We cannot update sphinx to >6 until docutils==0.20 is released: https://github.com/mcmtroffaes/sphinxcontrib-bibtex/issues/322
     "docutils==0.17",
-    "sphinx<6",
+    "sphinx<7",
     "sphinx-autobuild",
     "nbsphinx",
     "sphinxcontrib-bibtex",
