@@ -1,4 +1,5 @@
 """Isotropy subgroup of space group."""
+
 from __future__ import annotations
 
 from fractions import Fraction
