@@ -1,4 +1,5 @@
 """Modulation class."""
+
 from __future__ import annotations
 
 from warnings import warn
