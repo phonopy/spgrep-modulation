@@ -13,7 +13,7 @@ readme = "README.md"
 authors = [
     {name = "Kohei Shinohara", email = "kshinohara0508@gmail.com"},
 ]
-requires-python = ">=3.8.0"
+requires-python = ">=3.9.0"
 license = {file = "LICENSE"}
 classifiers = [
     # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -22,9 +22,10 @@ classifiers = [
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering :: Physics",
 ]
 dependencies = [
@@ -50,10 +51,9 @@ changelog = "https://phonopy.github.io/spgrep-modulation/changelog.html"
 vis = [
     "ipykernel",
     "notebook>=4.2",
-    # nglview does not work with ipywidgets>=8, https://github.com/nglviewer/nglview/issues/1032
-    "ipywidgets>=7.0, <8",
-    "nglview>=3.0.3",
-    "ase>=3.22.1",
+    "ipywidgets",
+    "nglview>=3.0.4",
+    "ase>=3.23",
     "pymatgen>=2022.8.23",
 ]
 dev = [
@@ -69,9 +69,8 @@ dev = [
     "networkx",
 ]
 docs = [
-    # We cannot update sphinx to >6 until docutils==0.20 is released: https://github.com/mcmtroffaes/sphinxcontrib-bibtex/issues/322
-    "docutils==0.17",
-    "sphinx<6",
+    "docutils>=0.20",
+    "sphinx",
     "sphinx-autobuild",
     "nbsphinx",
     "sphinxcontrib-bibtex",
@@ -98,7 +97,7 @@ testpaths = ["tests"]
 
 [tool.black]
 line-length = 99
-target-version = ['py38', 'py39', 'py310']
+target-version = ['py38', 'py39', 'py310', 'py311']
 include = '\.pyi?$'
 exclude = '''
 /(
