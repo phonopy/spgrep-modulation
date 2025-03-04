@@ -178,7 +178,7 @@ class AbstractModulationSearch(ABC):
             scaled_positions=atoms.get_scaled_positions(),
             cell=atoms.cell,
         )
-        self._logger.info(f"Finish to relax structure: energy={energy/len(atoms):.4f} eV/atom")
+        self._logger.info(f"Finish to relax structure: energy={energy / len(atoms):.4f} eV/atom")
         return relaxed_cell, energy
 
     def _get_phonon(self, cell: PhonopyAtoms, supercell_matrix, distance: float = 0.03) -> Phonopy:
