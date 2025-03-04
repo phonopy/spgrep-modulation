@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 from itertools import product
+from typing import TYPE_CHECKING
 
 import numpy as np
 import pytest
@@ -15,6 +18,9 @@ from spgrep_modulation.irreps import (
     project_eigenmode_representation,
 )
 from spgrep_modulation.utils import get_modified_dynamical_matrix
+
+if TYPE_CHECKING:
+    from phonopy.api_phonopy import Phonopy
 
 
 @pytest.mark.parametrize(
@@ -35,7 +41,7 @@ from spgrep_modulation.utils import get_modified_dynamical_matrix
     ],
 )
 def test_project_eigenmode_representation(request, ph_name, qpoint, num_irreps, num_basis):
-    ph = request.getfixturevalue(ph_name)
+    ph: Phonopy = request.getfixturevalue(ph_name)
 
     primitive = ph.dynamical_matrix.primitive
     primitive_symmetry = Symmetry(cell=primitive)
@@ -108,29 +114,29 @@ def test_symmetry_adapted_basis(ph_bto):
     s = 1 / np.sqrt(2)
 
     # Acoustic (O)
-    gamma_4m_0 = np.zeros((3, 5, 3), dtype=np.complex_)
+    gamma_4m_0 = np.zeros((3, 5, 3), dtype=np.complex128)
     gamma_4m_0[0, 2, 2] = gamma_4m_0[1, 0, 0] = gamma_4m_0[2, 1, 1] = 1
     assert np.allclose(basis[0][0], gamma_4m_0)
 
     # Acoustic (O)
-    gamma_4m_1 = np.zeros((3, 5, 3), dtype=np.complex_)
+    gamma_4m_1 = np.zeros((3, 5, 3), dtype=np.complex128)
     gamma_4m_1[0, 0, 2] = gamma_4m_1[0, 1, 2] = s
     gamma_4m_1[1, 1, 0] = gamma_4m_1[1, 2, 0] = s
     gamma_4m_1[2, 0, 1] = gamma_4m_1[2, 2, 1] = s
     assert np.allclose(basis[0][1], gamma_4m_1)
 
     # Acoustic (Ti)
-    gamma_4m_2 = np.zeros((3, 5, 3), dtype=np.complex_)
+    gamma_4m_2 = np.zeros((3, 5, 3), dtype=np.complex128)
     gamma_4m_2[0, 3, 2] = gamma_4m_2[1, 3, 0] = gamma_4m_2[2, 3, 1] = 1
     assert np.allclose(basis[0][2], gamma_4m_2)
 
     # Acoustic (Ba)
-    gamma_4m_3 = np.zeros((3, 5, 3), dtype=np.complex_)
+    gamma_4m_3 = np.zeros((3, 5, 3), dtype=np.complex128)
     gamma_4m_3[0, 4, 2] = gamma_4m_3[1, 4, 0] = gamma_4m_3[2, 4, 1] = 1
     assert np.allclose(basis[0][3], gamma_4m_3)
 
     # Optic (O)
-    gamma_5m = np.zeros((3, 5, 3), dtype=np.complex_)
+    gamma_5m = np.zeros((3, 5, 3), dtype=np.complex128)
     gamma_5m[0, 0, 2] = -s
     gamma_5m[0, 1, 2] = s
     gamma_5m[1, 1, 0] = -s
@@ -157,7 +163,7 @@ def test_symmetry_adapted_basis(ph_bto):
     ],
 )
 def test_eigenmode_representation(request, ph_name, qpoint):
-    ph = request.getfixturevalue(ph_name)
+    ph: Phonopy = request.getfixturevalue(ph_name)
 
     primitive = ph.dynamical_matrix.primitive
     primitive_symmetry = Symmetry(cell=primitive)

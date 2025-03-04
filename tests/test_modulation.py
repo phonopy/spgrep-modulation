@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import phonopy
 import pytest
-from phonopy import Phonopy
+from phonopy.api_phonopy import Phonopy
 from phonopy.phonon.modulation import Modulation as PhonopyModulation
 from phonopy.structure.symmetry import Symmetry
 from spgrep.representation import check_spacegroup_representation, is_unitary

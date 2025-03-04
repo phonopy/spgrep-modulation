@@ -279,7 +279,7 @@ class Modulation:
         _, eigvecs, _ = self.eigenspaces[frequency_index]
 
         # Generate modulation
-        modulation = np.zeros((len(self.supercell), 3), dtype=np.complex_)
+        modulation = np.zeros((len(self.supercell), 3), dtype=np.complex128)
         for eigvec, amplitude, argument in zip(eigvecs, amplitudes, arguments):
             modulation += self._get_displacements(eigvec.reshape(-1, 3), amplitude, argument)
 

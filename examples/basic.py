@@ -7,7 +7,7 @@ from spgrep_modulation.modulation import Modulation
 
 # Load Phonopy object
 path = Path(__file__).resolve().parent.parent / "tests" / "phonopy_mp-2998.yaml.xz"
-ph = phonopy.load(path)
+ph = phonopy.load(path)  # type: ignore
 
 # Prepare Modulation class
 qpoint = [0.5, 0, 0]  # X point

@@ -133,7 +133,7 @@ def get_eigenmode_representation(
             primitive.scaled_positions @ Ri.T + vi[None, :] - primitive.scaled_positions[perm_i]
         )
 
-    perm_rep = np.zeros((order, num_atoms, num_atoms), dtype=np.complex_)
+    perm_rep = np.zeros((order, num_atoms, num_atoms), dtype=np.complex128)
     for i, Ri in enumerate(rotations):
         for kappa in range(num_atoms):
             kappa2 = primitive_symmetry.atomic_permutations[i, kappa]
@@ -144,7 +144,7 @@ def get_eigenmode_representation(
     # Rotation matrix in cartesian (order, 3, 3)
     A = primitive.cell.T  # column-wise lattice vectors
     Ainv = np.linalg.inv(A)
-    rotation_rep = np.array([A @ r @ Ainv for r in rotations], dtype=np.complex_)
+    rotation_rep = np.array([A @ r @ Ainv for r in rotations], dtype=np.complex128)
 
     rep = np.einsum("ipq,iab->ipaqb", perm_rep, rotation_rep, optimize="greedy")
     return rep
