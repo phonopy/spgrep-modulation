@@ -13,8 +13,8 @@ import seekpath
 from ase import Atoms
 from ase.calculators.calculator import Calculator
 from ase.calculators.emt import EMT
-from ase.constraints import UnitCellFilter
-from ase.optimize import BFGS
+from ase.filters import FrechetCellFilter
+from ase.optimize import LBFGSLineSearch
 from phonopy import Phonopy
 from phonopy.structure.atoms import PhonopyAtoms
 from phonopy.structure.symmetry import Symmetry
@@ -168,8 +168,8 @@ class AbstractModulationSearch(ABC):
         )
         atoms.set_calculator(self.calc)
 
-        ucf = UnitCellFilter(atoms, mask=mask)
-        dyn = BFGS(ucf)
+        filter = FrechetCellFilter(atoms, mask=mask)
+        dyn = LBFGSLineSearch(filter)
         dyn.run()
         energy = atoms.get_potential_energy()
 
