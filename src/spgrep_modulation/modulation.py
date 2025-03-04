@@ -5,6 +5,7 @@ from __future__ import annotations
 from warnings import warn
 
 import numpy as np
+
 from phonopy.harmonic.dynamical_matrix import DynamicalMatrix, DynamicalMatrixNAC
 from phonopy.phonon.degeneracy import degenerate_sets, get_eigenvectors
 from phonopy.structure.atoms import PhonopyAtoms
@@ -17,7 +18,6 @@ from phonopy.structure.cells import (
 )
 from phonopy.structure.symmetry import Symmetry
 from phonopy.units import VaspToTHz
-
 from spgrep_modulation.irreps import (
     get_eigenmode_representation,
     project_eigenmode_representation,
@@ -279,7 +279,7 @@ class Modulation:
         _, eigvecs, _ = self.eigenspaces[frequency_index]
 
         # Generate modulation
-        modulation = np.zeros((len(self.supercell), 3), dtype=np.complex_)
+        modulation = np.zeros((len(self.supercell), 3), dtype=np.complex128)
         for eigvec, amplitude, argument in zip(eigvecs, amplitudes, arguments):
             modulation += self._get_displacements(eigvec.reshape(-1, 3), amplitude, argument)
 

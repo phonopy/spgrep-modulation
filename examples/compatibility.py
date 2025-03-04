@@ -7,11 +7,12 @@ from typing import Any
 
 import networkx as nx
 import numpy as np
-import phonopy
 import seekpath
 from spgrep.group import get_little_group
 from spgrep.representation import get_character
 
+import phonopy
+from phonopy.api_phonopy import Phonopy
 from spgrep_modulation.modulation import Modulation
 from spgrep_modulation.utils import NDArrayComplex, NDArrayFloat, NDArrayInt
 
@@ -157,7 +158,7 @@ def _saw_consecutive(
 
 
 def sew_bands(
-    ph: phonopy.Phonopy,
+    ph: Phonopy,
     start: list[float],
     stop: list[float],
     num: int = 17,
@@ -222,7 +223,7 @@ def sew_bands(
 if __name__ == "__main__":
     path = Path(__file__).resolve().parent.parent / "tests" / "phonopy_mp-661.yaml.xz"
 
-    ph = phonopy.load(path)
+    ph = phonopy.load(path)  # type: ignore
 
     band_path = seekpath.get_path(ph.primitive.totuple())
 
