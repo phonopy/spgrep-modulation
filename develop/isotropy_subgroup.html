@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="_static/documentation_options.js?v=0fec8a57"></script>
+    <script src="_static/documentation_options.js?v=df6a2f2f"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -416,11 +416,11 @@ By stacking these basis vectors, we can find a transformation matrix <span class
         ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{Mt} )^{-1} ( \mathbf{R}_{j}, \mathbf{\tau}_{j} + \mathbf{Mt}' ) \in \mathcal{S} \\
     &amp;\Leftrightarrow
         \forall ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{Mt} ), ( \mathbf{R}_{j}, \mathbf{\tau}_{j} + \mathbf{Mt}' ) \in \mathcal{S},
-        \mathbf{\tau}_{j} + \mathbf{Mt}' - \mathbf{R}_{i}^{-1}(\mathbf{\tau}_{i} + \mathbf{Mt}) \in \mathcal{L}_{\mathcal{S}} \\
+        \mathbf{R}_{i}^{-1} (\mathbf{\tau}_{j} + \mathbf{Mt}' - \mathbf{\tau}_{i} - \mathbf{Mt}) \in \mathcal{L}_{\mathcal{S}} \\
     &amp;\Leftrightarrow
         \forall \mathbf{R}_{i}, \mathbf{R}_{j} \in \mathcal{S},
         \exists k \,s.t.\, \mathbf{R}_{i}^{-1} \mathbf{R}_{j} = \mathbf{R}_{k},
-        \mathbf{\tau}_{j} - \mathbf{R}_{i}^{-1}\mathbf{\tau}_{i} - \mathbf{\tau}_{k} \in \mathcal{L}_{\mathcal{S}} \\\end{split}\]</div>
+        \mathbf{\tau}_{j} - \mathbf{\tau}_{i} - \mathbf{R}_{k} \mathbf{\tau}_{k} \in \mathcal{L}_{\mathcal{S}} \\\end{split}\]</div>
 </section>
 <section id="determine-order-parameter-direction">
 <h3>Determine order-parameter direction<a class="headerlink" href="#determine-order-parameter-direction" title="Link to this heading">#</a></h3>
