@@ -95,11 +95,11 @@ The condition that {math}`\mathcal{S}` is a subgroup of {math}`\mathcal{G}` is a
         ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{Mt} )^{-1} ( \mathbf{R}_{j}, \mathbf{\tau}_{j} + \mathbf{Mt}' ) \in \mathcal{S} \\
     &\Leftrightarrow
         \forall ( \mathbf{R}_{i}, \mathbf{\tau}_{i} + \mathbf{Mt} ), ( \mathbf{R}_{j}, \mathbf{\tau}_{j} + \mathbf{Mt}' ) \in \mathcal{S},
-        \mathbf{\tau}_{j} + \mathbf{Mt}' - \mathbf{R}_{i}^{-1}(\mathbf{\tau}_{i} + \mathbf{Mt}) \in \mathcal{L}_{\mathcal{S}} \\
+        \mathbf{R}_{i}^{-1} (\mathbf{\tau}_{j} + \mathbf{Mt}' - \mathbf{\tau}_{i} - \mathbf{Mt}) \in \mathcal{L}_{\mathcal{S}} \\
     &\Leftrightarrow
         \forall \mathbf{R}_{i}, \mathbf{R}_{j} \in \mathcal{S},
         \exists k \,s.t.\, \mathbf{R}_{i}^{-1} \mathbf{R}_{j} = \mathbf{R}_{k},
-        \mathbf{\tau}_{j} - \mathbf{R}_{i}^{-1}\mathbf{\tau}_{i} - \mathbf{\tau}_{k} \in \mathcal{L}_{\mathcal{S}} \\
+        \mathbf{\tau}_{j} - \mathbf{\tau}_{i} - \mathbf{R}_{k} \mathbf{\tau}_{k} \in \mathcal{L}_{\mathcal{S}} \\
 ```
 
 ### Determine order-parameter direction
