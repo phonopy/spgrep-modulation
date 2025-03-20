@@ -270,7 +270,7 @@ def enumerate_point_subgroup(
             if not preserve_sublattice[i]:
                 continue
             inv = get_inverse_index(table, i)
-            conj = [table[inv, table[idx, i]] for idx in elements]
+            conj = [int(table[inv, table[idx, i]]) for idx in elements]
             found.add(sum(1 << idx for idx in set(conj)))
 
     assert len(found) == len(st)
@@ -322,7 +322,7 @@ def traverse(
         subgroup.add(g)
 
         for h in generators:
-            que.put(table[g, h])
+            que.put(int(table[g, h]))  # cast np.int64 to int
 
     return sorted(list(subgroup))
 
