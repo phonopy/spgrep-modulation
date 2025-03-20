@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>spgrep_modulation.isotropy &#8212; spgrep-modulation 0.2.6</title>
+    <title>spgrep_modulation.isotropy &#8212; spgrep-modulation 0.2.7</title>
   
   
   
@@ -35,8 +35,8 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/documentation_options.js?v=5ba2c408"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/documentation_options.js?v=ac67dabd"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -132,7 +132,7 @@
   
   
   
-    <p class="title logo__title">spgrep-modulation 0.2.6</p>
+    <p class="title logo__title">spgrep-modulation 0.2.7</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -557,7 +557,7 @@ document.write(`
             <span class="k">if</span> <span class="ow">not</span> <span class="n">preserve_sublattice</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
                 <span class="k">continue</span>
             <span class="n">inv</span> <span class="o">=</span> <span class="n">get_inverse_index</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-            <span class="n">conj</span> <span class="o">=</span> <span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="n">inv</span><span class="p">,</span> <span class="n">table</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span>
+            <span class="n">conj</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">inv</span><span class="p">,</span> <span class="n">table</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="n">i</span><span class="p">]])</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span>
             <span class="n">found</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">conj</span><span class="p">)))</span>
 
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">found</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
@@ -610,7 +610,7 @@ document.write(`
         <span class="n">subgroup</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">generators</span><span class="p">:</span>
-            <span class="n">que</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">])</span>
+            <span class="n">que</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">]))</span>  <span class="c1"># cast np.int64 to int</span>
 
     <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">subgroup</span><span class="p">))</span>
 
