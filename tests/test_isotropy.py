@@ -133,7 +133,7 @@ def test_isotropy_subgroup(request, ph_name, qpoint, dimension, freq_idx, number
         cell = md.apply_modulation_to_supercell(scaled_modulation)
         symmetry = Symmetry(cell)
 
-        numbers_actual.append(symmetry.dataset["number"])
+        numbers_actual.append(symmetry.dataset.number)
 
     if numbers_expect:
         assert set(numbers_actual) == set(numbers_expect)

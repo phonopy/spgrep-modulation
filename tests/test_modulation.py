@@ -37,6 +37,7 @@ def test_symmetry_adapted_eigenmodes(request, ph_name, qpoint, dimension):
         supercell_matrix=dimension,
         qpoint=qpoint,
         factor=ph.unit_conversion_factor,
+        degeneracy_tolerance=1e-3,
     )
 
     # Check if each mode is truly eigenvector of dynamical matrix
@@ -65,7 +66,7 @@ def test_with_lower_symmetry():
     ph = phonopy.load(path)
 
     parent_symmetry = Symmetry(ph.unitcell)
-    assert parent_symmetry.dataset["number"] == 64  # Cmce
+    assert parent_symmetry.dataset.number == 64  # Cmce
 
     qpoint = [0.5, 0.5, 0.5]  # R
     md = Modulation.with_supercell_and_symmetry_search(
@@ -78,7 +79,7 @@ def test_with_lower_symmetry():
     assert len(modulated) == 1
 
     symmetry = Symmetry(modulated[0])
-    assert symmetry.dataset["number"] == 12  # C2/m
+    assert symmetry.dataset.number == 12  # C2/m
 
 
 def test_regression(ph_bto: Phonopy):

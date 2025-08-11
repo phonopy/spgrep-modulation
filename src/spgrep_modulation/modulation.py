@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Final
 from warnings import warn
 
 import numpy as np
@@ -32,6 +33,8 @@ from spgrep_modulation.utils import (
     sample_on_unit_sphere,
 )
 
+DEFAULT_DEGENERACY_TOLERANCE: Final[float] = 1e-3
+
 
 class Modulation:
     """Generate modulated cells based on dynamical matrix of phonon."""
@@ -44,7 +47,7 @@ class Modulation:
         qpoint: NDArrayFloat,
         nac_q_direction: NDArrayFloat | None = None,
         factor: float = VaspToTHz,
-        degeneracy_tolerance: float = 1e-4,
+        degeneracy_tolerance: float = DEFAULT_DEGENERACY_TOLERANCE,
         seed: int = 0,
     ) -> None:
         """Generate modulated cells based on dynamical matrix of phonon.
@@ -398,7 +401,7 @@ class Modulation:
         qpoint: NDArrayFloat,
         nac_q_direction: NDArrayFloat | None = None,
         factor: float = VaspToTHz,
-        degeneracy_tolerance: float = 1e-4,
+        degeneracy_tolerance: float = DEFAULT_DEGENERACY_TOLERANCE,
         symprec: float = 1e-5,
         seed: int = 0,
     ) -> Modulation:
