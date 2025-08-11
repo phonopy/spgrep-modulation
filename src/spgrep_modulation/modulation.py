@@ -6,7 +6,6 @@ from typing import Final
 from warnings import warn
 
 import numpy as np
-
 from phonopy.harmonic.dynamical_matrix import DynamicalMatrix, DynamicalMatrixNAC
 from phonopy.phonon.degeneracy import degenerate_sets, get_eigenvectors
 from phonopy.structure.atoms import PhonopyAtoms
@@ -19,6 +18,7 @@ from phonopy.structure.cells import (
 )
 from phonopy.structure.symmetry import Symmetry
 from phonopy.units import VaspToTHz
+
 from spgrep_modulation.irreps import (
     get_eigenmode_representation,
     project_eigenmode_representation,
