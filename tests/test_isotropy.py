@@ -1,10 +1,10 @@
 import numpy as np
 import pytest
-from phonopy.structure.symmetry import Symmetry
 from spgrep.group import get_cayley_table
 from spgrep.pointgroup import pg_dataset
 from spgrep.utils import is_integer_array
 
+from phonopy.structure.symmetry import Symmetry
 from spgrep_modulation.isotropy import (
     IsotropyEnumerator,
     enumerate_point_subgroup,
@@ -133,7 +133,7 @@ def test_isotropy_subgroup(request, ph_name, qpoint, dimension, freq_idx, number
         cell = md.apply_modulation_to_supercell(scaled_modulation)
         symmetry = Symmetry(cell)
 
-        numbers_actual.append(symmetry.dataset["number"])
+        numbers_actual.append(symmetry.dataset.number)
 
     if numbers_expect:
         assert set(numbers_actual) == set(numbers_expect)

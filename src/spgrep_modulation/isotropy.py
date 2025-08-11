@@ -273,7 +273,7 @@ def enumerate_point_subgroup(
             conj = [int(table[inv, table[idx, i]]) for idx in elements]
             found.add(sum(1 << idx for idx in set(conj)))
 
-    assert len(found) == len(st)
+    assert found == st
     return ret
 
 
