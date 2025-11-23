@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from fractions import Fraction
 from math import gcd
+from typing import TypeAlias  # for Python<3.10
 
 import numpy as np
 from numpy.typing import NDArray
-from typing_extensions import TypeAlias  # for Python<3.10
 
 NDArrayInt: TypeAlias = NDArray[np.intc]
 NDArrayFloat: TypeAlias = NDArray[np.float64]
@@ -92,10 +92,7 @@ def get_commensurate_diagonal_supercell(
     for i, qi in enumerate(qpoint):
         n = Fraction(qi).limit_denominator(max_denominator)
         if not np.isclose(np.abs(n.numerator / n.denominator), np.abs(qi), atol=tol):
-            print(
-                "Warning: qpoint %s with value %s does not fit with the provided tolerance"
-                % (i, qi)
-            )
+            print(f"Warning: qpoint {i} with value {qi} does not fit with the provided tolerance")
         diag[i] = n.denominator
     return np.diag(diag)
 
