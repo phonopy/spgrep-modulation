@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>spgrep_modulation.modulation &#8212; spgrep-modulation 0.2.7</title>
+    <title>spgrep_modulation.modulation &#8212; spgrep-modulation 0.3.0</title>
   
   
   
@@ -35,7 +35,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/documentation_options.js?v=ac67dabd"></script>
+    <script src="../../_static/documentation_options.js?v=6512192e"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -132,7 +132,7 @@
   
   
   
-    <p class="title logo__title">spgrep-modulation 0.2.7</p>
+    <p class="title logo__title">spgrep-modulation 0.3.0</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -281,6 +281,7 @@ document.write(`
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Final</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -311,6 +312,8 @@ document.write(`
     <span class="n">sample_on_unit_sphere</span><span class="p">,</span>
 <span class="p">)</span>
 
+<span class="n">DEFAULT_DEGENERACY_TOLERANCE</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-3</span>
+
 
 <div class="viewcode-block" id="Modulation">
 <a class="viewcode-back" href="../../api_modulation.html#spgrep_modulation.modulation.Modulation">[docs]</a>
@@ -325,7 +328,7 @@ document.write(`
         <span class="n">qpoint</span><span class="p">:</span> <span class="n">NDArrayFloat</span><span class="p">,</span>
         <span class="n">nac_q_direction</span><span class="p">:</span> <span class="n">NDArrayFloat</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">VaspToTHz</span><span class="p">,</span>
-        <span class="n">degeneracy_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span>
+        <span class="n">degeneracy_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_DEGENERACY_TOLERANCE</span><span class="p">,</span>
         <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate modulated cells based on dynamical matrix of phonon.</span>
@@ -690,7 +693,7 @@ document.write(`
         <span class="n">qpoint</span><span class="p">:</span> <span class="n">NDArrayFloat</span><span class="p">,</span>
         <span class="n">nac_q_direction</span><span class="p">:</span> <span class="n">NDArrayFloat</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">VaspToTHz</span><span class="p">,</span>
-        <span class="n">degeneracy_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span>
+        <span class="n">degeneracy_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_DEGENERACY_TOLERANCE</span><span class="p">,</span>
         <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">,</span>
         <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Modulation</span><span class="p">:</span>
