@@ -311,20 +311,22 @@ def traverse(
     table: NDArrayInt,
 ) -> list[int]:
     """Traverse group elements from generators."""
-    subgroup = set()
+    visited = [False for _ in range(len(table))]
     que = Queue()  # type: ignore
     que.put(identity)
 
     while not que.empty():
         g = que.get()
-        if g in subgroup:
+        if visited[g]:
             continue
-        subgroup.add(g)
+        visited[g] = True
 
         for h in generators:
-            que.put(int(table[g, h]))  # cast np.int64 to int
+            gh = int(table[g, h])  # cast np.int64 to int
+            if not visited[gh]:
+                que.put(gh)
 
-    return sorted(list(subgroup))
+    return sorted([i for i, v in enumerate(visited) if v])
 
 
 def search_compliment(
