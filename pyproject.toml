@@ -36,7 +36,7 @@ dependencies = [
     "spglib>=2.6",
     "phonopy>=2.43.1",
     "seekpath",
-    "spgrep>=0.3.3",  # https://github.com/spglib/spgrep
+    "spgrep>=0.4",
     "hsnf>=0.3.15",  # https://github.com/lan496/hsnf
 ]
 
@@ -78,6 +78,9 @@ docs = [
     "sphinx-book-theme",
 ]
 
+[dependency-groups]
+dev = [ "spgrep-modulation[dev]" ]
+
 ###############################################################################
 # Setuptools
 ###############################################################################
@@ -94,25 +97,26 @@ zip-safe = false
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
-[tool.black]
+[tool.ruff]
 line-length = 99
-target-version = ['py38', 'py39', 'py310', 'py311']
-include = '\.pyi?$'
-exclude = '''
-/(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-  | docs
-)/
-'''
+[tool.ruff.lint]
+extend-select = [
+    "F",           # pyflakes
+    "E",           # pycodestyle-errors
+    "I",           # isort
+    # "D",           # pydocstyle
+    "UP",          # pyupgrade
+]
+extend-ignore = [
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D203",  # Conflict with D211
+    "D205",
+    "D213",  # Conflict with D212
+    "E501",
+]
 
 [tool.mypy]
 exclude = [
