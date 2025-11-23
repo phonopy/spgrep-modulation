@@ -36,8 +36,8 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="_static/documentation_options.js?v=92390d89"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/documentation_options.js?v=6ffc7ba9"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -349,13 +349,13 @@ document.write(`
 <p>Consider space group <span class="math notranslate nohighlight">\(\mathcal{G}\)</span> and its representation</p>
 <div class="math notranslate nohighlight">
 \[    g \phi_{j} = \sum_{i} \phi_{i} \Gamma(g)_{ij} \quad (g \in \mathcal{G}).\]</div>
-<p>A subgroup <span class="math notranslate nohighlight">\(\mathcal{H} (\leq \mathcal{G})\)</span> is called <strong>isotropy subgroup</strong> belonging <span class="math notranslate nohighlight">\(\Gamma\)</span> if the subduced representation <span class="math notranslate nohighlight">\(\Gamma \downarrow \mathcal{H}\)</span> has an identity representation <a class="footnote-reference brackets" href="#id19" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <span id="id2">[<a class="reference internal" href="#id12" title="C. J. Howard and H. T. Stokes. Group-Theoretical Analysis of Octahedral Tilting in Perovskites. Acta Crystallographica Section B, 54(6):782–789, Dec 1998. URL: https://doi.org/10.1107/S0108768198004200, doi:10.1107/S0108768198004200.">HS98</a>, <a class="reference internal" href="#id14" title="H T Stokes and D M Hatch. Isotropy Subgroups of the 230 Crystallographic Space Groups. WORLD SCIENTIFIC, edition, 1989. URL: https://www.worldscientific.com/doi/abs/10.1142/0751, doi:10.1142/0751.">SH89</a>, <a class="reference internal" href="#id13" title="Harold T. Stokes, Dorian M. Hatch, and James D. Wells. Group-theoretical methods for obtaining distortions in crystals: applications to vibrational modes and phase transitions. Phys. Rev. B, 43:11010–11018, May 1991. URL: https://link.aps.org/doi/10.1103/PhysRevB.43.11010, doi:10.1103/PhysRevB.43.11010.">SHW91</a>]</span>.</p>
+<p>A subgroup <span class="math notranslate nohighlight">\(\mathcal{H} (\leq \mathcal{G})\)</span> is called <strong>isotropy subgroup</strong> belonging <span class="math notranslate nohighlight">\(\Gamma\)</span> if the subduced representation <span class="math notranslate nohighlight">\(\Gamma \downarrow \mathcal{H}\)</span> has an identity representation <a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <span id="id2">[<a class="reference internal" href="#id13" title="C. J. Howard and H. T. Stokes. Group-Theoretical Analysis of Octahedral Tilting in Perovskites. Acta Crystallographica Section B, 54(6):782–789, Dec 1998. URL: https://doi.org/10.1107/S0108768198004200, doi:10.1107/S0108768198004200.">HS98</a>, <a class="reference internal" href="#id15" title="H T Stokes and D M Hatch. Isotropy Subgroups of the 230 Crystallographic Space Groups. WORLD SCIENTIFIC, edition, 1989. URL: https://www.worldscientific.com/doi/abs/10.1142/0751, doi:10.1142/0751.">SH89</a>, <a class="reference internal" href="#id14" title="Harold T. Stokes, Dorian M. Hatch, and James D. Wells. Group-theoretical methods for obtaining distortions in crystals: applications to vibrational modes and phase transitions. Phys. Rev. B, 43:11010–11018, May 1991. URL: https://link.aps.org/doi/10.1103/PhysRevB.43.11010, doi:10.1103/PhysRevB.43.11010.">SHW91</a>]</span>.</p>
 <p>When we consider a linear combination of basis functions as <span class="math notranslate nohighlight">\(\mathbf{\eta} = \sum_{i} \eta_{i} \phi_{i}\)</span>, we call <span class="math notranslate nohighlight">\(\mathbf{\eta} = \{ \eta_{i} \}_{i}\)</span> as <strong>order parameters</strong>.
 Two order parameters <span class="math notranslate nohighlight">\(\mathbf{\eta}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\eta}'\)</span> are equivalent if some operation <span class="math notranslate nohighlight">\(g \in \mathcal{G}\)</span> exists such that</p>
 <div class="math notranslate nohighlight">
 \[    \mathbf{\eta}' = \mathbf{\Gamma}(g) \mathbf{\eta}.\]</div>
 <section id="algorithm-to-generate-isotropy-subgroups-of-space-group-stokes-vk5013">
-<h2>Algorithm to generate isotropy subgroups of space group <span id="id3">[<a class="reference internal" href="#id16" title="Harold T. Stokes and Branton J. Campbell. A general algorithm for generating isotropy subgroups in superspace. Acta Crystallographica Section A, 73(1):4–13, Jan 2017. URL: https://doi.org/10.1107/S2053273316017629, doi:10.1107/S2053273316017629.">SC17</a>]</span><a class="headerlink" href="#algorithm-to-generate-isotropy-subgroups-of-space-group-stokes-vk5013" title="Link to this heading">#</a></h2>
+<h2>Algorithm to generate isotropy subgroups of space group <span id="id4">[<a class="reference internal" href="#id17" title="Harold T. Stokes and Branton J. Campbell. A general algorithm for generating isotropy subgroups in superspace. Acta Crystallographica Section A, 73(1):4–13, Jan 2017. URL: https://doi.org/10.1107/S2053273316017629, doi:10.1107/S2053273316017629.">SC17</a>]</span><a class="headerlink" href="#algorithm-to-generate-isotropy-subgroups-of-space-group-stokes-vk5013" title="Link to this heading">#</a></h2>
 <p>For a small representation <span class="math notranslate nohighlight">\(\Gamma^{\mathbf{k}\alpha}\)</span> of space group <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>, its maximal isotropy subgroups <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> are enumerated as follows.</p>
 <section id="determine-sublattice-mathcal-l-mathcal-s-and-translational-subgroup-mathcal-t-mathcal-s">
 <h3>Determine sublattice <span class="math notranslate nohighlight">\(\mathcal{L}_{\mathcal{S}}\)</span> and translational subgroup <span class="math notranslate nohighlight">\(\mathcal{T}(\mathcal{S})\)</span><a class="headerlink" href="#determine-sublattice-mathcal-l-mathcal-s-and-translational-subgroup-mathcal-t-mathcal-s" title="Link to this heading">#</a></h3>
@@ -431,29 +431,31 @@ By stacking these basis vectors, we can find a transformation matrix <span class
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
-<div class="docutils container" id="id4">
+<div class="docutils container" id="id5">
 <div role="list" class="citation-list">
-<div class="citation" id="id12" role="doc-biblioentry">
+<div class="citation" id="id13" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">HS98</a><span class="fn-bracket">]</span></span>
 <p>C. J. Howard and H. T. Stokes. Group-Theoretical Analysis of Octahedral Tilting in Perovskites. <em>Acta Crystallographica Section B</em>, 54(6):782–789, Dec 1998. URL: <a class="reference external" href="https://doi.org/10.1107/S0108768198004200">https://doi.org/10.1107/S0108768198004200</a>, <a class="reference external" href="https://doi.org/10.1107/S0108768198004200">doi:10.1107/S0108768198004200</a>.</p>
 </div>
-<div class="citation" id="id14" role="doc-biblioentry">
+<div class="citation" id="id15" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">SH89</a><span class="fn-bracket">]</span></span>
 <p>H T Stokes and D M Hatch. <em>Isotropy Subgroups of the 230 Crystallographic Space Groups</em>. WORLD SCIENTIFIC, edition, 1989. URL: <a class="reference external" href="https://www.worldscientific.com/doi/abs/10.1142/0751">https://www.worldscientific.com/doi/abs/10.1142/0751</a>, <a class="reference external" href="https://doi.org/10.1142/0751">doi:10.1142/0751</a>.</p>
 </div>
-<div class="citation" id="id16" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">SC17</a><span class="fn-bracket">]</span></span>
+<div class="citation" id="id17" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">SC17</a><span class="fn-bracket">]</span></span>
 <p>Harold T. Stokes and Branton J. Campbell. A general algorithm for generating isotropy subgroups in superspace. <em>Acta Crystallographica Section A</em>, 73(1):4–13, Jan 2017. URL: <a class="reference external" href="https://doi.org/10.1107/S2053273316017629">https://doi.org/10.1107/S2053273316017629</a>, <a class="reference external" href="https://doi.org/10.1107/S2053273316017629">doi:10.1107/S2053273316017629</a>.</p>
 </div>
-<div class="citation" id="id13" role="doc-biblioentry">
+<div class="citation" id="id14" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">SHW91</a><span class="fn-bracket">]</span></span>
 <p>Harold T. Stokes, Dorian M. Hatch, and James D. Wells. Group-theoretical methods for obtaining distortions in crystals: applications to vibrational modes and phase transitions. <em>Phys. Rev. B</em>, 43:11010–11018, May 1991. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.43.11010">https://link.aps.org/doi/10.1103/PhysRevB.43.11010</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.43.11010">doi:10.1103/PhysRevB.43.11010</a>.</p>
 </div>
 </div>
 </div>
+</section>
+</section>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id19" role="doc-footnote">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>Consider group <span class="math notranslate nohighlight">\(G\)</span> acting on space <span class="math notranslate nohighlight">\(X\)</span>.
 In general, isotropy subgroup is defined as stabilizer of point <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(X\)</span> as</p>
@@ -461,8 +463,6 @@ In general, isotropy subgroup is defined as stabilizer of point <span class="mat
 \[    G_{x} = \left\{ g \in G \mid g x = x \right\}.\]</div>
 </aside>
 </aside>
-</section>
-</section>
 
 
                 </article>

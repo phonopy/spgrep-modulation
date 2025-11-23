@@ -35,8 +35,8 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/documentation_options.js?v=92390d89"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/documentation_options.js?v=6ffc7ba9"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -599,20 +599,22 @@ document.write(`
     <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Traverse group elements from generators.&quot;&quot;&quot;</span>
-    <span class="n">subgroup</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">))]</span>
     <span class="n">que</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
     <span class="n">que</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">identity</span><span class="p">)</span>
 
     <span class="k">while</span> <span class="ow">not</span> <span class="n">que</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">que</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">subgroup</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">g</span><span class="p">]:</span>
             <span class="k">continue</span>
-        <span class="n">subgroup</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+        <span class="n">visited</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">generators</span><span class="p">:</span>
-            <span class="n">que</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">]))</span>  <span class="c1"># cast np.int64 to int</span>
+            <span class="n">gh</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">])</span>  <span class="c1"># cast np.int64 to int</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">gh</span><span class="p">]:</span>
+                <span class="n">que</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">subgroup</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">visited</span><span class="p">)</span> <span class="k">if</span> <span class="n">v</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="search_compliment">
