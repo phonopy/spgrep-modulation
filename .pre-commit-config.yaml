@@ -10,7 +10,7 @@ repos:
       - id: debug-statements
       - id: end-of-file-fixer
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.10
+    rev: v0.14.11
     hooks:
       - id: ruff-format
       - id: ruff
@@ -22,6 +22,6 @@ repos:
     - id: mypy
       exclude: ^docs/
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.9.21  # uv version.
+    rev: 0.9.24  # uv version.
     hooks:
     - id: uv-lock
