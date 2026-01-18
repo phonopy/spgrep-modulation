@@ -8,7 +8,7 @@ import numpy as np
 from phonopy.structure.cells import Primitive
 from phonopy.structure.symmetry import Symmetry
 from spgrep.core import get_spacegroup_irreps_from_primitive_symmetry
-from spgrep.representation import project_to_irrep
+from spgrep.rep.irreps import project_to_irrep
 
 from spgrep_modulation.utils import NDArrayComplex, NDArrayFloat, NDArrayInt
 

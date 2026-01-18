@@ -8,7 +8,8 @@ import pytest
 from phonopy.api_phonopy import Phonopy
 from phonopy.phonon.modulation import Modulation as PhonopyModulation
 from phonopy.structure.symmetry import Symmetry
-from spgrep.representation import check_spacegroup_representation, is_unitary
+from spgrep.rep.representation import is_unitary
+from spgrep.symmetry.representation import check_spacegroup_representation
 
 from spgrep_modulation.modulation import Modulation
 
