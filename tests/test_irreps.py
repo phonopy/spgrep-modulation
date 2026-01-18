@@ -6,9 +6,9 @@ from typing import TYPE_CHECKING
 import numpy as np
 import pytest
 from phonopy.structure.symmetry import Symmetry
+from spgrep.rep.representation import get_character, is_unitary
 from spgrep.symmetry.group import get_little_group
 from spgrep.symmetry.representation import check_spacegroup_representation
-from spgrep.rep.representation import get_character, is_unitary
 
 from spgrep_modulation.irreps import (
     get_eigenmode_representation,
