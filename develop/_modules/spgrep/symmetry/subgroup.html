@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>spgrep.symmetry.subgroup &#8212; spgrep-modulation 0.3.1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=f6a0e81e"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/spgrep/symmetry/subgroup';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">spgrep-modulation 0.3.1</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">   Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../examples.html">   Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/band_connectivity.html">  Sewing band structure by subduced representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/visualize.html">  Visualize modulated structures with nglview</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../formulation.html">   Formulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../phonon.html">   Lattice vibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../isotropy_subgroup.html">   Isotropy subgroup</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api.html">   API reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_modulation.html">    Modulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_irreps.html">    Irreps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_isotropy.html">    Isotropy subgroup</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">   Change log</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../notes.html">   Implementation notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../group_velocity.html">   Symmetry condition for group velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../supercell.html">   Supercell construction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../band_connectivity.html">   Band connectivity</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for spgrep.symmetry.subgroup</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Isotropy subgroup of space group.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">queue</span><span class="w"> </span><span class="kn">import</span> <span class="n">Queue</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">spgrep.rep.group</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_identity_index</span><span class="p">,</span> <span class="n">get_inverse_index</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spgrep.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">NDArrayInt</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="enumerate_point_subgroup">
+<a class="viewcode-back" href="../../../api_isotropy.html#spgrep_modulation.isotropy.enumerate_point_subgroup">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">enumerate_point_subgroup</span><span class="p">(</span>
+    <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">,</span> <span class="n">preserve_sublattice</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">return_conjugacy_class</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate conjugacy subgroups of point group.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    table: array[int], (order, order)</span>
+<span class="sd">        Multiplication table of group</span>
+<span class="sd">    preserve_sublattice: list[bool]</span>
+<span class="sd">        Specify ``preserve_sublattice[i] = True`` if the ``i``-th operation preserves translational subgroup of isotropy subgroup</span>
+<span class="sd">    return_conjugacy_class: bool, default=True</span>
+<span class="sd">        If true, return representatives of conjugacy classes.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    subgroups: list[list[int]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    <span class="n">identity</span> <span class="o">=</span> <span class="n">get_identity_index</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    <span class="c1"># Represent choice of elements by bit array</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">identity</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">preserve_sublattice</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">identity</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">st</span><span class="p">:</span>
+            <span class="c1"># Already visited</span>
+            <span class="k">continue</span>
+
+        <span class="n">next_st</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="n">st</span><span class="p">:</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="n">_decode_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">_is_subgroup</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
+            <span class="n">generated</span> <span class="o">=</span> <span class="n">_traverse</span><span class="p">(</span><span class="n">elements</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">identity</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
+            <span class="n">next_st</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">generated</span><span class="p">)))</span>
+
+        <span class="n">st</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">next_st</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">return_conjugacy_class</span><span class="p">:</span>
+        <span class="n">subgroups</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">st</span><span class="p">):</span>
+            <span class="n">subgroups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_decode_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">order</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">subgroups</span>
+
+    <span class="c1"># Group by conjugacy classes</span>
+    <span class="n">found</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">st</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">bits</span> <span class="ow">in</span> <span class="n">found</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="n">_decode_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">preserve_sublattice</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">continue</span>
+            <span class="n">inv</span> <span class="o">=</span> <span class="n">get_inverse_index</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">conj</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">inv</span><span class="p">,</span> <span class="n">table</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="n">i</span><span class="p">]])</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span>
+            <span class="n">found</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">conj</span><span class="p">)))</span>
+
+    <span class="k">assert</span> <span class="n">found</span> <span class="o">==</span> <span class="n">st</span>
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">enumerate_point_subgroup_naive</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">preserve_sublattice</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate conjugacy subgroups of point group in brute force.&quot;&quot;&quot;</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">order</span><span class="p">):</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="n">_decode_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">preserve_sublattice</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]):</span>
+            <span class="k">continue</span>
+
+        <span class="k">if</span> <span class="n">_is_subgroup</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ret</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_decode_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">bits</span> <span class="o">&gt;&gt;</span> <span class="n">idx</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">elements</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_subgroup</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">subtable</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">elements</span><span class="p">][:,</span> <span class="n">elements</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">subtable</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">subtable</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="n">elements</span><span class="p">))</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">subtable</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="n">elements</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_traverse</span><span class="p">(</span>
+    <span class="n">generators</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="n">identity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Traverse group elements from generators.&quot;&quot;&quot;</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">))]</span>
+    <span class="n">que</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+    <span class="n">que</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">identity</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">que</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">que</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">g</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="n">visited</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">generators</span><span class="p">:</span>
+            <span class="n">gh</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">])</span>  <span class="c1"># cast np.int64 to int</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">gh</span><span class="p">]:</span>
+                <span class="n">que</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">visited</span><span class="p">)</span> <span class="k">if</span> <span class="n">v</span><span class="p">])</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kohei Shinohara
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022, Kohei Shinohara.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

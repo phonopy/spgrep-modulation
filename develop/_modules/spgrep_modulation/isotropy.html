@@ -35,9 +35,9 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/documentation_options.js?v=001f6811"></script>
-    <script src="../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/documentation_options.js?v=f6a0e81e"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/spgrep_modulation/isotropy';</script>
@@ -288,7 +288,9 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hsnf</span><span class="w"> </span><span class="kn">import</span> <span class="n">row_style_hermite_normal_form</span><span class="p">,</span> <span class="n">smith_normal_form</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hsnf.integer_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_integer_linear_system</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">spgrep.group</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cayley_table</span><span class="p">,</span> <span class="n">get_identity_index</span><span class="p">,</span> <span class="n">get_inverse_index</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spgrep.rep.group</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_identity_index</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spgrep.symmetry.group</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cayley_table</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spgrep.symmetry.subgroup</span><span class="w"> </span><span class="kn">import</span> <span class="n">enumerate_point_subgroup</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">spgrep.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">grassmann_distance</span><span class="p">,</span> <span class="n">is_integer_array</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">spgrep_modulation.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -497,100 +499,6 @@ document.write(`
 
     <span class="k">return</span> <span class="n">transformation</span></div>
 
-
-
-<div class="viewcode-block" id="enumerate_point_subgroup">
-<a class="viewcode-back" href="../../api_isotropy.html#spgrep_modulation.isotropy.enumerate_point_subgroup">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">enumerate_point_subgroup</span><span class="p">(</span>
-    <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">,</span> <span class="n">preserve_sublattice</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">return_conjugacy_class</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate conjugacy subgroups of point group.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    table: array[int], (order, order)</span>
-<span class="sd">        Multiplication table of group</span>
-<span class="sd">    preserve_sublattice: list[bool]</span>
-<span class="sd">        Specify ``preserve_sublattice[i] = True`` if the ``i``-th operation preserves translational subgroup of isotropy subgroup</span>
-<span class="sd">    return_conjugacy_class: bool, default=True</span>
-<span class="sd">        If true, return representatives of conjugacy classes.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    subgroups: list[list[int]]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-    <span class="n">identity</span> <span class="o">=</span> <span class="n">get_identity_index</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-    <span class="c1"># Represent choice of elements by bit array</span>
-    <span class="n">st</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">identity</span><span class="p">}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
-        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">preserve_sublattice</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">identity</span><span class="p">):</span>
-            <span class="k">continue</span>
-        <span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">st</span><span class="p">:</span>
-            <span class="c1"># Already visited</span>
-            <span class="k">continue</span>
-
-        <span class="n">next_st</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="n">st</span><span class="p">:</span>
-            <span class="n">elements</span> <span class="o">=</span> <span class="n">_decode_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
-            <span class="k">assert</span> <span class="n">_is_subgroup</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
-            <span class="n">generated</span> <span class="o">=</span> <span class="n">traverse</span><span class="p">(</span><span class="n">elements</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">identity</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
-            <span class="n">next_st</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">generated</span><span class="p">)))</span>
-
-        <span class="n">st</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">next_st</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">return_conjugacy_class</span><span class="p">:</span>
-        <span class="n">subgroups</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">st</span><span class="p">):</span>
-            <span class="n">subgroups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_decode_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">order</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">subgroups</span>
-
-    <span class="c1"># Group by conjugacy classes</span>
-    <span class="n">found</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">st</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">bits</span> <span class="ow">in</span> <span class="n">found</span><span class="p">:</span>
-            <span class="k">continue</span>
-        <span class="n">elements</span> <span class="o">=</span> <span class="n">_decode_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
-        <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">preserve_sublattice</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                <span class="k">continue</span>
-            <span class="n">inv</span> <span class="o">=</span> <span class="n">get_inverse_index</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-            <span class="n">conj</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">inv</span><span class="p">,</span> <span class="n">table</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="n">i</span><span class="p">]])</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span>
-            <span class="n">found</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">conj</span><span class="p">)))</span>
-
-    <span class="k">assert</span> <span class="n">found</span> <span class="o">==</span> <span class="n">st</span>
-    <span class="k">return</span> <span class="n">ret</span></div>
-
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">enumerate_point_subgroup_naive</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">preserve_sublattice</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate conjugacy subgroups of point group in brute force.&quot;&quot;&quot;</span>
-    <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">order</span><span class="p">):</span>
-        <span class="n">elements</span> <span class="o">=</span> <span class="n">_decode_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">preserve_sublattice</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]):</span>
-            <span class="k">continue</span>
-
-        <span class="k">if</span> <span class="n">_is_subgroup</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
-            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">ret</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">_decode_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-    <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">bits</span> <span class="o">&gt;&gt;</span> <span class="n">idx</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">elements</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">_is_subgroup</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">subtable</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">elements</span><span class="p">][:,</span> <span class="n">elements</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">subtable</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">subtable</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="n">elements</span><span class="p">))</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">subtable</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="n">elements</span><span class="p">)):</span>
-            <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">return</span> <span class="kc">True</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">traverse</span><span class="p">(</span>
