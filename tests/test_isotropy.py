@@ -1,14 +1,14 @@
+from __future__ import annotations
+
 import numpy as np
 import pytest
 from phonopy.structure.symmetry import Symmetry
-from spgrep.group import get_cayley_table
-from spgrep.pointgroup import pg_dataset
+from spgrep.symmetry.group import get_cayley_table
+from spgrep.symmetry.subgroup import enumerate_point_subgroup
 from spgrep.utils import is_integer_array
 
 from spgrep_modulation.isotropy import (
     IsotropyEnumerator,
-    enumerate_point_subgroup,
-    enumerate_point_subgroup_naive,
     get_translational_subgroup,
     search_compliment,
 )
@@ -40,15 +40,6 @@ def test_get_translational_subgroup(qpoint):
     transformation = get_translational_subgroup(qpoint)
     assert np.linalg.det(transformation) > 0
     assert is_integer_array(transformation @ qpoint)
-
-
-def test_enumerate_point_subgroup():
-    pointgroup = pg_dataset["4/mmm"][0]
-    table = get_cayley_table(np.array(pointgroup))
-    flags = [True for _ in range(len(pointgroup))]
-    subgroups_actual = enumerate_point_subgroup(table, flags, return_conjugacy_class=False)
-    subgroups_expect = enumerate_point_subgroup_naive(table, flags)
-    assert len(subgroups_actual) == len(subgroups_expect)
 
 
 def test_compliments():

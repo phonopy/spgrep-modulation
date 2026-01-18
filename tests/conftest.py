@@ -1,8 +1,9 @@
 from pathlib import Path
 
-import phonopy
 import pytest
 from phonopy.api_phonopy import Phonopy
+
+import phonopy
 
 
 @pytest.fixture(scope="session")

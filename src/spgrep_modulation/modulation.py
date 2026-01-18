@@ -18,6 +18,7 @@ from phonopy.structure.cells import (
 )
 from phonopy.structure.symmetry import Symmetry
 from phonopy.units import VaspToTHz
+import phonopy.physical_units
 
 from spgrep_modulation.irreps import (
     get_eigenmode_representation,

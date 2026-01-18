@@ -1,89 +1,82 @@
 [build-system]
-requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2", "wheel"]
 build-backend = "setuptools.build_meta"
-
 ###############################################################################
 # Project
 ###############################################################################
+requires = [ "setuptools>=45", "setuptools-scm[toml]>=6.2", "wheel" ]
+
 [project]
-name = "spgrep_modulation"
-dynamic = ["version"]
+name = "spgrep-modulation"
 description = "Collective atomic modulation analysis with irreducible space-group representation"
 readme = "README.md"
+license = { file = "LICENSE" }
 authors = [
-    {name = "Kohei Shinohara", email = "kshinohara0508@gmail.com"},
+  { name = "Kohei Shinohara", email = "kshinohara0508@gmail.com" },
 ]
 requires-python = ">=3.10"
-license = {file = "LICENSE"}
 classifiers = [
-    # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
-    "Development Status :: 2 - Pre-Alpha",
-    "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: BSD License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Topic :: Scientific/Engineering :: Physics",
+  # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: BSD License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Scientific/Engineering :: Physics",
 ]
+dynamic = [ "version" ]
 dependencies = [
-    "setuptools",
-    "setuptools_scm",
-    "wheel",
-    "typing_extensions",
-    "numpy>=1.20.1",
-    "spglib>=2.6",
-    "phonopy>=2.43.1",
-    "seekpath",
-    "spgrep>=0.4",
-    "hsnf>=0.3.15",  # https://github.com/lan496/hsnf
+  "hsnf>=0.3.15",      # https://github.com/lan496/hsnf
+  "numpy>=1.20.1",
+  "phonopy>=2.47.1",
+  "seekpath",
+  "spglib>=2.7",
+  "spgrep>=0.5",
+  "typing-extensions",
 ]
 
-[project.urls]
-repository = "https://github.com/lan496/spgrep-modulation"
-homepage = "https://phonopy.github.io/spgrep-modulation"
-documentation = "https://phonopy.github.io/spgrep-modulation"
-changelog = "https://phonopy.github.io/spgrep-modulation/changelog.html"
-
-[project.optional-dependencies]
-vis = [
-    "ipykernel",
-    "notebook>=4.2",
-    "ipywidgets",
-    "nglview>=3.0.4",
-    "ase>=3.23",
-    "pymatgen>=2022.8.23",
+optional-dependencies.dev = [
+  "click",
+  "ipython",
+  "networkx",
+  "prek",
+  "pytest",
+  "pytest-cov",
 ]
-dev = [
-    "pytest",
-    "pytest-cov",
-    "pre-commit",
-    "black",
-    "mypy",
-    "flake8",
-    "pyupgrade",
-    "ipython",
-    "click",
-    "networkx",
+optional-dependencies.docs = [
+  "docutils>=0.20",
+  # "sphinx-proof",  # Seems to be incompatible with nbsphinx
+  "myst-parser",
+  "nbsphinx",
+  "sphinx",
+  "sphinx-autobuild",
+  "sphinx-book-theme",
+  "sphinxcontrib-bibtex",
 ]
-docs = [
-    "docutils>=0.20",
-    "sphinx",
-    "sphinx-autobuild",
-    "nbsphinx",
-    "sphinxcontrib-bibtex",
-    # "sphinx-proof",  # Seems to be incompatible with nbsphinx
-    "myst-parser",
-    "sphinx-book-theme",
+optional-dependencies.vis = [
+  "ase>=3.23",
+  "ipykernel",
+  "ipywidgets",
+  "nglview>=3.0.4",
+  "notebook>=4.2",
+  "pymatgen>=2022.8.23",
 ]
+urls.changelog = "https://phonopy.github.io/spgrep-modulation/changelog.html"
+urls.documentation = "https://phonopy.github.io/spgrep-modulation"
+urls.homepage = "https://phonopy.github.io/spgrep-modulation"
+urls.repository = "https://github.com/lan496/spgrep-modulation"
 
 [dependency-groups]
-dev = [ "spgrep-modulation[dev]" ]
-
 ###############################################################################
 # Setuptools
 ###############################################################################
+dev = [ "spgrep-modulation[dev]" ]
+
 [tool.setuptools]
 zip-safe = false
 
@@ -92,34 +85,34 @@ zip-safe = false
 ###############################################################################
 
 # Enable version inference
-[tool.setuptools_scm]
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
+[tool.setuptools_scm]
 
 [tool.ruff]
 line-length = 99
-[tool.ruff.lint]
-extend-select = [
-    "F",           # pyflakes
-    "E",           # pycodestyle-errors
-    "I",           # isort
-    # "D",           # pydocstyle
-    "UP",          # pyupgrade
+lint.extend-select = [
+  "E", # pycodestyle-errors
+  "F", # pyflakes
+  "I", # isort
+  # "D",           # pydocstyle
+  "UP", # pyupgrade
 ]
-extend-ignore = [
-    "D100",
-    "D101",
-    "D102",
-    "D103",
-    "D203",  # Conflict with D211
-    "D205",
-    "D213",  # Conflict with D212
-    "E501",
+lint.extend-ignore = [
+  "D100",
+  "D101",
+  "D102",
+  "D103",
+  "D203", # Conflict with D211
+  "D205",
+  "D213", # Conflict with D212
+  "E501",
 ]
+
+[tool.pytest.ini_options]
+testpaths = [ "tests" ]
 
 [tool.mypy]
 exclude = [
-    'docs',
+  'docs',
 ]
 warn_no_return = false

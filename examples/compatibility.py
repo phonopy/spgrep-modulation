@@ -7,12 +7,12 @@ from typing import Any
 
 import networkx as nx
 import numpy as np
-import phonopy
 import seekpath
 from phonopy.api_phonopy import Phonopy
 from spgrep.group import get_little_group
 from spgrep.representation import get_character
 
+import phonopy
 from spgrep_modulation.modulation import Modulation
 from spgrep_modulation.utils import NDArrayComplex, NDArrayFloat, NDArrayInt
 
