@@ -1,8 +1,8 @@
 [build-system]
 build-backend = "setuptools.build_meta"
-###############################################################################
+## #############################################################################
 # Project
-###############################################################################
+## #############################################################################
 requires = [ "setuptools>=45", "setuptools-scm[toml]>=6.2", "wheel" ]
 
 [project]
@@ -39,7 +39,6 @@ dependencies = [
   "spgrep>=0.5",
   "typing-extensions",
 ]
-
 optional-dependencies.dev = [
   "click",
   "ipython",
@@ -72,28 +71,20 @@ urls.homepage = "https://phonopy.github.io/spgrep-modulation"
 urls.repository = "https://github.com/lan496/spgrep-modulation"
 
 [dependency-groups]
-###############################################################################
+## #############################################################################
 # Setuptools
-###############################################################################
+## #############################################################################
 dev = [ "spgrep-modulation[dev]" ]
 
 [tool.setuptools]
 zip-safe = false
 
-###############################################################################
-# Other tools
-###############################################################################
-
-# Enable version inference
-
-[tool.setuptools_scm]
-
 [tool.ruff]
 line-length = 99
 lint.extend-select = [
-  "E", # pycodestyle-errors
-  "F", # pyflakes
-  "I", # isort
+  "E",  # pycodestyle-errors
+  "F",  # pyflakes
+  "I",  # isort
   # "D",           # pydocstyle
   "UP", # pyupgrade
 ]
@@ -108,11 +99,11 @@ lint.extend-ignore = [
   "E501",
 ]
 
-[tool.pytest.ini_options]
-testpaths = [ "tests" ]
+[tool.pytest]
+ini_options.testpaths = [ "tests" ]
 
 [tool.mypy]
 exclude = [
-  'docs',
+  "docs",
 ]
 warn_no_return = false
