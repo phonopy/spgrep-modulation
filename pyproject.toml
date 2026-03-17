@@ -99,11 +99,11 @@ lint.extend-ignore = [
   "E501",
 ]
 
-[tool.pytest]
-ini_options.testpaths = [ "tests" ]
-
 [tool.mypy]
 exclude = [
   "docs",
 ]
 warn_no_return = false
+
+[tool.pytest]
+ini_options.testpaths = [ "tests" ]
