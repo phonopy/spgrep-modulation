@@ -79,6 +79,9 @@ dev = [ "spgrep-modulation[dev]" ]
 [tool.setuptools]
 zip-safe = false
 
+[tool.uv]
+exclude-newer = "1 week"
+
 [tool.ruff]
 line-length = 99
 lint.extend-select = [

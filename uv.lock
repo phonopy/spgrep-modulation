@@ -12,6 +12,10 @@ resolution-markers = [
     "python_full_version < '3.11' and sys_platform != 'win32'",
 ]
 
+[options]
+exclude-newer = "2026-04-05T00:19:20.295388Z"
+exclude-newer-span = "P1W"
+
 [[package]]
 name = "accessible-pygments"
 version = "0.0.5"
@@ -3473,7 +3477,7 @@ requires-dist = [
     { name = "sphinxcontrib-bibtex", marker = "extra == 'docs'" },
     { name = "typing-extensions" },
 ]
-provides-extras = ["vis", "dev", "docs"]
+provides-extras = ["dev", "docs", "vis"]
 
 [package.metadata.requires-dev]
 dev = [{ name = "spgrep-modulation", extras = ["dev"] }]
