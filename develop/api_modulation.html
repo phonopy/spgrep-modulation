@@ -44,6 +44,8 @@
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_modulation';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -286,7 +288,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -302,6 +306,32 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation"><code class="docutils literal notranslate"><span class="pre">Modulation</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.dynamical_matrix"><code class="docutils literal notranslate"><span class="pre">Modulation.dynamical_matrix</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.primitive_symmetry"><code class="docutils literal notranslate"><span class="pre">Modulation.primitive_symmetry</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.little_rotations"><code class="docutils literal notranslate"><span class="pre">Modulation.little_rotations</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.little_translations"><code class="docutils literal notranslate"><span class="pre">Modulation.little_translations</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.primitive"><code class="docutils literal notranslate"><span class="pre">Modulation.primitive</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.supercell"><code class="docutils literal notranslate"><span class="pre">Modulation.supercell</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.qpoint"><code class="docutils literal notranslate"><span class="pre">Modulation.qpoint</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.unit_conversion_factor"><code class="docutils literal notranslate"><span class="pre">Modulation.unit_conversion_factor</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.degeneracy_tolerance"><code class="docutils literal notranslate"><span class="pre">Modulation.degeneracy_tolerance</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.eigenspaces"><code class="docutils literal notranslate"><span class="pre">Modulation.eigenspaces</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.get_modulated_supercell_and_modulation"><code class="docutils literal notranslate"><span class="pre">Modulation.get_modulated_supercell_and_modulation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.get_modulated_supercells"><code class="docutils literal notranslate"><span class="pre">Modulation.get_modulated_supercells()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.get_high_symmetry_modulated_supercells"><code class="docutils literal notranslate"><span class="pre">Modulation.get_high_symmetry_modulated_supercells()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.with_supercell_and_symmetry_search"><code class="docutils literal notranslate"><span class="pre">Modulation.with_supercell_and_symmetry_search()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.eigvals_to_frequencies"><code class="docutils literal notranslate"><span class="pre">Modulation.eigvals_to_frequencies()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.apply_modulation_to_supercell"><code class="docutils literal notranslate"><span class="pre">Modulation.apply_modulation_to_supercell()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -313,6 +343,178 @@
                   
   <section id="modulation">
 <h1>Modulation<a class="headerlink" href="#modulation" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><dl class="py class">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">spgrep_modulation.modulation.</span></span><span class="sig-name descname"><span class="pre">Modulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">primitive_symmetry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">supercell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamical_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nac_q_direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15.633302300230191</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degeneracy_tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/modulation.html#Modulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.modulation.Modulation" title="Link to this definition">#</a></dt>
+<dd><p>Generate modulated cells based on dynamical matrix of phonon.</p>
+<p>Generate modulated cells based on dynamical matrix of phonon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>primitive_symmetry</strong> (<em>phonopy.structure.symmetry.Symmetry</em>) – phonopy’s Symmetry object for primitive cell</p></li>
+<li><p><strong>supercell</strong> (<em>phonopy.structure.cells.Supercell</em>) – phonopy’s supercell object to apply modulation</p></li>
+<li><p><strong>dynamical_matrix</strong> (<em>phonopy.harmonic.dynamical_matrix.DynamicalMatrix</em>) – phonopy’s dynamical matrix object</p></li>
+<li><p><strong>qpoint</strong> (<em>array</em><em>, </em><em>(</em><em>3</em><em>, </em><em>)</em>)</p></li>
+<li><p><strong>nac_q_direction</strong> – Used to calculate dynamical matrix around Gamma point if specified</p></li>
+<li><p><strong>factor</strong> (<em>float</em>) – Unit conversion</p></li>
+<li><p><strong>degeneracy_tolerance</strong> (<em>float</em>) – Absolute tolerance to groupby phonon frequencies in <code class="docutils literal notranslate"><span class="pre">factor</span></code> unit</p></li>
+<li><p><strong>seed</strong> (<em>int</em>) – Seed value for sampling modulation from degenerated modes</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.dynamical_matrix">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">dynamical_matrix</span></span><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.dynamical_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Return Phonopy’s dynamical matrix.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.primitive_symmetry">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">primitive_symmetry</span></span><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.primitive_symmetry" title="Link to this definition">#</a></dt>
+<dd><p>Return Phonopy’s symmetry for primitive cell.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.little_rotations">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">little_rotations</span></span><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.little_rotations" title="Link to this definition">#</a></dt>
+<dd><p>Return rotations of little group at <code class="docutils literal notranslate"><span class="pre">qpoint</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.little_translations">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">little_translations</span></span><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.little_translations" title="Link to this definition">#</a></dt>
+<dd><p>Return translations of little group at <code class="docutils literal notranslate"><span class="pre">qpoint</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.primitive">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">primitive</span></span><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.primitive" title="Link to this definition">#</a></dt>
+<dd><p>Return Phonopy’s primitive cell.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.supercell">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">supercell</span></span><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.supercell" title="Link to this definition">#</a></dt>
+<dd><p>Return Phonopy’s supercell without modulations.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.qpoint">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">qpoint</span></span><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.qpoint" title="Link to this definition">#</a></dt>
+<dd><p>Return qpoint.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.unit_conversion_factor">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">unit_conversion_factor</span></span><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.unit_conversion_factor" title="Link to this definition">#</a></dt>
+<dd><p>Return unit conversion for frequencies.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.degeneracy_tolerance">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">degeneracy_tolerance</span></span><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.degeneracy_tolerance" title="Link to this definition">#</a></dt>
+<dd><p>Return absolute tolerance to detect degenerated bands.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.eigenspaces">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">eigenspaces</span></span><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.eigenspaces" title="Link to this definition">#</a></dt>
+<dd><p>Return list of <code class="docutils literal notranslate"><span class="pre">(eigenvalue,</span> <span class="pre">degenerated</span> <span class="pre">eigenvectors,</span> <span class="pre">irrep</span> <span class="pre">formed</span> <span class="pre">by</span> <span class="pre">the</span> <span class="pre">eigenvectors)</span></code> of dynamical matrix.</p>
+<p><code class="docutils literal notranslate"><span class="pre">frequency_index</span></code> is the index of <code class="docutils literal notranslate"><span class="pre">eigenspaces</span></code>.
+Each <code class="docutils literal notranslate"><span class="pre">frequency_index</span></code> corresponds to a eigenvalue of the dynamical matrix, <span class="math notranslate nohighlight">\(\omega_{\alpha s}^{2}\)</span>.
+Here, <span class="math notranslate nohighlight">\(\alpha\)</span> specifies irrep up to unitary equivalence and <span class="math notranslate nohighlight">\(s\)</span> distinguishes the irrep among equivalent irreps.
+<code class="docutils literal notranslate"><span class="pre">eigenspaces[frequency_index]</span></code> is a tuple with</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">eigenvalue</span></code>: float, eigenvalue of the dynamical matrix <span class="math notranslate nohighlight">\(\omega_{\alpha s}^{2}\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eigenvectors</span></code>: array, (dim, num_atoms, 3), <code class="docutils literal notranslate"><span class="pre">eigenvectors[lambda,</span> <span class="pre">kappa,</span> <span class="pre">:]</span></code> is an eigenvector <span class="math notranslate nohighlight">\(\mathbf{e}(\kappa; \mathbf{q}\alpha s \lambda)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">irrep</span></code>: array, (little_order, dim, dim), representation matrices of the irrep <span class="math notranslate nohighlight">\(\tilde{\Gamma}^{\mathbf{q}\alpha s}\)</span></p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.get_modulated_supercell_and_modulation">
+<span class="sig-name descname"><span class="pre">get_modulated_supercell_and_modulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frequency_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitudes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/modulation.html#Modulation.get_modulated_supercell_and_modulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.get_modulated_supercell_and_modulation" title="Link to this definition">#</a></dt>
+<dd><p>Return modulated cell and modulation with given amplitudes and arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frequency_index</strong> (<em>int</em>) – Index of considered eigenmodes in <code class="docutils literal notranslate"><span class="pre">Modulation.eigenspaces</span></code>.
+See <a class="reference internal" href="#spgrep_modulation.modulation.Modulation.eigenspaces" title="spgrep_modulation.modulation.Modulation.eigenspaces"><code class="xref py py-func docutils literal notranslate"><span class="pre">Modulation.eigenspaces()</span></code></a>.</p></li>
+<li><p><strong>amplitudes</strong> (<em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>(</em><em>dim</em><em>, </em><em>)</em>)</p></li>
+<li><p><strong>arguments</strong> (<em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>(</em><em>dim</em><em>, </em><em>)</em>) – in radian</p></li>
+<li><p><strong>return_cell</strong> (<em>bool = True</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.get_modulated_supercells">
+<span class="sig-name descname"><span class="pre">get_modulated_supercells</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frequency_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximal_displacement</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/modulation.html#Modulation.get_modulated_supercells"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.get_modulated_supercells" title="Link to this definition">#</a></dt>
+<dd><p>Return modulated cells with randomly sampled arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frequency_index</strong> (<em>int</em>) – Index of considered eigenmodes in <code class="docutils literal notranslate"><span class="pre">Modulation.eigenspaces</span></code>.
+See <a class="reference internal" href="#spgrep_modulation.modulation.Modulation.eigenspaces" title="spgrep_modulation.modulation.Modulation.eigenspaces"><code class="xref py py-func docutils literal notranslate"><span class="pre">Modulation.eigenspaces()</span></code></a>.</p></li>
+<li><p><strong>maximal_displacement</strong> (<em>int</em>) – Amplitude of modulation is chosen so that the maximal displacement in returned modulation is equal to <code class="docutils literal notranslate"><span class="pre">maximal_displacement</span></code>.
+Same unit as <code class="docutils literal notranslate"><span class="pre">Modulation.primitive.cell</span></code>.</p></li>
+<li><p><strong>max_size</strong> (<em>int</em>) – Number of returned modulated structures when degenerated eigenmodes are specified.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cells</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of PhonopyAtoms</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.get_high_symmetry_modulated_supercells">
+<span class="sig-name descname"><span class="pre">get_high_symmetry_modulated_supercells</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frequency_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximal_displacement</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.11</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/modulation.html#Modulation.get_high_symmetry_modulated_supercells"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.get_high_symmetry_modulated_supercells" title="Link to this definition">#</a></dt>
+<dd><p>Return modulated cells corresponding to one-dimensional order-parameter directions of an isotropy subgroup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frequency_index</strong> (<em>int</em>) – Index of considered eigenmodes in <code class="docutils literal notranslate"><span class="pre">Modulation.eigenspaces</span></code>.
+See <a class="reference internal" href="#spgrep_modulation.modulation.Modulation.eigenspaces" title="spgrep_modulation.modulation.Modulation.eigenspaces"><code class="xref py py-func docutils literal notranslate"><span class="pre">Modulation.eigenspaces()</span></code></a>.</p></li>
+<li><p><strong>maximal_displacement</strong> (<em>int</em>) – Amplitude of modulation is chosen so that the maximal displacement in returned modulation is equal to <code class="docutils literal notranslate"><span class="pre">maximal_displacement</span></code>.
+Same unit as <code class="docutils literal notranslate"><span class="pre">Modulation.primitive.cell</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cells</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of PhonopyAtoms</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.with_supercell_and_symmetry_search">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">with_supercell_and_symmetry_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamical_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">supercell_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nac_q_direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15.633302300230191</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degeneracy_tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symprec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/modulation.html#Modulation.with_supercell_and_symmetry_search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.with_supercell_and_symmetry_search" title="Link to this definition">#</a></dt>
+<dd><p>Return Modulation class with supercell matrix.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.eigvals_to_frequencies">
+<span class="sig-name descname"><span class="pre">eigvals_to_frequencies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eigvals</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/modulation.html#Modulation.eigvals_to_frequencies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.eigvals_to_frequencies" title="Link to this definition">#</a></dt>
+<dd><p>Convert eigenvalue to frequency.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spgrep_modulation.modulation.Modulation.apply_modulation_to_supercell">
+<span class="sig-name descname"><span class="pre">apply_modulation_to_supercell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modulation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spgrep_modulation/modulation.html#Modulation.apply_modulation_to_supercell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spgrep_modulation.modulation.Modulation.apply_modulation_to_supercell" title="Link to this definition">#</a></dt>
+<dd><p>Apply modulation to supercell.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div></blockquote>
 </section>
 
 
@@ -350,6 +552,41 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation"><code class="docutils literal notranslate"><span class="pre">Modulation</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.dynamical_matrix"><code class="docutils literal notranslate"><span class="pre">Modulation.dynamical_matrix</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.primitive_symmetry"><code class="docutils literal notranslate"><span class="pre">Modulation.primitive_symmetry</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.little_rotations"><code class="docutils literal notranslate"><span class="pre">Modulation.little_rotations</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.little_translations"><code class="docutils literal notranslate"><span class="pre">Modulation.little_translations</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.primitive"><code class="docutils literal notranslate"><span class="pre">Modulation.primitive</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.supercell"><code class="docutils literal notranslate"><span class="pre">Modulation.supercell</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.qpoint"><code class="docutils literal notranslate"><span class="pre">Modulation.qpoint</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.unit_conversion_factor"><code class="docutils literal notranslate"><span class="pre">Modulation.unit_conversion_factor</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.degeneracy_tolerance"><code class="docutils literal notranslate"><span class="pre">Modulation.degeneracy_tolerance</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.eigenspaces"><code class="docutils literal notranslate"><span class="pre">Modulation.eigenspaces</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.get_modulated_supercell_and_modulation"><code class="docutils literal notranslate"><span class="pre">Modulation.get_modulated_supercell_and_modulation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.get_modulated_supercells"><code class="docutils literal notranslate"><span class="pre">Modulation.get_modulated_supercells()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.get_high_symmetry_modulated_supercells"><code class="docutils literal notranslate"><span class="pre">Modulation.get_high_symmetry_modulated_supercells()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.with_supercell_and_symmetry_search"><code class="docutils literal notranslate"><span class="pre">Modulation.with_supercell_and_symmetry_search()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.eigvals_to_frequencies"><code class="docutils literal notranslate"><span class="pre">Modulation.eigvals_to_frequencies()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spgrep_modulation.modulation.Modulation.apply_modulation_to_supercell"><code class="docutils literal notranslate"><span class="pre">Modulation.apply_modulation_to_supercell()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
