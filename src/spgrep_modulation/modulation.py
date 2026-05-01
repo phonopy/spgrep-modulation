@@ -7,7 +7,7 @@ from warnings import warn
 
 import numpy as np
 from phonopy.harmonic.dynamical_matrix import DynamicalMatrix, DynamicalMatrixNAC
-from phonopy.phonon.degeneracy import degenerate_sets, get_eigenvectors
+from phonopy.phonon.degeneracy import degenerate_sets
 from phonopy.structure.atoms import PhonopyAtoms
 from phonopy.structure.cells import (
     Primitive,
@@ -91,14 +91,11 @@ class Modulation:
         self._supercell_size = np.abs(np.around(np.linalg.det(self._supercell.supercell_matrix)))
 
         # Diagonalize dynamical matrix if not performed yet
-        eigvals, _ = get_eigenvectors(
-            qpoint,
-            self._dynamical_matrix,
-            ddm=None,  # Not used
-            perturbation=None,
-            derivative_order=None,
-            nac_q_direction=self._nac_q_direction,
-        )
+        if isinstance(self._dynamical_matrix, DynamicalMatrixNAC):
+            self._dynamical_matrix.run(qpoint, q_direction=self._nac_q_direction)
+        else:
+            self._dynamical_matrix.run(qpoint)
+        eigvals = np.linalg.eigh(self._dynamical_matrix.dynamical_matrix)[0].real
 
         # Group eigenvecs by frequencies
         self._eigenspaces, mapping_little_group = self._group_eigenspaces(eigvals)
