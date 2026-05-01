@@ -62,7 +62,7 @@ optional-dependencies.vis = [
   "ipykernel",
   "ipywidgets",
   "nglview>=3.0.4",
-  "notebook>=4.2",
+  "notebook>=7.5.6",
   "pymatgen>=2022.8.23",
 ]
 urls.changelog = "https://phonopy.github.io/spgrep-modulation/changelog.html"
@@ -80,7 +80,7 @@ dev = [ "spgrep-modulation[dev]" ]
 zip-safe = false
 
 [tool.uv]
-exclude-newer = "1 week"
+exclude-newer = "2026-05-01"
 
 [tool.ruff]
 line-length = 99
