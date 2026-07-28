@@ -42,7 +42,7 @@ class AbstractModulationSearch(ABC):
     def __init__(
         self,
         calc: Calculator,
-        supercell_matrix: list[list[int]] = [[2, 0, 0], [0, 2, 0], [0, 0, 2]],
+        supercell_matrix: list[list[int]] | None = None,
         maximal_displacement: float = 0.11,
         max_size: int = 512,
         symmetry_tolerance: float = 1e-2,  # Rough symprec to idealize modulated cells
@@ -51,6 +51,8 @@ class AbstractModulationSearch(ABC):
         angle_tol: float = -1,
     ) -> None:
         self._calc = calc
+        if supercell_matrix is None:
+            supercell_matrix = [[2, 0, 0], [0, 2, 0], [0, 0, 2]]
         self._supercell_matrix = supercell_matrix
         self._maximal_displacement = maximal_displacement
         self._max_size = max_size
@@ -139,7 +141,7 @@ class AbstractModulationSearch(ABC):
 
             for child in children:
                 child_pmg = get_pmg_structure(child.cell)
-                if any([self._structure_matcher.fit(child_pmg, other) for other in found_pmg]):
+                if any(self._structure_matcher.fit(child_pmg, other) for other in found_pmg):
                     self._logger.info("Detect duplicates")
                     continue
 
@@ -302,7 +304,7 @@ class BaseModulationSearch(AbstractModulationSearch):
             elif num_ops == max_num_ops:
                 pmg_structure = get_pmg_structure(refined)
                 if any(
-                    [self._structure_matcher.fit(pmg_structure, other) for other in selected_pmg]
+                    self._structure_matcher.fit(pmg_structure, other) for other in selected_pmg
                 ):
                     continue
                 selected.append(refined)
