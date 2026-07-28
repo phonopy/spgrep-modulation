@@ -582,7 +582,7 @@
 
     <span class="c1"># Lattice points in sublattice formed by `transformation`</span>
     <span class="c1"># See https://lan496.github.io/dsenum/supercell.html</span>
-    <span class="n">snf</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">smith_normal_form</span><span class="p">(</span><span class="n">transformation</span><span class="p">)</span>  <span class="c1"># snf = L @ transformation @ R</span>
+    <span class="n">snf</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">_R</span> <span class="o">=</span> <span class="n">smith_normal_form</span><span class="p">(</span><span class="n">transformation</span><span class="p">)</span>  <span class="c1"># snf = L @ transformation @ R</span>
     <span class="n">invariant_factors</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">snf</span><span class="o">.</span><span class="n">diagonal</span><span class="p">())</span>
     <span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">factor</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">invariant_factors</span><span class="p">]):</span>
