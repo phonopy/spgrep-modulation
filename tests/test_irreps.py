@@ -102,7 +102,7 @@ def test_symmetry_adapted_basis(ph_bto):
     primitive_symmetry = Symmetry(cell=primitive)
 
     rep = get_eigenmode_representation(primitive, primitive_symmetry, qpoint)
-    basis, irreps, mapping = project_eigenmode_representation(
+    basis, irreps, _mapping = project_eigenmode_representation(
         rep, primitive, primitive_symmetry, qpoint
     )
     assert len(irreps) == 2

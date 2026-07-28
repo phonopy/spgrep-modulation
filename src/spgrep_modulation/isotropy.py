@@ -255,7 +255,7 @@ def search_compliment(
 
     # Lattice points in sublattice formed by `transformation`
     # See https://lan496.github.io/dsenum/supercell.html
-    snf, L, R = smith_normal_form(transformation)  # snf = L @ transformation @ R
+    snf, L, _R = smith_normal_form(transformation)  # snf = L @ transformation @ R
     invariant_factors = tuple(snf.diagonal())
     points = []
     for factor in product(*[range(f) for f in invariant_factors]):

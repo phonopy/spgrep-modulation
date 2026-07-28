@@ -115,7 +115,7 @@ def test_regression(ph_bto: Phonopy):
         qpoint=qpoint,
         factor=ph_bto.unit_conversion_factor,
     )
-    modulated_cell, modulation = md.get_modulated_supercell_and_modulation(
+    _modulated_cell, modulation = md.get_modulated_supercell_and_modulation(
         frequency_index=band_index,
         amplitudes=[amplitude],
         arguments=[argument],

@@ -241,8 +241,7 @@ def get_local_and_ghost_sites(structure: Structure, eps: float = 1e-8) -> list[P
                 )
                 locals_and_ghosts.append(new_site)
 
-    for site in wrapped_sites:
-        locals_and_ghosts.append(site)
+    locals_and_ghosts.extend(wrapped_sites)
 
     return locals_and_ghosts
 

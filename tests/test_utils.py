@@ -30,6 +30,6 @@ def test_qr_unique():
             [0, 0, -1],
         ]
     )
-    q, r = qr_unique(a)
+    _q, r = qr_unique(a)
     _, r2 = qr_unique(r)
     assert np.allclose(r, r2)
