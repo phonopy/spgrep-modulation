@@ -317,7 +317,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for spgrep_modulation.irreps</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Irreps for phonon.&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""Irreps for phonon."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -339,25 +339,25 @@
     <span class="n">primitive</span><span class="p">:</span> <span class="n">Primitive</span><span class="p">,</span>
     <span class="n">primitive_symmetry</span><span class="p">:</span> <span class="n">Symmetry</span><span class="p">,</span>
     <span class="n">primitive_qpoint</span><span class="p">:</span> <span class="n">NDArrayFloat</span><span class="p">,</span>
-    <span class="n">method</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;Neto&quot;</span><span class="p">,</span> <span class="s2">&quot;random&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Neto&quot;</span><span class="p">,</span>
+    <span class="n">method</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"Neto"</span><span class="p">,</span> <span class="s2">"random"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Neto"</span><span class="p">,</span>
     <span class="n">rtol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">,</span>
     <span class="n">atol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span>  <span class="c1"># Too tight tolerance gives wrong basis vectors...</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">NDArrayComplex</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArrayComplex</span><span class="p">],</span> <span class="n">NDArrayInt</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decompose representation matrices by eigenmodes into irreps.</span>
+<span class="w">    </span><span class="sd">"""Decompose representation matrices by eigenmodes into irreps.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    eigenmode_representation: array, (order, num_atoms, 3, num_atoms, 3)</span>
 <span class="sd">        Representation matrices formed by phonon eigenmodes</span>
 <span class="sd">    primitive: phonopy.structure.cells.Primitive</span>
-<span class="sd">        phonopy&#39;s primitive object</span>
+<span class="sd">        phonopy's primitive object</span>
 <span class="sd">    primitive_symmetry: phonopy.structure.symmetry.Symmetry</span>
-<span class="sd">        phonopy&#39;s Symmetry object for primitive cell</span>
+<span class="sd">        phonopy's Symmetry object for primitive cell</span>
 <span class="sd">    primitive_qpoint: array, (3, )</span>
-<span class="sd">        q vector in ``primitive``&#39;s dual basis vectors</span>
-<span class="sd">    method: str, &#39;Neto&#39; or &#39;random&#39;</span>
-<span class="sd">        &#39;Neto&#39;: construct irreps from a fixed chain of subgroups of little co-group</span>
-<span class="sd">        &#39;random&#39;: construct irreps by numerically diagonalizing a random matrix commute with regular representation</span>
+<span class="sd">        q vector in ``primitive``'s dual basis vectors</span>
+<span class="sd">    method: str, 'Neto' or 'random'</span>
+<span class="sd">        'Neto': construct irreps from a fixed chain of subgroups of little co-group</span>
+<span class="sd">        'random': construct irreps by numerically diagonalizing a random matrix commute with regular representation</span>
 <span class="sd">    rtol: float</span>
 <span class="sd">        Relative tolerance for comparing float values</span>
 <span class="sd">    atol: float</span>
@@ -367,13 +367,13 @@
 <span class="sd">    -------</span>
 <span class="sd">    all_basis: list</span>
 <span class="sd">        ``all_basis[i]`` is list of independent basis vectors with (dim, num_atoms, 3) forming ``irreps[i]``.</span>
-<span class="sd">        Note: phase chosen to be consistent with definition of phonopy&#39;s dynamical matrix</span>
+<span class="sd">        Note: phase chosen to be consistent with definition of phonopy's dynamical matrix</span>
 <span class="sd">    irreps: list of irrep, (little_order, dim, dim)</span>
 <span class="sd">    mapping_little_group: array[int], (order, )</span>
 <span class="sd">        list of indices for little group.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">rotations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">&quot;rotations&quot;</span><span class="p">]</span>
-    <span class="n">translations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">&quot;translations&quot;</span><span class="p">]</span>
+<span class="sd">    """</span>
+    <span class="n">rotations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">"rotations"</span><span class="p">]</span>
+    <span class="n">translations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">"translations"</span><span class="p">]</span>
     <span class="n">num_atoms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">primitive</span><span class="p">)</span>
 
     <span class="n">small_reps</span><span class="p">,</span> <span class="n">mapping_little_group</span> <span class="o">=</span> <span class="n">get_spacegroup_irreps_from_primitive_symmetry</span><span class="p">(</span>
@@ -402,7 +402,7 @@
         <span class="n">modified_basis</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">basis</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_atoms</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">basis</span> <span class="ow">in</span> <span class="n">projected</span><span class="p">])</span>
         <span class="n">irreps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">irrep</span><span class="p">)</span>
 
-    <span class="c1"># Apply phase to be consistent with definition of phonopy&#39;s dynamical matrix</span>
+    <span class="c1"># Apply phase to be consistent with definition of phonopy's dynamical matrix</span>
     <span class="n">phase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
         <span class="o">-</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">primitive</span><span class="o">.</span><span class="n">scaled_positions</span><span class="p">,</span> <span class="n">primitive_qpoint</span><span class="p">)</span>
     <span class="p">)</span>  <span class="c1"># (num_atoms, )</span>
@@ -426,27 +426,27 @@
     <span class="n">primitive_symmetry</span><span class="p">:</span> <span class="n">Symmetry</span><span class="p">,</span>
     <span class="n">primitive_qpoint</span><span class="p">:</span> <span class="n">NDArrayFloat</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayComplex</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute representation matrix for eigenmodes.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute representation matrix for eigenmodes.</span>
 
 <span class="sd">    .. math::</span>
-<span class="sd">       \Gamma_{\kappa&#39;\mu&#39;; \kappa\mu}^{\mathbf{q}}(g) := \exp \left( -i \mathbf{R}_{g} \mathbf{q} \cdot \mathbf{h}_{g}(\kappa) \right) [\mathbf{R}_{g}]_{\mu&#39;\mu} \delta_{ g\kappa, \kappa&#39; }</span>
+<span class="sd">       \Gamma_{\kappa'\mu'; \kappa\mu}^{\mathbf{q}}(g) := \exp \left( -i \mathbf{R}_{g} \mathbf{q} \cdot \mathbf{h}_{g}(\kappa) \right) [\mathbf{R}_{g}]_{\mu'\mu} \delta_{ g\kappa, \kappa' }</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    primitive: phonopy.structure.cells.Primitive</span>
-<span class="sd">        phonopy&#39;s primitive object</span>
+<span class="sd">        phonopy's primitive object</span>
 <span class="sd">    primitive_symmetry: phonopy.structure.symmetry.Symmetry</span>
-<span class="sd">        phonopy&#39;s Symmetry object for primitive cell</span>
+<span class="sd">        phonopy's Symmetry object for primitive cell</span>
 <span class="sd">    primitive_qpoint: array, (3, )</span>
-<span class="sd">        q vector in ``primitive``&#39;s dual basis vectors</span>
+<span class="sd">        q vector in ``primitive``'s dual basis vectors</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    rep: array, (order, num_atoms, 3, num_atoms, 3)</span>
 <span class="sd">        Representation matrices</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">rotations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">&quot;rotations&quot;</span><span class="p">]</span>
-    <span class="n">translations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">&quot;translations&quot;</span><span class="p">]</span>
+<span class="sd">    """</span>
+    <span class="n">rotations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">"rotations"</span><span class="p">]</span>
+    <span class="n">translations</span> <span class="o">=</span> <span class="n">primitive_symmetry</span><span class="o">.</span><span class="n">symmetry_operations</span><span class="p">[</span><span class="s2">"translations"</span><span class="p">]</span>
     <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rotations</span><span class="p">)</span>
     <span class="n">num_atoms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">primitive</span><span class="p">)</span>
 
@@ -470,7 +470,7 @@
     <span class="n">Ainv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="n">rotation_rep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">A</span> <span class="o">@</span> <span class="n">r</span> <span class="o">@</span> <span class="n">Ainv</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rotations</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
 
-    <span class="n">rep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ipq,iab-&gt;ipaqb&quot;</span><span class="p">,</span> <span class="n">perm_rep</span><span class="p">,</span> <span class="n">rotation_rep</span><span class="p">,</span> <span class="n">optimize</span><span class="o">=</span><span class="s2">&quot;greedy&quot;</span><span class="p">)</span>
+    <span class="n">rep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"ipq,iab-&gt;ipaqb"</span><span class="p">,</span> <span class="n">perm_rep</span><span class="p">,</span> <span class="n">rotation_rep</span><span class="p">,</span> <span class="n">optimize</span><span class="o">=</span><span class="s2">"greedy"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">rep</span></div>
 
 </pre></div>

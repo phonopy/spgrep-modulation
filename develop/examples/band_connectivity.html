@@ -415,8 +415,8 @@
 
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;spgrep_modulation==</span><span class="si">{</span><span class="n">spgrep_modulation</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;phonopy==</span><span class="si">{</span><span class="n">phonopy</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"spgrep_modulation==</span><span class="si">{</span><span class="n">spgrep_modulation</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"phonopy==</span><span class="si">{</span><span class="n">phonopy</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -433,8 +433,8 @@ phonopy==2.16.3
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;poster&quot;</span><span class="p">)</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">"poster"</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -444,7 +444,7 @@ phonopy==2.16.3
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BandNode</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Each point in band structure, characterized by eigenvalue and character of irrep.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Each point in band structure, characterized by eigenvalue and character of irrep."""</span>
 
     <span class="n">qpoint</span><span class="p">:</span> <span class="n">NDArrayFloat</span>
     <span class="n">character</span><span class="p">:</span> <span class="n">NDArrayComplex</span>
@@ -455,7 +455,7 @@ phonopy==2.16.3
 
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">QpointInfo</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for little co-group at qpoint.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for little co-group at qpoint."""</span>
 
     <span class="n">qpoint</span><span class="p">:</span> <span class="n">NDArrayFloat</span>
     <span class="n">little_rotations</span><span class="p">:</span> <span class="n">NDArrayInt</span>
@@ -508,7 +508,7 @@ phonopy==2.16.3
     <span class="n">num_atoms</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Connect nodes in consecutive qpoints.</span>
+<span class="w">    </span><span class="sd">"""Connect nodes in consecutive qpoints.</span>
 
 <span class="sd">    Assume little group of `qpoint_info1` includes little group of `qpoint_info2`.</span>
 
@@ -521,7 +521,7 @@ phonopy==2.16.3
 <span class="sd">    -------</span>
 <span class="sd">    connections:</span>
 <span class="sd">        Let `connections[i] = (n1, n2)`. `qpoint_info1.nodes[n1]` and `qpoint_info2.nodes[n2]` are connected.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
     <span class="n">num_nodes1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qpoint_info1</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
     <span class="n">num_nodes2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qpoint_info2</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
@@ -586,7 +586,7 @@ phonopy==2.16.3
     <span class="n">stop</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
     <span class="n">num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Connect bands between qpoints `start` and `stop`.</span>
+<span class="w">    </span><span class="sd">"""Connect bands between qpoints `start` and `stop`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -595,9 +595,9 @@ phonopy==2.16.3
 <span class="sd">        list with length = 3 * len(ph.primitive)</span>
 <span class="sd">        connections[k] is the k-th band composed of list of tuples `(i, idx)` corresponding to `list_qpoint_info[i].nodes[idx]`</span>
 <span class="sd">    ratios: array with shape (num, )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Specify more than three points for `num`.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Specify more than three points for `num`."</span><span class="p">)</span>
 
     <span class="n">list_qpoint_info</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">ratios</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">num</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -630,8 +630,8 @@ phonopy==2.16.3
         <span class="n">adj</span><span class="p">[</span><span class="n">src</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
 
     <span class="c1"># Add dummy source and destination nodes</span>
-    <span class="n">source</span> <span class="o">=</span> <span class="s2">&quot;source&quot;</span>
-    <span class="n">destination</span> <span class="o">=</span> <span class="s2">&quot;destination&quot;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="s2">"source"</span>
+    <span class="n">destination</span> <span class="o">=</span> <span class="s2">"destination"</span>
     <span class="n">adj</span><span class="p">[</span><span class="n">source</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">adj</span><span class="p">[</span><span class="n">destination</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">list_qpoint_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">nodes</span><span class="p">):</span>
@@ -651,7 +651,7 @@ phonopy==2.16.3
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;tests&quot;</span> <span class="o">/</span> <span class="s2">&quot;phonopy_mp-661.yaml.xz&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"tests"</span> <span class="o">/</span> <span class="s2">"phonopy_mp-661.yaml.xz"</span>
 <span class="n">ph</span> <span class="o">=</span> <span class="n">phonopy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 <span class="n">ph</span><span class="o">.</span><span class="n">auto_band_structure</span><span class="p">(</span><span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -672,9 +672,9 @@ phonopy==2.16.3
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">band_path</span> <span class="o">=</span> <span class="n">seekpath</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="n">ph</span><span class="o">.</span><span class="n">primitive</span><span class="o">.</span><span class="n">totuple</span><span class="p">())</span>
-<span class="n">label1</span><span class="p">,</span> <span class="n">label2</span> <span class="o">=</span> <span class="n">band_path</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">label1</span><span class="p">,</span> <span class="n">label2</span> <span class="o">=</span> <span class="n">band_path</span><span class="p">[</span><span class="s2">"path"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">list_qpoints_info</span><span class="p">,</span> <span class="n">connections</span><span class="p">,</span> <span class="n">ratios</span> <span class="o">=</span> <span class="n">sew_bands</span><span class="p">(</span>
-    <span class="n">ph</span><span class="p">,</span> <span class="n">band_path</span><span class="p">[</span><span class="s2">&quot;point_coords&quot;</span><span class="p">][</span><span class="n">label1</span><span class="p">],</span> <span class="n">band_path</span><span class="p">[</span><span class="s2">&quot;point_coords&quot;</span><span class="p">][</span><span class="n">label2</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">512</span>
+    <span class="n">ph</span><span class="p">,</span> <span class="n">band_path</span><span class="p">[</span><span class="s2">"point_coords"</span><span class="p">][</span><span class="n">label1</span><span class="p">],</span> <span class="n">band_path</span><span class="p">[</span><span class="s2">"point_coords"</span><span class="p">][</span><span class="n">label2</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">512</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -689,15 +689,15 @@ phonopy==2.16.3
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.75</span><span class="p">,</span> <span class="mf">6.75</span> <span class="o">*</span> <span class="mf">1.6</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">ratio</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span> <span class="n">ratios</span><span class="p">)):</span>
-    <span class="n">color</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span>
     <span class="n">frequencies</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">list_qpoints_info</span><span class="p">[</span><span class="n">qpoint_idx</span><span class="p">]</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">band_idx</span><span class="p">]</span><span class="o">.</span><span class="n">frequency</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">qpoint_idx</span><span class="p">,</span> <span class="n">band_idx</span><span class="p">)</span> <span class="ow">in</span> <span class="n">connection</span>
     <span class="p">]</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ratios</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">frequencies</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Wave vector&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency (THz)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Wave vector"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Frequency (THz)"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="n">label1</span><span class="p">,</span> <span class="n">label2</span><span class="p">])</span>
 </pre></div>
@@ -725,7 +725,7 @@ phonopy==2.16.3
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.75</span><span class="p">,</span> <span class="mf">6.75</span> <span class="o">*</span> <span class="mf">1.6</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">ratio</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span> <span class="n">ratios</span><span class="p">)):</span>
-    <span class="n">color</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span>
     <span class="n">frequencies</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">list_qpoints_info</span><span class="p">[</span><span class="n">qpoint_idx</span><span class="p">]</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">band_idx</span><span class="p">]</span><span class="o">.</span><span class="n">frequency</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">qpoint_idx</span><span class="p">,</span> <span class="n">band_idx</span><span class="p">)</span> <span class="ow">in</span> <span class="n">connection</span>
@@ -733,8 +733,8 @@ phonopy==2.16.3
     <span class="c1"># ax.plot(ratios[1:], frequencies[1:], color=color)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ratios</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">frequencies</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Wave vector&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency (THz)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Wave vector"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Frequency (THz)"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">11.8</span><span class="p">,</span> <span class="mf">12.8</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="n">label1</span><span class="p">,</span> <span class="n">label2</span><span class="p">])</span>

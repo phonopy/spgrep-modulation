@@ -317,7 +317,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for spgrep_modulation.isotropy</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Isotropy subgroup of space group.&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""Isotropy subgroup of space group."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -345,7 +345,7 @@
 <div class="viewcode-block" id="IsotropyEnumerator">
 <a class="viewcode-back" href="../../api_isotropy.html#spgrep_modulation.isotropy.IsotropyEnumerator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">IsotropyEnumerator</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate isotropy subgroups of given little group and small representation.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Enumerate isotropy subgroups of given little group and small representation."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -356,7 +356,7 @@
         <span class="n">max_denominator</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
         <span class="n">atol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize class.</span>
+<span class="w">        </span><span class="sd">"""Initialize class.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -372,7 +372,7 @@
 <span class="sd">            Maximal value to infer denominators of ``qpoint``</span>
 <span class="sd">        atol: float, default=1e-6</span>
 <span class="sd">            Absolute tolerance to avoid numerical noise</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_little_rotations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">little_rotations</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_little_translations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">little_translations</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">rint</span><span class="p">(</span><span class="n">little_translations</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_qpoint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">qpoint</span><span class="p">)</span>
@@ -384,40 +384,40 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">little_rotations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayInt</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return rotations of little group at ``qpoint``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return rotations of little group at ``qpoint``."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_little_rotations</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">little_translations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayFloat</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return translations of little group at ``qpoint``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return translations of little group at ``qpoint``."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_little_translations</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">qpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayFloat</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return qpoint.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return qpoint."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qpoint</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">small_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArrayComplex</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return small representation of space group.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return small representation of space group."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_small_rep</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">maximal_isotropy_subgroups</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return list of indices for isotropy subgroups.</span>
+<span class="w">        </span><span class="sd">"""Return list of indices for isotropy subgroups.</span>
 
 <span class="sd">        Let ``subgroup = self.maximal_isotropy_subgroups[i]``. ``(self.little_rotations[subgroup], self.little_translations[subgroup])`` gives a coset of the ``i``-th isotropy subgroup.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maximal_isotropy_subgroups</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">order_parameter_directions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArrayComplex</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return order-parameter directions of isotropy subgroups.</span>
+<span class="w">        </span><span class="sd">"""Return order-parameter directions of isotropy subgroups.</span>
 
 <span class="sd">        Let ``opd = self.order_parameter_directions[i]``, which is an array with ``(num_direction, dim)``.</span>
 <span class="sd">        ``num_direction`` is the number of free parameters for the ``i``-th isotropy subgroup.</span>
 <span class="sd">        ``dim`` is dimension of the given small representation.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_order_parameter_directions</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -467,12 +467,12 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_determine_order_parameter_directions</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">isotropy_subgroup</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">NDArrayComplex</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine order-parameter directions of given isotropy subgroup.</span>
+<span class="w">        </span><span class="sd">"""Determine order-parameter directions of given isotropy subgroup.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        directions: (num_directions, small_rep_dim)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Projection to identity representation will also work, but the problem</span>
         <span class="c1"># is that identity representation of small representations is not obvious...</span>
         <span class="n">subduced_rep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">small_rep</span><span class="p">[</span><span class="n">isotropy_subgroup</span><span class="p">]</span>
@@ -498,7 +498,7 @@
 <div class="viewcode-block" id="get_translational_subgroup">
 <a class="viewcode-back" href="../../api_isotropy.html#spgrep_modulation.isotropy.get_translational_subgroup">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_translational_subgroup</span><span class="p">(</span><span class="n">qpoint</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="n">NDArrayFloat</span><span class="p">,</span> <span class="n">max_denominator</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return transformation matrix of the following sublattice.</span>
+<span class="w">    </span><span class="sd">"""Return transformation matrix of the following sublattice.</span>
 
 <span class="sd">    Let ``t`` be a lattice point of the returned sublattice. Then, ``np.dot(t, qpoint)`` is integer.</span>
 
@@ -513,7 +513,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    transformation: array, (3, 3)</span>
 <span class="sd">        ``transformation @ qpoint`` is integer vector.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qpoint</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="n">qpoint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">qpoint</span><span class="p">)</span>
 
@@ -546,7 +546,7 @@
     <span class="n">identity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Traverse group elements from generators.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Traverse group elements from generators."""</span>
     <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">))]</span>
     <span class="n">que</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
     <span class="n">que</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">identity</span><span class="p">)</span>
@@ -575,7 +575,7 @@
     <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">,</span>
     <span class="n">atol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return true if some adjusted translations enable given point group and translational subgroup correspond to a space group.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return true if some adjusted translations enable given point group and translational subgroup correspond to a space group."""</span>
     <span class="c1"># Search generators</span>
     <span class="n">identity</span> <span class="o">=</span> <span class="n">get_identity_index</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
     <span class="n">generators</span> <span class="o">=</span> <span class="n">_search_generators</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>

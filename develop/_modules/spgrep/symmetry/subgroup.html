@@ -317,7 +317,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for spgrep.symmetry.subgroup</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Isotropy subgroup of space group.&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""Isotropy subgroup of space group."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -334,7 +334,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">enumerate_point_subgroup</span><span class="p">(</span>
     <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">,</span> <span class="n">preserve_sublattice</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">return_conjugacy_class</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate conjugacy subgroups of point group.</span>
+<span class="w">    </span><span class="sd">"""Enumerate conjugacy subgroups of point group.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -348,7 +348,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    subgroups: list[list[int]]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
     <span class="n">identity</span> <span class="o">=</span> <span class="n">get_identity_index</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
     <span class="c1"># Represent choice of elements by bit array</span>
@@ -396,7 +396,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">enumerate_point_subgroup_naive</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">preserve_sublattice</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate conjugacy subgroups of point group in brute force.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Enumerate conjugacy subgroups of point group in brute force."""</span>
     <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">order</span><span class="p">):</span>
@@ -428,7 +428,7 @@
     <span class="n">identity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">table</span><span class="p">:</span> <span class="n">NDArrayInt</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Traverse group elements from generators.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Traverse group elements from generators."""</span>
     <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">))]</span>
     <span class="n">que</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
     <span class="n">que</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">identity</span><span class="p">)</span>

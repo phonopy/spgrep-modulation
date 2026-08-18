@@ -419,7 +419,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">spgrep_modulation.modulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">Modulation</span>
 
 <span class="c1"># Load Phonopy object</span>
-<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;tests&quot;</span> <span class="o">/</span> <span class="s2">&quot;phonopy_mp-2998.yaml.xz&quot;</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"tests"</span> <span class="o">/</span> <span class="s2">"phonopy_mp-2998.yaml.xz"</span>
 <span class="n">ph</span> <span class="o">=</span> <span class="n">phonopy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
 <span class="c1"># Prepare Modulation class</span>
@@ -433,16 +433,16 @@
 
 <span class="c1"># Degenerated imaginary mode</span>
 <span class="n">frequency_index</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Frequency (THz): </span><span class="si">{</span><span class="n">md</span><span class="o">.</span><span class="n">eigvals_to_frequencies</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">eigenspaces</span><span class="p">[</span><span class="n">frequency_index</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Frequency (THz): </span><span class="si">{</span><span class="n">md</span><span class="o">.</span><span class="n">eigvals_to_frequencies</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">eigenspaces</span><span class="p">[</span><span class="n">frequency_index</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="c1"># -&gt; Frequency (THz): -4.88</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Irrep shape: </span><span class="si">{</span><span class="n">md</span><span class="o">.</span><span class="n">eigenspaces</span><span class="p">[</span><span class="n">frequency_index</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Irrep shape: </span><span class="si">{</span><span class="n">md</span><span class="o">.</span><span class="n">eigenspaces</span><span class="p">[</span><span class="n">frequency_index</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="c1"># -&gt; Irrep shape: (16, 2, 2)</span>
 
 <span class="c1"># Modulated cells corresponding to one-dimensional order-parameter directions of isotropy subgroup</span>
 <span class="n">cells</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">get_high_symmetry_modulated_supercells</span><span class="p">(</span><span class="n">frequency_index</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cells</span><span class="p">:</span>
     <span class="n">symmetry</span> <span class="o">=</span> <span class="n">Symmetry</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">symmetry</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;international&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (No. </span><span class="si">{</span><span class="n">symmetry</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">symmetry</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="s1">'international'</span><span class="p">]</span><span class="si">}</span><span class="s2"> (No. </span><span class="si">{</span><span class="n">symmetry</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="s1">'number'</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 <span class="c1"># -&gt; Pmma (No. 51) and Cmcm (No. 63)</span>
 </pre></div>
 </div>
@@ -457,7 +457,7 @@ conda<span class="w"> </span>activate<span class="w"> </span>modulation
 git<span class="w"> </span>clone<span class="w"> </span>git@github.com:lan496/spgrep-modulation.git
 <span class="nb">cd</span><span class="w"> </span>spgrep-modulation
 pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
-<span class="c1"># pip install -e &quot;.[dev,docs,vis]&quot;</span>
+<span class="c1"># pip install -e ".[dev,docs,vis]"</span>
 <span class="c1"># pre-commit install</span>
 </pre></div>
 </div>
