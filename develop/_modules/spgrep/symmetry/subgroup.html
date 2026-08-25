@@ -321,7 +321,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">queue</span><span class="w"> </span><span class="kn">import</span> <span class="n">Queue</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">spgrep.rep.group</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_identity_index</span><span class="p">,</span> <span class="n">get_inverse_index</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">spgrep.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -401,7 +401,7 @@
     <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">order</span><span class="p">):</span>
         <span class="n">elements</span> <span class="o">=</span> <span class="n">_decode_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">preserve_sublattice</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">preserve_sublattice</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">):</span>
             <span class="k">continue</span>
 
         <span class="k">if</span> <span class="n">_is_subgroup</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
@@ -430,19 +430,16 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""Traverse group elements from generators."""</span>
     <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">))]</span>
-    <span class="n">que</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
-    <span class="n">que</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">identity</span><span class="p">)</span>
+    <span class="n">que</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">identity</span><span class="p">])</span>
+    <span class="n">visited</span><span class="p">[</span><span class="n">identity</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">que</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">que</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">g</span><span class="p">]:</span>
-            <span class="k">continue</span>
-        <span class="n">visited</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-
+    <span class="k">while</span> <span class="n">que</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">que</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">generators</span><span class="p">:</span>
             <span class="n">gh</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">])</span>  <span class="c1"># cast np.int64 to int</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">gh</span><span class="p">]:</span>
-                <span class="n">que</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">gh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">que</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">visited</span><span class="p">)</span> <span class="k">if</span> <span class="n">v</span><span class="p">])</span>
 </pre></div>
