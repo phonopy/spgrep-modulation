@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "schedule:weekly"],
+  "minimumReleaseAge": "7d",
+  "enabledManagers": ["pre-commit"],
+  "pre-commit": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "groupName": "pre-commit hooks",
+      "matchManagers": ["pre-commit"]
+    },
+    {
+      "description": "Automerge non-major hook updates after checks pass",
+      "matchManagers": ["pre-commit"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "automerge": true,
+      "platformAutomerge": false
+    }
+  ]
+}

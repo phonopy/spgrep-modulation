@@ -7,6 +7,23 @@ on:
     branches: [main, develop]
 
 jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+
+    - uses: actions/setup-python@v7
+      with:
+        python-version: "3.13"
+
+    - name: Install prek
+      run: python -m pip install prek
+
+    - name: Run pre-commit hooks
+      env:
+        SKIP: uv-lock
+      run: prek run --all-files
+
   tests:
     runs-on: ubuntu-latest
     strategy:
